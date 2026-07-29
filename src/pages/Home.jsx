@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
 import Button from "../components/Button.jsx";
 import ProjectCard from "../components/ProjectCard.jsx";
+import FeaturedSystem from "../components/FeaturedSystem.jsx";
 import Icon from "../components/Icon.jsx";
 import { getImage } from "../lib/media.js";
 import { home } from "../content/home.js";
@@ -14,10 +15,10 @@ import "./Home.css";
 /**
  * Homepage — V2.
  *
- * Seven movements, composed rather than stacked: a dark opening, a light
- * proof band, a work sequence with one lead card and two supporting cards, a
- * compact model strip, an offset offer block, a portrait split, and a dark
- * close.
+ * Composed rather than stacked: a dark opening, a light proof band, the ISQ
+ * eLearning Design System in its own featured section (v3.2), a work
+ * sequence with one lead card and two supporting cards, a compact model
+ * strip, an offset offer block, a portrait split, and a dark close.
  *
  * Exactly two ink bands: the opening and the close. Everything between them,
  * and the footer beneath them, sits on paper or raised paper. Dark is
@@ -70,6 +71,9 @@ export default function Home() {
           <p className="proof__clients">{home.proof.clients}</p>
         </div>
       </section>
+
+      {/* 02b — featured system --------------------------------------------- */}
+      <FeaturedSystem content={home.featuredSystem} />
 
       {/* 03 — selected work ---------------------------------------------- */}
       <section className="section home-work" aria-labelledby="work-title">

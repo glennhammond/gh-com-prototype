@@ -20,7 +20,7 @@ export const about = {
   headline: "I have spent fifteen years on the parts of digital learning nobody puts in the brief.",
 
   summary: [
-    "Six years inside the aviation regulator, building learning for examiners who assess other examiners. Three months moving approximately fifty thousand educators off a learning platform they had outgrown. A year turning a workplace wellbeing business into a product that runs without its founder in the room.",
+    "Six years inside the aviation regulator, building learning for examiners who assess other examiners. Three months moving a professional learning platform serving teachers, principals, board members and volunteers off a system they had outgrown. A year turning a workplace wellbeing business into a product that runs without its founder in the room.",
     "The through-line is not the subject matter. It is that in each case the interesting problem was somewhere other than the course.",
   ],
 

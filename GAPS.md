@@ -1,8 +1,10 @@
-# Unresolved factual placeholders — V3
+# Unresolved factual placeholders — V3.2
 
-Generated from the `gaps` arrays in `src/content/projects.js`. Every item
-here also renders in the interface, in a *Still to confirm* panel at the foot
-of the page it belongs to.
+Generated from the `gaps` arrays in `src/content/projects.js`. These are
+internal review data only: as of v3.2 they are no longer rendered on the
+public site (see `DECISIONS.md`). This file, and the `gaps` field on each
+project record, remain the source of truth for what still needs Glenn's
+confirmation before a page's facts are treated as final.
 
 `PUBLISH=1 npm run verify` fails the build while any editorial placeholder
 remains in the output.

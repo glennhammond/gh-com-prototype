@@ -50,7 +50,8 @@ import { STATUS, SOURCE } from "./status.js";
  *
  * ⚠ RECORDED CONFLICT — Connect & Learn audience size. Master Copy (25 Jul
  *   2026) says "approximately 50,000 educators"; CV (6 Jul 2026) says "28,000
- *   users". The conservative figure is published. Carried over from V2.
+ *   users". As of v3.2, neither figure is published: the audience is
+ *   described without a number until one is confirmed. See DECISIONS.md §16.
  *
  * ⚠ RECORDED CONFLICT — CLASS expansion. The V3 brief calls CLASS "CASA
  *   Learning for Safer Skies". The platform header in the recovered
@@ -1052,6 +1053,7 @@ const connectAndLearn = {
   areas: ["Platforms", "Content design", "Production systems"],
   status: STATUS.APPROVED,
   source: SOURCE.MASTER_COPY,
+  relatedSlugs: ["isq-elearning-design-system"],
 
   card: {
     panel: {
@@ -1059,7 +1061,6 @@ const connectAndLearn = {
       figures: [
         { value: "3", unit: "months", label: "Engagement" },
         { value: "60+", unit: "courses", label: "Rebuilt in parallel" },
-        { value: "28,000", unit: "users", label: "Educators and leaders" },
       ],
     },
     headline: "A platform migration and a course rebuild, at the same time",
@@ -1101,6 +1102,7 @@ const connectAndLearn = {
   reframe: [
     "The interesting constraint was not the migration. It was that more than sixty Storyline courses had to be redeveloped while the new environment was being shaped, inside a three-month engagement, without a gap in service for schools already using the platform.",
     "Platform decisions and content decisions could not be sequenced one after the other. The learning architecture had to be settled early enough that course redevelopment did not have to be redone, and late enough that it reflected what the courses actually needed.",
+    "The subsequent ISQ eLearning Design System formalised shared learning patterns, components and production standards for the next stage of the platform ecosystem this migration established.",
   ],
 
   outcomes: {
@@ -1117,7 +1119,7 @@ const connectAndLearn = {
     "No learner-facing imagery from this platform has been approved for publication, so none is shown. The figures above come from the project record rather than from a reconstructed screen.",
 
   gaps: [
-    "Resolve the audience-size conflict: the Master Copy says approximately 50,000 educators, the CV says 28,000 users. The conservative figure is published.",
+    "Resolve the audience-size conflict: the Master Copy says approximately 50,000 educators, the CV says 28,000 users. As of v3.2 neither figure is published; the site describes the audience without a number.",
     "Confirm whether any Connect & Learn interface imagery may be published.",
   ],
 
@@ -1125,6 +1127,308 @@ const connectAndLearn = {
     title: "Connect & Learn — Independent Schools Queensland | Glenn Hammond",
     description:
       "A platform migration from Cornerstone to ISQ-hosted Moodle with more than sixty courses redeveloped in parallel, inside a three-month engagement.",
+  },
+};
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ISQ eLearning Design System — v3.2
+
+   Written from the v3.2 integration brief. The live reference site
+   (isq-elearning-design-system.vercel.app) and its source repository were
+   both unreachable when this record was written — see DECISIONS.md §18 and
+   SOURCE.ISQ_DS_BRIEF. Component counts, maturity-state labels, the exact
+   implementation stack and the current version are therefore described
+   qualitatively rather than asserted as confirmed numbers. `gaps` below
+   lists everything that needs verification against the live system before
+   these are treated as final.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+const isqDesignSystem = {
+  path: "/work/isq-elearning-design-system",
+  slug: "isq-elearning-design-system",
+  format: "standard",
+  tier: "featured",
+  title: "ISQ eLearning Design System",
+  clientId: "isq",
+  clientName: "Independent Schools Queensland",
+  sector: "Education · professional learning",
+  role: "Design-system lead, learning designer and developer",
+  layers: ["experience", "content", "platform", "operations"],
+  areas: ["Design systems", "Platforms", "Learning experience", "Production systems"],
+  status: STATUS.PROPOSED,
+  source: SOURCE.ISQ_DS_BRIEF,
+  relatedSlugs: ["connect-and-learn"],
+
+  card: {
+    kicker: "Design system · Independent Schools Queensland",
+    placeholder: {
+      label: "ISQ eLearning Design System homepage",
+      note: "Screenshot to be captured from the live reference site once cleared for use here.",
+    },
+    headline: "Turning course-level solutions into a shared organisational system",
+    summary:
+      "A live framework connecting learning patterns, visual foundations, reusable components, Rise implementation, accessibility and governance across ISQ's digital learning.",
+  },
+
+  hero: {
+    role: "placeholder",
+    eyebrow: "Independent Schools Queensland · Design system",
+    headline: "One design language, defined once and consumed across digital learning.",
+    standfirst:
+      "A shared framework connecting learning design, visual foundations, reusable patterns, interface components, accessibility and governance across Articulate Rise, Connect & Learn and future ISQ digital learning products.",
+    placeholder: {
+      label: "ISQ eLearning Design System homepage and proposition",
+      note: "The reference site's opening screen, showing how the system states its own purpose.",
+      ratio: "16 / 9",
+    },
+    area: "Design systems",
+  },
+
+  meta: [
+    { label: "Client", value: "Independent Schools Queensland" },
+    { label: "Sector", value: "Education · professional learning" },
+    { label: "Role", value: "Design-system lead, learning designer and developer" },
+    { label: "Platforms", value: "Articulate Rise · Moodle · HTML · CSS · JavaScript" },
+    { label: "Status", value: "Operational system, in active development" },
+  ],
+
+  brief: {
+    problem:
+      "Digital learning decisions and solutions were distributed across platforms, courses, documents and production code.",
+    role:
+      "Led the system from emerging course-level patterns through component development, documentation, audit, governance and live implementation.",
+    scope:
+      "Learning patterns, visual foundations, components, Rise implementation, accessibility, imagery, documentation, governance and the live reference site.",
+    outcome:
+      "A working operational reference connecting design intent with reusable implementation across ISQ digital learning.",
+    stack: "HTML · CSS · JavaScript · Articulate Rise · Moodle",
+  },
+
+  situation: [
+    "Independent Schools Queensland produces a substantial amount of digital learning: compliance courses and professional-learning programmes for teachers, principals, board members and volunteers across member schools. Much of it shares the same underlying requirements — section orientation, legislation and policy explanation, scenario progression, evidence presentation, decision points, role comparison, process explanation, reflection, knowledge checks and resource presentation — but each course had, until now, solved them again from scratch.",
+    "That pattern followed directly from the earlier work moving Connect & Learn onto ISQ-hosted Moodle: a platform migration and a parallel rebuild of more than sixty Storyline courses inside a single term. The migration solved where courses lived. It did not solve how they were designed, and the courses built afterwards faced the same recurring decisions the old ones had.",
+  ],
+
+  reframe: [
+    "The problem was not inconsistent styling. It was repeated design decisions with no shared record of the decision already made: unclear component status, duplicated implementation, inconsistent learner experiences, documentation that drifted from what courses actually shipped, accessibility risk carried course by course, and no reliable way to hand a proven solution from one course to the next. None of that is fixed by a style guide, because a style guide describes appearance and this problem was about behaviour, structure and reuse.",
+    "Instead of designing one more polished course, the opportunity was to build the system that could support every future course: a shared framework connecting learning design, visual design, interaction design, platform implementation, production standards, accessibility and governance, so a recurring problem only had to be solved once.",
+  ],
+
+  roleDetail:
+    "Glenn led the design-system strategy, system architecture, learning-pattern definition, component specification, UX and information architecture, visual design, front-end development, Rise implementation, accessibility guidance, imagery standards, documentation, the system audit, and the governance and lifecycle model, as well as building the live reference site.",
+
+  architecture: {
+    headline: "One system, several consumers.",
+    intro:
+      "Foundations set the values everything else inherits. Learning patterns turn those values into repeatable structures for a course. Components are the built implementation of a pattern. Platform implementation carries a component into a real authoring environment. Governance keeps the stack from drifting once more than one course depends on it.",
+    layers: [
+      {
+        label: "Foundations",
+        detail: "Design tokens and visual foundations: colour, type, spacing and the values every pattern and component inherits.",
+      },
+      {
+        label: "Learning patterns",
+        detail: "Documented, repeatable structures for recurring learning needs — orientation, scenario progression, decision points, legislation explanation and more.",
+      },
+      {
+        label: "Components",
+        detail: "The built implementation of a pattern: specified, named and given a maturity status.",
+      },
+      {
+        label: "Platform implementation",
+        detail: "How a component is delivered in a real authoring environment, from a native block to custom code to a post-publish enhancement.",
+      },
+      {
+        label: "Governance",
+        detail: "The maturity model, contribution process and versioning that keep the system coherent as it grows.",
+      },
+    ],
+    consumers: ["Articulate Rise", "Moodle (Connect & Learn)"],
+    consumersNote:
+      "Extending platform implementation further is named as ongoing work, not a finished claim — see “Where it got to” and “What's next” below.",
+  },
+
+  components: [
+    {
+      name: "Section opener",
+      detail:
+        "Orients a learner at the start of a new section: what it covers, why it matters and how long it takes. A native platform heading block could not carry the “why it matters” framing without breaking the platform's own styling, which is why this is a reusable custom-code component rather than a default block. It carries a heading landmark and a defined reading order, so a screen-reader user meets the section the same way a sighted learner does.",
+    },
+    {
+      name: "Scenario stage",
+      detail:
+        "Carries a narrative scenario through several linked stages, so a course can put a decision in context rather than stating it in the abstract. Built as a reusable component because scenario-based courses recur constantly and had previously been rebuilt per course, each with slightly different navigation and a slightly different accessibility story. Keyboard and focus behaviour is specified once, in the component, rather than re-tested on every course.",
+    },
+    {
+      name: "Decision point",
+      detail:
+        "Presents a choice and its consequence, used wherever a course needs a learner to apply judgement rather than recall a fact. This is the component followed through specification, implementation and use below, because it is the clearest example of a pattern that started as a recurring course requirement and ended as a documented, governed part of the system.",
+    },
+    {
+      name: "Legislation panel",
+      detail:
+        "Presents a piece of legislation or policy alongside a plain-language explanation, used across the compliance courses the system grew out of. A post-publish CSS enhancement was considered and set aside here, because the panel needed a defined reading order and a collapse state that a CSS-only treatment could not guarantee across authoring updates; it is built as a governed reusable component instead.",
+    },
+    {
+      name: "Resource panel",
+      detail:
+        "Surfaces supporting resources — documents, links, further reading — without breaking a course's linear flow. Implemented as the lightest tier available, a native platform block with a post-publish CSS enhancement, because the learning purpose needed a clearer visual treatment rather than custom interaction logic. The system's rule is to use the least complex implementation that fully supports the learning purpose, and this component is the clearest example of that rule being applied rather than overridden.",
+    },
+  ],
+
+  figuresTitle: "The system, from catalogue to course",
+  figuresLede:
+    "Screenshots from the live reference site are being captured and cleared for use here. Until then, each placeholder marks exactly what belongs in it and why it was chosen, following one component, Decision point, from specification through implementation to use inside a course.",
+  figures: [
+    {
+      role: "placeholder",
+      placeholder: {
+        label: "Component catalogue",
+        note: "The full catalogue view, showing how components are organised and how their status is indicated at a glance.",
+        ratio: "16 / 9",
+      },
+      caption:
+        "The catalogue is the entry point for a designer choosing between a proven pattern and one still being tested. Status is shown at the point of choice, not filed in a separate document a designer has to remember to check.",
+      area: "Design systems",
+    },
+    {
+      role: "placeholder",
+      placeholder: {
+        label: "Decision point — documentation",
+        note: "The component's specification page: purpose, states, accessibility behaviour and usage guidance.",
+        ratio: "4 / 3",
+      },
+      caption:
+        "The specification for Decision point: what it is for, when to use it, and what a learner using assistive technology should experience. This is the claim the audit checked the built courses against.",
+      area: "Documentation",
+    },
+    {
+      role: "placeholder",
+      placeholder: {
+        label: "Decision point — implementation",
+        note: "The component's HTML, CSS and JavaScript as it ships, ready to drop into a course.",
+        ratio: "4 / 3",
+      },
+      caption:
+        "The same component as code. Keeping documentation and implementation visibly paired is what let the audit find the places where they had quietly diverged.",
+      area: "Implementation",
+    },
+    {
+      role: "placeholder",
+      placeholder: {
+        label: "Scenario stage — learning-pattern guidance",
+        note: "The pattern-level guidance for Scenario stage: when to reach for it and what learning need it answers.",
+        ratio: "16 / 9",
+      },
+      caption:
+        "A pattern sits above a component: it documents the learning need first, so a designer chooses Scenario stage because a narrative decision genuinely helps, not because it is the component they remember from the last course.",
+      area: "Learning patterns",
+    },
+    {
+      role: "placeholder",
+      placeholder: {
+        label: "Rise implementation guidance",
+        note: "Guidance for building the pattern inside Articulate Rise, including where a native block is enough and where it is not.",
+        ratio: "16 / 9",
+      },
+      caption:
+        "Implementation guidance for the platform most ISQ courses ship on. It states the same implementation hierarchy the components above follow: native first, custom only where the learning purpose needs it.",
+      area: "Platform implementation",
+    },
+    {
+      role: "placeholder",
+      placeholder: {
+        label: "Governance and component lifecycle",
+        note: "The maturity model and contribution process, showing how a component moves from proposal to a governed, reusable part of the system.",
+        ratio: "16 / 9",
+      },
+      caption:
+        "Every component carries a lifecycle state, so a designer can tell a proven pattern from an early one at a glance. The exact set of state labels is confirmed against the live system rather than restated here as fixed.",
+      area: "Governance",
+    },
+    {
+      role: "placeholder",
+      placeholder: {
+        label: "Decision point in a live course",
+        note: "The component as a learner encounters it, inside a published ISQ course. Requires clearance before publication.",
+        ratio: "16 / 9",
+      },
+      caption:
+        "The same component, in use. Specification, implementation and this screen are the same claim checked three times: what the system says a learner should experience, what the code does, and what actually ships.",
+      area: "Learning experience",
+    },
+  ],
+
+  decisionLog: [
+    {
+      title: "Build a design system, not a course style guide",
+      choice:
+        "The work was scoped as a system connecting learning design, visual foundations, components, implementation guidance and governance, rather than a visual style guide for Rise courses.",
+      why: "A style guide fixes what things look like. The recurring problem was about what things are and how they behave: which pattern to reach for, how a component is implemented, and who decides when it changes. Only a system with governance behind it can answer those.",
+      tradeoff:
+        "It took longer to reach something publishable, and it is harder to explain in one sentence than “a set of templates.” A style guide would have shipped sooner and looked finished faster.",
+    },
+    {
+      title: "Separate native, custom and post-publish implementation",
+      choice:
+        "Every pattern is assigned the least complex implementation tier that fully supports its learning purpose: a native platform block first, a reusable custom-code component only where the platform default cannot do the job, and a post-publish CSS enhancement or externally hosted asset where that is enough.",
+      why: "Customising every block is how design systems become unmaintainable, because each customisation is one more thing that can break on a platform update. Restricting complexity to where the learning purpose actually needs it keeps the system sustainable as ISQ's platforms change.",
+      tradeoff:
+        "Some components look plainer than a fully custom build would allow, and the tiering decision itself takes judgement on every new pattern, rather than defaulting to “build it custom” as the safe answer.",
+    },
+    {
+      title: "Treat production code as evidence",
+      choice:
+        "The system was audited by comparing its strategic documents, implementation guides and component documentation against the actual production CSS, HTML and live course implementations, rather than assuming the written specification was correct.",
+      why: "Documentation drifts the moment nobody is watching. Courses ship, deadlines move, and a component gets adjusted locally without the documentation catching up. Treating the built courses as the primary evidence, and the documentation as a claim to be checked against them, is how that drift actually gets found.",
+      tradeoff:
+        "The audit surfaced undocumented components, inconsistent naming and duplicated treatments that then had to be reconciled, which is slower and less comfortable than trusting the documentation and moving on.",
+    },
+  ],
+
+  governance: [
+    "Each component carries a documented maturity status, from an early proposal through validation in production to becoming a governed, reusable part of the system, with a defined path to retirement when a pattern is superseded rather than silently abandoned. The exact set of status labels is confirmed against the live system rather than restated here as a fixed list.",
+    "The system was audited against its own strategic documents, implementation guides, component documentation, production CSS and HTML, and live course implementations, rather than assuming the written specification was the complete system. That audit surfaced undocumented components, inconsistent naming, locally redefined values, duplicated treatments and components that had diverged from their documented pattern.",
+    "Versioning and a contribution route are what keep the system from drifting again now that more than one course depends on it. This is treated as an ongoing operational discipline, not a one-off clean-up.",
+  ],
+
+  outcomes: {
+    note: "Adoption figures, development-time savings and accessibility certification are not published and are not claimed here.",
+    items: [
+      "Distributed design decisions consolidated into one coherent reference",
+      "Documented, reusable learning patterns derived from real course production",
+      "Shared visual and interaction foundations across Rise and Moodle-based delivery",
+      "A catalogue of reusable, specified components",
+      "Rise implementation guidance for the patterns and components in the system",
+      "Accessibility requirements attached to component documentation",
+      "Imagery and media standards for digital learning production",
+      "Drift between documentation and production surfaced and reconciled through audit",
+      "Component status and lifecycle governance, so the system can evolve without becoming an uncontrolled collection of one-off builds",
+      "A maintainable live operational reference connecting design intent to implementation",
+      "Foundations built as governed values, so a future rebrand can be carried through the system rather than redone course by course",
+    ],
+  },
+
+  reflection:
+    "The next stage is adoption rather than invention: testing the system through further production work, resolving components still in an early or experimental status, extending platform implementation, and finding out whether the system actually improves consistency, accessibility and delivery efficiency rather than assuming it does.",
+
+  evidenceNote:
+    "Component counts and maturity-state labels change as the system evolves, so they are described qualitatively here rather than fixed to a number. The live reference site is the current source of truth.",
+
+  gaps: [
+    "Confirm exact component count, the maturity-state label set, and the current system version against the live site.",
+    "Confirm the implementation stack and hosting of the isq-elearning-design-system.vercel.app reference site itself, as distinct from what the design system produces guidance for.",
+    "Confirm whether Storyline course production is a current consumer of this system, or remains separate from it.",
+    "Capture and clear the seven screenshots specified in this case study for publication: component catalogue, Decision point documentation, Decision point implementation, Scenario stage pattern guidance, Rise implementation guidance, governance/lifecycle model, and Decision point inside a live course.",
+    "Confirm names and roles of any collaborators or stakeholders, if any should be credited.",
+    "Confirm the project's start date and current period.",
+    "Confirm permission to publish any live-course screenshot showing a component in use.",
+  ],
+
+  seo: {
+    title: "ISQ eLearning Design System — Independent Schools Queensland | Glenn Hammond",
+    description:
+      "An operational design system connecting learning patterns, visual foundations, reusable components, Rise implementation, accessibility and governance across ISQ's digital learning.",
   },
 };
 
@@ -1923,6 +2227,7 @@ export const casaSubprojects = [
 export const projects = [
   casaProgramme,
   ...casaSubprojects,
+  isqDesignSystem,
   wellbeingStudio,
   connectAndLearn,
   tafePathways,
@@ -1952,10 +2257,15 @@ export const projectBySlug = Object.fromEntries(projects.map((p) => [p.slug, p])
 export const flagship = wellbeingStudio;
 export const programme = casaProgramme;
 
-/** Work index tiers. Scale and position carry the hierarchy, not the card. */
+/** Work index tiers. Scale and position carry the hierarchy, not the card.
+ *  ISQ eLearning Design System leads the case-study tier (v3.2): it is the
+ *  clearest single piece of evidence for the site's four-layer proposition,
+ *  so it takes the same "lead" grid position Wellbeing Studio held before
+ *  it, which moves to second rather than dropping out of view. */
 export const workIndex = {
   programme: casaProgramme,
   featured: [
+    isqDesignSystem,
     wellbeingStudio,
     connectAndLearn,
     tafePathways,
@@ -1997,7 +2307,14 @@ export function siblings(path) {
   };
 }
 
-/** Two related projects for the foot of a case study. Same areas first. */
+/**
+ * Two related projects for the foot of a case study. Same areas first.
+ *
+ * A record may set `relatedSlugs` to force specific projects to the front of
+ * the list — used where an editorial cross-link matters more than the area
+ * score would produce on its own (ISQ eLearning Design System ↔ Connect &
+ * Learn). Remaining slots are filled by area score as before.
+ */
 export function related(path, count = 2) {
   const project = projectByPath[path];
   if (!project) return [];
@@ -2006,5 +2323,16 @@ export function related(path, count = 2) {
   );
   const score = (p) =>
     p.areas.filter((a) => project.areas.includes(a)).length;
+
+  const forced = (project.relatedSlugs ?? [])
+    .map((slug) => projectBySlug[slug])
+    .filter((p) => p && p.path !== path);
+  if (forced.length) {
+    const rest = pool
+      .filter((p) => !forced.includes(p))
+      .sort((a, b) => score(b) - score(a));
+    return [...forced, ...rest].slice(0, count);
+  }
+
   return [...pool].sort((a, b) => score(b) - score(a)).slice(0, count);
 }
