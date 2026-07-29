@@ -21,54 +21,6 @@
   }
 }
 
-/* --- Per-page gaps panel -------------------------------------------------- */
-
-.gaps {
-  margin-top: var(--section-y-tight);
-  padding: clamp(20px, 3vw, 36px);
-  border: 1px dashed var(--rule-strong);
-  border-radius: var(--radius);
-  background: var(--paper-raised);
-}
-
-.gaps__title {
-  margin: 0 0 var(--space-3);
-  font-family: var(--font-display);
-  font-size: var(--size-heading);
-  line-height: var(--leading-heading);
-  letter-spacing: var(--tracking-heading);
-  color: var(--text);
-}
-
-.gaps__tag {
-  display: block;
-  margin-bottom: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--brass-ink);
-}
-
-.gaps__lede {
-  margin: 0 0 var(--space-4);
-  max-width: 62ch;
-  font-size: var(--size-small);
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-.gaps__list {
-  margin: 0;
-  padding-left: 1.4em;
-  display: grid;
-  gap: var(--space-2);
-  max-width: 68ch;
-  font-size: var(--size-small);
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
 /* --- Evidence note -------------------------------------------------------- */
 
 .evnote {
@@ -96,7 +48,6 @@
   color: var(--text-secondary);
 }
 
-.on-ink .gaps,
 .on-ink .evnote {
   background: rgba(243, 241, 234, 0.05);
   border-color: rgba(243, 241, 234, 0.3);

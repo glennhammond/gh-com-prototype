@@ -1,6 +1,15 @@
 import { STATUS, SOURCE } from "./status.js";
 
 /**
+ * v3.2 — adds `featuredSystem`, a dedicated homepage section for the ISQ
+ * eLearning Design System, sitting between the proof strip and "Selected
+ * work". It is deliberately not a fourth project card: the brief for this
+ * release asks for a distinct featured treatment, since the design system is
+ * the clearest single piece of evidence for the four-layer proposition this
+ * whole site argues. See DECISIONS.md §18.
+ */
+
+/**
  * Homepage copy — V2 sequence.
  *
  * V1 ran: claim → framework → flagship → evidence → belief → capability → close.
@@ -25,7 +34,7 @@ export const home = {
     headline: "The course is the easy part.",
     standfirst:
       "A course is one layer of four. The platform it runs on, the content around it and the production system that keeps it current are the other three — and they are where learning programmes actually come apart. I design all four, and I own the joins.",
-    primaryCta: { href: "/work/wellbeing-studio", label: "View the flagship case study" },
+    primaryCta: { href: "/work/isq-elearning-design-system", label: "View the ISQ design-system case study" },
     secondaryCta: { href: "/work", label: "All four projects" },
   },
 
@@ -40,10 +49,39 @@ export const home = {
     clients: "Independent Schools Queensland · Civil Aviation Safety Authority · Goodstart Early Learning · Corporate Yoga Australia",
   },
 
+  /* 02b — the ISQ eLearning Design System, featured in its own right. */
+  featuredSystem: {
+    eyebrow: "Featured system",
+    title: "ISQ eLearning Design System",
+    statement:
+      "A shared framework connecting learning design, visual language, reusable components, accessibility and technical delivery across ISQ's digital learning ecosystem.",
+    evidence: [
+      "A growing catalogue of core and approved components",
+      "Cross-platform foundations, shared across Rise and Moodle",
+      "Documented learning patterns and implementation guidance",
+      "Operational governance and versioning",
+    ],
+    capabilities: [
+      "Learning design",
+      "Design systems",
+      "UX and interface design",
+      "Front-end development",
+      "Accessibility",
+      "Governance",
+    ],
+    primaryCta: { href: "/work/isq-elearning-design-system", label: "View case study" },
+    secondaryCta: {
+      href: "https://isq-elearning-design-system.vercel.app/",
+      label: "Explore live system",
+    },
+    status: STATUS.PROPOSED,
+    source: SOURCE.ISQ_DS_BRIEF,
+  },
+
   /* 03 — selected work */
   work: {
     eyebrow: "Selected work",
-    headline: "Three projects that show the whole system, not a screenshot.",
+    headline: "Three more projects, three different kinds of proof.",
     standfirst:
       "A platform built from nothing, a regulator's training programme, and a migration that had to happen while sixty courses were being rebuilt.",
   },
