@@ -1,0 +1,47 @@
+.layer-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+.layer-mark__rule {
+  width: 18px;
+  height: 3px;
+  flex: none;
+  background: var(--layer);
+}
+
+.layer-mark__num {
+  color: var(--brass-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.layer-mark--compact .layer-mark__rule {
+  width: 12px;
+  height: 2px;
+}
+
+.layer-mark--dot .layer-mark__rule {
+  width: 10px;
+  height: 10px;
+}
+
+/* Layer 04 is Ink, which on an ink band is the band itself. The .on-ink
+   context lifts --layer-4 to a readable slate (see tokens.css), so no
+   per-component override is needed here. */
+
+.layer-span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

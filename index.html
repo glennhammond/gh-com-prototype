@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f1ea" />
+    <meta name="author" content="Glenn Hammond" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!--
+      No third-party font connections. ITC Avant Garde is licensed and
+      self-hosted; Inter and JetBrains Mono are bundled via @fontsource.
+      See src/styles/fonts.css.
+    -->
+  </head>
+  <body>
+    <script>
+      // Progressive enhancement flag. Components that need JavaScript to be
+      // usable (the small-screen nav disclosure) only reveal their controls
+      // when this class is present, so a no-JS visitor is never shown a
+      // control that cannot work.
+      document.documentElement.classList.add("js");
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

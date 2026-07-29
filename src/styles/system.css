@@ -1,0 +1,247 @@
+/* ==========================================================================
+   The visual system (v3.1)
+
+   Everything here is shared apparatus: the editorial grid, the icon base, the
+   rule hierarchy and the small number of approved graphic devices. Component
+   rules still live beside their component.
+
+   The premium signal in this system is whitespace, rule-work, scale and
+   restraint. There are no gradients, no blur, no shadows, no large radii and
+   no decorative motion, by design.
+   ========================================================================== */
+
+/* --- 1. The editorial grid ---------------------------------------------------
+   The whole image system rests on one decision: evidence is LEFT-ALIGNED to
+   the reading column and grows rightwards. Centring evidence under a
+   left-aligned argument costs a re-scan on every figure and makes width
+   differences read as inconsistency rather than as rank.
+   -------------------------------------------------------------------------- */
+
+.ed {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+}
+
+.ed > * {
+  max-width: 100%;
+}
+
+.ed > p,
+.ed > ul,
+.ed > ol {
+  max-width: var(--measure);
+}
+
+/* --- 2. Rule hierarchy -------------------------------------------------------
+   Three weights, used deliberately. --rule-strong opens a major section,
+   --rule divides structure, --rule-soft separates items inside one list. */
+
+.rule-strong {
+  border: 0;
+  border-top: 2px solid var(--rule-strong);
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.rule-soft {
+  border: 0;
+  border-top: 1px solid var(--rule-soft);
+}
+
+/* The one brass gesture. A single 3px mark, never repeated within a section. */
+.gesture {
+  width: 56px;
+  height: 3px;
+  background: var(--brass);
+  border: 0;
+}
+
+/* --- 3. The layer spine ------------------------------------------------------
+   The device that makes the four layer colours read as one family rather than
+   as four unrelated swatches. Decorative: it never carries meaning alone. */
+
+.spine {
+  display: flex;
+  width: 100%;
+  height: 3px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.spine span {
+  flex: 1;
+}
+
+.spine span:nth-child(1) {
+  background: var(--layer-1);
+}
+.spine span:nth-child(2) {
+  background: var(--layer-2);
+}
+.spine span:nth-child(3) {
+  background: var(--layer-3);
+}
+.spine span:nth-child(4) {
+  background: var(--layer-4);
+}
+
+.spine--short {
+  width: 96px;
+}
+
+/* --- 4. Index numerals -------------------------------------------------------
+   Section and item numbers, in the display face at a readable size. Brass as
+   text, so the darker step. */
+
+.index-num {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--brass-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- 5. Chips ----------------------------------------------------------------
+   One size only. v3 shipped 10px, 10.5px, 11px and 12.5px mono variants. */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+}
+
+.chip--l1 {
+  border-color: var(--layer-1);
+  background: var(--layer-1-tint);
+  color: var(--layer-1-ink);
+}
+.chip--l2 {
+  border-color: var(--layer-2);
+  background: var(--layer-2-tint);
+  color: var(--layer-2-ink);
+}
+.chip--l3 {
+  border-color: var(--layer-3);
+  background: var(--layer-3-tint);
+  color: var(--layer-3-ink);
+}
+.chip--l4 {
+  border-color: var(--layer-4);
+  background: var(--layer-4-tint);
+  color: var(--layer-4-ink);
+}
+.chip--quiet {
+  color: var(--text-tertiary);
+}
+
+/* --- 6. Bracket motif --------------------------------------------------------
+   Taken from the wordmark. It mounts content; it never decorates. At most
+   twice per page. */
+
+.brackets {
+  position: relative;
+  padding: var(--space-4) var(--space-5);
+}
+
+.brackets::before,
+.brackets::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  border: 1px solid var(--brass);
+}
+
+.brackets::before {
+  left: 0;
+  border-right: 0;
+}
+
+.brackets::after {
+  right: 0;
+  border-left: 0;
+}
+
+/* --- 7. Icons ----------------------------------------------------------------
+   24x24 grid, no fills, square terminals, no enclosing decorative circles.
+   Stroke thickens slightly at small sizes so a 16px icon does not go spindly,
+   and thins at 32 and 48 so a large icon does not go clumsy. Icons inherit
+   currentColor and always travel with a word.
+   -------------------------------------------------------------------------- */
+
+.icon {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+
+.icon--16 {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.75;
+}
+.icon--20 {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.6;
+}
+.icon--32 {
+  width: 32px;
+  height: 32px;
+  stroke-width: 1.35;
+}
+.icon--48 {
+  width: 48px;
+  height: 48px;
+  stroke-width: 1.1;
+}
+
+/* --- 8. Semantic panels ------------------------------------------------------
+   Never colour alone: each carries a border, a label and a heavier left rule. */
+
+.note-panel {
+  padding: var(--space-4);
+  border: 1px solid;
+  border-left-width: 3px;
+  border-radius: var(--radius);
+  font-size: var(--size-small);
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+.note-panel--success {
+  border-color: var(--success);
+  background: var(--success-bg);
+  color: var(--success);
+}
+.note-panel--warning {
+  border-color: var(--warning);
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+.note-panel--error {
+  border-color: var(--error);
+  background: var(--error-bg);
+  color: var(--error);
+}

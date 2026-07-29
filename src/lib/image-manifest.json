@@ -1,0 +1,622 @@
+{
+  "class-home": {
+    "set": "casa",
+    "source": "casa-aviationworx-class-lms-hero.jpg",
+    "width": 800,
+    "height": 563,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "casa-streams": {
+    "set": "casa",
+    "source": "casa-catalogue-stream-selection.jpg",
+    "width": 1600,
+    "height": 909,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-doc-catalogue": {
+    "set": "casa",
+    "source": "casa-catalogue-interface.jpg",
+    "width": 1600,
+    "height": 720,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-template-menu": {
+    "set": "casa",
+    "source": "casa-course-template-menu.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-icons": {
+    "set": "casa",
+    "source": "tpl-icons.png",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-component-spec": {
+    "set": "casa",
+    "source": "tpl-component-spec.png",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-video-lightbox": {
+    "set": "casa",
+    "source": "casa-video-lightbox.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-authoring-guidance": {
+    "set": "casa",
+    "source": "casa-learner-data.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-video": {
+    "set": "casa",
+    "source": "video-edit.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-authoring": {
+    "set": "casa",
+    "source": "storyline-build.jpg",
+    "width": 1600,
+    "height": 891,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-interview": {
+    "set": "casa",
+    "source": "fer-interview.png",
+    "width": 1600,
+    "height": 822,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-assessment": {
+    "set": "casa",
+    "source": "fer-assessment.png",
+    "width": 1600,
+    "height": 731,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-competency": {
+    "set": "casa",
+    "source": "fer-competency.png",
+    "width": 1600,
+    "height": 844,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-regulation": {
+    "set": "casa",
+    "source": "fer-regulation.png",
+    "width": 1600,
+    "height": 924,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "casa-mobile-plan": {
+    "set": "casa",
+    "source": "fer-mobile-plan.png",
+    "width": 480,
+    "height": 891,
+    "widths": [
+      480
+    ]
+  },
+  "casa-mobile-conduct": {
+    "set": "casa",
+    "source": "fer-mobile-conduct.png",
+    "width": 480,
+    "height": 876,
+    "widths": [
+      480
+    ]
+  },
+  "casa-programme-card": {
+    "set": "casa",
+    "source": "casa-aviationworx-class-lms-hero.jpg",
+    "width": 800,
+    "height": 425,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "casa-card": {
+    "set": "casa",
+    "source": "fer-interview.png",
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "tafe-slideshow": {
+    "set": "tafe",
+    "source": "tafe-pathways-experience-hero.png",
+    "width": 1600,
+    "height": 905,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "tafe-industry-data": {
+    "set": "tafe",
+    "source": "tafe-construction-industry-data.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "tafe-map-admin": {
+    "set": "tafe",
+    "source": "tafe-pathways-screen-01.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "tafe-map-trades": {
+    "set": "tafe",
+    "source": "tafe-pathways-screen-02.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "tafe-wireframe": {
+    "set": "tafe",
+    "source": "tafe-pathways-wireframe.jpg",
+    "width": 800,
+    "height": 741,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "tafe-card": {
+    "set": "tafe",
+    "source": "tafe-construction-industry-data.jpg",
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "sonic-cover": {
+    "set": "sonic",
+    "source": "sonic-healthplus-course-cover.png",
+    "width": 800,
+    "height": 535,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "sonic-support-services": {
+    "set": "sonic",
+    "source": "sonic-healthplus-injury-management-hero.jpg",
+    "width": 1600,
+    "height": 1057,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "sonic-education": {
+    "set": "sonic",
+    "source": "sonic-healthplus-module-03.png",
+    "width": 800,
+    "height": 530,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "sonic-question": {
+    "set": "sonic",
+    "source": "sonic-healthplus-module-01.png",
+    "width": 800,
+    "height": 530,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "sonic-feedback": {
+    "set": "sonic",
+    "source": "sonic-healthplus-module-02.png",
+    "width": 800,
+    "height": 530,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "sonic-card": {
+    "set": "sonic",
+    "source": "sonic-healthplus-course-cover.png",
+    "width": 800,
+    "height": 500,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "goodstart-myportal": {
+    "set": "goodstart",
+    "source": "goodstart-learning-screen.jpg",
+    "width": 1600,
+    "height": 881,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "goodstart-activity": {
+    "set": "goodstart",
+    "source": "goodstart-food-interaction.png",
+    "width": 798,
+    "height": 537,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "goodstart-card": {
+    "set": "goodstart",
+    "source": "goodstart-learning-screen.jpg",
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "isq-diff-title": {
+    "set": "isq",
+    "source": "isq-differentiated-learning-hero.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "isq-diff-intro": {
+    "set": "isq",
+    "source": "isq-differentiation-screen-02.jpg",
+    "width": 1600,
+    "height": 905,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "isq-diff-tiers": {
+    "set": "isq",
+    "source": "isq-differentiation-screen-03.jpg",
+    "width": 1600,
+    "height": 905,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "isq-diff-cycle": {
+    "set": "isq",
+    "source": "isq-differentiation-screen-04.jpg",
+    "width": 1600,
+    "height": 905,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "isq-diff-scenario": {
+    "set": "isq",
+    "source": "isq-differentiation-screen-05.jpg",
+    "width": 1600,
+    "height": 905,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "isq-diff-card": {
+    "set": "isq",
+    "source": "isq-differentiated-learning-hero.jpg",
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "safetyhub-cover": {
+    "set": "safetyhub",
+    "source": "safetyhub-asbestos-awareness-hero.png",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "safetyhub-question": {
+    "set": "safetyhub",
+    "source": "safetyhub-asbestos-question-03.png",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "safetyhub-video": {
+    "set": "safetyhub",
+    "source": "safetyhub-asbestos-screen-04.png",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "safetyhub-choice": {
+    "set": "safetyhub",
+    "source": "safetyhub-asbestos-screen-05.png",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "safetyhub-feedback": {
+    "set": "safetyhub",
+    "source": "safetyhub-asbestos-screen-07.png",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "safetyhub-card": {
+    "set": "safetyhub",
+    "source": "safetyhub-asbestos-question-03.png",
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "proto-data-intro": {
+    "set": "proto",
+    "source": "learning-data-prototype-hero.png",
+    "width": 1600,
+    "height": 901,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "proto-likert": {
+    "set": "proto",
+    "source": "learning-data-likert-scale.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "proto-menu": {
+    "set": "proto",
+    "source": "storyline-hamburger-menu-prototype.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "proto-card": {
+    "set": "proto",
+    "source": "learning-data-prototype-hero.png",
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "ws-landing": {
+    "set": "ws",
+    "source": "ws-landing.webp",
+    "width": 1572,
+    "height": 884,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "ws-library": {
+    "set": "ws",
+    "source": "ws-library.webp",
+    "width": 800,
+    "height": 533,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "ws-session": {
+    "set": "ws",
+    "source": "ws-session.webp",
+    "width": 800,
+    "height": 533,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "ws-dashboard": {
+    "set": "ws",
+    "source": "ws-dashboard.webp",
+    "width": 800,
+    "height": 533,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "ws-journeys": {
+    "set": "ws",
+    "source": "ws-journeys.webp",
+    "width": 800,
+    "height": 533,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "ws-program": {
+    "set": "ws",
+    "source": "ws-program.webp",
+    "width": 800,
+    "height": 533,
+    "widths": [
+      800,
+      480
+    ]
+  },
+  "ws-card": {
+    "set": "ws",
+    "source": "ws-landing.webp",
+    "width": 1565,
+    "height": 978,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "glenn-working": {
+    "set": "portrait",
+    "source": "glenn-desk.jpg",
+    "width": 1600,
+    "height": 2000,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  },
+  "glenn-desk-wide": {
+    "set": "portrait",
+    "source": "glenn-desk.jpg",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      1600,
+      800,
+      480
+    ]
+  }
+}

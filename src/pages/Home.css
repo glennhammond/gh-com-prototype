@@ -1,0 +1,388 @@
+/* ==========================================================================
+   Homepage (v3.1)
+
+   Two ink bands, the opening and the close, and nothing dark between them.
+   Approximate surface distribution across the page:
+     paper 68% · raised paper 12% · plate 8% · ink 10% · brass 1.5% ·
+     mineral 0.5%
+   ========================================================================== */
+
+/* ==== 01 Opening: full-bleed type, no competing image ==================== */
+
+.hero {
+  background: var(--ink);
+  color: var(--on-ink);
+  padding-block: clamp(44px, 6.5vw, 96px) clamp(40px, 5.5vw, 80px);
+}
+
+.hero__eyebrow {
+  color: var(--brass-light);
+}
+
+/* 74px, not 99px. The homepage keeps the largest display step because it has
+   no primary image to hold it against, but it is still a display step, not
+   a billboard. */
+.hero__title {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--size-display-xl);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  max-width: 14ch;
+}
+
+.hero__standfirst {
+  margin-top: var(--space-5);
+  font-size: var(--size-lede);
+  line-height: 1.55;
+  color: var(--on-ink-dim);
+  max-width: var(--measure-lede);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+/* ==== 02 Proof strip: ruled index on raised paper ======================== */
+
+.proof {
+  background: var(--paper-raised);
+  border-bottom: 1px solid var(--rule);
+  padding-block: var(--space-6);
+}
+
+.proof__list {
+  display: grid;
+  gap: var(--space-5) var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .proof__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .proof__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.proof__list li {
+  border-top: 2px solid var(--rule-strong);
+  padding-top: var(--space-3);
+}
+
+.proof__value {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.proof__label {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--size-caption);
+  line-height: 1.45;
+  color: var(--text-secondary);
+  max-width: 26ch;
+}
+
+.proof__clients {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+  max-width: none;
+  line-height: 1.8;
+}
+
+/* ==== 03 Selected work: lead card plus supporting grid, on paper ========= */
+
+.home-work__head {
+  max-width: 60ch;
+  margin-bottom: var(--space-7);
+}
+
+.home-work__head .display-l {
+  margin-top: var(--space-3);
+  max-width: 20ch;
+}
+
+.home-work__head .lede {
+  margin-top: var(--space-4);
+}
+
+.home-work__grid {
+  display: grid;
+  gap: var(--space-7) var(--space-6);
+  list-style: none;
+  margin: var(--space-7) 0 0;
+  padding: var(--space-7) 0 0;
+  border-top: 1px solid var(--rule);
+}
+
+@media (min-width: 760px) {
+  .home-work__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.home-work__all {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.home-work__all:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+/* ==== 04 The four-layer model, on paper ================================== */
+
+.model {
+  background: var(--paper);
+  border-block: 1px solid var(--rule);
+}
+
+.model__head {
+  max-width: 56ch;
+}
+
+.model__spine {
+  margin-bottom: var(--space-4);
+}
+
+.model__head .display-m {
+  margin-top: var(--space-3);
+}
+
+.model__lede {
+  margin-top: var(--space-3);
+  color: var(--text-secondary);
+  max-width: 54ch;
+}
+
+.model__list {
+  display: grid;
+  gap: var(--space-5);
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .model__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1040px) {
+  .model__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+/* Three signals, never colour alone: the rule carries the layer colour, and
+   the icon, numeral and name travel with it. */
+.model__item {
+  border-top: 3px solid var(--layer);
+  padding-top: var(--space-4);
+}
+
+.model__icon {
+  color: var(--layer);
+  margin-bottom: var(--space-3);
+}
+
+.model__name {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: 1.05rem;
+}
+
+.model__num {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  font-weight: 400;
+  letter-spacing: var(--tracking-meta);
+  color: var(--brass-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.model__what {
+  margin-top: var(--space-2);
+  font-size: var(--size-caption);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* ==== 05 How to buy: offset split, on paper ============================== */
+
+.buy__inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .buy__inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--space-7);
+    align-items: end;
+  }
+}
+
+.buy__offer .display-l {
+  margin-top: var(--space-3);
+  max-width: 14ch;
+}
+
+.buy__lede {
+  margin-top: var(--space-4);
+  font-size: var(--size-lede);
+  line-height: 1.55;
+  max-width: 44ch;
+}
+
+/* The one brass gesture on this page. */
+.buy__aside {
+  border-top: 3px solid var(--brass);
+  padding-top: var(--space-4);
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.buy__aside p {
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+  max-width: 46ch;
+}
+
+/* ==== 06 Glenn: portrait split, on raised paper ========================== */
+
+.person {
+  background: var(--paper);
+  border-block: 1px solid var(--rule);
+}
+
+.person__inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .person__inner {
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+/* Photographic evidence takes no mount: a border turns a photograph into a
+   specimen. A hairline is kept only because this sits on raised paper and
+   otherwise has no edge at all. */
+.person__portrait {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.person__portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.person__text .display-m {
+  margin-top: var(--space-3);
+  max-width: 20ch;
+}
+
+.person__para {
+  margin-top: var(--space-4);
+  color: var(--text-secondary);
+  max-width: var(--measure);
+}
+
+.person__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.person__link:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+/* ==== 07 Close: the second and last ink band ============================= */
+
+.close {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+.close__inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .close__inner {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+.close__body {
+  margin-top: var(--space-4);
+  color: var(--on-ink-dim);
+  max-width: 46ch;
+}
+
+.close__promise {
+  margin-top: var(--space-4);
+  font-size: var(--size-small);
+  color: var(--on-ink-dim);
+  line-height: 1.6;
+  max-width: 38ch;
+}
+
+.close__alt {
+  margin-top: var(--space-3);
+  font-size: var(--size-small);
+  color: var(--on-ink-dim);
+}

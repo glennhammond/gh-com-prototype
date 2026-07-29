@@ -1,0 +1,183 @@
+.layer-tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: var(--space-4);
+}
+
+.layer-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding-inline: var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color var(--motion-state) var(--ease),
+    color var(--motion-state) var(--ease);
+}
+
+.layer-tabs__tab:hover {
+  border-color: var(--text-secondary);
+  color: var(--text);
+}
+
+/* Selection carries three signals, never colour alone: filled swatch,
+   ink border and heavier label. */
+.layer-tabs__tab[data-selected] {
+  border-color: var(--text);
+  color: var(--text);
+  background: var(--paper);
+}
+
+.layer-tabs__bar {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  border: 1.5px solid var(--layer);
+  border-radius: 1px;
+}
+
+.layer-tabs__tab[data-selected] .layer-tabs__bar {
+  background: var(--layer);
+}
+
+.layer-tabs__icon,
+.layer-tabs__title-icon {
+  color: var(--layer);
+}
+
+.layer-tabs__num {
+  color: var(--brass-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Panels ----------------------------------------------------------------
+   Small screens and no-JS: every panel is shown and the tablist is hidden.  */
+
+.layer-tabs__list {
+  display: none;
+}
+
+.layer-tabs__panel {
+  border-top: 3px solid var(--layer);
+  padding-top: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.layer-tabs__panel:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+
+@media (min-width: 900px) {
+  html.js .layer-tabs__list {
+    display: flex;
+  }
+
+  /* Driven by an attribute present in the static HTML, so the correct panel
+     is painted on the first frame with no hydration flash. */
+  html.js .layer-tabs__panel {
+    display: none;
+    margin-top: var(--space-6);
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  html.js .layer-tabs__panel[data-selected] {
+    display: block;
+  }
+}
+
+.layer-tabs__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--size-display-m);
+}
+
+.layer-tabs__title-num {
+  font-family: var(--font-mono);
+  font-size: 0.55em;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--brass-ink);
+}
+
+.layer-tabs__grid {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 800px) {
+  .layer-tabs__grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+}
+
+.layer-tabs__what {
+  font-size: var(--size-lede);
+  line-height: 1.5;
+  max-width: 44ch;
+}
+
+.layer-tabs__fails,
+.layer-tabs__brings {
+  margin-top: var(--space-4);
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+  max-width: 48ch;
+}
+
+.layer-tabs__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  margin-bottom: var(--space-1);
+}
+
+.layer-tabs__label--spaced {
+  margin-top: var(--space-5);
+}
+
+.layer-tabs__caps,
+.layer-tabs__related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.layer-tabs__caps li,
+.layer-tabs__related li {
+  padding-block: var(--space-2);
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: var(--size-small);
+  line-height: 1.45;
+}
+
+.layer-tabs__caps li:last-child,
+.layer-tabs__related li:last-child {
+  border-bottom: 0;
+}
+
+.layer-tabs__related a {
+  text-decoration-color: var(--brass);
+}
+
+.layer-tabs__related span {
+  color: var(--text-secondary);
+}

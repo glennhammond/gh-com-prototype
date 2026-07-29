@@ -1,0 +1,29 @@
+.section--band {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+.section-head {
+  margin-bottom: var(--space-6);
+}
+
+.section-head__title {
+  max-width: 22ch;
+  margin-top: var(--space-3);
+}
+
+.section-head__lede {
+  margin-top: var(--space-4);
+}
+
+/* The layer spine opens a major section. Decorative only: it never carries
+   meaning on its own. */
+.section-head__spine {
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 900px) {
+  .section-head {
+    margin-bottom: var(--space-7);
+  }
+}

@@ -1,0 +1,107 @@
+/* Editorial placeholders. Visible on purpose. */
+
+.ph-mark {
+  padding: 1px 7px 2px;
+  border: 1px dashed var(--brass);
+  border-radius: var(--radius);
+  /* Not colour alone: the dashed border and the bracket-free mono setting
+     both carry the meaning, and a screen reader gets a spoken prefix. */
+  background: transparent;
+  color: var(--brass-ink);
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .ph-mark {
+    white-space: normal;
+  }
+}
+
+/* --- Per-page gaps panel -------------------------------------------------- */
+
+.gaps {
+  margin-top: var(--section-y-tight);
+  padding: clamp(20px, 3vw, 36px);
+  border: 1px dashed var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+}
+
+.gaps__title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--size-heading);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--text);
+}
+
+.gaps__tag {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+}
+
+.gaps__lede {
+  margin: 0 0 var(--space-4);
+  max-width: 62ch;
+  font-size: var(--size-small);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.gaps__list {
+  margin: 0;
+  padding-left: 1.4em;
+  display: grid;
+  gap: var(--space-2);
+  max-width: 68ch;
+  font-size: var(--size-small);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* --- Evidence note -------------------------------------------------------- */
+
+.evnote {
+  margin: var(--space-5) 0;
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--brass);
+  background: var(--paper-raised);
+  max-width: var(--fig-pair);
+}
+
+.evnote__label {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+}
+
+.evnote__body {
+  margin: 0;
+  max-width: 66ch;
+  font-size: var(--size-small);
+  line-height: 1.62;
+  color: var(--text-secondary);
+}
+
+.on-ink .gaps,
+.on-ink .evnote {
+  background: rgba(243, 241, 234, 0.05);
+  border-color: rgba(243, 241, 234, 0.3);
+}
+
+.on-ink .evnote {
+  border-left-color: var(--brass);
+}

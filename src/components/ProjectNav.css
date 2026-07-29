@@ -1,0 +1,180 @@
+/* Previous/next and related-project navigation. */
+
+/* Next project sits on a pale surface, never on ink. */
+.pnext {
+  background: var(--paper);
+  border-top: 1px solid var(--rule-strong);
+}
+
+.pnext__inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.pnext__link {
+  display: block;
+  min-height: 44px;
+  padding: var(--space-5) 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pnext__link--next {
+  text-align: right;
+  padding-left: var(--space-5);
+  border-left: 1px solid var(--rule);
+}
+
+.pnext__link--next .pnext__dir {
+  justify-content: flex-end;
+}
+
+.pnext__link--prev {
+  padding-right: var(--space-5);
+}
+
+.pnext__dir {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+}
+
+.pnext__title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--text);
+}
+
+.pnext__link:hover .pnext__title {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.pnext__client {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .pnext__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pnext__link--next {
+    text-align: left;
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .pnext__link--prev {
+    padding-right: 0;
+  }
+}
+
+/* --- Related -------------------------------------------------------------- */
+
+.related {
+  padding: var(--section-y-tight) 0;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+}
+
+.related__title {
+  margin: 0 0 var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  font-weight: 400;
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.related__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-5);
+}
+
+.related__link {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Image role 01, at index scale. */
+.related__visual {
+  overflow: hidden;
+  max-width: 140px;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--plate);
+}
+
+.related__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.related__gap {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--plate) 0 6px,
+    var(--paper-raised) 6px 12px
+  );
+}
+
+.related__client {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.related__name {
+  margin: 3px 0 4px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text);
+}
+
+.related__link:hover .related__name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.related__areas {
+  margin: 0;
+  font-size: var(--size-caption);
+  color: var(--text-secondary);
+}

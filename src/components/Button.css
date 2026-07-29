@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Buttons (v3.1)
+
+   The primary action is the one place the palette raises its voice, and it
+   does so in brass rather than in ink. #8C5E1C carries white at 6.12:1, and
+   the two darker steps below it carry white at 8.51 and 10.40, so hover and
+   active are legible states rather than decorative ones.
+
+   Controlled and authoritative, not vivid or promotional.
+   ========================================================================== */
+
+.btn {
+  --btn-fg: var(--text);
+  --btn-bg: transparent;
+  --btn-edge: var(--text);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px; /* 44px is the floor; 48px for anything form-adjacent */
+  padding: var(--space-3) var(--space-5);
+  border: 1.5px solid var(--btn-edge);
+  border-radius: var(--radius);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--motion-state) var(--ease),
+    color var(--motion-state) var(--ease),
+    border-color var(--motion-state) var(--ease);
+}
+
+/* --- Primary --------------------------------------------------------------- */
+
+.btn--primary {
+  --btn-fg: var(--action-foreground);
+  --btn-bg: var(--action-primary);
+  --btn-edge: var(--action-primary);
+}
+
+.btn--primary:hover {
+  --btn-bg: var(--action-hover);
+  --btn-edge: var(--action-hover);
+}
+
+.btn--primary:active {
+  --btn-bg: var(--action-active);
+  --btn-edge: var(--action-active);
+}
+
+/* On an ink band the action colour alone would sit at 2.4:1 against the
+   ground, below SC 1.4.11 for a component boundary. A brass-light edge lifts
+   the boundary to 7.69:1 without changing the action colour itself. */
+.on-ink .btn--primary {
+  --btn-edge: var(--brass-light);
+}
+
+/* --- Outline --------------------------------------------------------------- */
+
+.btn--outline {
+  --btn-fg: var(--text);
+  --btn-bg: transparent;
+  --btn-edge: var(--text);
+}
+
+.btn--outline:hover {
+  --btn-bg: var(--plate);
+  --btn-fg: var(--text);
+  --btn-edge: var(--text);
+}
+
+.on-ink .btn--outline:hover {
+  --btn-bg: var(--ink-raised);
+  --btn-fg: var(--on-ink);
+  --btn-edge: var(--on-ink);
+}
+
+.btn--outline:active {
+  --btn-bg: var(--plate-deep);
+}
+
+/* --- Quiet ------------------------------------------------------------------
+   A text-weight action for in-flow links that still needs a target size. Brass
+   as text, so the darker step. */
+
+.btn--quiet {
+  --btn-edge: transparent;
+  --btn-fg: var(--brass-ink);
+  padding-inline: 0;
+  min-height: 44px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.btn--quiet:hover {
+  --btn-fg: var(--mineral-ink);
+}
+
+/* --- Disabled ---------------------------------------------------------------- */
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  --btn-bg: var(--state-disabled-surface);
+  --btn-fg: var(--state-disabled-text);
+  --btn-edge: var(--state-disabled-rule);
+  cursor: not-allowed;
+}

@@ -1,0 +1,172 @@
+/* Project metadata, brief panel and decision list. */
+
+/* The metadata strip. On plate, never on ink: it is a set of labelled facts,
+   not a moment of emphasis. Values are sentence case — v3 ran fourteen words
+   of uppercase mono through one cell. */
+.metabar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4) var(--space-5);
+  margin: 0;
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.metabar__item dt {
+  margin-bottom: 5px;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  /* Secondary, not tertiary: this strip sits on plate, where tertiary
+     measures 4.11:1 and fails. */
+  color: var(--text-secondary);
+}
+
+.metabar__item dd {
+  margin: 0;
+  font-size: var(--size-small);
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* --- In 60 seconds -------------------------------------------------------- */
+
+.brief {
+  margin-top: var(--section-y-tight);
+  padding: clamp(24px, 3.4vw, 40px);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--brass);
+  border-radius: var(--radius);
+  max-width: var(--fig-pair);
+}
+
+.brief__title {
+  margin: 0 0 var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  font-weight: 400;
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+}
+
+.brief__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--space-5);
+  margin: 0;
+}
+
+.brief__grid dt {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text);
+}
+
+.brief__grid dd {
+  margin: 0;
+  font-size: var(--size-small);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.brief__stack {
+  grid-column: 1 / -1;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+
+.brief__stack dd {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.02em;
+}
+
+/* --- Key design decisions -------------------------------------------------- */
+
+.decisions {
+  margin-top: var(--section-y);
+  padding: var(--section-y-tight) 0;
+  background: var(--paper-raised);
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+}
+
+.decisions__list {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-6);
+}
+
+.decisions__item {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr);
+  gap: var(--space-4);
+  max-width: 82ch;
+}
+
+.decisions__num {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--brass-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.decisions__heading {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--size-heading);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--text);
+}
+
+.decisions__detail {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: var(--space-2) var(--space-4);
+}
+
+.decisions__detail dt {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding-top: 3px;
+}
+
+.decisions__detail dd {
+  margin: 0;
+  font-size: var(--size-small);
+  line-height: 1.62;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 700px) {
+  .decisions__item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+
+  .decisions__detail {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px var(--space-4);
+  }
+
+  .decisions__detail dd {
+    margin-bottom: var(--space-3);
+  }
+}

@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Site footer (v3.1)
+
+   Moved from an ink band to raised paper. A dark footer on every page works
+   against the 10% ink target, and on the homepage it placed two ink blocks in
+   sequence directly beneath the close. The terminal mark is now the
+   four-colour layer spine and a strong rule, not a change of ground.
+   ========================================================================== */
+
+.site-footer {
+  background: var(--paper);
+  color: var(--text);
+  border-top: 1px solid var(--rule-strong);
+  margin-top: auto;
+}
+
+.site-footer__spine {
+  max-width: none;
+  margin: 0;
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-top: var(--section-y-tight);
+  padding-bottom: var(--space-6);
+}
+
+@media (min-width: 800px) {
+  .site-footer__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+.site-footer__mark {
+  width: 210px;
+  color: var(--text);
+}
+
+.site-footer__descriptor {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  max-width: 34ch;
+  line-height: 1.9;
+}
+
+.site-footer__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+@media (min-width: 800px) {
+  .site-footer__cols {
+    gap: var(--space-7);
+  }
+}
+
+.site-footer__heading {
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer__list li + li {
+  margin-top: var(--space-1);
+}
+
+.site-footer__list a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--text);
+  font-size: var(--size-small);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.site-footer__list a:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--brass);
+}
+
+.site-footer__plain {
+  padding-top: var(--space-3);
+  color: var(--text-secondary);
+  font-size: var(--size-small);
+  max-width: 26ch;
+  line-height: 1.5;
+}
+
+.site-footer__base {
+  border-top: 1px solid var(--rule);
+  padding-block: var(--space-4) var(--space-5);
+}
+
+.site-footer__fine {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: none;
+  color: var(--text-tertiary);
+  max-width: none;
+}

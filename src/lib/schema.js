@@ -1,0 +1,102 @@
+import { site } from "../content/site.js";
+import { about } from "../content/about.js";
+
+/**
+ * Structured data — Blueprint §25.
+ *
+ * Rule from the blueprint: no schema claim that has not been verified.
+ * In particular, `award` states exactly what the Master Copy states and no
+ * more; it is frozen until the LearnX certificate is supplied.
+ */
+
+const url = (path) => `${site.origin}${path === "/" ? "" : path}`;
+
+const address = {
+  "@type": "PostalAddress",
+  addressLocality: site.location.locality,
+  addressRegion: site.location.region,
+  addressCountry: site.location.country,
+};
+
+/** Person — sitewide identity. Retains the role title recruiters expect. */
+export const personSchema = {
+  "@type": "Person",
+  "@id": `${site.origin}/#person`,
+  name: site.name,
+  jobTitle: site.roleTitle,
+  url: site.origin,
+  email: `mailto:${site.email}`,
+  address,
+  sameAs: [site.linkedin],
+  award: "Two Diamond Awards, Best eLearning Project, LearnX 2024",
+  knowsAbout: [
+    "Learning systems design",
+    "Learning experience design",
+    "Learning platforms",
+    "Moodle",
+    "Instructional design",
+    "Accessibility",
+  ],
+  alumniOf: undefined,
+  hasCredential: about.qualifications.map((q) => ({
+    "@type": "EducationalOccupationalCredential",
+    name: q,
+  })),
+};
+
+/** ProfessionalService — the practice. Service types mirror the four layers. */
+export const practiceSchema = {
+  "@type": "ProfessionalService",
+  "@id": `${site.origin}/#practice`,
+  name: "Glenn Hammond — Learning Systems",
+  url: site.origin,
+  founder: { "@id": `${site.origin}/#person` },
+  address,
+  areaServed: { "@type": "Country", name: "Australia" },
+  serviceType: [
+    "Learning experience design",
+    "Learning content and programme design",
+    "Learning platform architecture and migration",
+    "Learning production and design systems",
+  ],
+};
+
+/** CreativeWork — one per case study. */
+export function projectSchema(project) {
+  const node = {
+    "@type": "CreativeWork",
+    "@id": url(project.path),
+    name: project.title,
+    url: url(project.path),
+    abstract: project.card?.summary,
+    creator: { "@id": `${site.origin}/#person` },
+    about: project.sector,
+  };
+  // Only assert a client when the name is approved for publication.
+  if (project.clientName) {
+    node.sourceOrganization = {
+      "@type": "Organization",
+      name: project.clientName,
+    };
+  }
+  return node;
+}
+
+/** BreadcrumbList — case studies and other second-level pages. */
+export function breadcrumbSchema(trail) {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: url(item.href),
+    })),
+  };
+}
+
+/** Wraps nodes into a single @graph document. */
+export const graph = (...nodes) => ({
+  "@context": "https://schema.org",
+  "@graph": nodes.filter(Boolean),
+});

@@ -1,0 +1,195 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* The header is never ink. It is navigation, not punctuation. */
+
+.site-header__inner {
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+/* --- Brand ---------------------------------------------------------------- */
+
+/* An inline SVG has no text baseline, so `align-items: baseline` throws the
+   descriptor above the mark. Centre them and nudge the descriptor to sit on
+   the wordmark's optical baseline instead. */
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--text);
+  padding-block: var(--space-3);
+}
+
+.site-header__mark {
+  width: 148px;
+  flex: none;
+}
+
+.site-header__descriptor {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+@media (max-width: 420px) {
+  .site-header__descriptor {
+    display: none;
+  }
+  .site-header__mark {
+    width: 118px;
+  }
+}
+
+/* --- Toggle ---------------------------------------------------------------
+   Hidden by default and revealed by the script that hydrates the header, so a
+   no-JS visitor is never shown a control that cannot work. See index.html. */
+
+.site-header__toggle {
+  display: none;
+  min-height: 44px;
+  padding-inline: var(--space-3);
+  margin-right: calc(var(--space-3) * -1);
+  background: none;
+  border: 0;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* --- Navigation ----------------------------------------------------------- */
+
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__link,
+.site-nav__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text);
+  transition: color var(--motion-state) var(--ease);
+}
+
+.site-nav__link {
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav__link:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--rule-strong);
+}
+
+/* Current page is marked by a rule and by the text colour, never by colour
+   alone. Brass here is a 2px rule — a non-text mark — so the accent step is
+   correct; the label itself stays ink. */
+.site-nav__link.is-current {
+  border-bottom-color: var(--brass);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.site-nav__cta {
+  padding-inline: var(--space-4);
+  border: 1.5px solid var(--text);
+  border-radius: var(--radius);
+}
+
+.site-nav__cta:hover {
+  background: var(--action-primary);
+  border-color: var(--action-primary);
+  color: var(--action-foreground);
+}
+
+.site-nav__cta:active {
+  background: var(--action-active);
+  border-color: var(--action-active);
+}
+
+/* --- Small screens --------------------------------------------------------
+   Four items do not need a hamburger on tablet, so the panel only appears
+   below 900px. */
+
+@media (max-width: 899px) {
+  html.js .site-header__toggle {
+    display: inline-flex;
+  }
+
+  html.js .site-nav {
+    display: none;
+  }
+
+  html.js .site-nav[data-open] {
+    display: block;
+    position: absolute;
+    inset: var(--header-h) 0 auto 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: var(--space-4) var(--gutter) var(--space-6);
+  }
+
+  .site-nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .site-nav__link,
+  .site-nav__cta {
+    min-height: 52px;
+    width: 100%;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .site-nav__cta {
+    margin-top: var(--space-4);
+    justify-content: center;
+    border: 1.5px solid var(--text);
+  }
+
+  /* Without JavaScript the panel is simply always visible. */
+  html:not(.js) .site-header__inner {
+    flex-wrap: wrap;
+    padding-bottom: var(--space-3);
+  }
+  html:not(.js) .site-nav {
+    width: 100%;
+  }
+  html:not(.js) .site-nav__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  html:not(.js) .site-nav__link,
+  html:not(.js) .site-nav__cta {
+    width: auto;
+    border-bottom: 0;
+  }
+}

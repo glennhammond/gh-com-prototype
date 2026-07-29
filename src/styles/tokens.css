@@ -1,0 +1,274 @@
+/* ==========================================================================
+   Design tokens, single source of truth (v3.1)
+
+   Art direction:  "Ink, Brass and Mineral"
+   Colour:         Option A. Quiet Authority
+   Distribution:   the proposed refined colour balance
+
+   The identity is unchanged from v3. What changes is the ranking of
+   everything on the page: dark drops from an environment to a punctuation
+   mark, brass splits into a mark colour and a text colour, one cool
+   supporting hue is added, the image plate separates from the paper, and the
+   figure system gains nine roles whose default is narrower than the reading
+   column.
+
+   Contrast figures are computed, not estimated. Surface separation is stated
+   as a CIE L* delta, because a contrast ratio is the wrong instrument for
+   two adjacent pale surfaces.
+
+   Full record: V3.1-TOKENS.md
+   ========================================================================== */
+
+:root {
+  /* --- Surfaces ----------------------------------------------------------
+     Target proportion of page area across a representative page:
+
+       paper          68%
+       paper-raised   12%
+       plate           8%
+       ink            10%
+       brass          1.5%
+       mineral        0.5%
+
+     Dark is punctuation. If a page reads as dark, the balance has slipped. */
+
+  --paper: #f4f1e9;        /* L* 95.2, the primary ground */
+  --paper-raised: #fcfaf5; /* L* 98.3, panels that lift off the page */
+
+  /* The image mount. v3's #eeebe1 sat 2.09 L* from paper, at the limit of
+     perception for large flat areas, so the plate read as a printing error
+     rather than as a mount. This sits 5.53 L* away: unmistakable without
+     becoming grey. */
+  --plate: #e7e1d3;        /* L* 89.7 */
+  --plate-deep: #ded7c5;   /* L* 86.0, transparent artefacts, icon sheets */
+
+  --ink: #15191e;          /* L* 8.6, the dark GROUND. Not a text token */
+  --ink-raised: #20262d;   /* L* 14.9, panels on an ink band, 6.31 ΔL* apart */
+
+  /* --- Text ---------------------------------------------------------------
+     Every value is >= 4.5:1 on the surface it is specified for. */
+  --text: #15191e;           /* 15.64:1 on paper */
+  --text-secondary: #435264; /* 7.08:1 on paper */
+  /* 4.74 on paper, 5.13 on raised paper. FORBIDDEN ON PLATE: it measures
+     4.11 there and fails SC 1.4.3. Metadata only, never prose. */
+  --text-tertiary: #5f6c7c;
+  --on-ink: #f4f1e9;         /* 15.64:1 on ink */
+  --on-ink-dim: #c7cdd4;     /* 11.02:1 on ink */
+  --on-ink-muted: #aeb6bf;   /* 8.61:1 on ink */
+
+  /* --- Mineral ------------------------------------------------------------
+     The supporting colour: a cool counterweight to a very warm page, not a
+     second accent competing with brass. Already latent in the system,
+     because v3's Layer 02 was a green. */
+  --mineral: #46665b;       /* 5.62:1 on paper */
+  --mineral-ink: #3a5a4f;   /* 6.75:1 on paper, small text and link hover */
+  --mineral-light: #7fa396; /* 6.37:1 on ink */
+  --mineral-tint: #e3eae6;  /* L* 92.1 */
+
+  /* --- Brass --------------------------------------------------------------
+     Three jobs, three values. This is a correction, not a refinement: v3 set
+     10.5px mono chips in #a67a2e on paper, which measures 3.42:1 and fails
+     WCAG 1.4.3 for text at any size.
+
+       --brass       rules, focus, numerals, graphic gestures, non-text marks
+       --brass-ink   any brass that is small text
+       --action-*    the primary filled call to action */
+  --brass: #a66f22;       /* 3.78:1. NON-TEXT ONLY. Clears SC 1.4.11 */
+  --brass-ink: #855619;   /* 5.57 paper / 6.02 raised / 4.82 plate */
+  --brass-light: #d0a45b; /* 7.69:1 on ink */
+  --brass-tint: #f1e7d4;  /* L* 92.0, chip and callout ground */
+
+  --action-primary: #8c5e1c; /* white on this: 6.12:1 */
+  --action-hover: #6f4711;   /* white on this: 8.51:1 */
+  --action-active: #5c3a0e;  /* white on this: 10.40:1 */
+  --action-foreground: #ffffff;
+
+  --slate: #526171; /* 5.63:1 on paper, structural, not prose */
+  --slate-tint: #e4e7eb;
+
+  /* --- Rules --------------------------------------------------------------
+     Three weights, because v3's single --rule was doing three jobs and
+     therefore doing none of them clearly. */
+  --rule-strong: #b9b2a0; /* emphatic: the head of a major section */
+  --rule: #d4cfc2;        /* structural: section divisions, plate edges */
+  --rule-soft: #e6e1d5;   /* incidental: list separators */
+  --rule-ink: rgba(244, 241, 233, 0.18);
+
+  /* --- Semantic states ---------------------------------------------------- */
+  --success: #2f6b4f;
+  --warning: #7a5200;
+  --error: #9b3225;
+  --success-bg: #edf5f0;
+  --warning-bg: #faf1de;
+  --error-bg: #fbefec;
+
+  /* --- Links, buttons, interaction ---------------------------------------- */
+  --link: var(--text);
+  --link-underline: var(--brass); /* the colour sits in the rule, not the
+                                     text, so the link still reads in
+                                     forced-colours mode */
+  --link-hover: var(--mineral-ink);
+  --link-visited: #4a4553;
+
+  --state-hover-surface: #efebe0;
+  --state-selected-rule: var(--brass);
+  --state-selected-surface: var(--brass-tint);
+  --state-disabled-surface: #f0ebe1;
+  --state-disabled-text: #5e6772; /* 4.83:1 on the disabled surface */
+  --state-disabled-rule: #c4bdb0;
+
+  --focus-color: var(--brass);
+  --focus-color-ink: var(--brass-light);
+  --focus-width: 3px;
+  --focus-offset: 3px;
+
+  /* --- The four layers -----------------------------------------------------
+     Same assignment as v3. What changes is that all four are now palette
+     members rather than a separate set. Colour is never the only signal: the
+     numeral, name and icon always travel with the swatch. */
+  --layer-1: #a66f22; --layer-1-ink: #855619; --layer-1-tint: #f1e7d4;
+  --layer-2: #46665b; --layer-2-ink: #3a5a4f; --layer-2-tint: #e3eae6;
+  --layer-3: #526171; --layer-3-ink: #435264; --layer-3-tint: #e4e7eb;
+  --layer-4: #15191e; --layer-4-ink: #15191e; --layer-4-tint: #e5e5e4;
+  /* On an ink band Layer 04 would vanish, so it lifts. v3 did this too. */
+  --layer-4-on-ink: #7d8894;
+
+  /* --- Typography ---------------------------------------------------------- */
+  --font-display: "ITC Avant Garde Std", "Century Gothic", "Futura", system-ui,
+    sans-serif;
+  --font-body: "InterVariable", "Inter", ui-sans-serif, -apple-system,
+    "Segoe UI", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* v3's display scale topped out at 5.4rem (86px). Against an 800px primary
+     image rather than a 982px one, 86px was out of proportion: the headline
+     was the largest object on the page by a wide margin and the evidence read
+     as a footnote to it. */
+  --size-display-xl: clamp(2.5rem, 6vw, 4.6rem);   /* 40 → 74px */
+  --size-display-l: clamp(1.75rem, 3.6vw, 2.7rem); /* 28 → 43px */
+  --size-display-m: clamp(1.3rem, 2.4vw, 1.75rem); /* 21 → 28px */
+  --size-heading: clamp(1.02rem, 1.5vw, 1.22rem);
+  --size-lede: clamp(1.05rem, 1.7vw, 1.28rem);
+  --size-body: 1.0625rem;   /* 17px */
+  --size-small: 0.9375rem;  /* 15px */
+  --size-caption: 0.875rem; /* 14px, its own step, was sharing --size-small */
+  --size-meta: 0.6875rem;   /* 11px mono, the ONLY mono size */
+
+  --leading-display: 1.02;
+  --leading-heading: 1.16;
+  --leading-body: 1.62;
+  --leading-caption: 1.55;
+
+  --tracking-display: -0.025em;
+  --tracking-heading: -0.015em;
+  --tracking-meta: 0.15em;
+
+  /* --- Measure -------------------------------------------------------------
+     The single most consequential number in the system. Every figure width
+     below is defined in relation to it. */
+  --measure: 64ch;         /* ~660px of body copy */
+  --measure-lede: 56ch;
+  --measure-caption: 58ch; /* fixed for every figure role */
+
+  /* --- Figure scale --------------------------------------------------------
+     Nine roles, six widths. The default is CONTAINED: a figure that does not
+     declare a role gets --fig-support, which matches the text column rather
+     than exceeding it.
+
+     v3 for comparison, measured at 1440px: the lead figure and every
+     .figure--wide rendered at 982px against a ~660px text column. The image
+     was 49% wider than the argument it supported. */
+  --fig-detail: 480px;   /* interface detail, annotated crop */
+  --fig-support: 660px;  /* DEFAULT, aligns to the text column */
+  --fig-primary: 800px;  /* one per page; breaks the column deliberately */
+  --fig-pair: 860px;     /* two-up sequence, total */
+  --fig-portrait: 300px; /* a single phone screen */
+  --fig-full: 1180px;    /* exceptional, and argued in the caption */
+
+  --plate-pad: 20px;          /* was clamp(14px, 2.4vw, 34px) */
+  --plate-pad-tight: 12px;
+  --plate-pad-artefact: 32px; /* transparent artefacts genuinely need air */
+
+  /* --- Spacing: 4px base ---------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 20px;
+  --space-5: 32px;
+  --space-6: 52px;
+  --space-7: 84px;
+  --space-8: 136px;
+
+  /* Section rhythm, reduced in proportion to the smaller figures. */
+  --section-y: clamp(56px, 7.5vw, 116px); /* v3: up to 148px */
+  --section-y-tight: clamp(40px, 5vw, 76px);
+  --evidence-y: var(--space-7); /* clearance above and below a figure */
+  --gutter: clamp(20px, 5vw, 64px);
+  --container: 1180px;
+  --container-narrow: 760px;
+
+  /* --- Shape ---------------------------------------------------------------- */
+  --radius: 2px; /* sharp brand corners; no consumer rounding */
+
+  /* --- Motion --------------------------------------------------------------- */
+  --motion-state: 140ms;
+  --motion-entrance: 600ms;
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+
+  /* Sticky header height, used for scroll-margin so a focused element is
+     never obscured. WCAG 2.2 SC 2.4.11. */
+  --header-h: 60px;
+}
+
+@media (min-width: 800px) {
+  :root {
+    --header-h: 76px;
+  }
+}
+
+/* --- Ink band context -------------------------------------------------------
+   Components read tokens rather than special-casing themselves, so any
+   component can sit on either surface. Ink is reserved for the homepage
+   opening and close, the case-study introduction, and one argument band. */
+
+.on-ink {
+  --paper: #15191e;
+  --paper-raised: #20262d;
+  --plate: #20262d;
+  --plate-deep: #272e37;
+
+  --text: #f4f1e9;
+  --text-secondary: #c7cdd4;
+  --text-tertiary: #aeb6bf;
+
+  --rule: rgba(244, 241, 233, 0.18);
+  --rule-soft: rgba(244, 241, 233, 0.1);
+  --rule-strong: rgba(244, 241, 233, 0.32);
+
+  --brass: #d0a45b;
+  --brass-ink: #d0a45b; /* 7.69:1 on ink */
+  --brass-tint: rgba(208, 164, 91, 0.14);
+
+  --mineral: #7fa396;
+  --mineral-ink: #7fa396;
+  --mineral-tint: rgba(127, 163, 150, 0.14);
+
+  --slate: #8b96a3;
+
+  --link: #f4f1e9;
+  --link-hover: #d0a45b;
+  --link-underline: #d0a45b;
+
+  --focus-color: var(--focus-color-ink);
+
+  /* Layer 04 is ink, which is the band itself, it would vanish. */
+  --layer-4: var(--layer-4-on-ink);
+  --layer-4-ink: var(--layer-4-on-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-state: 1ms;
+    --motion-entrance: 1ms;
+  }
+}

@@ -1,0 +1,354 @@
+.pcard {
+  position: relative;
+}
+
+.pcard__link {
+  display: grid;
+  gap: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+}
+
+.pcard__link:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: 6px;
+}
+
+/* --- Visual: image role 01, the portfolio cover -----------------------------
+   The one place in the whole system where `cover` is permitted, because a
+   recognisable shape matters more than a complete frame here. Wayfinding, not
+   evidence. Fixed 16:10, top-centred crop, hairline edge, no caption, never
+   enlarges, and capped at 560px so a card can never out-rank the primary
+   evidence on a case-study page. */
+
+.pcard__visual {
+  position: relative;
+  overflow: hidden;
+  max-width: 560px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--plate);
+  aspect-ratio: 16 / 10;
+}
+
+/* The programme and lead cards run beside their body copy on wide screens, so
+   the cell itself is already the constraint. */
+.pcard--programme .pcard__visual,
+.pcard--lead .pcard__visual {
+  max-width: 620px;
+}
+
+.pcard__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 400ms var(--ease);
+}
+
+/* A restrained scale on hover: enough to feel alive, not enough to be a
+   gimmick. Disabled entirely under reduced motion. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pcard__link:hover .pcard__visual img {
+    transform: scale(1.02);
+  }
+}
+
+/* --- Evidence panel (no approved imagery) ---------------------------------- */
+
+.epanel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: clamp(18px, 3vw, 32px);
+  /* Plate, not plate-deep: this panel carries brass text, which measures
+     4.38:1 on plate-deep and 4.82:1 on plate. */
+  background: var(--plate);
+  color: var(--text);
+}
+
+.epanel__kicker {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  max-width: none;
+}
+
+.epanel__figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-6);
+  margin: 0;
+}
+
+.epanel__figures dt {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.epanel__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.epanel__unit {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.1em;
+  color: var(--brass-ink);
+}
+
+.epanel__figures dd {
+  margin: 4px 0 0;
+  font-size: var(--size-caption);
+  line-height: 1.4;
+  color: var(--text-secondary);
+  max-width: 16ch;
+}
+
+/* --- Body ------------------------------------------------------------------ */
+
+.pcard__client {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  max-width: none;
+}
+
+.pcard__sector {
+  color: var(--text-secondary);
+}
+
+.pcard__sector::before {
+  content: "· ";
+}
+
+.pcard__headline {
+  margin-top: var(--space-2);
+  font-size: var(--size-display-m);
+  line-height: 1.14;
+  max-width: 22ch;
+}
+
+.pcard--lead .pcard__headline {
+  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+}
+
+.pcard__link:hover .pcard__headline {
+  color: var(--mineral-ink);
+}
+
+.pcard__summary {
+  margin-top: var(--space-3);
+  font-size: var(--size-small);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 52ch;
+}
+
+.pcard__areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+}
+
+.pcard__areas li {
+  padding: 4px 10px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-size: var(--size-caption);
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.pcard__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  border-bottom: 2px solid var(--brass);
+  padding-bottom: 3px;
+}
+
+.pcard__cta::after {
+  content: "→";
+  transition: transform var(--motion-state) var(--ease);
+}
+
+.pcard__link:hover .pcard__cta::after {
+  transform: translateX(3px);
+}
+
+/* --- Lead card: image beside body on wide screens -------------------------- */
+
+@media (min-width: 900px) {
+  .pcard--lead .pcard__link {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: center;
+  }
+}
+
+/* Project name leads the meta line so the card is identifiable at a glance
+   and so the work index is scannable by project, not only by client. */
+.pcard__project {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.pcard__project::after {
+  content: " ·";
+  color: var(--brass-ink);
+}
+
+/* ===========================================================================
+   V3 additions: programme card, small card, gap panel, kicker
+   =========================================================================== */
+
+/* --- Programme card -------------------------------------------------------- */
+
+.pcard--programme .pcard__visual {
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 900px) {
+  .pcard--programme .pcard__link {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--space-7);
+    align-items: center;
+  }
+}
+
+.pcard--programme .pcard__headline {
+  font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+  max-width: 18ch;
+}
+
+.pcard__kicker {
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  max-width: none;
+}
+
+/* The five child projects, listed on the card. A programme that does not name
+   its children on the index is indistinguishable from a long case study. */
+.pcard__children {
+  list-style: none;
+  counter-reset: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.pcard__children li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+}
+
+.pcard__childnum {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.1em;
+  color: var(--brass-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Small card (prototypes) ------------------------------------------------ */
+
+.pcard--small .pcard__headline {
+  font-size: 1.06rem;
+  line-height: 1.25;
+  max-width: 26ch;
+}
+
+.pcard--small .pcard__summary {
+  font-size: var(--size-caption);
+}
+
+
+
+.pcard--small .pcard__areas li {
+  font-size: var(--size-meta);
+  padding: 3px 8px;
+}
+
+/* --- Gap panel: no attributable image --------------------------------------- */
+
+.gpanel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: clamp(18px, 3vw, 34px);
+  border: 1px solid var(--rule-strong);
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0 9px,
+      rgba(166, 111, 34, 0.07) 9px 18px
+    ),
+    var(--plate);
+}
+
+.gpanel__tag {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  max-width: none;
+}
+
+.gpanel__label {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.25;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text);
+  max-width: 24ch;
+}
+
+.gpanel__note {
+  font-size: var(--size-caption);
+  line-height: 1.45;
+  color: var(--text-secondary);
+  max-width: 34ch;
+}
