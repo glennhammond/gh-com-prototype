@@ -73,6 +73,48 @@
   max-width: var(--measure-lede);
 }
 
+.case__external {
+  margin-top: var(--space-4);
+}
+
+.case__external a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--on-ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass-light);
+}
+
+.case__external a:hover {
+  color: var(--brass-light);
+}
+
+.case__related-service {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+  text-align: center;
+}
+
+.case__related-service a {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.case__related-service a:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
 /* --- Metadata strip --------------------------------------------------------
    Plate, not ink. This is the hinge between the dark opening and the primary
    image, and it is why the primary figure no longer straddles a band edge. */
