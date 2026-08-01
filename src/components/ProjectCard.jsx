@@ -48,6 +48,8 @@ export default function ProjectCard({ project, size = "default", eager = false }
             </picture>
           ) : card.panel ? (
             <EvidencePanel panel={card.panel} />
+          ) : card.map ? (
+            <MapPanel items={card.map} />
           ) : (
             <GapPanel placeholder={card.placeholder} />
           )}
@@ -118,6 +120,27 @@ function EvidencePanel({ panel }) {
           </div>
         ))}
       </dl>
+    </div>
+  );
+}
+
+/**
+ * Used where no approved imagery exists but the project's own structure is
+ * itself legible evidence — a numbered map of how the thing holds together,
+ * the same device the homepage's featured-system section uses in place of a
+ * screenshot (v3.3). Reserved for records where that structure genuinely is
+ * the argument; everything else still falls through to GapPanel.
+ */
+function MapPanel({ items }) {
+  if (!items?.length) return null;
+  return (
+    <div className="mpanel">
+      <p className="mpanel__kicker">How it holds together</p>
+      <ol className="mpanel__list">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ol>
     </div>
   );
 }

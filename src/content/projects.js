@@ -330,6 +330,15 @@ const casaAviationworx = {
     },
   ],
 
+  outcomes: {
+    note: "Course volumes, user numbers and platform metrics are unconfirmed and not claimed here.",
+    items: [
+      "A learner-facing front end designed and built in house for an internal CASA platform",
+      "Navigation, content structure and interface conventions shaped around how CASA staff actually looked for learning, rather than the platform's generic default",
+      "[Confirm whether this front end remained in production or was superseded by CLASS]",
+    ],
+  },
+
   gaps: [
     "Confirm the purpose and audience of AviationWorx.",
     "Confirm the platform technology, vendor and any integrations.",
@@ -496,6 +505,11 @@ const casaCourseSystem = {
   areas: ["Production systems", "Design systems", "Multimedia"],
   status: STATUS.APPROVED,
   source: SOURCE.MASTER_COPY,
+
+  relatedService: {
+    label: "Explore advanced Storyline development",
+    href: "/services/storyline-development",
+  },
 
   card: {
     image: "casa-icons",
@@ -722,6 +736,15 @@ const casaCatalogue = {
     },
   ],
 
+  outcomes: {
+    note: "Catalogue size, course counts and platform adoption are unconfirmed and not claimed here.",
+    items: [
+      "A single-question entry point that filters a large body of role-specific learning without relying on stale staff-record data",
+      "A four-stream taxonomy built on span of responsibility rather than job title, so it survives a restructure without being redefined",
+      "[Confirm how many courses sat behind each stream and how the catalogue was maintained]",
+    ],
+  },
+
   gaps: [
     "Confirm whether the stream selector and the Document Catalogue course belong to the same body of work.",
     "Confirm which platform hosted the catalogue, and whether it was AviationWorx or CLASS.",
@@ -756,6 +779,11 @@ const casaFer = {
   areas: ["Learning experience", "Content design", "Multimedia"],
   status: STATUS.APPROVED,
   source: SOURCE.MASTER_COPY,
+
+  relatedService: {
+    label: "Explore advanced Storyline development",
+    href: "/services/storyline-development",
+  },
 
   card: {
     image: "casa-card",
@@ -1152,6 +1180,7 @@ const isqDesignSystem = {
   clientId: "isq",
   clientName: "Independent Schools Queensland",
   sector: "Education · professional learning",
+  period: "2021 —",
   role: "Design-system lead, learning designer and developer",
   layers: ["experience", "content", "platform", "operations"],
   areas: ["Design systems", "Platforms", "Learning experience", "Production systems"],
@@ -1159,12 +1188,23 @@ const isqDesignSystem = {
   source: SOURCE.ISQ_DS_BRIEF,
   relatedSlugs: ["connect-and-learn"],
 
+  externalRef: {
+    label: "Explore the live system",
+    href: "https://isq-elearning-design-system.vercel.app/",
+  },
+
+  relatedService: {
+    label: "Explore Rise design systems",
+    href: "/services/rise-design-systems",
+  },
+
+
   card: {
     kicker: "Design system · Independent Schools Queensland",
-    placeholder: {
-      label: "ISQ eLearning Design System homepage",
-      note: "Screenshot to be captured from the live reference site once cleared for use here.",
-    },
+    /* No approved screenshot exists yet. The system's own architecture is
+       shown instead of a hatched gap plate, the same device the homepage
+       FeaturedSystem section already uses for the same reason (v3.3). */
+    map: ["Foundations", "Learning patterns", "Components", "Platform implementation", "Governance"],
     headline: "Turning course-level solutions into a shared organisational system",
     summary:
       "A live framework connecting learning patterns, visual foundations, reusable components, Rise implementation, accessibility and governance across ISQ's digital learning.",
@@ -2258,15 +2298,19 @@ export const flagship = wellbeingStudio;
 export const programme = casaProgramme;
 
 /** Work index tiers. Scale and position carry the hierarchy, not the card.
- *  ISQ eLearning Design System leads the case-study tier (v3.2): it is the
- *  clearest single piece of evidence for the site's four-layer proposition,
- *  so it takes the same "lead" grid position Wellbeing Studio held before
- *  it, which moves to second rather than dropping out of view. */
+ *  Wellbeing Studio holds the lead grid position (v3.3): it is the flagship
+ *  with real photography, and it now sits second on the page rather than
+ *  first, directly under the CASA programme's own full-width block. Putting
+ *  the ISQ eLearning Design System (still image-less; see its `card.map`
+ *  fallback) in that same wide "lead" slot meant two large, prominent blocks
+ *  with no photograph ran back to back at the top of the tier. ISQ is still
+ *  featured, just in the regular grid rather than doubling the programme's
+ *  emphasis. Reversible in one line once real ISQ screenshots exist. */
 export const workIndex = {
   programme: casaProgramme,
   featured: [
-    isqDesignSystem,
     wellbeingStudio,
+    isqDesignSystem,
     connectAndLearn,
     tafePathways,
     goodstart,

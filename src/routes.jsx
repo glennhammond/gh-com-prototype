@@ -3,6 +3,8 @@ import Home from "./pages/Home.jsx";
 import Work from "./pages/Work.jsx";
 import CaseStudy from "./pages/CaseStudy.jsx";
 import Services from "./pages/Practice.jsx";
+import RiseDesignSystems from "./pages/RiseDesignSystems.jsx";
+import StorylineDevelopment from "./pages/StorylineDevelopment.jsx";
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Privacy from "./pages/Privacy.jsx";
@@ -10,9 +12,13 @@ import NotFound from "./pages/NotFound.jsx";
 import { projects, casaSubprojects } from "./content/projects.js";
 
 /**
- * Route table — V3.
+ * Route table — V3.1.
  *
- * Five destinations: Home, Work, Services, About, Contact.
+ * Seven destinations: Home, Work, Services, About, Contact, plus two
+ * specialist-practice pages nested under Services (Rise design systems,
+ * Storyline development). Both sit under /services rather than in primary
+ * navigation — they are how the work under the four-layer model gets built,
+ * not a fifth top-level destination.
  *
  * V3 adds one level of depth under /work. The CASA programme's children live
  * at /work/casa/<slug>, so the URL states the relationship without any
@@ -24,9 +30,6 @@ import { projects, casaSubprojects } from "./content/projects.js";
  * one-file change and the sitemap follows automatically.
  *
  * Deliberately absent:
- *   /practice, /services/xapi-analytics → folded into /services;
- *                                          redirects configured in vercel.json
- *   /design-system/*                     → deferred to Release Two
  *   /work/child-protection-program       → withheld, see content/projects.js
  *   /insights, /notes                    → no content exists; not created
  *
@@ -54,6 +57,8 @@ export const routes = [
         getStaticPaths: () => casaSubprojects.map((p) => p.path.slice(1)),
       },
       { path: "services", element: <Services /> },
+      { path: "services/rise-design-systems", element: <RiseDesignSystems /> },
+      { path: "services/storyline-development", element: <StorylineDevelopment /> },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "privacy", element: <Privacy /> },

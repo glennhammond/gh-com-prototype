@@ -386,3 +386,140 @@
   font-size: var(--size-small);
   color: var(--on-ink-dim);
 }
+
+/* ==== 03a Featured system: ISQ, ahead of the selected-work trio =========== */
+
+.home-system {
+  background: var(--paper-raised);
+  border-block: 1px solid var(--rule-strong);
+}
+
+.home-system__inner {
+  max-width: var(--measure-lede);
+}
+
+.home-system__body {
+  margin-top: var(--space-4);
+}
+
+.home-system__points {
+  list-style: none;
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.home-system__points li {
+  position: relative;
+  padding-left: var(--space-5);
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+}
+
+.home-system__points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 12px;
+  height: 1px;
+  background: var(--brass);
+}
+
+.home-system__areas {
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.home-system__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.home-system__external {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.home-system__external:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+/* ==== 04a Specialist development: Rise / Storyline, after the model ====== */
+
+/* v3.3: raised paper, not the model section's own paper. Both sections used
+   the same surface and sat back to back with only a hairline between them,
+   so they read as one long block rather than two designed moments. */
+.specialist {
+  background: var(--paper-raised);
+}
+
+.specialist__head {
+  max-width: var(--measure-lede);
+}
+
+.specialist__lede {
+  margin-top: var(--space-3);
+  color: var(--text-secondary);
+}
+
+.specialist__panels {
+  margin-top: var(--space-6);
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 700px) {
+  .specialist__panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-7) var(--space-6);
+  }
+}
+
+.specialist__panel {
+  border-top: 3px solid var(--brass);
+  padding-top: var(--space-4);
+}
+
+.specialist__title {
+  font-size: var(--size-display-m);
+}
+
+.specialist__body {
+  margin-top: var(--space-3);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 42ch;
+}
+
+.specialist__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.specialist__cta:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}

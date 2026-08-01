@@ -50,8 +50,8 @@ export default function Work() {
         <SectionHead
           level={1}
           eyebrow="Selected work"
-          headline="One programme, seven case studies and a small lab."
-          standfirst="Ordered by weight rather than by date. Each page says what the evidence supports and, where it matters, what it does not."
+          headline="Learning systems in practice."
+          standfirst="From enterprise Moodle platforms and production systems to Storyline simulations and organisational design systems, these projects demonstrate how strategy becomes implementation."
         />
 
         {/* --- Tier 1: the programme -------------------------------------- */}

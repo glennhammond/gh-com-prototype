@@ -117,6 +117,18 @@ export default function CaseStudy() {
           <p className="eyebrow case__eyebrow">{project.hero.eyebrow}</p>
           <h1 className="display-l case__title">{project.hero.headline}</h1>
           <p className="case__standfirst">{marked(project.hero.standfirst)}</p>
+          {project.externalRef && (
+            <p className="case__external">
+              <a
+                href={project.externalRef.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {project.externalRef.label}
+                <span className="visually-hidden">: opens in a new tab</span>
+              </a>
+            </p>
+          )}
         </div>
       </header>
 
@@ -386,6 +398,14 @@ export default function CaseStudy() {
 
       <PrevNext path={project.path} />
       {!isProgramme && <Related path={project.path} />}
+
+      {project.relatedService && (
+        <p className="container case__related-service">
+          <Link to={project.relatedService.href}>
+            {project.relatedService.label}
+          </Link>
+        </p>
+      )}
 
       {/* --- Contact ---------------------------------------------------------- */}
       <section className="case__next" aria-labelledby="case-next">
