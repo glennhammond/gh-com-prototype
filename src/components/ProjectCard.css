@@ -302,11 +302,65 @@
   font-size: var(--size-caption);
 }
 
-
-
 .pcard--small .pcard__areas li {
   font-size: var(--size-meta);
   padding: 3px 8px;
+}
+
+/* --- Map panel: structure as evidence (v3.3) --------------------------------
+   Where no image exists but the project's own architecture is itself the
+   argument. Same device as the homepage FeaturedSystem map, scaled to a
+   card: a kicker and a numbered list, no image plate at all. */
+
+.mpanel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(18px, 3vw, 32px);
+  background: var(--plate);
+  color: var(--text);
+}
+
+.mpanel__kicker {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  max-width: none;
+}
+
+.mpanel__list {
+  list-style: none;
+  counter-reset: mpanel;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: grid;
+}
+
+.mpanel__list li {
+  counter-increment: mpanel;
+  position: relative;
+  padding: var(--space-2) 0 var(--space-2) var(--space-6);
+  border-top: 1px solid var(--rule-soft);
+  font-size: var(--size-small);
+  color: var(--text);
+}
+
+.mpanel__list li:first-child {
+  border-top: 0;
+}
+
+.mpanel__list li::before {
+  content: counter(mpanel, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  color: var(--brass-ink);
+  font-variant-numeric: tabular-nums;
 }
 
 /* --- Gap panel: no attributable image --------------------------------------- */
