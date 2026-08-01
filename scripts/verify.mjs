@@ -175,6 +175,8 @@ const routes = new Set([
   "/",
   "/work",
   "/services",
+  "/services/rise-design-systems",
+  "/services/storyline-development",
   "/about",
   "/contact",
   "/privacy",
@@ -269,9 +271,24 @@ if (largestImageKb > BUDGET.image)
 
 /* --- 9. Third-party requests ------------------------------------------------ */
 
+/* This check exists to keep the page free of resources the browser fetches
+ * automatically on load — scripts, embeds, trackers — per the blueprint's
+ * zero-third-party-connections rule. It does not need to block a plain,
+ * user-initiated <a href> to a verified piece of Glenn's own evidence: that
+ * is a reference link in copy, not a connection the page makes for you.
+ * EVIDENCE_LINKS is for exactly that — an explicit, narrow allowlist of
+ * outbound <a href> targets. src attributes (script, img, iframe, etc.) are
+ * checked separately below and are never exempted, so an embed or tracker
+ * pointed at one of these domains would still fail the build. */
+const EVIDENCE_LINKS = ["https://isq-elearning-design-system.vercel.app"];
+
 for (const [file, source] of Object.entries(html)) {
-  const external = [...source.matchAll(/(?:src|href)="(https?:\/\/[^"]+)"/g)]
+  const srcs = [...source.matchAll(/\bsrc="(https?:\/\/[^"]+)"/g)].map((m) => m[1]);
+  const hrefs = [...source.matchAll(/\bhref="(https?:\/\/[^"]+)"/g)]
     .map((m) => m[1])
+    .filter((u) => !EVIDENCE_LINKS.some((allowed) => u.startsWith(allowed)));
+
+  const external = [...srcs, ...hrefs]
     .filter((u) => !u.startsWith("https://glennhammond.com"))
     .filter((u) => !u.includes("schema.org"))
     .filter((u) => !u.includes("linkedin.com"));

@@ -12,6 +12,8 @@ const paths = [
   "/work",
   ...projects.map((p) => p.path),
   "/services",
+  "/services/rise-design-systems",
+  "/services/storyline-development",
   "/about",
   "/contact",
   "/privacy",
