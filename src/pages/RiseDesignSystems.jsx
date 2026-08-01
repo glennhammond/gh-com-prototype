@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
 import Section, { SectionHead } from "../components/Section.jsx";
 import Button from "../components/Button.jsx";
@@ -123,19 +124,21 @@ export default function RiseDesignSystems() {
             eyebrow={copy.evidence.heading}
             headline={evidenceProject.title}
           />
-          <ProjectCard project={evidenceProject} size="lead" />
-          {evidenceProject.externalRef && (
-            <p className="svc-evidence__external">
-              <a
-                href={evidenceProject.externalRef.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {evidenceProject.externalRef.label}
-                <span className="visually-hidden">: opens in a new tab</span>
-              </a>
-            </p>
-          )}
+          <div className="svc-evidence__unit">
+            <ProjectCard project={evidenceProject} size="lead" />
+            {evidenceProject.externalRef && (
+              <p className="svc-evidence__external">
+                <a
+                  href={evidenceProject.externalRef.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {evidenceProject.externalRef.label}
+                  <span className="visually-hidden">: opens in a new tab</span>
+                </a>
+              </p>
+            )}
+          </div>
         </Section>
       )}
 
@@ -148,6 +151,10 @@ export default function RiseDesignSystems() {
         <Button to={copy.cta.href} variant="primary">
           {copy.cta.label}
         </Button>
+        <p className="svc-cta__more">
+          Not sure Rise is the right call?{" "}
+          <Link to="/services">Compare it with Storyline on the Services overview</Link>
+        </p>
       </Section>
     </>
   );

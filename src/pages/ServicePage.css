@@ -205,8 +205,18 @@
 
 /* --- Evidence --------------------------------------------------------------- */
 
+/* v3.3: the card and the "explore live system" link read as two unrelated
+   paragraphs before this. A hairline rule binds them into one evidence
+   unit, the same convention .engagement__layers and .model already use to
+   attach a footnote to the block above it. */
+.svc-evidence__unit {
+  display: grid;
+}
+
 .svc-evidence__external {
   margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
 }
 
 .svc-evidence__external a {
@@ -238,6 +248,14 @@
   }
 }
 
+.svc-evidence__more {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+}
+
 /* --- CTA close -------------------------------------------------------------- */
 
 .svc-cta {
@@ -249,4 +267,19 @@
   margin-bottom: var(--space-6);
   color: var(--on-ink-dim);
   max-width: var(--measure-lede);
+}
+
+.svc-cta__more {
+  margin-top: var(--space-5);
+  font-size: var(--size-small);
+  color: var(--on-ink-muted);
+}
+
+.svc-cta__more a {
+  color: var(--on-ink-dim);
+  text-decoration-color: var(--brass-light);
+}
+
+.svc-cta__more a:hover {
+  color: var(--on-ink);
 }

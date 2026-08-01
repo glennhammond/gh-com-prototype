@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
 import Section, { SectionHead } from "../components/Section.jsx";
 import Button from "../components/Button.jsx";
@@ -145,6 +146,10 @@ export default function StorylineDevelopment() {
               </li>
             ))}
           </ul>
+          <p className="svc-evidence__more">
+            Two of these belong to the same six-year engagement.{" "}
+            <Link to="/work/casa">See the full CASA programme</Link>
+          </p>
         </Section>
       )}
 
@@ -157,6 +162,10 @@ export default function StorylineDevelopment() {
         <Button to={copy.cta.href} variant="primary">
           {copy.cta.label}
         </Button>
+        <p className="svc-cta__more">
+          Not sure Storyline is the right call?{" "}
+          <Link to="/services">Compare it with Rise on the Services overview</Link>
+        </p>
       </Section>
     </>
   );
