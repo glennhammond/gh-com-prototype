@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
 import Button from "../components/Button.jsx";
 import ProjectCard from "../components/ProjectCard.jsx";
+import FeaturedSystem from "../components/FeaturedSystem.jsx";
 import Icon from "../components/Icon.jsx";
 import { getImage } from "../lib/media.js";
 import { home } from "../content/home.js";
 import { layers } from "../content/layers.js";
-import { featured, projectBySlug } from "../content/projects.js";
+import { featured } from "../content/projects.js";
 import { site } from "../content/site.js";
 import { graph, personSchema, practiceSchema } from "../lib/schema.js";
 import "./Home.css";
@@ -14,20 +15,19 @@ import "./Home.css";
 /**
  * Homepage — V2.
  *
- * Seven movements, composed rather than stacked: a dark opening, a light
- * proof band, a work sequence with one lead card and two supporting cards, a
- * compact model strip, an offset offer block, a portrait split, and a dark
- * close.
+ * Composed rather than stacked: a dark opening, a light proof band, the ISQ
+ * eLearning Design System in its own featured section, a work sequence with
+ * one lead card and two supporting cards, a compact model strip, a specialist
+ * Rise and Storyline section, an offset offer block, a portrait split, and a
+ * dark close.
  *
  * Exactly two ink bands: the opening and the close. Everything between them,
  * and the footer beneath them, sits on paper or raised paper. Dark is
- * punctuation, so the page reads light and the two dark moments carry weight
- * they did not have when a quarter of the page was already dark.
+ * punctuation, so the page reads light and the two dark moments carry weight.
  */
 export default function Home() {
   const portrait = getImage("glenn-working");
   const [lead, ...supporting] = featured;
-  const featuredSystemProject = projectBySlug[home.featuredSystem.slug];
 
   return (
     <>
@@ -42,14 +42,18 @@ export default function Home() {
       <section className="hero on-ink" aria-labelledby="hero-title">
         <div className="container hero__inner">
           <p className="eyebrow hero__eyebrow">{home.hero.eyebrow}</p>
+
           <h1 id="hero-title" className="hero__title">
             {home.hero.headline}
           </h1>
+
           <p className="hero__standfirst">{home.hero.standfirst}</p>
+
           <div className="hero__actions">
             <Button to={home.hero.primaryCta.href} variant="primary">
               {home.hero.primaryCta.label}
             </Button>
+
             <Button to={home.hero.secondaryCta.href} variant="outline">
               {home.hero.secondaryCta.label}
             </Button>
@@ -57,7 +61,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 02 — proof strip ------------------------------------------------ */}
+      {/* 02 — proof strip ----------------------------------------------- */}
       <section className="proof" aria-label="Track record">
         <div className="container">
           <ul className="proof__list">
@@ -68,67 +72,38 @@ export default function Home() {
               </li>
             ))}
           </ul>
+
           <p className="proof__clients">{home.proof.clients}</p>
         </div>
       </section>
 
-      {/* 03a — featured system --------------------------------------------- */}
-      {featuredSystemProject && (
-        <section className="section section--tight home-system" aria-labelledby="system-title">
-          <div className="container home-system__inner">
-            <div className="home-system__text">
-              <p className="eyebrow">{home.featuredSystem.eyebrow}</p>
-              <h2 id="system-title" className="display-l">
-                {home.featuredSystem.headline}
-              </h2>
-              <p className="lede home-system__body">{home.featuredSystem.body}</p>
-              <ul className="home-system__points">
-                {home.featuredSystem.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <p className="home-system__areas">{home.featuredSystem.areas.join(" · ")}</p>
-              <div className="home-system__actions">
-                <Button to={featuredSystemProject.path} variant="primary">
-                  View case study
-                </Button>
-                {featuredSystemProject.externalRef && (
-                  <a
-                    className="home-system__external"
-                    href={featuredSystemProject.externalRef.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {featuredSystemProject.externalRef.label}
-                    <span className="visually-hidden">: opens in a new tab</span>
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      {/* 03 — featured system ------------------------------------------- */}
+      <FeaturedSystem content={home.featuredSystem} />
 
-      {/* 03 — selected work ---------------------------------------------- */}
+      {/* 04 — selected work --------------------------------------------- */}
       <section className="section home-work" aria-labelledby="work-title">
         <div className="container">
           <header className="home-work__head">
             <p className="eyebrow">{home.work.eyebrow}</p>
+
             <h2 id="work-title" className="display-l">
               {home.work.headline}
             </h2>
+
             <p className="lede">{home.work.standfirst}</p>
           </header>
 
-          <ProjectCard project={lead} size="lead" eager />
+          {lead && <ProjectCard project={lead} size="lead" eager />}
 
-          <ul className="home-work__grid">
-            {supporting.map((project) => (
-              <li key={project.slug}>
-                <ProjectCard project={project} />
-              </li>
-            ))}
-          </ul>
+          {supporting.length > 0 && (
+            <ul className="home-work__grid">
+              {supporting.map((project) => (
+                <li key={project.slug}>
+                  <ProjectCard project={project} />
+                </li>
+              ))}
+            </ul>
+          )}
 
           <Link className="home-work__all" to="/work">
             All four projects
@@ -136,22 +111,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 04 — the model, compact ----------------------------------------- */}
-      <section className="section section--tight model" aria-labelledby="model-title">
+      {/* 05 — the model ------------------------------------------------- */}
+      <section
+        className="section section--tight model"
+        aria-labelledby="model-title"
+      >
         <div className="container">
           <div className="model__head">
-            <p className="spine spine--short model__spine" aria-hidden="true">
+            <p
+              className="spine spine--short model__spine"
+              aria-hidden="true"
+            >
               <span />
               <span />
               <span />
               <span />
             </p>
+
             <p className="eyebrow">{home.framework.eyebrow}</p>
+
             <h2 id="model-title" className="display-m">
               {home.framework.headline}
             </h2>
+
             <p className="model__lede">{home.framework.standfirst}</p>
           </div>
+
           <ol className="model__list">
             {layers.map((layer) => (
               <li
@@ -159,11 +144,17 @@ export default function Home() {
                 className="model__item"
                 style={{ "--layer": `var(${layer.token})` }}
               >
-                <Icon name={layer.icon} size={32} className="model__icon" />
+                <Icon
+                  name={layer.icon}
+                  size={32}
+                  className="model__icon"
+                />
+
                 <h3 className="model__name">
                   <span className="model__num">{layer.number}</span>
                   {layer.name}
                 </h3>
+
                 <p className="model__what">{layer.what}</p>
               </li>
             ))}
@@ -171,34 +162,69 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 04a — specialist development -------------------------------------- */}
-      <section className="section section--tight specialist" aria-labelledby="specialist-title">
+      {/* 06 — specialist development ----------------------------------- */}
+      <section
+        className="section section--tight specialist"
+        aria-labelledby="specialist-title"
+      >
         <div className="container">
           <header className="specialist__head">
-            <p className="eyebrow">{home.specialistDevelopment.eyebrow}</p>
+            <p className="eyebrow">
+              {home.specialistDevelopment.eyebrow}
+            </p>
+
             <h2 id="specialist-title" className="display-m">
               {home.specialistDevelopment.headline}
             </h2>
-            <p className="specialist__lede">{home.specialistDevelopment.standfirst}</p>
+
+            <p className="specialist__lede">
+              {home.specialistDevelopment.standfirst}
+            </p>
           </header>
 
           <div className="specialist__panels">
-            <article className="specialist__panel" aria-labelledby="specialist-rise">
-              <h3 id="specialist-rise" className="specialist__title">
+            <article
+              className="specialist__panel"
+              aria-labelledby="specialist-rise"
+            >
+              <h3
+                id="specialist-rise"
+                className="specialist__title"
+              >
                 {home.specialistDevelopment.rise.headline}
               </h3>
-              <p className="specialist__body">{home.specialistDevelopment.rise.body}</p>
-              <Link className="specialist__cta" to={home.specialistDevelopment.rise.cta.href}>
+
+              <p className="specialist__body">
+                {home.specialistDevelopment.rise.body}
+              </p>
+
+              <Link
+                className="specialist__cta"
+                to={home.specialistDevelopment.rise.cta.href}
+              >
                 {home.specialistDevelopment.rise.cta.label}
               </Link>
             </article>
 
-            <article className="specialist__panel" aria-labelledby="specialist-storyline">
-              <h3 id="specialist-storyline" className="specialist__title">
+            <article
+              className="specialist__panel"
+              aria-labelledby="specialist-storyline"
+            >
+              <h3
+                id="specialist-storyline"
+                className="specialist__title"
+              >
                 {home.specialistDevelopment.storyline.headline}
               </h3>
-              <p className="specialist__body">{home.specialistDevelopment.storyline.body}</p>
-              <Link className="specialist__cta" to={home.specialistDevelopment.storyline.cta.href}>
+
+              <p className="specialist__body">
+                {home.specialistDevelopment.storyline.body}
+              </p>
+
+              <Link
+                className="specialist__cta"
+                to={home.specialistDevelopment.storyline.cta.href}
+              >
                 {home.specialistDevelopment.storyline.cta.label}
               </Link>
             </article>
@@ -206,18 +232,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 05 — how to buy -------------------------------------------------- */}
+      {/* 07 — how to buy ------------------------------------------------ */}
       <section className="section buy" aria-labelledby="buy-title">
         <div className="container buy__inner">
           <div className="buy__offer">
             <p className="eyebrow">{home.buy.eyebrow}</p>
+
             <h2 id="buy-title" className="display-l">
               {home.buy.headline}
             </h2>
+
             <p className="buy__lede">{home.buy.standfirst}</p>
           </div>
+
           <div className="buy__aside">
             <p>{home.buy.body}</p>
+
             <Button to={home.buy.cta.href} variant="outline">
               {home.buy.cta.label}
             </Button>
@@ -225,7 +255,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06 — Glenn -------------------------------------------------------- */}
+      {/* 08 — Glenn ----------------------------------------------------- */}
       <section className="section person" aria-labelledby="person-title">
         <div className="container person__inner">
           {portrait && (
@@ -236,11 +266,13 @@ export default function Home() {
                   srcSet={portrait.avif}
                   sizes="(min-width: 900px) 300px, 60vw"
                 />
+
                 <source
                   type="image/webp"
                   srcSet={portrait.webp}
                   sizes="(min-width: 900px) 300px, 60vw"
                 />
+
                 <img
                   src={portrait.src}
                   alt="Glenn Hammond at his desk, in profile."
@@ -252,37 +284,56 @@ export default function Home() {
               </picture>
             </div>
           )}
+
           <div className="person__text">
             <p className="eyebrow">{home.person.eyebrow}</p>
+
             <h2 id="person-title" className="display-m">
               {home.person.headline}
             </h2>
-            {home.person.body.map((p) => (
-              <p key={p.slice(0, 24)} className="person__para">
-                {p}
+
+            {home.person.body.map((paragraph) => (
+              <p
+                key={paragraph.slice(0, 24)}
+                className="person__para"
+              >
+                {paragraph}
               </p>
             ))}
-            <Link className="person__link" to={home.person.cta.href}>
+
+            <Link
+              className="person__link"
+              to={home.person.cta.href}
+            >
               {home.person.cta.label}
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 07 — close --------------------------------------------------------- */}
-      <section className="section section--tight close on-ink" aria-labelledby="close-title">
+      {/* 09 — close ----------------------------------------------------- */}
+      <section
+        className="section section--tight close on-ink"
+        aria-labelledby="close-title"
+      >
         <div className="container close__inner">
           <div>
             <h2 id="close-title" className="display-l">
               {home.close.headline}
             </h2>
+
             <p className="close__body">{home.close.body}</p>
           </div>
+
           <div className="close__action">
             <Button to={home.close.cta.href} variant="primary">
               {home.close.cta.label}
             </Button>
-            <p className="close__promise">{site.responsePromise.text}</p>
+
+            <p className="close__promise">
+              {site.responsePromise.text}
+            </p>
+
             <p className="close__alt">
               Or write directly:{" "}
               <a href={`mailto:${site.email}`}>{site.email}</a>

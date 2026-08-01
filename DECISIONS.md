@@ -212,3 +212,79 @@ regression still fails the build.
 currently mixed. Sweeping `src/content/` is a contained follow-up pass and was
 not done unasked, because mechanical replacement of an em dash produces bad
 prose about a third of the time.
+
+---
+
+# V3.2 deviations
+
+## 15. The "still to confirm" panel is no longer public
+
+**What was built** — `Gaps`, the per-page "Still to confirm before this page
+is published" panel, is removed from `CaseStudy.jsx` and from
+`Editorial.jsx`/`Editorial.css`. Every project record keeps its `gaps` array;
+`GAPS.md` is still generated from it. The data is internal now, not rendered.
+
+**Why** — appropriate for an internal review artefact, wrong for a live
+portfolio a prospective client reads. A visible "still to confirm" list on
+every case study undercut the site's own evidence-led voice at exactly the
+pages meant to demonstrate it.
+
+**Consequence** — nothing on screen tells a reader what is unconfirmed. The
+`EvidenceNote` pattern (a public, editorial explanation of a specific
+evidentiary limit, e.g. "no learner-facing imagery has been approved") is
+kept and remains the correct tool where a reader genuinely needs to know why
+something is not shown.
+
+## 16. Connect & Learn's audience figure is stated without a number
+
+**What was built** — the disputed audience figure (Master Copy: "approximately
+50,000 educators"; CV: "28,000 users") is removed from `about.js` and from the
+Connect & Learn card's evidence panel in `projects.js`. Both now describe the
+audience without a number ("teachers, principals, board members and
+volunteers across ISQ member schools").
+
+**Why** — the two source figures disagree by a large margin and neither is
+confirmed. Publishing either as if settled overstates certainty; publishing
+both is inconsistent. `gaps` on the Connect & Learn record keeps the
+reconciliation item for when Glenn confirms one.
+
+**Consequence** — the card's evidence panel now shows two figures (engagement
+length, course count) instead of three. Reversible the moment a figure is
+confirmed: restore the `dt`/`dd` pair in `card.panel.figures`.
+
+## 17. `/services` redirect direction fixed
+
+**What was built** — `vercel.json` redirected `/services → /practice`, a route
+that has not existed since Decision 5 folded `/practice` into `/services`. The
+redirect now runs the other way: `/practice`, `/services/xapi-analytics` and
+`/design-system/*` all redirect to `/services`, which is the live route.
+
+**Why** — the old redirect made `/services` — the route actually in
+`routes.jsx` and linked from the header nav — permanently redirect to a page
+that does not exist. This was very likely shipped backwards by mistake when
+Decision 5 renamed the route and the redirect was not updated to match.
+
+**Consequence** — none. This restores the routing comment's own stated intent.
+
+## 18. ISQ eLearning Design System added as a case study, not a microsite
+
+**What was built** — a new project record in `projects.js`
+(`/work/isq-elearning-design-system`), a dedicated homepage featured-system
+section, and two new optional, generic section types added to
+`CaseStudy.jsx` (a system-architecture flow and a selected-components list),
+gated on fields no other record sets. No existing case study's rendering
+changes.
+
+**Why** — the live ISQ design-system site and its source repository were both
+unreachable from this environment (network policy denies the live domain;
+this session's GitHub access is not scoped to that repository). Per Glenn's
+direction, the case study proceeds on qualitative, conservative language
+rather than guessed numbers: no component count, no asserted maturity-state
+label set, no claim about the reference site's own build stack. All eight
+required visual subjects are placeholders in the site's existing "image to
+supply" pattern (the same device already used on `/work/casa/aviationworx`),
+not fabricated screens.
+
+**Consequence** — the case study is honest but visually thinner than it
+should eventually be. See the implementation report for the full list of
+claims that need verification against the live system before publication.

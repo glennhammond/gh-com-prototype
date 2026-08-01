@@ -3,7 +3,7 @@ import Seo from "../components/Seo.jsx";
 import Figure from "../components/Figure.jsx";
 import Button from "../components/Button.jsx";
 import NotFound from "./NotFound.jsx";
-import { Gaps, EvidenceNote, marked } from "../components/Editorial.jsx";
+import { EvidenceNote, marked } from "../components/Editorial.jsx";
 import { MetaBar, Brief, Outcomes, Decisions } from "../components/ProjectMeta.jsx";
 import {
   ProgrammeMap,
@@ -44,9 +44,15 @@ import "./CaseStudy.css";
  *   shortened ink introduction → pale metadata strip → programme rail →
  *   primary evidence on paper → in 60 seconds on raised paper →
  *   evidence note → situation → what was wrong → constraints → role →
- *   evidence figures → key decisions → one ink argument band →
- *   subprojects / programme map → outcomes → reflection → testimonial →
- *   gaps → previous/next → related → contact on raised paper
+ *   [system architecture] → [selected components] → evidence figures →
+ *   key decisions → one ink argument band → subprojects / programme map →
+ *   [governance] → outcomes → reflection → testimonial →
+ *   previous/next → related → contact on raised paper
+ *
+ * The two bracketed sections (v3.2) are optional, gated on fields a record
+ * may or may not set — currently only the ISQ eLearning Design System uses
+ * them. The per-page "still to confirm" review panel that used to sit before
+ * previous/next is no longer rendered publicly; see DECISIONS.md §15.
  *
  * The single worst adjacency in v3 was the opening: a tall ink hero with a
  * 982px screenshot straddling its lower edge, before a sentence of argument
@@ -205,6 +211,70 @@ export default function CaseStudy() {
         )}
       </div>
 
+      {/* --- System architecture ---------------------------------------------
+          Optional: set by records that define how the work fits together as
+          layers rather than as a single artefact. Currently only the ISQ
+          eLearning Design System uses this. */}
+      {project.architecture && (
+        <section className="case__architecture" aria-labelledby="architecture">
+          <div className="container">
+            <h2 id="architecture" className="display-m">
+              {project.architecture.headline}
+            </h2>
+            <p className="case__architecture-lede">{project.architecture.intro}</p>
+            <ol className="case__architecture-flow">
+              {project.architecture.layers.map((l, i) => (
+                <li key={l.label}>
+                  <span className="case__architecture-num" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="case__architecture-name">{l.label}</h3>
+                    <p>{l.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            {project.architecture.consumers && (
+              <div className="case__architecture-consumers">
+                <p className="case__architecture-consumers-label">Consumed by</p>
+                <ul>
+                  {project.architecture.consumers.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+                {project.architecture.consumersNote && (
+                  <p className="case__architecture-consumers-note">
+                    {marked(project.architecture.consumersNote)}
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* --- Selected components -----------------------------------------------
+          Optional: a small, interpreted set of examples rather than a full
+          component gallery. */}
+      {project.components && (
+        <div className="container case__body">
+          <section className="case__part" aria-labelledby="components">
+            <h2 id="components" className="case__part-title">
+              Selected components
+            </h2>
+            <dl className="case__components">
+              {project.components.map((c) => (
+                <div key={c.name} className="case__component">
+                  <dt>{c.name}</dt>
+                  <dd>{marked(c.detail)}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        </div>
+      )}
+
       {/* --- Evidence ------------------------------------------------------- */}
       {figures.length > 0 && (
         <section className="case__evidence" aria-labelledby="evidence">
@@ -299,6 +369,7 @@ export default function CaseStudy() {
 
       {/* --- Outcomes ------------------------------------------------------- */}
       <div className="container case__body">
+        <Block title="Governance and audit" paragraphs={project.governance} />
         <Outcomes outcomes={project.outcomes} />
 
         {project.reflection && (
@@ -324,11 +395,6 @@ export default function CaseStudy() {
           </figure>
         </section>
       )}
-
-      {/* --- Review gaps ----------------------------------------------------- */}
-      <div className="container">
-        <Gaps items={project.gaps} />
-      </div>
 
       <PrevNext path={project.path} />
       {!isProgramme && <Related path={project.path} />}

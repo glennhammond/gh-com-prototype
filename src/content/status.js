@@ -39,4 +39,10 @@ export const SOURCE = {
   BLUEPRINT: "Website Experience Blueprint v1.0, 26 Jul 2026",
   PROJECT_RECORD: "concept-to-platform project record",
   SUPPLIED_ASSET: "Supplied asset archive",
+  /** The v3.2 ISQ eLearning Design System integration brief. The live system
+   *  and its repository were unreachable when this record was written (see
+   *  DECISIONS.md §18); component counts, maturity-state labels and the
+   *  reference site's own build stack are described qualitatively rather
+   *  than asserted, pending verification against the live system. */
+  ISQ_DS_BRIEF: "v3.2 ISQ eLearning Design System integration brief, 29 Jul 2026",
 };

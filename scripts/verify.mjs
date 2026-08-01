@@ -123,6 +123,7 @@ const REQUIRED = {
   "index.html": ["The course is the easy part", "Learning System Review", "Operations"],
   "work.html": ["Featured programme", "Case studies", "Prototypes and experiments"],
   "work/wellbeing-studio.html": ["Three decisions I would defend", "What it cost"],
+  "work/isq-elearning-design-system.html": ["ISQ eLearning Design System", "least complex implementation"],
   "work/casa.html": ["The five projects", "What the six years contained"],
   "work/casa/class.html": ["CASA Learning Academy for Safe Skies", "not public-facing"],
   "work/casa/aviationworx.html": ["Image to supply", "no image in the recovered archive"],
@@ -271,6 +272,12 @@ if (largestImageKb > BUDGET.image)
 
 /* --- 9. Third-party requests ------------------------------------------------ */
 
+/* Outbound links a human clicks (not fetched resources) are allow-listed
+   individually, same treatment as linkedin.com below. Currently: the ISQ
+   eLearning Design System reference site, linked from the homepage featured
+   section and the ISQ case study per the v3.2 brief. */
+const ALLOWED_EXTERNAL_LINKS = ["isq-elearning-design-system.vercel.app"];
+
 /* This check exists to keep the page free of resources the browser fetches
  * automatically on load — scripts, embeds, trackers — per the blueprint's
  * zero-third-party-connections rule. It does not need to block a plain,
@@ -291,7 +298,8 @@ for (const [file, source] of Object.entries(html)) {
   const external = [...srcs, ...hrefs]
     .filter((u) => !u.startsWith("https://glennhammond.com"))
     .filter((u) => !u.includes("schema.org"))
-    .filter((u) => !u.includes("linkedin.com"));
+    .filter((u) => !u.includes("linkedin.com"))
+    .filter((u) => !ALLOWED_EXTERNAL_LINKS.some((allowed) => u.includes(allowed)));
   if (external.length) {
     fail(`Third-party resource referenced in ${file}: ${external.join(", ")}`);
   }

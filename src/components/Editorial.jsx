@@ -1,24 +1,17 @@
 import "./Editorial.css";
 
 /**
- * Editorial placeholders — V3.
+ * Editorial placeholders — v3.2.
  *
- * This prototype is a review artefact, and the single most useful thing it can
- * do is make its own gaps impossible to miss. Two mechanisms:
+ * <Prose> renders body copy and highlights anything in square brackets as an
+ * editorial placeholder. Nothing else in the content uses square brackets, so
+ * the marker is unambiguous.
  *
- *   <Prose>  renders body copy and highlights anything in square brackets as
- *            an editorial placeholder. Nothing else in the content uses square
- *            brackets, so the marker is unambiguous.
- *
- *   <Gaps>   a per-page panel listing everything that must be confirmed before
- *            the page can be published.
- *
- * Both are deliberately visible rather than hidden behind a flag. A missing
- * fact that only shows up in a build log is a missing fact that never gets
- * filled in.
- *
- * Before launch: remove both components and the copy they mark. `verify.mjs`
- * fails the build if a placeholder survives into a production build.
+ * The per-page "still to confirm" review list (formerly rendered by a <Gaps>
+ * component here) is no longer part of the public interface. Each project
+ * record still carries a `gaps` array as internal review data — see
+ * GAPS.md — it is simply not rendered. `verify.mjs` still fails the build if
+ * a bracketed placeholder survives into a production build.
  */
 
 const BRACKETED = /(\[[^\]]+\])/g;
@@ -41,35 +34,6 @@ export function marked(text) {
 /** A paragraph that understands placeholders. */
 export function Prose({ children, className = "" }) {
   return <p className={className}>{marked(children)}</p>;
-}
-
-/**
- * The unresolved facts for one page.
- *
- * Rendered as a real <section> with a heading so it appears in the document
- * outline and a screen-reader user meets it in the same place a sighted
- * reviewer does.
- */
-export function Gaps({ items, id = "gaps" }) {
-  if (!items?.length) return null;
-  return (
-    <section className="gaps" aria-labelledby={id}>
-      <h2 id={id} className="gaps__title">
-        <span className="gaps__tag">Review</span>
-        Still to confirm before this page is published
-      </h2>
-      <p className="gaps__lede">
-        {items.length} {items.length === 1 ? "item" : "items"}. Nothing on this
-        page asserts a fact that is not in a supplied source; where a fact is
-        missing it is marked rather than invented.
-      </p>
-      <ol className="gaps__list">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ol>
-    </section>
-  );
 }
 
 /**
