@@ -138,7 +138,7 @@ export const home = {
     eyebrow: "How it gets built",
     headline: "Specialist digital learning development",
     standfirst:
-      "Two disciplines inside the practice above, each developed further than the model alone shows.",
+      "Both sit inside Content and Operations above. Neither is a bolt-on.",
     rise: {
       headline: "Rise design systems",
       body:

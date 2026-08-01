@@ -460,8 +460,11 @@
 
 /* ==== 04a Specialist development: Rise / Storyline, after the model ====== */
 
+/* v3.3: raised paper, not the model section's own paper. Both sections used
+   the same surface and sat back to back with only a hairline between them,
+   so they read as one long block rather than two designed moments. */
 .specialist {
-  background: var(--paper);
+  background: var(--paper-raised);
 }
 
 .specialist__head {
