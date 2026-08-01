@@ -142,17 +142,31 @@
     display: inline-flex;
   }
 
+  /* v3.3: opacity/transform rather than display:none, so open and close get
+     a short, reduced-motion-respecting transition instead of a hard cut.
+     Still out of the layout and the tab order when closed (position:
+     absolute plus visibility:hidden), so nothing changes for a no-JS
+     visitor or for keyboard/screen-reader users. */
   html.js .site-nav {
-    display: none;
-  }
-
-  html.js .site-nav[data-open] {
-    display: block;
     position: absolute;
     inset: var(--header-h) 0 auto 0;
     background: var(--paper);
     border-bottom: 1px solid var(--rule);
     padding: var(--space-4) var(--gutter) var(--space-6);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity var(--motion-state) var(--ease),
+      transform var(--motion-state) var(--ease),
+      visibility 0s linear var(--motion-state);
+  }
+
+  html.js .site-nav[data-open] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity var(--motion-state) var(--ease),
+      transform var(--motion-state) var(--ease);
   }
 
   .site-nav__list {
