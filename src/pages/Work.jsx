@@ -51,7 +51,7 @@ export default function Work() {
           level={1}
           eyebrow="Selected work"
           headline="Learning systems in practice."
-          standfirst="Every project here earns its place by what it proves, not by how it looks. I chose six sectors to test the same four layers against: a national safety regulator, an award-winning schools migration, a wellbeing platform built from nothing, and the design systems and production work that make the rest sustainable."
+          standfirst="From enterprise Moodle platforms and production systems to Storyline simulations and organisational design systems, these projects demonstrate how strategy becomes implementation."
         />
 
         {/* --- Tier 1: the programme -------------------------------------- */}
