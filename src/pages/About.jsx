@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
 import { SectionHead } from "../components/Section.jsx";
 import Button from "../components/Button.jsx";
@@ -126,6 +127,11 @@ export default function About() {
               LinkedIn
             </Button>
           </div>
+
+          <p className="about__more">
+            Wondering what working together actually looks like?{" "}
+            <Link to="/services">See how the practice is organised</Link>
+          </p>
         </div>
       </section>
     </>

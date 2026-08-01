@@ -128,3 +128,13 @@
   gap: var(--space-3);
   margin-top: var(--space-4);
 }
+
+.about__more {
+  margin-top: var(--space-5);
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+}
+
+.about__more a {
+  color: var(--text);
+}
