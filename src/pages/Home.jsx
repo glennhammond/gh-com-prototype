@@ -6,7 +6,7 @@ import Icon from "../components/Icon.jsx";
 import { getImage } from "../lib/media.js";
 import { home } from "../content/home.js";
 import { layers } from "../content/layers.js";
-import { featured } from "../content/projects.js";
+import { featured, projectBySlug } from "../content/projects.js";
 import { site } from "../content/site.js";
 import { graph, personSchema, practiceSchema } from "../lib/schema.js";
 import "./Home.css";
@@ -27,6 +27,7 @@ import "./Home.css";
 export default function Home() {
   const portrait = getImage("glenn-working");
   const [lead, ...supporting] = featured;
+  const featuredSystemProject = projectBySlug[home.featuredSystem.slug];
 
   return (
     <>
@@ -70,6 +71,43 @@ export default function Home() {
           <p className="proof__clients">{home.proof.clients}</p>
         </div>
       </section>
+
+      {/* 03a — featured system --------------------------------------------- */}
+      {featuredSystemProject && (
+        <section className="section section--tight home-system" aria-labelledby="system-title">
+          <div className="container home-system__inner">
+            <div className="home-system__text">
+              <p className="eyebrow">{home.featuredSystem.eyebrow}</p>
+              <h2 id="system-title" className="display-l">
+                {home.featuredSystem.headline}
+              </h2>
+              <p className="lede home-system__body">{home.featuredSystem.body}</p>
+              <ul className="home-system__points">
+                {home.featuredSystem.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <p className="home-system__areas">{home.featuredSystem.areas.join(" · ")}</p>
+              <div className="home-system__actions">
+                <Button to={featuredSystemProject.path} variant="primary">
+                  View case study
+                </Button>
+                {featuredSystemProject.externalRef && (
+                  <a
+                    className="home-system__external"
+                    href={featuredSystemProject.externalRef.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {featuredSystemProject.externalRef.label}
+                    <span className="visually-hidden">: opens in a new tab</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 03 — selected work ---------------------------------------------- */}
       <section className="section home-work" aria-labelledby="work-title">
@@ -130,6 +168,41 @@ export default function Home() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* 04a — specialist development -------------------------------------- */}
+      <section className="section section--tight specialist" aria-labelledby="specialist-title">
+        <div className="container">
+          <header className="specialist__head">
+            <p className="eyebrow">{home.specialistDevelopment.eyebrow}</p>
+            <h2 id="specialist-title" className="display-m">
+              {home.specialistDevelopment.headline}
+            </h2>
+            <p className="specialist__lede">{home.specialistDevelopment.standfirst}</p>
+          </header>
+
+          <div className="specialist__panels">
+            <article className="specialist__panel" aria-labelledby="specialist-rise">
+              <h3 id="specialist-rise" className="specialist__title">
+                {home.specialistDevelopment.rise.headline}
+              </h3>
+              <p className="specialist__body">{home.specialistDevelopment.rise.body}</p>
+              <Link className="specialist__cta" to={home.specialistDevelopment.rise.cta.href}>
+                {home.specialistDevelopment.rise.cta.label}
+              </Link>
+            </article>
+
+            <article className="specialist__panel" aria-labelledby="specialist-storyline">
+              <h3 id="specialist-storyline" className="specialist__title">
+                {home.specialistDevelopment.storyline.headline}
+              </h3>
+              <p className="specialist__body">{home.specialistDevelopment.storyline.body}</p>
+              <Link className="specialist__cta" to={home.specialistDevelopment.storyline.cta.href}>
+                {home.specialistDevelopment.storyline.cta.label}
+              </Link>
+            </article>
+          </div>
         </div>
       </section>
 

@@ -47,10 +47,77 @@ export default function Practice() {
           level={1}
           eyebrow="Practice"
           headline="Four layers, one owner."
-          standfirst="I work across all four layers of a learning programme rather than taking one and handing the rest on. That is not a claim to be better at each discipline than a specialist in it — it is a claim that the decisions between them need a single owner."
+          standfirst="I work across all four layers of a learning programme rather than taking one and handing the rest on. That is not a claim to be better at each discipline than a specialist in it — it is a claim that the decisions between them need a single owner. Two of those layers have their own specialist practice: Rise design systems and premium development, and advanced Storyline development."
         />
         <LayerTabs />
       </div>
+
+      <section className="section builds" aria-labelledby="builds-title">
+        <div className="container">
+          <SectionHead
+            id="builds-title"
+            eyebrow="How it gets built"
+            headline="Rise and Storyline, done as specialist practices."
+            standfirst="Both sit mostly inside the Content and Operations layers above — this is how the work gets built, not a different kind of work. Rise and Storyline are chosen for different reasons rather than ranked against each other."
+          />
+
+          <div className="builds__cards">
+            <article className="builds__card" aria-labelledby="builds-rise">
+              <h3 id="builds-rise" className="builds__title">
+                Rise design systems and premium development
+              </h3>
+              <p className="builds__body">
+                Rise makes responsive course production efficient, but its
+                standard visual and interaction options can make learning feel
+                generic. I combine learning design, UX, HTML, CSS and reusable
+                components to create distinctive, scalable Rise experiences.
+              </p>
+              <Link className="builds__cta" to="/services/rise-design-systems">
+                Explore Rise design systems
+              </Link>
+            </article>
+
+            <article className="builds__card" aria-labelledby="builds-storyline">
+              <h3 id="builds-storyline" className="builds__title">
+                Advanced Storyline development
+              </h3>
+              <p className="builds__body">
+                Bespoke scenarios, simulations, assessments and interactive
+                learning built on extensive experience across the Articulate
+                ecosystem.
+              </p>
+              <Link className="builds__cta" to="/services/storyline-development">
+                Explore Storyline development
+              </Link>
+            </article>
+          </div>
+
+          <div className="builds__compare">
+            <h3 className="builds__compare-title">
+              The right tool for the learning problem
+            </h3>
+            <p>
+              <strong>Rise</strong> is responsive and content-led: efficient
+              to develop and maintain, suited to scalable programmes and
+              course suites, and strongest for structured, content-rich
+              learning enhanced through reusable systems and custom
+              components.
+            </p>
+            <p>
+              <strong>Storyline</strong> is bespoke and interaction-led: it
+              supports complex scenarios, simulations and advanced logic, and
+              is strongest where the interaction itself carries the learning.
+            </p>
+            <p>
+              I recommend Rise, Storyline or a combined solution based on the
+              learning objectives, audience, interaction requirements,
+              accessibility, production constraints, maintenance model and
+              reporting requirements — not on a fixed preference for either
+              tool.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section className="section engagements" aria-labelledby="engagements-title">
         <div className="container">

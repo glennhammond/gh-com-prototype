@@ -1,3 +1,80 @@
+/* --- Rise / Storyline feature cards -----------------------------------------
+   Sits between the layer tabs and the engagements list: two specialist
+   practices inside the four-layer model, not a fifth destination. */
+
+.builds {
+  background: var(--paper-raised);
+  border-block: 1px solid var(--rule-strong);
+}
+
+.builds__cards {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 700px) {
+  .builds__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-7) var(--space-6);
+  }
+}
+
+.builds__card {
+  border-top: 3px solid var(--brass);
+  padding-top: var(--space-4);
+}
+
+.builds__title {
+  font-size: var(--size-display-m);
+}
+
+.builds__body {
+  margin-top: var(--space-3);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 46ch;
+}
+
+.builds__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.builds__cta:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+.builds__compare {
+  margin-top: var(--section-y-tight);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+  max-width: var(--measure);
+}
+
+.builds__compare-title {
+  font-size: var(--size-display-s, 1.35rem);
+  margin-bottom: var(--space-3);
+}
+
+.builds__compare p {
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.builds__compare p + p {
+  margin-top: var(--space-3);
+}
+
 /* v3.1: off ink. This is a list of routine content panels, not a moment of
    emphasis, and at full height it was reading as an environment rather than
    as punctuation. */

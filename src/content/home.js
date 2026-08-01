@@ -12,6 +12,14 @@ import { STATUS, SOURCE } from "./status.js";
  * four-layer model arrives once attention has been earned, and no primary
  * action requires the visitor to decode it.
  *
+ * Two beats were added without disturbing that sequence: a featured-system
+ * band for the ISQ eLearning Design System immediately ahead of the
+ * selected-work trio (recovered from this repo's own production deployment —
+ * see the note on `isqDesignSystem` in content/projects.js), and a compact
+ * Rise/Storyline "specialist digital learning development" band directly
+ * after the four-layer model, so both are visible before a visitor reaches
+ * the detailed Services page without displacing the top-of-page positioning.
+ *
  * All copy is PROPOSED, awaiting approval.
  */
 
@@ -40,12 +48,53 @@ export const home = {
     clients: "Independent Schools Queensland · Civil Aviation Safety Authority · Goodstart Early Learning · Corporate Yoga Australia",
   },
 
+  /* 03a — featured system, ahead of the selected-work trio */
+  featuredSystem: {
+    eyebrow: "Featured system",
+    slug: "isq-elearning-design-system",
+    headline: "ISQ eLearning Design System",
+    body:
+      "A shared framework connecting learning design, visual language, reusable components, accessibility and technical delivery across ISQ's digital learning ecosystem.",
+    points: [
+      "A growing catalogue of core and approved components",
+      "Cross-platform foundations, shared across Rise and Moodle",
+      "Documented learning patterns and implementation guidance",
+      "Operational governance and versioning",
+    ],
+    areas: [
+      "Learning design",
+      "Design systems",
+      "UX and interface design",
+      "Front-end development",
+      "Accessibility",
+      "Governance",
+    ],
+  },
+
   /* 03 — selected work */
   work: {
     eyebrow: "Selected work",
-    headline: "Three projects that show the whole system, not a screenshot.",
+    headline: "Three more projects, three different kinds of proof.",
     standfirst:
       "A platform built from nothing, a regulator's training programme, and a migration that had to happen while sixty courses were being rebuilt.",
+  },
+
+  /* 04a — Rise and Storyline, after the model has been introduced */
+  specialistDevelopment: {
+    eyebrow: "How it gets built",
+    headline: "Specialist digital learning development",
+    standfirst:
+      "Two disciplines inside the practice above, each developed further than the model alone shows.",
+    rise: {
+      headline: "Rise design systems",
+      body: "Premium, scalable Rise experiences supported by custom components, HTML, CSS and reusable production standards.",
+      cta: { href: "/services/rise-design-systems", label: "Explore Rise design systems" },
+    },
+    storyline: {
+      headline: "Advanced Storyline development",
+      body: "Bespoke scenarios, simulations and interactive learning built on extensive experience across the Articulate ecosystem.",
+      cta: { href: "/services/storyline-development", label: "Explore Storyline development" },
+    },
   },
 
   /* 04 — the model, after proof has earned it */
