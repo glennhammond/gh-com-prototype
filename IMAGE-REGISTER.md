@@ -43,13 +43,6 @@ for each one inline.
 | `goodstart-activity` | `goodstart-food-interaction.png` | Goodstart |
 | `isq-diff-title`, `isq-diff-card` | `isq-differentiated-learning-hero.jpg` | ISQ |
 | `isq-diff-intro`, `-tiers`, `-cycle`, `-scenario` | `isq-differentiation-screen-02/03/04/05.jpg` | ISQ |
-| `isq-ds-decision-point` | `isq-ds-decision-point.png` | ISQ eLearning Design System |
-| `isq-ds-knowledge-check` | `isq-ds-knowledge-check.png` | ISQ eLearning Design System |
-| `isq-ds-tabs` | `isq-ds-tabs.png` | ISQ eLearning Design System |
-| `isq-ds-flip-cards` | `isq-ds-flip-cards.png` | ISQ eLearning Design System |
-| `isq-ds-content-cards` | `isq-ds-content-cards.png` | ISQ eLearning Design System |
-| `isq-ds-comparison-panel` | `isq-ds-comparison-panel.png` | ISQ eLearning Design System |
-| `isq-ds-section-summary` | `isq-ds-section-summary.png` | ISQ eLearning Design System |
 | `safetyhub-cover` | `safetyhub-asbestos-awareness-hero.png` | Safetyhub |
 | `safetyhub-question`, `safetyhub-card` | `safetyhub-asbestos-question-03.png` | Safetyhub |
 | `safetyhub-video` | `safetyhub-asbestos-screen-04.png` | Safetyhub |
@@ -60,7 +53,24 @@ for each one inline.
 
 ---
 
-## 2. Omitted, with reasons
+## 2. Processed, held in reserve
+
+Sourced, cropped and derived, but not currently referenced by any page. Kept
+ready rather than deleted: see DECISIONS.md §20.
+
+| Output | Source | What it demonstrates |
+| --- | --- | --- |
+| `isq-ds-decision-point` | `isq-ds-decision-point.png` | Decision point component, ready state |
+| `isq-ds-knowledge-check` | `isq-ds-knowledge-check.png` | Four-question Knowledge check |
+| `isq-ds-tabs` | `isq-ds-tabs.png` | Three-tab content pattern |
+| `isq-ds-flip-cards` | `isq-ds-flip-cards.png` | Flip card, front and revealed states in one frame |
+| `isq-ds-content-cards` | `isq-ds-content-cards.png` | Four-card layout, domestic and family violence example |
+| `isq-ds-comparison-panel` | `isq-ds-comparison-panel.png` | Two-column comparison pattern with featured lists |
+| `isq-ds-section-summary` | `isq-ds-section-summary.png` | Four-part Section summary component |
+
+---
+
+## 3. Omitted, with reasons
 
 | Asset | Reason |
 | --- | --- |
@@ -82,7 +92,7 @@ for each one inline.
 
 ---
 
-## 3. Uncertain CASA attribution
+## 4. Uncertain CASA attribution
 
 These are the ones to resolve before publication. Each is flagged in the
 interface as well as here.
@@ -98,7 +108,7 @@ interface as well as here.
 
 ---
 
-## 4. Rules applied
+## 5. Rules applied
 
 - Crops are expressed as fractions of the source so they survive a re-export.
 - Nothing is upscaled. A width is skipped when the source cannot carry it,

@@ -325,3 +325,26 @@ seven patterns shown. The documentation, code and governance views named in
 implementation, and the lifecycle/governance model) are still not shown and
 remain listed in `gaps`, along with confirmation that any future live-course
 screenshot has clearance to publish.
+
+---
+
+## 20. §19's figures held back; processed assets kept in reserve
+
+**What was built** — `isqDesignSystem.figures`, `figuresTitle`,
+`figuresLede`, the `components` entry for Decision point, and the two
+`gaps` items touched in §19 were reverted to their §18 wording, so the case
+study shows the placeholder plates again rather than the seven component
+captures. Nothing under `src/assets/isq/` was touched: the seven
+`isq-ds-*` source files, their AVIF/WebP derivatives, the `scripts/images.mjs`
+recipes that produce them, and their `image-manifest.json` entries all
+remain in the repository, built and ready.
+
+**Why** — Glenn's direction, on review, was that the seven captures should
+go back in with more context around them rather than stay as they landed in
+§19. The images themselves are not the problem; the surrounding narrative
+needs another pass before they are shown.
+
+**Consequence** — the case study is back to §18's all-placeholder state.
+The processed images are not orphaned: re-adding them to `figures` is a
+content-only change (the asset pipeline work is already done), whenever the
+richer framing is ready.

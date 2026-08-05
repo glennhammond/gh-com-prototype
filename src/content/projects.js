@@ -1302,7 +1302,7 @@ const isqDesignSystem = {
     {
       name: "Decision point",
       detail:
-        "Presents a choice and its consequence, used wherever a course needs a learner to apply judgement rather than recall a fact. Shown below as a learner encounters it.",
+        "Presents a choice and its consequence, used wherever a course needs a learner to apply judgement rather than recall a fact. This is the component followed through specification, implementation and use below, because it is the clearest example of a pattern that started as a recurring course requirement and ended as a documented, governed part of the system.",
     },
     {
       name: "Legislation panel",
@@ -1316,68 +1316,86 @@ const isqDesignSystem = {
     },
   ],
 
-  figuresTitle: "The components, from decision to summary",
+  figuresTitle: "The system, from catalogue to course",
   figuresLede:
-    "Seven screens from the component library, grouped by the learning job each does: judgement and formative assessment, learner-paced exploration, and a consistent shape for complex material. Most carry the library's demonstration copy rather than a published course; the domestic and family violence example is the exception, using real subject matter. What the seven share is the foundations layer beneath them: spacing, typography, colour and interaction feedback, specified once and inherited by every pattern shown here.",
+    "Screenshots from the live reference site are being captured and cleared for use here. Until then, each placeholder marks exactly what belongs in it and why it was chosen, following one component, Decision point, from specification through implementation to use inside a course.",
   figures: [
     {
-      role: "support",
-      image: "isq-ds-decision-point",
-      alt: "A Decision point interaction: a heading, four options and Check answer and Reset controls, in the system's card and radio-option style.",
+      role: "placeholder",
+      placeholder: {
+        label: "Component catalogue",
+        note: "The full catalogue view, showing how components are organised and how their status is indicated at a glance.",
+        ratio: "16 / 9",
+      },
       caption:
-        "Decision point, shown in the library's demonstration copy. The same card, option and button treatment repeats wherever a course asks for judgement rather than recall.",
-      area: "Assessment",
-      expandable: true,
+        "The catalogue is the entry point for a designer choosing between a proven pattern and one still being tested. Status is shown at the point of choice, not filed in a separate document a designer has to remember to check.",
+      area: "Design systems",
     },
     {
-      role: "primary",
-      image: "isq-ds-knowledge-check",
-      alt: "A four-question Knowledge check: a question list on the left, the active question and options on the right, with Check answer and Next question controls.",
+      role: "placeholder",
+      placeholder: {
+        label: "Decision point — documentation",
+        note: "The component's specification page: purpose, states, accessibility behaviour and usage guidance.",
+        ratio: "4 / 3",
+      },
       caption:
-        "A four-question Knowledge check. Navigation, progress and controls hold the same position and style across every question, so attention goes to the content, not the interface.",
-      area: "Assessment",
-      expandable: true,
+        "The specification for Decision point: what it is for, when to use it, and what a learner using assistive technology should experience. This is the claim the audit checked the built courses against.",
+      area: "Documentation",
     },
     {
-      role: "support",
-      image: "isq-ds-tabs",
-      alt: "A three-tab content panel with Tab one selected and its body text visible.",
+      role: "placeholder",
+      placeholder: {
+        label: "Decision point — implementation",
+        note: "The component's HTML, CSS and JavaScript as it ships, ready to drop into a course.",
+        ratio: "4 / 3",
+      },
       caption:
-        "A three-tab pattern for content in parallel parts. One panel shows at a time, so a page avoids overwhelming a learner while keeping related content a click away.",
-      area: "Content exploration",
+        "The same component as code. Keeping documentation and implementation visibly paired is what let the audit find the places where they had quietly diverged.",
+      area: "Implementation",
     },
     {
-      role: "support",
-      image: "isq-ds-flip-cards",
-      alt: "A two-card flip interaction: the left card front-facing, the right turned to its revealed state, each with a return control.",
+      role: "placeholder",
+      placeholder: {
+        label: "Scenario stage — learning-pattern guidance",
+        note: "The pattern-level guidance for Scenario stage: when to reach for it and what learning need it answers.",
+        ratio: "16 / 9",
+      },
       caption:
-        "A flip-card pair in both states at once: front prompt on the left, revealed content on the right. The same flip and return treatment repeats across every flip-card instance.",
-      area: "Content exploration",
+        "A pattern sits above a component: it documents the learning need first, so a designer chooses Scenario stage because a narrative decision genuinely helps, not because it is the component they remember from the last course.",
+      area: "Learning patterns",
     },
     {
-      role: "primary",
-      image: "isq-ds-content-cards",
-      alt: "A four-card layout on domestic and family violence: Forms, Methods, Pattern and People.",
+      role: "placeholder",
+      placeholder: {
+        label: "Rise implementation guidance",
+        note: "Guidance for building the pattern inside Articulate Rise, including where a native block is enough and where it is not.",
+        ratio: "16 / 9",
+      },
       caption:
-        "A four-card layout applied to a domestic and family violence explainer, breaking sensitive material into scannable groups. The same grid structures comparable content elsewhere.",
-      area: "Structured content",
+        "Implementation guidance for the platform most ISQ courses ship on. It states the same implementation hierarchy the components above follow: native first, custom only where the learning purpose needs it.",
+      area: "Platform implementation",
     },
     {
-      role: "primary",
-      image: "isq-ds-comparison-panel",
-      alt: "A comparison panel: a dark heading band above two columns, each with a subheading and featured list, closing on a shared takeaway.",
+      role: "placeholder",
+      placeholder: {
+        label: "Governance and component lifecycle",
+        note: "The maturity model and contribution process, showing how a component moves from proposal to a governed, reusable part of the system.",
+        ratio: "16 / 9",
+      },
       caption:
-        "A comparison pattern pairing two surfaces under one heading band, each with a featured list and a shared takeaway. Built for content that asks a learner to weigh two things side by side.",
-      area: "Structured content",
-      expandable: true,
+        "Every component carries a lifecycle state, so a designer can tell a proven pattern from an early one at a glance. The exact set of state labels is confirmed against the live system rather than restated here as fixed.",
+      area: "Governance",
     },
     {
-      role: "support",
-      image: "isq-ds-section-summary",
-      alt: "A Section summary: heading and intro line above a 2-by-2 grid of numbered cards, each with a subheading and description.",
+      role: "placeholder",
+      placeholder: {
+        label: "Decision point in a live course",
+        note: "The component as a learner encounters it, inside a published ISQ course. Requires clearance before publication.",
+        ratio: "16 / 9",
+      },
       caption:
-        "A Section summary, shown in the library's demonstration copy. Numbered cards consolidate a section's key points into one consistent closing structure.",
-      area: "Structured content",
+        "The same component, in use. Specification, implementation and this screen are the same claim checked three times: what the system says a learner should experience, what the code does, and what actually ships.",
+      area: "Learning experience",
     },
   ],
 
@@ -1441,10 +1459,10 @@ const isqDesignSystem = {
     "Confirm exact component count, the maturity-state label set, and the current system version against the live site.",
     "Confirm the implementation stack and hosting of the isq-elearning-design-system.vercel.app reference site itself, as distinct from what the design system produces guidance for.",
     "Confirm whether Storyline course production is a current consumer of this system, or remains separate from it.",
-    "Capture and clear screenshots of the system's documentation and governance layers: the component catalogue, a specification page, implementation code and the lifecycle view. Not yet shown here.",
+    "Capture and clear the seven screenshots specified in this case study for publication: component catalogue, Decision point documentation, Decision point implementation, Scenario stage pattern guidance, Rise implementation guidance, governance/lifecycle model, and Decision point inside a live course.",
     "Confirm names and roles of any collaborators or stakeholders, if any should be credited.",
     "Confirm the project's start date and current period.",
-    "Confirm permission to publish a component inside a published course with real learner-facing content.",
+    "Confirm permission to publish any live-course screenshot showing a component in use.",
   ],
 
   seo: {
