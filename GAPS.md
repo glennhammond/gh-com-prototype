@@ -9,7 +9,7 @@ confirmation before a page's facts are treated as final.
 `PUBLISH=1 npm run verify` fails the build while any editorial placeholder
 remains in the output.
 
-### CASA learning programme  (/work/casa)
+### CASA learning program  (/work/casa)
 - [ ] Confirm the purpose, audience and scope of AviationWorx, and how it related to CLASS.
 - [ ] Confirm the underlying platform technology and vendor for both AviationWorx and CLASS.
 - [ ] Confirm the number of courses and the size of the audience on each platform.

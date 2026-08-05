@@ -11,13 +11,13 @@ import "./Work.css";
  *
  * V2 showed four projects as a lead card plus a grid. With thirteen routed
  * pages that structure stops communicating: everything looks equally
- * important, and the CASA programme reads as one project among many rather
+ * important, and the CASA program reads as one project among many rather
  * than as six years of work with five projects inside it.
  *
  * V3 uses three tiers, and the hierarchy is carried by scale and position
  * rather than by a badge:
  *
- *   1. Featured programme  full-width, image left, five named projects listed
+ *   1. Featured program  full-width, image left, five named projects listed
  *                          on the right. Nothing else on the page is this size.
  *   2. Case studies        a two-column grid, with the flagship taking the
  *                          first, wider cell.
@@ -35,7 +35,7 @@ export default function Work() {
     <>
       <Seo
         title="Selected work | Glenn Hammond"
-        description="A six-year learning programme inside Australia's aviation safety regulator, a live wellbeing platform, an award-winning schools migration, and vocational, health and safety learning for education and government."
+        description="A six-year learning program inside Australia's aviation safety regulator, a live wellbeing platform, an award-winning schools migration, and vocational, health and safety learning for education and government."
         path="/work"
         jsonLd={graph(
           personSchema,
@@ -54,11 +54,11 @@ export default function Work() {
           standfirst="From enterprise Moodle platforms and production systems to Storyline simulations and organisational design systems, these projects demonstrate how strategy becomes implementation."
         />
 
-        {/* --- Tier 1: the programme -------------------------------------- */}
+        {/* --- Tier 1: the program -------------------------------------- */}
         <section className="work-tier" aria-labelledby="tier-programme">
           <h2 id="tier-programme" className="work-tier__title">
             <span className="work-tier__num" aria-hidden="true">01</span>
-            Featured programme
+            Featured program
           </h2>
           <ProjectCard project={programme} size="programme" eager />
         </section>

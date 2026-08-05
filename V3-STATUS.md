@@ -25,7 +25,7 @@ evidence and attribution.
 learning, Sonic HealthPlus, Safetyhub and the prototypes are new. Goodstart
 moves from a text-only note to a full case study with real imagery.
 
-**The Work index is now three tiers.** Featured programme, case studies,
+**The Work index is now three tiers.** Featured program, case studies,
 prototypes. Hierarchy is carried by scale, position and a real heading for each
 tier, not by a badge or a colour.
 

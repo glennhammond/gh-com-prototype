@@ -149,7 +149,7 @@ where Glenn's presence matters. The page is written to work without it.
 
 ## 10. The Work index gained a tier, and the flagship kept its place
 
-**What was built** — three tiers: featured programme, case studies,
+**What was built** — three tiers: Featured program, case studies,
 prototypes. CASA is the only programme; Wellbeing Studio is the first and
 widest card inside the case-study tier.
 
