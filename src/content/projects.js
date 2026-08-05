@@ -7,7 +7,7 @@ import { STATUS, SOURCE } from "./status.js";
  * WHAT CHANGED FROM V2
  * ═══════════════════════════════════════════════════════════════════════════
  *
- * 1. CASA is a PROGRAMME, not a project. Six years produced several
+ * 1. CASA is a program, not a project. Six years produced several
  *    substantially different bodies of work. V2 flattened all of it into one
  *    case study called "Flight Examiner Rating", which understated both the
  *    range and the platform work. V3 gives CASA an overview page and five
@@ -19,7 +19,7 @@ import { STATUS, SOURCE } from "./status.js";
  *    and moves from a note to a full case study.
  *
  * 3. Records carry `tier`, which drives the Work index hierarchy, and `path`,
- *    which is the single source of truth for routing. Programme children live
+ *    which is the single source of truth for routing. program children live
  *    under /work/casa/… so the URL states the relationship.
  *
  * 4. Records carry `gaps` — the editorial placeholders that must be resolved
@@ -60,7 +60,7 @@ import { STATUS, SOURCE } from "./status.js";
  */
 
 /* ══════════════════════════════════════════════════════════════════════════
-   CASA — programme overview
+   CASA — program overview
    ══════════════════════════════════════════════════════════════════════════ */
 
 const casaProgramme = {
@@ -68,7 +68,7 @@ const casaProgramme = {
   slug: "casa",
   format: "programme",
   tier: "programme",
-  title: "CASA learning programme",
+  title: "CASA learning program",
   shortTitle: "CASA",
   clientId: "casa",
   clientName: "Civil Aviation Safety Authority",
@@ -85,8 +85,8 @@ const casaProgramme = {
     alt: "The CLASS platform home page, showing the CASA Learning Academy for Safe Skies wordmark, a welcome carousel and six large task tiles.",
     headline: "Six years designing learning platforms and digital learning for CASA",
     summary:
-      "Two internal learning platforms, a national examiner programme, a reusable course production system and a role-based learning catalogue, built inside the aviation safety regulator over six years.",
-    kicker: "Programme · five projects",
+      "Two internal learning platforms, a national examiner program, a reusable course production system and a role-based learning catalogue, built inside the aviation safety regulator over six years.",
+    kicker: "Program · five projects",
   },
 
   hero: {
@@ -117,7 +117,7 @@ const casaProgramme = {
     scope:
       "LMS front-end design and development for two internal platforms, course and catalogue information architecture, instructional and assessment design, a reusable Storyline production system, and in-house video and livestream production.",
     outcome:
-      "Two internal learning platforms with front ends I designed and built, a national flight examiner programme, and a production system the regulator's design team used after I left.",
+      "Two internal learning platforms with front ends I designed and built, a national flight examiner program, and a production system the regulator's design team used after I left.",
     stack: "Articulate Storyline · Adobe CC · AviationWorx · CLASS",
   },
 
@@ -139,7 +139,7 @@ const casaProgramme = {
     "[Confirm which internal team owned each platform and who else worked on the front ends]",
   ],
 
-  /* The programme map. Sequence is deliberately grouped rather than dated,
+  /* The program map. Sequence is deliberately grouped rather than dated,
      because only the FER period and the filming date are firmly evidenced. */
   programmeMap: {
     note: "Grouped by body of work rather than by date. Only the engagement period and the March 2021 filming date are firmly evidenced; individual project dates are unconfirmed.",
@@ -161,15 +161,15 @@ const casaProgramme = {
       },
       {
         label: "Programmes",
-        detail: "The national examiner programme built on top of all of it.",
+        detail: "The national examiner program built on top of all of it.",
         items: ["flight-examiner-rating"],
       },
     ],
   },
 
-  /* The programme page's own evidence: the production and multimedia work that
+  /* The program page's own evidence: the production and multimedia work that
      sits under all five projects rather than inside any one of them. */
-  figuresTitle: "Multimedia and production, across the programme",
+  figuresTitle: "Multimedia and production, across the program",
   figuresLede:
     "Two capabilities ran underneath everything else. Being able to author and to shoot in house changes what can be designed, because a scenario can be written for footage that is actually obtainable.",
   figures: [
@@ -210,14 +210,14 @@ const casaProgramme = {
     "Confirm the purpose, audience and scope of AviationWorx, and how it related to CLASS.",
     "Confirm the underlying platform technology and vendor for both AviationWorx and CLASS.",
     "Confirm the number of courses and the size of the audience on each platform.",
-    "Confirm the sequence of the five projects so the programme map can carry dates.",
+    "Confirm the sequence of the five projects so the program map can carry dates.",
     "Confirm which recovered catalogue imagery belongs to which platform.",
   ],
 
   seo: {
-    title: "CASA learning programme — six years of platform and learning design | Glenn Hammond",
+    title: "CASA learning program — six years of platform and learning design | Glenn Hammond",
     description:
-      "Two internal learning platforms, a national flight examiner programme, a reusable Storyline production system and a role-based learning catalogue, designed inside Australia's aviation safety regulator.",
+      "Two internal learning platforms, a national flight examiner program, a reusable Storyline production system and a role-based learning catalogue, designed inside Australia's aviation safety regulator.",
   },
 };
 
@@ -256,7 +256,7 @@ const casaAviationworx = {
 
   hero: {
     role: "placeholder",
-    eyebrow: "CASA programme · Platform",
+    eyebrow: "CASA program · Platform",
     headline: "Designing and developing the AviationWorx LMS front end.",
     standfirst:
       "AviationWorx was one of two internal learning platforms at CASA whose front end I designed and developed. This page is written from confirmed responsibility rather than from recovered screens.",
@@ -269,7 +269,7 @@ const casaAviationworx = {
 
   meta: [
     { label: "Client", value: "Civil Aviation Safety Authority" },
-    { label: "Programme", value: "CASA, 2015–2021" },
+    { label: "program", value: "CASA, 2015–2021" },
     { label: "Role", value: "LMS front-end design and development" },
     { label: "Platform", value: "[Confirm technology and integration details]" },
     { label: "Audience", value: "[Confirm audience]" },
@@ -362,7 +362,7 @@ const casaAviationworx = {
 const casaClass = {
   path: "/work/casa/class",
   slug: "class",
-  programme: "casa",
+  program: "casa",
   format: "standard",
   title: "CLASS",
   clientId: "casa",
@@ -376,7 +376,7 @@ const casaClass = {
   source: SOURCE.MASTER_COPY,
 
   card: {
-    image: "casa-programme-card",
+    image: "casa-program-card",
     alt: "The CLASS platform home page, showing the CASA Learning Academy for Safe Skies wordmark, a welcome carousel and six large task tiles.",
     headline: "Designing the learner experience for CLASS",
     summary:
@@ -385,7 +385,7 @@ const casaClass = {
 
   hero: {
     role: "primary",
-    eyebrow: "CASA programme · Platform",
+    eyebrow: "CASA program · Platform",
     headline: "Designing the learner experience for CLASS.",
     standfirst:
       "CLASS is an internal CASA learning platform. I designed and developed its learner-facing front end: the landing view, the navigation, and the patterns that made a large body of regulated learning navigable by the people who had to complete it.",
@@ -399,7 +399,7 @@ const casaClass = {
 
   meta: [
     { label: "Client", value: "Civil Aviation Safety Authority" },
-    { label: "Programme", value: "CASA, 2015–2021" },
+    { label: "program", value: "CASA, 2015–2021" },
     { label: "Role", value: "LMS front-end design and development" },
     { label: "Access", value: "Internal platform, not public-facing" },
     { label: "Platform", value: "[Confirm technology and integration details]" },
@@ -516,13 +516,13 @@ const casaCourseSystem = {
     alt: "The CASA course template icon library: ten icons shown in outline and inverted treatments above numbered step markers in square and round variants, each in several states.",
     headline: "Creating a reusable Storyline production system",
     summary:
-      "The style manual, templates, component specifications and asset libraries that let several designers produce work that looked like one programme.",
+      "The style manual, templates, component specifications and asset libraries that let several designers produce work that looked like one program.",
   },
 
   hero: {
     role: "primary",
     mount: "plate",
-    eyebrow: "CASA programme · Production",
+    eyebrow: "CASA program · Production",
     headline: "Creating a reusable Storyline production system.",
     standfirst:
       "A regulator producing regulated learning at volume has a consistency problem before it has a quality problem. The answer was a documented production system: templates, specified components, a navigation convention and an asset library the whole design team built from.",
@@ -536,7 +536,7 @@ const casaCourseSystem = {
 
   meta: [
     { label: "Client", value: "Civil Aviation Safety Authority" },
-    { label: "Programme", value: "CASA, 2015–2021" },
+    { label: "program", value: "CASA, 2015–2021" },
     { label: "Role", value: "Design and production system" },
     { label: "Built with", value: "Articulate Storyline · Adobe CC · PowerPoint · InDesign" },
     { label: "Users", value: "The internal instructional design team" },
@@ -560,7 +560,7 @@ const casaCourseSystem = {
 
   reframe: [
     "The unit of reuse is not the template. It is the component and its states. A template that specifies layout but not behaviour still produces four different hover treatments.",
-    "So each component was specified down to dimensions, slide position and its normal, hover, active, visited and disabled states. That is unglamorous work, and it is the reason several designers could produce something that read as one programme.",
+    "So each component was specified down to dimensions, slide position and its normal, hover, active, visited and disabled states. That is unglamorous work, and it is the reason several designers could produce something that read as one program.",
   ],
 
   figures: [
@@ -679,7 +679,7 @@ const casaCatalogue = {
 
   hero: {
     role: "primary",
-    eyebrow: "CASA programme · Structure",
+    eyebrow: "CASA program · Structure",
     headline: "Structuring a role-based learning catalogue.",
     standfirst:
       "When learning is role-specific, the hardest interface problem is the first screen. This one asks a single question a person can answer about themselves, and uses the answer to do the filtering.",
@@ -693,7 +693,7 @@ const casaCatalogue = {
 
   meta: [
     { label: "Client", value: "Civil Aviation Safety Authority" },
-    { label: "Programme", value: "CASA, 2015–2021" },
+    { label: "program", value: "CASA, 2015–2021" },
     { label: "Role", value: "Information architecture and interface design" },
     { label: "Streams", value: "Four, defined by span of responsibility" },
     { label: "Platform", value: "[Confirm which platform hosted the catalogue]" },
@@ -767,7 +767,7 @@ const casaCatalogue = {
 const casaFer = {
   path: "/work/casa/flight-examiner-rating",
   slug: "flight-examiner-rating",
-  programme: "casa",
+  program: "casa",
   format: "standard",
   title: "Flight Examiner Rating",
   clientId: "casa",
@@ -790,22 +790,22 @@ const casaFer = {
     alt: "A CASA flight training examiner speaking to camera in the Flight Examiner Rating course, her name and role captioned across the video.",
     headline: "Learning for people whose job is assessing other people",
     summary:
-      "The national Flight Examiner Rating course and professional development programme, for air transport, helicopter and general aviation examiners.",
+      "The national Flight Examiner Rating course and professional development program, for air transport, helicopter and general aviation examiners.",
   },
 
   hero: {
     role: "primary",
-    eyebrow: "CASA programme · Learning",
+    eyebrow: "CASA program · Learning",
     headline: "Learning for people whose job is assessing other people.",
     standfirst:
-      "Flight examiners sit at the top of Australian aviation: they test the people who train and test other pilots. The programme had to be exact enough to be defensible and clear enough that experienced professionals would actually use it.",
+      "Flight examiners sit at the top of Australian aviation: they test the people who train and test other pilots. The program had to be exact enough to be defensible and clear enough that experienced professionals would actually use it.",
     image: "casa-interview",
     alt: "A CASA flight training examiner speaking to camera, captioned with her name and role, inside the Flight Examiner Rating course.",
   },
 
   meta: [
     { label: "Client", value: "Civil Aviation Safety Authority" },
-    { label: "Programme", value: "CASA, 2015–2021" },
+    { label: "program", value: "CASA, 2015–2021" },
     { label: "Role", value: "eLearning Specialist" },
     { label: "Audience", value: "Air transport, helicopter and general aviation examiners" },
     { label: "Built with", value: "Articulate Storyline · Adobe CC" },
@@ -816,19 +816,19 @@ const casaFer = {
       "A regulatory framework that had to be applied consistently by the most experienced assessors in Australian aviation.",
     role: "Instructional design, assessment design and video production.",
     scope:
-      "Instructional design, scenario and assessment design, video production and livestreaming, built on the programme's reusable production system.",
+      "Instructional design, scenario and assessment design, video production and livestreaming, built on the program's reusable production system.",
     outcome:
       "The Australian Flight Examiner Rating Course and Professional Development Program, for air transport, helicopter and general aviation examiners.",
     stack: "Articulate Storyline · Adobe CC · CLASS",
   },
 
   situation: [
-    "Flight examiners assess the people who train and test other pilots. The Flight Examiner Rating course and its professional development programme had to help experienced professionals apply a regulatory framework consistently, across three very different sectors of aviation.",
-    "The obvious approach, restating the regulation accurately, produces a document rather than a programme. The other obvious approach, simplifying until it is easy, produces something no longer true, which in this domain is a safety problem rather than an editorial one.",
+    "Flight examiners assess the people who train and test other pilots. The Flight Examiner Rating course and its professional development program had to help experienced professionals apply a regulatory framework consistently, across three very different sectors of aviation.",
+    "The obvious approach, restating the regulation accurately, produces a document rather than a program. The other obvious approach, simplifying until it is easy, produces something no longer true, which in this domain is a safety problem rather than an editorial one.",
   ],
 
   reframe: [
-    "The audience was the constraint that mattered. These are people who assess others for a living. Anything reading as generic compliance training loses them in the first minute, and their attention is the entire mechanism by which the programme works.",
+    "The audience was the constraint that mattered. These are people who assess others for a living. Anything reading as generic compliance training loses them in the first minute, and their attention is the entire mechanism by which the program works.",
     "So the design problem was not how to explain the rules. It was how to show the reasoning behind them, in a form senior practitioners would recognise as their own.",
   ],
 
@@ -847,7 +847,7 @@ const casaFer = {
       image: "casa-assessment",
       alt: "A course screen titled Principles of Assessment, with validity, reliability, flexibility and objectivity as expandable sections, beside a sidebar showing module progress.",
       caption:
-        "The sidebar is deliberately in this frame. A programme this long only works if a busy examiner can see where they are, leave, and come back without re-reading. Progress state was designed before content was written.",
+        "The sidebar is deliberately in this frame. A program this long only works if a busy examiner can see where they are, leave, and come back without re-reading. Progress state was designed before content was written.",
       area: "Learning experience",
       expandable: true,
     },
@@ -856,7 +856,7 @@ const casaFer = {
       image: "casa-competency",
       alt: "A course diagram using an iceberg to show that competency comprises task skills above the surface and task management, contingency management and job-role environment skills below it.",
       caption:
-        "Competency has four dimensions and only one of them is visible during a flight test. This is the single idea the programme most needed to land, so it was given a picture rather than a paragraph.",
+        "Competency has four dimensions and only one of them is visible during a flight test. This is the single idea the program most needed to land, so it was given a picture rather than a paragraph.",
       area: "Content design",
     },
     {
@@ -878,7 +878,7 @@ const casaFer = {
   ],
 
   outcomes: {
-    note: "Audience numbers, evaluation results and programme outcomes are not published, and are not claimed here.",
+    note: "Audience numbers, evaluation results and program outcomes are not published, and are not claimed here.",
     items: [
       "The Australian Flight Examiner Rating Course and Professional Development Program, for air transport, helicopter and general aviation examiners",
       "Scenario and assessment design grounded in the regulatory instrument hierarchy",
@@ -887,7 +887,7 @@ const casaFer = {
   },
 
   gaps: [
-    "Confirm the number of examiners the programme served.",
+    "Confirm the number of examiners the program served.",
     "Confirm whether evaluation data exists and may be published.",
     "Confirm permission to publish the piece-to-camera footage, which shows an identifiable person.",
   ],
@@ -921,10 +921,10 @@ const wellbeingStudio = {
 
   card: {
     image: "ws-card",
-    alt: "Wellbeing Studio member home page: a seasonal programme hero over a photograph, with the platform's four-item navigation above it.",
+    alt: "Wellbeing Studio member home page: a seasonal program hero over a photograph, with the platform's four-item navigation above it.",
     headline: "A business that ran on facilitator hours now runs on a platform",
     summary:
-      "Concept to live product in a year: the member experience, the programme content, the Moodle architecture underneath it, and the weekly publishing workflow that keeps it going.",
+      "Concept to live product in a year: the member experience, the program content, the Moodle architecture underneath it, and the weekly publishing workflow that keeps it going.",
   },
 
   brief: {
@@ -943,9 +943,9 @@ const wellbeingStudio = {
     eyebrow: "Corporate Yoga Australia · Wellbeing Studio",
     headline: "A business that ran on facilitator hours now runs on a platform.",
     standfirst:
-      "Concept to live product: the member experience, the programme content, the Moodle architecture underneath it, and the publishing and onboarding workflows that keep it going every week.",
+      "Concept to live product: the member experience, the program content, the Moodle architecture underneath it, and the publishing and onboarding workflows that keep it going every week.",
     image: "ws-landing",
-    alt: "Wellbeing Studio member home page, showing a seasonal programme hero and a monthly focus article card.",
+    alt: "Wellbeing Studio member home page, showing a seasonal program hero and a monthly focus article card.",
   },
 
   meta: [
@@ -957,7 +957,7 @@ const wellbeingStudio = {
   ],
 
   situation: [
-    "Corporate Yoga Australia had built a successful business delivering workplace wellbeing programmes, yoga sessions and facilitated experiences to organisations. Clients valued the work. The problem was that all of it depended on a facilitator being in a room at a particular time.",
+    "Corporate Yoga Australia had built a successful business delivering workplace wellbeing programs, yoga sessions and facilitated experiences to organisations. Clients valued the work. The problem was that all of it depended on a facilitator being in a room at a particular time.",
     "Resources were spread across several systems. Between sessions, participants had nothing. Every new client meant more facilitator hours, which meant growth was capped by the number of hours available to sell.",
   ],
 
@@ -968,7 +968,7 @@ const wellbeingStudio = {
 
   constraints: [
     "No in-house technical team. Whatever was built had to be operable by people whose expertise is wellbeing, not software.",
-    "A live weekly programme already running, which could not pause while a platform was built.",
+    "A live weekly program already running, which could not pause while a platform was built.",
     "Participants spread across office, remote and hybrid working, on organisation-managed devices with varying restrictions.",
     "A single practitioner across every discipline, which meant sequencing mattered more than it would with a team.",
   ],
@@ -976,8 +976,8 @@ const wellbeingStudio = {
   roleDetail:
     "I led the platform from initial concept through to live operation, working across product strategy, learning experience design, UX and interface design, Moodle architecture, front-end development, brand and visual systems, communications and automation design, and the operational workflows behind delivery.",
   collaborators: [
-    "Corporate Yoga Australia leadership: business model, programme direction and client relationships",
-    "Session facilitators: programme content and live delivery",
+    "Corporate Yoga Australia leadership: business model, program direction and client relationships",
+    "Session facilitators: program content and live delivery",
     "Pilot participants: testing and feedback",
   ],
 
@@ -1001,7 +1001,7 @@ const wellbeingStudio = {
     {
       role: "support",
       image: "ws-program",
-      alt: "Wellbeing Studio monthly programme panel with a seasonal article, supporting practices and links to the next live sessions.",
+      alt: "Wellbeing Studio monthly program panel with a seasonal article, supporting practices and links to the next live sessions.",
       caption:
         "Seasonal framing gives a returning member a reason to come back that is not a notification. It also gives the organisation a publishing rhythm it can sustain.",
       area: "Production systems",
@@ -1028,7 +1028,7 @@ const wellbeingStudio = {
     {
       title: "Narrow the name from Corporate Wellbeing Studio to Wellbeing Studio",
       choice: "The product was repositioned and renamed part-way through development.",
-      why: "The shorter identity read as a product rather than a corporate programme. Participants engage with something that feels like theirs; they tolerate something that feels like their employer's.",
+      why: "The shorter identity read as a product rather than a corporate program. Participants engage with something that feels like theirs; they tolerate something that feels like their employer's.",
       tradeoff:
         "It dropped the word that named the buyer, so the corporate proposition had to be carried by client-facing onboarding and reporting instead.",
     },
@@ -1058,7 +1058,7 @@ const wellbeingStudio = {
   seo: {
     title: "Wellbeing Studio — Corporate Yoga Australia | Glenn Hammond",
     description:
-      "Concept to live product: the member experience, programme content, Moodle architecture and the publishing and onboarding workflows behind a workplace wellbeing platform.",
+      "Concept to live product: the member experience, program content, Moodle architecture and the publishing and onboarding workflows behind a workplace wellbeing platform.",
   },
 };
 
@@ -1245,7 +1245,7 @@ const isqDesignSystem = {
   },
 
   situation: [
-    "Independent Schools Queensland produces a substantial amount of digital learning: compliance courses and professional-learning programmes for teachers, principals, board members and volunteers across member schools. Much of it shares the same underlying requirements — section orientation, legislation and policy explanation, scenario progression, evidence presentation, decision points, role comparison, process explanation, reflection, knowledge checks and resource presentation — but each course had, until now, solved them again from scratch.",
+    "Independent Schools Queensland produces a substantial amount of digital learning: compliance courses and professional-learning programs for teachers, principals, board members and volunteers across member schools. Much of it shares the same underlying requirements — section orientation, legislation and policy explanation, scenario progression, evidence presentation, decision points, role comparison, process explanation, reflection, knowledge checks and resource presentation — but each course had, until now, solved them again from scratch.",
     "That pattern followed directly from the earlier work moving Connect & Learn onto ISQ-hosted Moodle: a platform migration and a parallel rebuild of more than sixty Storyline courses inside a single term. The migration solved where courses lived. It did not solve how they were designed, and the courses built afterwards faced the same recurring decisions the old ones had.",
   ],
 
@@ -1659,7 +1659,7 @@ const goodstart = {
     eyebrow: "Goodstart Early Learning · MyPortal",
     headline: "A national learning platform for 640 centres.",
     standfirst:
-      "Developing the MyPortal learning management system and producing nationally accredited Certificate III and Diploma programmes in early childhood education and care, for educators spread across the country.",
+      "Developing the MyPortal learning management system and producing nationally accredited Certificate III and Diploma programs in early childhood education and care, for educators spread across the country.",
     image: "goodstart-myportal",
     alt: "The MyPortal course page for CHC50113 Diploma of Early Childhood Education and Care: a course banner, an open-all and close-all control, a highlighted Start here section with three activity icons labelled Welcome, Image of Child and Useful forms, and side panels for administration, people, messages and a calendar.",
     caption:
@@ -1681,7 +1681,7 @@ const goodstart = {
       "Accredited professional learning for educators spread across a large national network of centres, with no single environment to deliver it in.",
     role: "Online Learning Coordinator. [Confirm role boundaries: platform development, course production, or both]",
     scope:
-      "MyPortal learning platform development and production of nationally accredited Certificate III and Diploma programmes in early childhood education and care.",
+      "MyPortal learning platform development and production of nationally accredited Certificate III and Diploma programs in early childhood education and care.",
     outcome:
       "One learning environment carrying accredited qualifications across 640 centres. [Add measurable outcome]",
     stack: "Moodle",
@@ -1689,7 +1689,7 @@ const goodstart = {
 
   situation: [
     "Goodstart needed one digital environment capable of supporting accredited professional learning across a large, geographically distributed network of centres, and the accredited learning to run inside it.",
-    "Both halves were built together: the platform, and the nationally accredited Certificate III and Diploma programmes it delivered. It is the earliest example in this portfolio of the pattern that runs through all of it.",
+    "Both halves were built together: the platform, and the nationally accredited Certificate III and Diploma programs it delivered. It is the earliest example in this portfolio of the pattern that runs through all of it.",
   ],
 
   reframe: [
@@ -1723,7 +1723,7 @@ const goodstart = {
     note: "This is 2014 to 2015 work. No adoption, completion or satisfaction data is claimed.",
     items: [
       "The MyPortal learning environment, serving a national network of 640 centres",
-      "Nationally accredited Certificate III and Diploma programmes in early childhood education and care",
+      "Nationally accredited Certificate III and Diploma programs in early childhood education and care",
       "Interactive practice activities built around workplace routines rather than recall",
       "[Confirm number of courses/users]",
     ],
@@ -1740,7 +1740,7 @@ const goodstart = {
   seo: {
     title: "MyPortal — Goodstart Early Learning | Glenn Hammond",
     description:
-      "A national learning environment and accredited early childhood education programmes across 640 Goodstart centres.",
+      "A national learning environment and accredited early childhood education programs across 640 Goodstart centres.",
   },
 };
 
@@ -1777,7 +1777,7 @@ const isqDifferentiation = {
     eyebrow: "Independent Schools Queensland · Professional learning",
     headline: "Professional learning for teachers, about teaching.",
     standfirst:
-      "A sixty-minute course on differentiating the educational programme for students in Years 7 to 10. The audience are practising secondary teachers, which sets a high bar: anything that reads as theory they already know loses them immediately.",
+      "A sixty-minute course on differentiating the educational program for students in Years 7 to 10. The audience are practising secondary teachers, which sets a high bar: anything that reads as theory they already know loses them immediately.",
     image: "isq-diff-title",
     alt: "The course title screen: Differentiating the educational program for students in Years 7 to 10, with a sixty-minute duration indicator, a start control, and a photograph of secondary students working at laptops in a classroom.",
   },
@@ -1840,7 +1840,7 @@ const isqDifferentiation = {
     {
       role: "expandable",
       image: "isq-diff-scenario",
-      alt: "A scenario screen headed 'Which did Marta do?', describing a teacher's decision to include a student in a targeted reading programme, beside Marta's four-point targeted teaching checklist for that student.",
+      alt: "A scenario screen headed 'Which did Marta do?', describing a teacher's decision to include a student in a targeted reading program, beside Marta's four-point targeted teaching checklist for that student.",
       caption:
         "The worked example the course is actually built on. A named teacher, a named student, and a four-line checklist that is specific enough to copy. This is where the abstraction becomes something a participant can use on Monday.",
       area: "Learning experience",
@@ -2253,8 +2253,8 @@ const prototypes = {
    Assembly
    ══════════════════════════════════════════════════════════════════════════ */
 
-/** CASA subprojects, in reading order. Drives programme navigation and
- *  previous/next links inside the programme. */
+/** CASA subprojects, in reading order. Drives program navigation and
+ *  previous/next links inside the program. */
 export const casaSubprojects = [
   casaAviationworx,
   casaClass,
@@ -2300,11 +2300,11 @@ export const programme = casaProgramme;
 /** Work index tiers. Scale and position carry the hierarchy, not the card.
  *  Wellbeing Studio holds the lead grid position (v3.3): it is the flagship
  *  with real photography, and it now sits second on the page rather than
- *  first, directly under the CASA programme's own full-width block. Putting
+ *  first, directly under the CASA program's own full-width block. Putting
  *  the ISQ eLearning Design System (still image-less; see its `card.map`
  *  fallback) in that same wide "lead" slot meant two large, prominent blocks
  *  with no photograph ran back to back at the top of the tier. ISQ is still
- *  featured, just in the regular grid rather than doubling the programme's
+ *  featured, just in the regular grid rather than doubling the program's
  *  emphasis. Reversible in one line once real ISQ screenshots exist. */
 export const workIndex = {
   programme: casaProgramme,
@@ -2321,17 +2321,17 @@ export const workIndex = {
   lab: [prototypes],
 };
 
-/** Home shows three. Order is deliberate: live product, programme, award. */
+/** Home shows three. Order is deliberate: live product, program, award. */
 export const featured = [wellbeingStudio, casaProgramme, connectAndLearn];
 
-/** Previous/next within the whole portfolio, programme children included. */
+/** Previous/next within the whole portfolio, program children included. */
 const readingOrder = projects.map((p) => p.path);
 
 export function siblings(path) {
   const project = projectByPath[path];
   if (!project) return { prev: null, next: null };
 
-  /* Inside the programme, previous/next stays inside the programme. */
+  /* Inside the program, previous/next stays inside the program. */
   if (project.programme === "casa") {
     const i = casaSubprojects.findIndex((p) => p.path === path);
     return {

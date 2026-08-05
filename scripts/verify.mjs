@@ -121,7 +121,7 @@ for (const t of testimonials) {
 
 const REQUIRED = {
   "index.html": ["The course is the easy part", "Learning System Review", "Operations"],
-  "work.html": ["Featured programme", "Case studies", "Prototypes and experiments"],
+  "work.html": ["Featured program", "Case studies", "Prototypes and experiments"],
   "work/wellbeing-studio.html": ["Three decisions I would defend", "What it cost"],
   "work/isq-elearning-design-system.html": ["ISQ eLearning Design System", "least complex implementation"],
   "work/casa.html": ["The five projects", "What the six years contained"],
