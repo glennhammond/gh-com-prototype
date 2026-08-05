@@ -262,6 +262,26 @@ const SETS = {
       crop: [0.012, 0.012, 0.988, 0.988],
       ratio: 16 / 10,
     },
+
+    /* --- eLearning Design System — component library captures ---------
+       Full-frame crops of the system's own component demonstrations, not
+       screens from a published course. All are shown with the library's
+       placeholder text except content-cards, which uses a real domestic
+       and family violence explainer to show the same card structure
+       carrying genuinely difficult subject matter. */
+    { in: "isq-ds-decision-point.png", out: "isq-ds-decision-point", crop: [0, 0, 1, 1] },
+    {
+      in: "isq-ds-knowledge-check.png",
+      out: "isq-ds-knowledge-check",
+      // Trims a two-pixel sliver of an unrelated dark shape bleeding in
+      // from off-frame at the very top edge of the capture.
+      crop: [0, 0.012, 1, 1],
+    },
+    { in: "isq-ds-tabs.png", out: "isq-ds-tabs", crop: [0, 0, 1, 1] },
+    { in: "isq-ds-flip-cards.png", out: "isq-ds-flip-cards", crop: [0, 0, 1, 1] },
+    { in: "isq-ds-content-cards.png", out: "isq-ds-content-cards", crop: [0, 0, 1, 1] },
+    { in: "isq-ds-comparison-panel.png", out: "isq-ds-comparison-panel", crop: [0, 0, 1, 1] },
+    { in: "isq-ds-section-summary.png", out: "isq-ds-section-summary", crop: [0, 0, 1, 1] },
   ],
 
   /* ==================================================== Safetyhub */

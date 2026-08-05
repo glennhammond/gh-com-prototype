@@ -43,6 +43,13 @@ for each one inline.
 | `goodstart-activity` | `goodstart-food-interaction.png` | Goodstart |
 | `isq-diff-title`, `isq-diff-card` | `isq-differentiated-learning-hero.jpg` | ISQ |
 | `isq-diff-intro`, `-tiers`, `-cycle`, `-scenario` | `isq-differentiation-screen-02/03/04/05.jpg` | ISQ |
+| `isq-ds-decision-point` | `isq-ds-decision-point.png` | ISQ eLearning Design System |
+| `isq-ds-knowledge-check` | `isq-ds-knowledge-check.png` | ISQ eLearning Design System |
+| `isq-ds-tabs` | `isq-ds-tabs.png` | ISQ eLearning Design System |
+| `isq-ds-flip-cards` | `isq-ds-flip-cards.png` | ISQ eLearning Design System |
+| `isq-ds-content-cards` | `isq-ds-content-cards.png` | ISQ eLearning Design System |
+| `isq-ds-comparison-panel` | `isq-ds-comparison-panel.png` | ISQ eLearning Design System |
+| `isq-ds-section-summary` | `isq-ds-section-summary.png` | ISQ eLearning Design System |
 | `safetyhub-cover` | `safetyhub-asbestos-awareness-hero.png` | Safetyhub |
 | `safetyhub-question`, `safetyhub-card` | `safetyhub-asbestos-question-03.png` | Safetyhub |
 | `safetyhub-video` | `safetyhub-asbestos-screen-04.png` | Safetyhub |
@@ -71,6 +78,7 @@ for each one inline.
 | `goodstart-institute-logo.png` | A client mark is not portfolio evidence. Retained in `source/` for a future identity strip. |
 | `casa-course-template-icons.jpg` | Pixel-identical to `tpl-icons.png`, which is already in the V2 archive. The PNG is used because it carries transparency and stays crisper. |
 | `fer-component.png` | Duplicates what the component specification sheet already shows. |
+| `Screenshot 2026-08-03 112355.png` (three-card flip, initial state) | The flip-card evidence used elsewhere on the ISQ Design System case study (`isq-ds-flip-cards`) already shows a front state and a revealed state side by side in one frame. This third capture only repeats the front state already visible there, so it does not earn a second slot. |
 
 ---
 
