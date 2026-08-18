@@ -1,0 +1,140 @@
+/* ==== Diagnosis: on ink, numbered steps =================================== */
+
+.approach-diagnosis {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+.approach-diagnosis__lede {
+  margin-top: var(--space-3);
+  color: var(--on-ink-dim);
+  max-width: 54ch;
+}
+
+.approach-diagnosis__steps {
+  display: grid;
+  gap: var(--space-4);
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  counter-reset: step;
+}
+
+.approach-diagnosis__steps li {
+  display: flex;
+  gap: var(--space-4);
+  align-items: baseline;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-strong);
+  color: var(--on-ink-dim);
+  line-height: 1.55;
+}
+
+.approach-diagnosis__num {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  color: var(--brass-light);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==== Delivery: on paper ==================================================== */
+
+.approach-delivery__para {
+  margin-top: var(--space-4);
+  color: var(--text-secondary);
+  max-width: 58ch;
+}
+
+.approach-delivery__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.approach-delivery__cta:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+/* ==== Evidence: three projects, on raised paper ============================ */
+
+.approach-evidence {
+  background: var(--paper-raised);
+  border-block: 1px solid var(--rule-strong);
+}
+
+.approach-evidence__list {
+  display: grid;
+  gap: var(--space-6);
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+}
+
+@media (min-width: 760px) {
+  .approach-evidence__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.approach-evidence__item {
+  border-top: 3px solid var(--brass);
+  padding-top: var(--space-4);
+}
+
+.approach-evidence__title {
+  font-size: var(--size-display-m);
+}
+
+.approach-evidence__body {
+  margin-top: var(--space-3);
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.approach-evidence__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.approach-evidence__link:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+/* ==== Close: on ink ========================================================= */
+
+.approach-close {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+.approach-close__inner {
+  text-align: left;
+}
+
+.approach-close__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}

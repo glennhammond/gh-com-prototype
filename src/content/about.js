@@ -28,8 +28,12 @@ export const about = {
     heading: "How I work",
     paragraphs: [
       "Most learning problems arrive described as content problems. A course is not landing, so the request is for a better course. Often the course is fine and the platform is making it unusable, or the content is fine and nobody has owned the workflow that keeps it current.",
-      "So I start with the whole system rather than the brief, and I stay across all four layers rather than handing one to somebody else. That is not a claim to be better at each discipline than a specialist in it. It is a claim that the decisions between the disciplines are where the work is usually lost, and that those decisions need one owner.",
+      "I stay across all four layers rather than handing one to somebody else. How that plays out in practice, project by project, is on the Approach page.",
     ],
+    cta: {
+      href: "/approach",
+      label: "Read the Approach page",
+    },
     status: STATUS.PROPOSED,
   },
 

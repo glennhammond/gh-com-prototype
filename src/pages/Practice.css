@@ -1,3 +1,22 @@
+.practice-intro__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.practice-intro__cta:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
 /* --- Rise / Storyline feature cards -----------------------------------------
    Sits between the layer tabs and the engagements list: two specialist
    practices inside the four-layer model, not a fifth destination. */

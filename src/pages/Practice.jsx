@@ -29,15 +29,15 @@ export default function Practice() {
   return (
     <>
       <Seo
-        title="Practice | Glenn Hammond"
-        description="Four layers, four defined engagements. Learning system reviews, platform and programme delivery, production and design systems, and embedded specialist work."
+        title="Capabilities | Glenn Hammond"
+        description="Four layers, four defined engagements. Learning system reviews, platform and program delivery, production and design systems, and embedded specialist work."
         path="/practice"
         jsonLd={graph(
           personSchema,
           practiceSchema,
           breadcrumbSchema([
             { name: "Home", href: "/" },
-            { name: "Practice", href: "/practice" },
+            { name: "Capabilities", href: "/practice" },
           ])
         )}
       />
@@ -45,10 +45,13 @@ export default function Practice() {
       <div className="section container">
         <SectionHead
           level={1}
-          eyebrow="Practice"
+          eyebrow="Capabilities"
           headline="Four layers, one owner."
-          standfirst="I work across all four layers of a learning programme rather than taking one and handing the rest on. That is not a claim to be better at each discipline than a specialist in it — it is a claim that the decisions between them need a single owner. Two of those layers have their own specialist practice: Rise design systems and premium development, and advanced Storyline development."
+          standfirst="I work across all four layers of a learning program rather than taking one and handing the rest on. Two of those layers have their own specialist practice: Rise design systems and premium development, and advanced Storyline development."
         />
+        <Link className="practice-intro__cta" to="/approach">
+          Read how I connect the four layers
+        </Link>
         <LayerTabs />
       </div>
 

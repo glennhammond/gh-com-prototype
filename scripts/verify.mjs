@@ -125,7 +125,7 @@ for (const t of testimonials) {
 
 const REQUIRED = {
   "index.html": ["The course is the easy part", "Learning System Review", "Operations"],
-  "work.html": ["Featured program", "Case studies", "Prototypes and experiments"],
+  "work.html": ["Flagship work", "Selected additional work", "Prototypes and experiments"],
   "work/wellbeing-studio.html": ["Three decisions I would defend", "What it cost"],
   "work/isq-elearning-design-system.html": ["ISQ eLearning Design System", "least complex implementation"],
   "work/casa.html": ["The five projects", "What the six years contained"],
@@ -139,6 +139,7 @@ const REQUIRED = {
   "work/goodstart-myportal.html": ["640 centres"],
   "work/interaction-prototypes.html": ["SCORM 2004"],
   "practice.html": ["Four layers, one owner", "Learning System Review"],
+  "approach.html": ["The work is lost in the joins", "The model, in three projects"],
   "about.html": ["Where I have done it"],
   "contact.html": ["Tell me what is happening", "What does the problem seem closest to"],
   "privacy.html": ["must not go live"],
@@ -194,6 +195,7 @@ const routes = new Set([
   "/",
   "/work",
   "/practice",
+  "/approach",
   "/services/rise-design-systems",
   "/services/storyline-development",
   "/about",

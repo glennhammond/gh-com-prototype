@@ -56,6 +56,10 @@
   gap: var(--space-6);
 }
 
+.site-footer__cols > * {
+  min-width: 0;
+}
+
 @media (min-width: 800px) {
   .site-footer__cols {
     gap: var(--space-7);
@@ -84,10 +88,12 @@
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
+  max-width: 100%;
   color: var(--text);
   font-size: var(--size-small);
   text-decoration: none;
   border-bottom: 1px solid transparent;
+  overflow-wrap: anywhere;
 }
 
 .site-footer__list a:hover {

@@ -1327,3 +1327,31 @@ estate in §6–§21 beyond what was already in `vercel.json`. Phase A is
 foundation work only; that estate follows in a later phase once the current
 live site's actual URL inventory is confirmed (§28's own evidentiary
 standard applies here as much as to any content decision).
+
+---
+
+# 33. Flagship restructure (18 August 2026)
+
+This section is additive. No canonical URL, action or destination recorded
+in §1 to §30 was edited or removed by this phase; every route listed as
+CANONICAL, KEEP or REDIRECT above is unchanged.
+
+**What changed** was homepage and Work-page prominence, not routing. Three
+projects (Wellbeing Studio, ISQ Connect & Learn, CASA Flight Examiner
+Rating) now carry primary editorial prominence on `/` and `/work`, in that
+fixed order. Every other live route named in §30's locked list, including
+every CASA program child, `/work/isq-elearning-design-system`,
+`/work/tafe-pathways`, `/work/goodstart-myportal`,
+`/work/isq-differentiated-learning`, `/work/sonic-healthplus` and
+`/work/safetyhub-asbestos`, remains CANONICAL and indexable. The Work page's
+"Selected additional work" tier displays six of those routes as cards;
+`/work/isq-differentiated-learning` is the one live, indexable route not
+given a Work-page card in this phase.
+
+**New route:** `/approach` is added as CANONICAL, in primary navigation
+alongside Work, Capabilities (the `/practice` nav label) and About. It
+carries no historical WordPress equivalent and requires no redirect mapping.
+
+**Sitemap:** `/approach` is included as a new indexable entry, following the
+same generation rules as every other canonical route (§27); no `lastmod`
+value is fabricated for it.

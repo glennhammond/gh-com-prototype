@@ -56,6 +56,11 @@ export default function About() {
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
+          {about.approach.cta && (
+            <Link className="about__approach-cta" to={about.approach.cta.href}>
+              {about.approach.cta.label}
+            </Link>
+          )}
         </div>
       </section>
 

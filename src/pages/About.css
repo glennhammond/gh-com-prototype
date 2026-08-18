@@ -24,6 +24,25 @@
   margin-top: 1em;
 }
 
+.about__approach-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--on-ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass-light);
+}
+
+.about__approach-cta:hover {
+  color: var(--on-ink-dim);
+  border-bottom-color: var(--on-ink-dim);
+}
+
 .about__section-title {
   padding-bottom: var(--space-3);
   border-bottom: 2px solid var(--rule-strong);

@@ -326,3 +326,31 @@ the 301. The two specialist pages remain nested under a `/services/` path
 segment that no longer matches their logical parent's URL — a known,
 accepted asymmetry recorded here rather than silently carried. Revisiting
 that nesting is out of scope for Phase A.
+
+---
+
+# Flagship restructure (18 August 2026)
+
+## 20. Three flagship projects replace the CASA program as homepage and Work-page lead content
+
+**What was built:** `content/projects.js` gained a `flagships` export (Wellbeing Studio, ISQ Connect & Learn, CASA Flight Examiner Rating, in that fixed order) and `workIndex` was restructured into `flagships`, `secondary` and `lab` tiers. Home and Work both render a one-plus-two composition from this array. The CASA program overview remains live and discoverable as the lead entry of the secondary tier, with its card copy revised to name Flight Examiner Rating naturally rather than carry a flagship badge.
+
+**Why:** directed by Glenn. Three specific projects, not the CASA program as a whole, carry primary editorial prominence, in an order reflecting recency and completeness of end-to-end ownership demonstrated (Wellbeing Studio, then Connect & Learn, then CASA Flight Examiner Rating), not client, array position or alphabetical order.
+
+**Consequence:** every previously live route stays live and indexable. No project moved into `withheldProjects`. CASA's four other children (AviationWorx, CLASS, course system, learning catalogue) are no longer individually listed on the Work page; they remain reachable through the CASA program page's own navigation, unchanged.
+
+## 21. Six-project secondary selection on the Work page
+
+**What was built:** the Work page's "Selected additional work" tier shows six cards: the CASA program overview, the ISQ eLearning Design System, TAFE Queensland, Goodstart MyPortal, Sonic HealthPlus and Safetyhub. ISQ Differentiated Learning stays live and indexable at its existing route but carries no Work-page card.
+
+**Why:** selection criteria were approved status, evidence completeness (approved imagery versus placeholder figures), recency, sector diversity and capability coverage not already carried by the three flagships. ISQ Differentiated Learning's capability area (content design and learning experience) is already carried at strength by CASA Flight Examiner Rating and Wellbeing Studio, and it is the third ISQ-attributed entry after Connect & Learn and the ISQ eLearning Design System.
+
+**Consequence:** `/work/isq-differentiated-learning` remains a live route, in the sitemap, and covered by `scripts/verify.mjs`'s required-page checks. Removing it from the Work-page grid is a display decision, not a withdrawal.
+
+## 22. Approach becomes the canonical home of the four-layer argument; the Featured System band is removed
+
+**What was built:** a new `/approach` route and `content/approach.js`, added to primary navigation. Home's dedicated ISQ eLearning Design System band (the `FeaturedSystem` component) was removed entirely; the component and its stylesheet were deleted, since Home was their only consumer. The "work is lost in the joins" argument, previously stated in full on Home, Practice and About, is now stated once on Approach; the other three pages carry a shortened version and a link.
+
+**Why:** directed by Glenn, to stop the homepage presenting a fourth prominent item alongside the three flagships, and to stop the same diagnostic argument being restated three times across the site. Every project-specific claim on Approach is a narrower restatement of an already-approved sentence on that project's own case-study record (Wellbeing Studio's publishing and replay workflow, Connect & Learn's platform-and-content sequencing, CASA Flight Examiner Rating's use of the program's production system); no new fact, cause or outcome was introduced.
+
+**Consequence:** `/practice` keeps "Capabilities" as its nav label and page identity, consistent with the original migration brief. `scripts/verify.mjs` gained an `approach.html` required-content entry and `/approach` in its internal-link allow list; no existing required-page entry was removed.

@@ -85,7 +85,7 @@ const casaProgramme = {
     alt: "The CLASS platform home page, showing the CASA Learning Academy for Safe Skies wordmark, a welcome carousel and six large task tiles.",
     headline: "Six years designing learning platforms and digital learning for CASA",
     summary:
-      "Two internal learning platforms, a national examiner program, a reusable course production system and a role-based learning catalogue, built inside the aviation safety regulator over six years.",
+      "Two internal learning platforms, a reusable course production system and a role-based learning catalogue, built inside the aviation safety regulator over six years. The program's national Flight Examiner Rating course is presented separately, as one of three featured projects.",
     kicker: "Program · five projects",
   },
 
@@ -362,7 +362,7 @@ const casaAviationworx = {
 const casaClass = {
   path: "/work/casa/class",
   slug: "class",
-  program: "casa",
+  programme: "casa",
   format: "standard",
   title: "CLASS",
   clientId: "casa",
@@ -767,7 +767,7 @@ const casaCatalogue = {
 const casaFer = {
   path: "/work/casa/flight-examiner-rating",
   slug: "flight-examiner-rating",
-  program: "casa",
+  programme: "casa",
   format: "standard",
   title: "Flight Examiner Rating",
   clientId: "casa",
@@ -2294,35 +2294,40 @@ export const withheldProjects = [
 export const projectByPath = Object.fromEntries(projects.map((p) => [p.path, p]));
 export const projectBySlug = Object.fromEntries(projects.map((p) => [p.slug, p]));
 
-export const flagship = wellbeingStudio;
 export const programme = casaProgramme;
 
+/**
+ * Flagship restructure (v3.4). Three named projects carry primary editorial
+ * prominence across Home and Work. Order is authoritative and is not
+ * alphabetical, not by client and not by array position: Wellbeing Studio
+ * leads as the most contemporary end-to-end build, Connect & Learn follows
+ * as the platform-and-content migration at scale, and CASA Flight Examiner
+ * Rating follows as the earlier specialist aviation program. This order
+ * must be preserved wherever the three appear together.
+ */
+export const flagships = [wellbeingStudio, connectAndLearn, casaFer];
+
 /** Work index tiers. Scale and position carry the hierarchy, not the card.
- *  Wellbeing Studio holds the lead grid position (v3.3): it is the flagship
- *  with real photography, and it now sits second on the page rather than
- *  first, directly under the CASA program's own full-width block. Putting
- *  the ISQ eLearning Design System (still image-less; see its `card.map`
- *  fallback) in that same wide "lead" slot meant two large, prominent blocks
- *  with no photograph ran back to back at the top of the tier. ISQ is still
- *  featured, just in the regular grid rather than doubling the program's
- *  emphasis. Reversible in one line once real ISQ screenshots exist. */
+ *
+ *   flagships  the three named projects above, one-plus-two composition.
+ *   secondary  live, routed work with Work-page prominence but not flagship
+ *              weight. The CASA program overview stands in for its own five
+ *              children, which stay reachable through its own navigation
+ *              rather than as separate cards here.
+ *   lab        the prototypes tier.
+ */
 export const workIndex = {
-  programme: casaProgramme,
-  featured: [
-    wellbeingStudio,
+  flagships,
+  secondary: [
+    casaProgramme,
     isqDesignSystem,
-    connectAndLearn,
     tafePathways,
     goodstart,
-    isqDifferentiation,
     sonicHealthPlus,
     safetyhub,
   ],
   lab: [prototypes],
 };
-
-/** Home shows three. Order is deliberate: live product, program, award. */
-export const featured = [wellbeingStudio, casaProgramme, connectAndLearn];
 
 /** Previous/next within the whole portfolio, program children included. */
 const readingOrder = projects.map((p) => p.path);

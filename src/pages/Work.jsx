@@ -7,29 +7,29 @@ import { graph, personSchema, breadcrumbSchema } from "../lib/schema.js";
 import "./Work.css";
 
 /**
- * Work index — V3.
+ * Work index — v3.4.
  *
- * V2 showed four projects as a lead card plus a grid. With thirteen routed
- * pages that structure stops communicating: everything looks equally
- * important, and the CASA program reads as one project among many rather
- * than as six years of work with five projects inside it.
+ * Four tiers. The hierarchy is carried by scale and position rather than by
+ * a badge:
  *
- * V3 uses three tiers, and the hierarchy is carried by scale and position
- * rather than by a badge:
- *
- *   1. Featured program  full-width, image left, five named projects listed
- *                          on the right. Nothing else on the page is this size.
- *   2. Case studies        a two-column grid, with the flagship taking the
- *                          first, wider cell.
- *   3. Prototypes          a compact row, visibly smaller, under a heading
+ *   1. Flagship work        one-plus-two: Wellbeing Studio leads at full
+ *                          width, Connect & Learn and CASA Flight Examiner
+ *                          Rating follow as two equal-weight supporting
+ *                          cards, in that fixed order.
+ *   2. Selected additional  six cards, led by the CASA program overview.
+ *      work                 Its five children stay reachable through the
+ *                          program's own navigation rather than as separate
+ *                          cards here.
+ *   3. Prototypes           a compact row, visibly smaller, under a heading
  *                          that says what it is.
  *
  * Each tier has a real <h2>, so the hierarchy is in the document outline and
  * not only in the layout.
  */
 export default function Work() {
-  const { programme, featured, lab } = workIndex;
-  const [flagship, ...rest] = featured;
+  const { flagships, secondary, lab } = workIndex;
+  const [lead, ...supportingFlagships] = flagships;
+  const [casaProgramme, ...otherSecondary] = secondary;
 
   return (
     <>
@@ -51,29 +51,36 @@ export default function Work() {
           level={1}
           eyebrow="Selected work"
           headline="Learning systems in practice."
-          standfirst="From enterprise Moodle platforms and production systems to Storyline simulations and organisational design systems, these projects demonstrate how strategy becomes implementation."
+          standfirst="Three flagship projects, a selection of additional work spanning platforms, production systems and organisational design systems, and a compact prototypes tier. Together they demonstrate how strategy becomes implementation."
         />
 
-        {/* --- Tier 1: the program -------------------------------------- */}
-        <section className="work-tier" aria-labelledby="tier-programme">
-          <h2 id="tier-programme" className="work-tier__title">
+        {/* --- Tier 1: flagship work ---------------------------------------- */}
+        <section className="work-tier" aria-labelledby="tier-flagship">
+          <h2 id="tier-flagship" className="work-tier__title">
             <span className="work-tier__num" aria-hidden="true">01</span>
-            Featured program
-          </h2>
-          <ProjectCard project={programme} size="programme" eager />
-        </section>
-
-        {/* --- Tier 2: case studies ---------------------------------------- */}
-        <section className="work-tier" aria-labelledby="tier-cases">
-          <h2 id="tier-cases" className="work-tier__title">
-            <span className="work-tier__num" aria-hidden="true">02</span>
-            Case studies
+            Flagship work
           </h2>
           <ul className="work-grid">
             <li className="work-grid__lead">
-              <ProjectCard project={flagship} size="lead" />
+              <ProjectCard project={lead} size="lead" eager />
             </li>
-            {rest.map((project) => (
+            {supportingFlagships.map((project) => (
+              <li key={project.slug}>
+                <ProjectCard project={project} />
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* --- Tier 2: selected additional work ------------------------------ */}
+        <section className="work-tier" aria-labelledby="tier-secondary">
+          <h2 id="tier-secondary" className="work-tier__title">
+            <span className="work-tier__num" aria-hidden="true">02</span>
+            Selected additional work
+          </h2>
+          <ProjectCard project={casaProgramme} size="programme" />
+          <ul className="work-grid">
+            {otherSecondary.map((project) => (
               <li key={project.slug}>
                 <ProjectCard project={project} />
               </li>

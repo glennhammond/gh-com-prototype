@@ -51,12 +51,8 @@ export const home = {
     standfirst:
       "A course is one layer of four. The platform it runs on, the content around it and the production system that keeps it current are the other three — and they are where learning programmes actually come apart. I design all four, and I own the joins.",
     primaryCta: {
-      href: "/work/isq-elearning-design-system",
-      label: "View the ISQ design-system case study",
-    },
-    secondaryCta: {
       href: "/work",
-      label: "All four projects",
+      label: "View work",
     },
   },
 
@@ -85,52 +81,24 @@ export const home = {
       "Independent Schools Queensland · Civil Aviation Safety Authority · Goodstart Early Learning · Corporate Yoga Australia",
   },
 
-  /* 03 — the ISQ eLearning Design System, featured in its own right. */
-  featuredSystem: {
-    eyebrow: "Featured system",
-    title: "ISQ eLearning Design System",
-    statement:
-      "A shared framework connecting learning design, visual language, reusable components, accessibility and technical delivery across ISQ's digital learning ecosystem.",
-    evidence: [
-      "A growing catalogue of core and approved components",
-      "Cross-platform foundations, shared across Rise and Moodle",
-      "Documented learning patterns and implementation guidance",
-      "Operational governance and versioning",
-    ],
-    capabilities: [
-      "Learning design",
-      "Design systems",
-      "UX and interface design",
-      "Front-end development",
-      "Accessibility",
-      "Governance",
-    ],
-    primaryCta: {
-      href: "/work/isq-elearning-design-system",
-      label: "View case study",
-    },
-    secondaryCta: {
-      href: "https://isq-elearning-design-system.vercel.app/",
-      label: "Explore live system",
-    },
-    status: STATUS.PROPOSED,
-    source: SOURCE.ISQ_DS_BRIEF,
-  },
-
-  /* 04 — selected work */
+  /* 03 — the three flagship projects, one-plus-two composition */
   work: {
-    eyebrow: "Selected work",
-    headline: "Three more projects, three different kinds of proof.",
+    eyebrow: "Flagship work",
+    headline: "Three projects, one owner across every layer.",
     standfirst:
-      "A platform built from nothing, a regulator's training programme, and a migration that had to happen while sixty courses were being rebuilt.",
+      "A live wellbeing platform built end to end, a platform migration run alongside a full course rebuild, and six years of regulated aviation learning built on one production system.",
   },
 
-  /* 05 — the model, after proof has earned it */
+  /* 04 — the model, after proof has earned it */
   framework: {
     eyebrow: "How I read a problem",
     headline: "Four layers. Most organisations buy them separately.",
     standfirst:
-      "This is the diagnostic I use, not a test you have to pass. It matters because the work is rarely lost inside a layer — it is lost between them, in the handover nobody scoped.",
+      "A short summary of the model I use to diagnose a learning problem. The full reasoning, and how it plays out across three projects, is on the Approach page.",
+    cta: {
+      href: "/approach",
+      label: "Read the Approach page",
+    },
   },
 
   /* 06 — Rise and Storyline, after the model has been introduced */

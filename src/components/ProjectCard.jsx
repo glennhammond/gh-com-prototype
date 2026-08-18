@@ -85,7 +85,7 @@ export default function ProjectCard({ project, size = "default", eager = false }
           )}
 
           <span className="pcard__cta" aria-hidden="true">
-            {isProgramme ? "Explore the programme" : "View case study"}
+            {isProgramme ? "Explore the program" : "View case study"}
           </span>
         </div>
       </Link>

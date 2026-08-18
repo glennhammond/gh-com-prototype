@@ -2,24 +2,22 @@ import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
 import Button from "../components/Button.jsx";
 import ProjectCard from "../components/ProjectCard.jsx";
-import FeaturedSystem from "../components/FeaturedSystem.jsx";
 import Icon from "../components/Icon.jsx";
 import { getImage } from "../lib/media.js";
 import { home } from "../content/home.js";
 import { layers } from "../content/layers.js";
-import { featured } from "../content/projects.js";
+import { flagships } from "../content/projects.js";
 import { site } from "../content/site.js";
 import { graph, personSchema, practiceSchema } from "../lib/schema.js";
 import "./Home.css";
 
 /**
- * Homepage — V2.
+ * Homepage — v3.4.
  *
- * Composed rather than stacked: a dark opening, a light proof band, the ISQ
- * eLearning Design System in its own featured section, a work sequence with
- * one lead card and two supporting cards, a compact model strip, a specialist
- * Rise and Storyline section, an offset offer block, a portrait split, and a
- * dark close.
+ * Composed rather than stacked: a dark opening, a light proof band, the three
+ * flagship projects as one lead card and two supporting cards, a compact
+ * model strip, a specialist Rise and Storyline section, an offset offer
+ * block, a portrait split, and a dark close.
  *
  * Exactly two ink bands: the opening and the close. Everything between them,
  * and the footer beneath them, sits on paper or raised paper. Dark is
@@ -27,7 +25,7 @@ import "./Home.css";
  */
 export default function Home() {
   const portrait = getImage("glenn-working");
-  const [lead, ...supporting] = featured;
+  const [lead, ...supporting] = flagships;
 
   return (
     <>
@@ -53,10 +51,6 @@ export default function Home() {
             <Button to={home.hero.primaryCta.href} variant="primary">
               {home.hero.primaryCta.label}
             </Button>
-
-            <Button to={home.hero.secondaryCta.href} variant="outline">
-              {home.hero.secondaryCta.label}
-            </Button>
           </div>
         </div>
       </section>
@@ -77,10 +71,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 03 — featured system ------------------------------------------- */}
-      <FeaturedSystem content={home.featuredSystem} />
-
-      {/* 04 — selected work --------------------------------------------- */}
+      {/* 03 — flagship work ----------------------------------------------- */}
       <section className="section home-work" aria-labelledby="work-title">
         <div className="container">
           <header className="home-work__head">
@@ -106,12 +97,12 @@ export default function Home() {
           )}
 
           <Link className="home-work__all" to="/work">
-            All four projects
+            See all the work
           </Link>
         </div>
       </section>
 
-      {/* 05 — the model ------------------------------------------------- */}
+      {/* 04 — the model ------------------------------------------------- */}
       <section
         className="section section--tight model"
         aria-labelledby="model-title"
@@ -135,6 +126,10 @@ export default function Home() {
             </h2>
 
             <p className="model__lede">{home.framework.standfirst}</p>
+
+            <Link className="home-work__all" to={home.framework.cta.href}>
+              {home.framework.cta.label}
+            </Link>
           </div>
 
           <ol className="model__list">
@@ -162,7 +157,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06 — specialist development ----------------------------------- */}
+      {/* 05 — specialist development ----------------------------------- */}
       <section
         className="section section--tight specialist"
         aria-labelledby="specialist-title"
@@ -232,7 +227,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 07 — how to buy ------------------------------------------------ */}
+      {/* 06 — how to buy ------------------------------------------------ */}
       <section className="section buy" aria-labelledby="buy-title">
         <div className="container buy__inner">
           <div className="buy__offer">
@@ -255,7 +250,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 08 — Glenn ----------------------------------------------------- */}
+      {/* 07 — Glenn ----------------------------------------------------- */}
       <section className="section person" aria-labelledby="person-title">
         <div className="container person__inner">
           {portrait && (
@@ -311,7 +306,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 09 — close ----------------------------------------------------- */}
+      {/* 08 — close ----------------------------------------------------- */}
       <section
         className="section section--tight close on-ink"
         aria-labelledby="close-title"

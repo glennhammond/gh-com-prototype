@@ -44,11 +44,14 @@ export const site = {
   offerCvDownload: false,
 };
 
-/** Five destinations (BP §11). "Practice" replaces "Services" — implemented
- *  per docs/SEO-MIGRATION.md (18 Aug 2026); see DECISIONS.md #19. */
+/** Four primary destinations, plus Contact as the header CTA. /practice is
+ *  the canonical route (docs/SEO-MIGRATION.md, DECISIONS.md #19); its nav
+ *  label reads "Capabilities". Approach is a distinct fourth entry: how the
+ *  four layers connect, as opposed to what gets built inside each one. */
 export const nav = [
   { href: "/work", label: "Work" },
-  { href: "/practice", label: "Practice" },
+  { href: "/practice", label: "Capabilities" },
+  { href: "/approach", label: "Approach" },
   { href: "/about", label: "About" },
 ];
 
