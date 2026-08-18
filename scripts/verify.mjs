@@ -8,7 +8,7 @@
  * Run with:  npm run verify   (or npm run check to build first)
  */
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
-import { join, extname, relative } from "node:path";
+import { join, extname, relative, sep } from "node:path";
 import { gzipSync } from "node:zlib";
 import { clients } from "../src/content/clients.js";
 import { projects, withheldProjects } from "../src/content/projects.js";
@@ -25,6 +25,10 @@ const warn = (m) => warnings.push(m);
 const note = (m) => notes.push(m);
 
 /* --- helpers -------------------------------------------------------------- */
+
+/* path.relative() returns backslash-separated paths on Windows; every route
+   key in this file is forward-slash. Normalise before use as a lookup key. */
+const toPosix = (p) => p.split(sep).join("/");
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {
@@ -43,7 +47,7 @@ if (!existsSync(DIST)) {
 const files = walk(DIST);
 const htmlFiles = files.filter((f) => extname(f) === ".html");
 const html = Object.fromEntries(
-  htmlFiles.map((f) => [relative(DIST, f), readFileSync(f, "utf8")])
+  htmlFiles.map((f) => [toPosix(relative(DIST, f)), readFileSync(f, "utf8")])
 );
 
 /* --- 1. Placeholder scan --------------------------------------------------- */
@@ -85,7 +89,7 @@ const approvedLogoStems = clients
   .filter((c) => c.logoApproved && c.logoFile)
   .map((c) => c.logoFile.replace(/\.[a-z]+$/i, ""));
 for (const file of files) {
-  const rel = relative(DIST, file);
+  const rel = toPosix(relative(DIST, file));
   if (!/logo/i.test(rel)) continue;
   if (!approvedLogoStems.some((stem) => rel.includes(stem))) {
     fail(`Logo asset shipped without a logoApproved record: ${rel}`);

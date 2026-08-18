@@ -18,7 +18,7 @@
  *     node scripts/audit.mjs
  */
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
-import { join, extname, relative } from "node:path";
+import { join, extname, relative, sep } from "node:path";
 
 const DIST = "dist";
 const fails = [];
@@ -27,6 +27,10 @@ const notes = [];
 const fail = (m) => fails.push(m);
 const warn = (m) => warns.push(m);
 const note = (m) => notes.push(m);
+
+/* path.relative() returns backslash-separated paths on Windows; every route
+   key in this file is forward-slash. Normalise before use as a lookup key. */
+const toPosix = (p) => p.split(sep).join("/");
 
 function walk(dir, out = []) {
   for (const e of readdirSync(dir)) {
@@ -44,7 +48,7 @@ if (!existsSync(DIST)) {
 
 const pages = walk(DIST)
   .filter((f) => extname(f) === ".html")
-  .map((f) => [relative(DIST, f), readFileSync(f, "utf8")]);
+  .map((f) => [toPosix(relative(DIST, f)), readFileSync(f, "utf8")]);
 
 /* --- 1. Heading order ------------------------------------------------------ */
 
