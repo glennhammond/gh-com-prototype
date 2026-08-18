@@ -57,6 +57,7 @@ Machine-readable equivalents live in `src/content/*.js` as `status` and
 | Torres and Cape, Seqwater, TAFE Qld logos | permission-required | **Excluded from this build.** `verify.mjs` fails if they reappear |
 | Glenn's portrait | approved | Not yet used — needs crop and grade |
 | CASA 2021 screenshots | approved | Not yet used — need art direction |
+| 7 ISQ eLearning Design System component captures | approved | Cropped through `scripts/images.mjs`; **present in repo but not yet placed on the page** — see DECISIONS.md §19–20. Six carry the component library's own demonstration copy, not published-course content |
 | `og.png` | inherited | Carried over from the previous build; should be redesigned for the new position |
 
 ---

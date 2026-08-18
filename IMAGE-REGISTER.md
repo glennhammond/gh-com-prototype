@@ -53,7 +53,24 @@ for each one inline.
 
 ---
 
-## 2. Omitted, with reasons
+## 2. Processed, held in reserve
+
+Sourced, cropped and derived, but not currently referenced by any page. Kept
+ready rather than deleted: see DECISIONS.md §20.
+
+| Output | Source | What it demonstrates |
+| --- | --- | --- |
+| `isq-ds-decision-point` | `isq-ds-decision-point.png` | Decision point component, ready state |
+| `isq-ds-knowledge-check` | `isq-ds-knowledge-check.png` | Four-question Knowledge check |
+| `isq-ds-tabs` | `isq-ds-tabs.png` | Three-tab content pattern |
+| `isq-ds-flip-cards` | `isq-ds-flip-cards.png` | Flip card, front and revealed states in one frame |
+| `isq-ds-content-cards` | `isq-ds-content-cards.png` | Four-card layout, domestic and family violence example |
+| `isq-ds-comparison-panel` | `isq-ds-comparison-panel.png` | Two-column comparison pattern with featured lists |
+| `isq-ds-section-summary` | `isq-ds-section-summary.png` | Four-part Section summary component |
+
+---
+
+## 3. Omitted, with reasons
 
 | Asset | Reason |
 | --- | --- |
@@ -71,10 +88,11 @@ for each one inline.
 | `goodstart-institute-logo.png` | A client mark is not portfolio evidence. Retained in `source/` for a future identity strip. |
 | `casa-course-template-icons.jpg` | Pixel-identical to `tpl-icons.png`, which is already in the V2 archive. The PNG is used because it carries transparency and stays crisper. |
 | `fer-component.png` | Duplicates what the component specification sheet already shows. |
+| `Screenshot 2026-08-03 112355.png` (three-card flip, initial state) | The flip-card evidence used elsewhere on the ISQ Design System case study (`isq-ds-flip-cards`) already shows a front state and a revealed state side by side in one frame. This third capture only repeats the front state already visible there, so it does not earn a second slot. |
 
 ---
 
-## 3. Uncertain CASA attribution
+## 4. Uncertain CASA attribution
 
 These are the ones to resolve before publication. Each is flagged in the
 interface as well as here.
@@ -90,7 +108,7 @@ interface as well as here.
 
 ---
 
-## 4. Rules applied
+## 5. Rules applied
 
 - Crops are expressed as fractions of the source so they survive a re-export.
 - Nothing is upscaled. A width is skipped when the source cannot carry it,

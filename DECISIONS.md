@@ -288,3 +288,63 @@ not fabricated screens.
 **Consequence** — the case study is honest but visually thinner than it
 should eventually be. See the implementation report for the full list of
 claims that need verification against the live system before publication.
+
+---
+
+## 19. Seven of the eight §18 placeholders replaced with real component captures
+
+**What was built** — Glenn supplied eight screenshots from the design
+system's own component library. Seven were selected and added as
+`src/assets/isq/source/isq-ds-*.png`, processed through `scripts/images.mjs`
+into the standard AVIF/WebP derivatives, and now populate
+`isqDesignSystem.figures` in `projects.js`, replacing the placeholder plates
+from §18. The eighth (a second flip-card capture, showing three cards all in
+their unflipped front state) was left unused: the selected flip-card image
+already shows a front state and a revealed state side by side in one frame,
+which demonstrates the interaction more completely than an additional
+front-only capture would, so the second image would only have repeated
+evidence already on the page. Figures are grouped editorially into three
+learning jobs — assessment, content exploration, structured content — rather
+than following one component through specification, code and live use, since
+none of the supplied screenshots are documentation or code views: they are
+all captures of components as a learner would encounter them.
+
+**Why** — the screenshots are component-library captures, not screens from a
+published ISQ course: six of the seven carry the library's own generic
+demonstration copy rather than real course content, and captions say so
+explicitly rather than letting a reader assume they are looking at a live
+course. The seventh (the four-card layout) uses a real domestic and family
+violence explainer and is captioned as an example of real subject matter,
+not as evidence the course itself has shipped or been used by learners. No
+component count, maturity-state label or adoption figure is introduced;
+those remain qualitative per §18 and the open items in `gaps`.
+
+**Consequence** — the case study is now visually substantiated for the
+seven patterns shown. The documentation, code and governance views named in
+§18's remaining gaps (catalogue, a component's specification page, its
+implementation, and the lifecycle/governance model) are still not shown and
+remain listed in `gaps`, along with confirmation that any future live-course
+screenshot has clearance to publish.
+
+---
+
+## 20. §19's figures held back; processed assets kept in reserve
+
+**What was built** — `isqDesignSystem.figures`, `figuresTitle`,
+`figuresLede`, the `components` entry for Decision point, and the two
+`gaps` items touched in §19 were reverted to their §18 wording, so the case
+study shows the placeholder plates again rather than the seven component
+captures. Nothing under `src/assets/isq/` was touched: the seven
+`isq-ds-*` source files, their AVIF/WebP derivatives, the `scripts/images.mjs`
+recipes that produce them, and their `image-manifest.json` entries all
+remain in the repository, built and ready.
+
+**Why** — Glenn's direction, on review, was that the seven captures should
+go back in with more context around them rather than stay as they landed in
+§19. The images themselves are not the problem; the surrounding narrative
+needs another pass before they are shown.
+
+**Consequence** — the case study is back to §18's all-placeholder state.
+The processed images are not orphaned: re-adding them to `figures` is a
+content-only change (the asset pipeline work is already done), whenever the
+richer framing is ready.

@@ -415,6 +415,91 @@
       480
     ]
   },
+  "isq-ds-decision-point": {
+    "set": "isq",
+    "source": "isq-ds-decision-point.png",
+    "width": 860,
+    "height": 543,
+    "widths": [
+      860,
+      800,
+      660,
+      480
+    ]
+  },
+  "isq-ds-knowledge-check": {
+    "set": "isq",
+    "source": "isq-ds-knowledge-check.png",
+    "width": 860,
+    "height": 497,
+    "widths": [
+      860,
+      800,
+      660,
+      480
+    ]
+  },
+  "isq-ds-tabs": {
+    "set": "isq",
+    "source": "isq-ds-tabs.png",
+    "width": 860,
+    "height": 331,
+    "widths": [
+      860,
+      800,
+      660,
+      480
+    ]
+  },
+  "isq-ds-flip-cards": {
+    "set": "isq",
+    "source": "isq-ds-flip-cards.png",
+    "width": 860,
+    "height": 352,
+    "widths": [
+      860,
+      800,
+      660,
+      480
+    ]
+  },
+  "isq-ds-content-cards": {
+    "set": "isq",
+    "source": "isq-ds-content-cards.png",
+    "width": 1180,
+    "height": 657,
+    "widths": [
+      1180,
+      860,
+      800,
+      660,
+      480
+    ]
+  },
+  "isq-ds-comparison-panel": {
+    "set": "isq",
+    "source": "isq-ds-comparison-panel.png",
+    "width": 860,
+    "height": 564,
+    "widths": [
+      860,
+      800,
+      660,
+      480
+    ]
+  },
+  "isq-ds-section-summary": {
+    "set": "isq",
+    "source": "isq-ds-section-summary.png",
+    "width": 860,
+    "height": 636,
+    "widths": [
+      860,
+      800,
+      660,
+      480
+    ]
+  },
   "safetyhub-cover": {
     "set": "safetyhub",
     "source": "safetyhub-asbestos-awareness-hero.png",
