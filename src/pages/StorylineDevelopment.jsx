@@ -17,7 +17,9 @@ import "./ServicePage.css";
 /**
  * Advanced Storyline development.
  *
- * Sits under /services rather than in primary navigation, alongside Rise
+ * The URL stays at /services/storyline-development for now (SEO migration
+ * Phase A preserves it as-is; see DECISIONS.md #19) even though the parent
+ * overview page it logically sits under is now /practice, alongside Rise
  * design systems. Evidence here is the deeper of the two: CASA's reusable
  * Storyline production system, the Flight Examiner Rating programme, the
  * sixty-plus ISQ courses redeveloped, and the self-directed interaction
@@ -39,7 +41,7 @@ export default function StorylineDevelopment() {
           practiceSchema,
           breadcrumbSchema([
             { name: "Home", href: "/" },
-            { name: "Services", href: "/services" },
+            { name: "Practice", href: "/practice" },
             { name: "Storyline development", href: "/services/storyline-development" },
           ])
         )}
@@ -51,7 +53,7 @@ export default function StorylineDevelopment() {
           <nav aria-label="Breadcrumb" className="svc-hero__crumbs">
             <ol>
               <li>
-                <a href="/services">Services</a>
+                <a href="/practice">Practice</a>
               </li>
               <li aria-current="page">Storyline development</li>
             </ol>
@@ -164,7 +166,7 @@ export default function StorylineDevelopment() {
         </Button>
         <p className="svc-cta__more">
           Not sure Storyline is the right call?{" "}
-          <Link to="/services">Compare it with Rise on the Services overview</Link>
+          <Link to="/practice">Compare it with Rise on the Practice overview</Link>
         </p>
       </Section>
     </>

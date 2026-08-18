@@ -68,6 +68,7 @@ export default function Privacy() {
         title="Privacy | Glenn Hammond"
         description="How information submitted through this website is handled."
         path="/privacy"
+        noindex
         jsonLd={graph(
           personSchema,
           breadcrumbSchema([

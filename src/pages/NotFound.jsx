@@ -10,6 +10,7 @@ export default function NotFound() {
         title="Page not found | Glenn Hammond"
         description="That page does not exist."
         path="/404"
+        noindex
       />
       <div className="section container container--narrow">
         <SectionHead

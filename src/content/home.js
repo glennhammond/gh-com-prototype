@@ -35,7 +35,7 @@ import { STATUS, SOURCE } from "./status.js";
  *    the four-layer model.
  *
  * This makes both specialist services visible before a visitor reaches the
- * detailed Services page without displacing the top-of-page positioning.
+ * detailed Practice page without displacing the top-of-page positioning.
  *
  * All copy is PROPOSED, awaiting approval.
  */
@@ -168,7 +168,7 @@ export const home = {
     body:
       "Larger delivery work — building or migrating a platform with the content that lives in it, or building the production system an in-house team needs — usually starts here. It is the cheapest way to find out whether the problem is where you think it is.",
     cta: {
-      href: "/services",
+      href: "/practice",
       label: "See all four engagements",
     },
   },

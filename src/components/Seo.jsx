@@ -8,7 +8,14 @@ import { site } from "../content/site.js";
  * descriptions, canonicals, Open Graph tags and JSON-LD are all present in the
  * source. Link previews and crawlers never depend on JavaScript.
  */
-export default function Seo({ title, description, path = "/", jsonLd, image }) {
+export default function Seo({
+  title,
+  description,
+  path = "/",
+  jsonLd,
+  image,
+  noindex = false,
+}) {
   const url = `${site.origin}${path === "/" ? "" : path}`;
   const ogImage = `${site.origin}${image ?? "/og.png"}`;
 
@@ -17,6 +24,7 @@ export default function Seo({ title, description, path = "/", jsonLd, image }) {
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
+      {noindex && <meta name="robots" content="noindex, nofollow" />}
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={site.name} />

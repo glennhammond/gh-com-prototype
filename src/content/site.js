@@ -44,10 +44,11 @@ export const site = {
   offerCvDownload: false,
 };
 
-/** Five destinations (BP §11). "Practice" replaces "Services". */
+/** Five destinations (BP §11). "Practice" replaces "Services" — implemented
+ *  per docs/SEO-MIGRATION.md (18 Aug 2026); see DECISIONS.md #19. */
 export const nav = [
   { href: "/work", label: "Work" },
-  { href: "/services", label: "Services" },
+  { href: "/practice", label: "Practice" },
   { href: "/about", label: "About" },
 ];
 

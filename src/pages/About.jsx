@@ -130,7 +130,7 @@ export default function About() {
 
           <p className="about__more">
             Wondering what working together actually looks like?{" "}
-            <Link to="/services">See how the practice is organised</Link>
+            <Link to="/practice">See how the practice is organised</Link>
           </p>
         </div>
       </section>

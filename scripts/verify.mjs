@@ -134,7 +134,7 @@ const REQUIRED = {
   "work/isq-differentiated-learning.html": ["Years 7 to 10"],
   "work/goodstart-myportal.html": ["640 centres"],
   "work/interaction-prototypes.html": ["SCORM 2004"],
-  "services.html": ["Four layers, one owner", "Learning System Review"],
+  "practice.html": ["Four layers, one owner", "Learning System Review"],
   "about.html": ["Where I have done it"],
   "contact.html": ["Tell me what is happening", "What does the problem seem closest to"],
   "privacy.html": ["must not go live"],
@@ -170,12 +170,26 @@ for (const [file, source] of Object.entries(html)) {
   if (h1s.length !== 1) fail(`${file} has ${h1s.length} h1 elements, expected 1`);
 }
 
+/* --- 6b. noindex — SEO migration Phase A -----------------------------------
+   /404 and /privacy must carry a noindex robots meta tag; nothing else may,
+   so an indexable page can never be accidentally hidden from search. */
+
+const NOINDEX_PAGES = new Set(["404.html", "privacy.html"]);
+for (const [file, source] of Object.entries(html)) {
+  const hasNoindex = /name="robots"[^>]*content="[^"]*noindex/i.test(source);
+  if (NOINDEX_PAGES.has(file)) {
+    if (!hasNoindex) fail(`${file} should carry a noindex robots meta tag but does not`);
+  } else if (hasNoindex) {
+    fail(`${file} unexpectedly carries a noindex robots meta tag`);
+  }
+}
+
 /* --- 7. Internal links ------------------------------------------------------ */
 
 const routes = new Set([
   "/",
   "/work",
-  "/services",
+  "/practice",
   "/services/rise-design-systems",
   "/services/storyline-development",
   "/about",
@@ -303,6 +317,24 @@ for (const [file, source] of Object.entries(html)) {
   if (external.length) {
     fail(`Third-party resource referenced in ${file}: ${external.join(", ")}`);
   }
+}
+
+/* --- 10. Sitemap integrity — SEO migration Phase A -------------------------- */
+
+const sitemapPath = join(DIST, "sitemap.xml");
+if (!existsSync(sitemapPath)) {
+  fail("dist/sitemap.xml not found");
+} else {
+  const sitemap = readFileSync(sitemapPath, "utf8");
+  if (/<loc>[^<]*\/privacy<\/loc>/.test(sitemap))
+    fail("Sitemap includes /privacy, which is noindex and must not be listed");
+  if (/<loc>[^<]*\/services<\/loc>/.test(sitemap))
+    fail("Sitemap includes /services, which now 301s to /practice");
+  if (/<lastmod>/.test(sitemap))
+    fail("Sitemap contains a <lastmod> value; Phase A requires omitting it rather than fabricating one");
+  if (!/<loc>[^<]*\/practice<\/loc>/.test(sitemap))
+    fail("Sitemap is missing the canonical /practice URL");
+  note("Sitemap: /practice present, /services and /privacy absent, no fabricated lastmod");
 }
 
 /* --- Report ----------------------------------------------------------------- */

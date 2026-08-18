@@ -32,7 +32,7 @@ export const riseDesignSystems = {
   },
 
   hero: {
-    eyebrow: "Services · Rise design systems",
+    eyebrow: "Practice · Rise design systems",
     headline: "Transforming Rise into a distinctive, scalable digital learning system.",
     standfirst:
       "Rise is one of the fastest authoring tools available, but out of the box it produces generic-looking courses with limited flexibility. I develop design systems, reusable components and custom HTML/CSS enhancements that transform Rise into a premium learning platform while retaining all of its speed and maintainability.",
@@ -124,7 +124,7 @@ export const storylineDevelopment = {
   },
 
   hero: {
-    eyebrow: "Services · Storyline development",
+    eyebrow: "Practice · Storyline development",
     headline: "Sophisticated interactive learning built on deep Articulate expertise.",
     standfirst:
       "I have developed with Articulate Storyline across regulated aviation and education learning for more than a decade, including six years inside Australia's aviation safety regulator. That depth is what makes it possible to design and build complex interactions, simulations and scenario-based learning that stay intuitive, maintainable and aligned with the learning objective.",
@@ -133,7 +133,7 @@ export const storylineDevelopment = {
   whenItFits: {
     eyebrow: "When Storyline is the right choice",
     headline: "When the interaction carries the learning.",
-    body: "Storyline earns its cost when a learner needs to make a decision, practise a process, explore a consequence, work through a branching scenario or receive feedback tailored to what they actually did — not just what they clicked. Rise is content-led; Storyline is interaction-led, and the two are chosen for different reasons rather than ranked against each other (see “The right tool for the learning problem” on the Services overview).",
+    body: "Storyline earns its cost when a learner needs to make a decision, practise a process, explore a consequence, work through a branching scenario or receive feedback tailored to what they actually did — not just what they clicked. Rise is content-led; Storyline is interaction-led, and the two are chosen for different reasons rather than ranked against each other (see “The right tool for the learning problem” on the Practice overview).",
   },
 
   groups: [

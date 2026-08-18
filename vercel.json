@@ -6,18 +6,18 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/practice",
-      "destination": "/services",
+      "source": "/services",
+      "destination": "/practice",
       "permanent": true
     },
     {
       "source": "/services/xapi-analytics",
-      "destination": "/services",
+      "destination": "/practice",
       "permanent": true
     },
     {
       "source": "/design-system/:slug*",
-      "destination": "/services",
+      "destination": "/practice",
       "permanent": true
     }
   ],

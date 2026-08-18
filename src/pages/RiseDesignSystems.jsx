@@ -16,7 +16,9 @@ import "./ServicePage.css";
 /**
  * Rise design systems and premium development.
  *
- * Sits under /services rather than in primary navigation — this is a
+ * The URL stays at /services/rise-design-systems for now (SEO migration
+ * Phase A preserves it as-is; see DECISIONS.md #19) even though the parent
+ * overview page it logically sits under is now /practice — this is a
  * specialist practice inside the four-layer model (mostly Content and
  * Operations), not a fifth destination. Built from existing primitives only
  * (Section, Figure via ProjectCard, Button, Seo); no new shared components.
@@ -40,7 +42,7 @@ export default function RiseDesignSystems() {
           practiceSchema,
           breadcrumbSchema([
             { name: "Home", href: "/" },
-            { name: "Services", href: "/services" },
+            { name: "Practice", href: "/practice" },
             { name: "Rise design systems", href: "/services/rise-design-systems" },
           ])
         )}
@@ -52,7 +54,7 @@ export default function RiseDesignSystems() {
           <nav aria-label="Breadcrumb" className="svc-hero__crumbs">
             <ol>
               <li>
-                <a href="/services">Services</a>
+                <a href="/practice">Practice</a>
               </li>
               <li aria-current="page">Rise design systems</li>
             </ol>
@@ -153,7 +155,7 @@ export default function RiseDesignSystems() {
         </Button>
         <p className="svc-cta__more">
           Not sure Rise is the right call?{" "}
-          <Link to="/services">Compare it with Storyline on the Services overview</Link>
+          <Link to="/practice">Compare it with Storyline on the Practice overview</Link>
         </p>
       </Section>
     </>

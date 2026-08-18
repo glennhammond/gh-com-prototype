@@ -96,11 +96,18 @@ Final decision depends on content extraction or further historical evidence.
 /work/casa-flight-examiner-rating
 ```
 
-**Action:** KEEP + REBUILD
+**Action:** REDIRECT
 
-Retain exact slug.
+**Corrected 18 Aug 2026 (Phase A reconciliation, §32).** This flat slug is a
+historical URL, not a canonical destination. The V3 rebuild already
+restructured CASA into a nested programme — this is a source to redirect,
+not a route to keep.
 
-This becomes a major case study.
+```text
+301 → /work/casa/flight-examiner-rating
+```
+
+This becomes a major case study, at its nested canonical route.
 
 ---
 
@@ -110,11 +117,21 @@ This becomes a major case study.
 /work/casa-aviationworx-class
 ```
 
-**Action:** KEEP + REBUILD
+**Action:** REDIRECT — REVIEW destination
 
-Retain existing slug while project naming and scope are clarified.
+**Corrected 18 Aug 2026 (Phase A reconciliation, §32).** This flat slug is a
+historical URL, not a canonical destination. The nested route below is
+canonical.
 
-Do not rename solely for presentation consistency.
+```text
+301 → /work/casa/aviationworx
+```
+
+Do not rename the nested route solely for presentation consistency. The
+AviationWorx/CLASS relationship itself is still unconfirmed (see §29), so
+treat the exact redirect destination as REVIEW until that is resolved —
+`/work/casa/class` remains the alternative if the historical page in fact
+covered CLASS rather than AviationWorx.
 
 ---
 
@@ -124,15 +141,21 @@ Do not rename solely for presentation consistency.
 /work/elearning-design-system
 ```
 
-**Action:** KEEP + TRANSFORM
+**Action:** REVIEW — do not create
 
-Public-facing working title:
+**Corrected 18 Aug 2026 (Phase A reconciliation, §32).** This destination does
+not exist in the current build and must not be created until the content
+strategy resolves which of two distinct existing concepts it refers to:
 
-**Rise Design System**
+- `/services/rise-design-systems` — an existing Practice-level service page
+  describing Rise design-system development as a capability.
+- `/work/isq-elearning-design-system` — an existing, separate case-study
+  record for the ISQ eLearning Design System specifically.
 
-Retain the existing URL because it already has search visibility.
-
-The rebuilt page should be organisation-neutral.
+Public-facing working title **Rise Design System** was originally proposed
+for this URL on the basis of existing search visibility. That visibility
+should transfer via redirect once the relationship between the two existing
+concepts above is decided — not by creating a third page at this slug.
 
 ---
 
@@ -144,7 +167,9 @@ The rebuilt page should be organisation-neutral.
 
 **Action:** REVIEW
 
-Likely future treatment:
+**Note, 18 Aug 2026:** `/work/wellbeing-studio` already exists as the live,
+canonical Wellbeing Studio case study — it is not a future creation. This
+mapping remains REVIEW, unchanged from the original assessment:
 
 ```text
 301 → /work/wellbeing-studio
@@ -161,6 +186,10 @@ Only make this redirect once the Wellbeing Studio case study genuinely encompass
 ```
 
 **Action:** PRESERVE / REVIEW
+
+**Note, 18 Aug 2026:** the closest existing record is
+`/work/interaction-prototypes` — a different slug, and not confirmed as the
+same body of work. Do not redirect until that relationship is confirmed.
 
 Potentially useful secondary portfolio work demonstrating learning interaction and front-end capability.
 
@@ -855,6 +884,11 @@ Only recreate RSS if RSS becomes an intentional new-site feature.
 
 # 22. Current eLearning Design System child URLs
 
+**Note, 18 Aug 2026 (Phase A reconciliation, §32):** every destination in this
+section assumes `/work/elearning-design-system` becomes canonical. Per §5,
+that destination is REVIEW and must not be created yet. Treat every 301 below
+as pointing at a destination still to be decided, not an implemented target.
+
 Existing sitemap includes:
 
 ```text
@@ -913,11 +947,16 @@ Search Console has identified historical URLs including:
 /portfolio/elearning-design-system/
 ```
 
-**Action:** REDIRECT
+**Action:** REDIRECT — destination REVIEW
 
 ```text
 301 → /work/elearning-design-system
 ```
+
+**Note, 18 Aug 2026:** the destination above does not exist and is REVIEW
+per §5 and §22. Do not implement this redirect until it resolves to a real
+route (either the eventual Rise/ISQ destination decision, or a different
+canonical target).
 
 ---
 
@@ -1175,35 +1214,38 @@ Decide which child resources genuinely deserve standalone indexing.
 
 # 30. Immediate implementation status
 
-The website can now safely proceed under the following locked decisions:
+**Updated 18 Aug 2026 — Phase A implemented.** The locked list below is
+corrected against the current codebase; see §32 for the full reconciliation.
 
 ```text
 /                              KEEP
 /about                         KEEP
 /work                          KEEP
+/practice                      CANONICAL — implemented Phase A
+/services                      301 → /practice — implemented Phase A
+/work/casa                     CANONICAL — nested programme overview
+/work/casa/aviationworx        CANONICAL
+/work/casa/class               CANONICAL
+/work/casa/course-system       CANONICAL
+/work/casa/learning-catalogue  CANONICAL
+/work/casa/flight-examiner-rating
+                               CANONICAL
 /work/casa-flight-examiner-rating
-                               KEEP + REBUILD
-/work/casa-aviationworx-class KEEP + REBUILD
-/work/elearning-design-system KEEP + TRANSFORM
-/services                      301 → /practice
+                               301 → /work/casa/flight-examiner-rating (source, not canonical)
+/work/casa-aviationworx-class 301 → /work/casa/aviationworx — REVIEW destination, see §5
+/work/wellbeing-studio         KEEP — already implemented, not a future creation
+/work/elearning-design-system REVIEW — do not create, see §5 and §32
 /profile/                      301 → /about
 /portfolio/                    301 → /work
 /category/blog/                301 → /blog
 /portfolio/elearning-design-system/
-                               301 → /work/elearning-design-system
+                               301 → REVIEW destination, see §22–23
 ```
 
-New route authorised:
+`/practice` is implemented. Primary navigation reads Work / Practice / About.
 
-```text
-/practice
-```
-
-New flagship route authorised:
-
-```text
-/work/wellbeing-studio
-```
+Flagship route `/work/wellbeing-studio` is implemented and live — not
+pending creation.
 
 Other new Work routes should follow content extraction.
 
@@ -1224,3 +1266,64 @@ The SEO strategy is therefore:
 **preserve what has value, consolidate what has fragmented, rebuild what demonstrates capability, and remove what no longer deserves to represent the practice.**
 
 **Quiet on the surface. Considerable depth underneath.**
+
+---
+
+# 32. Phase A reconciliation — 18 August 2026
+
+Phase A of the implementation audit found that this document, as originally
+written, described several destinations that either did not match the
+already-shipped V3 codebase or did not yet exist. Rather than rewrite the
+document's history, the specific sections above were corrected in place and
+this section records what changed and why, as a single reference point.
+
+**This document's own target architecture (§2) was already correct** — it
+already named `/practice` as canonical and `/services → /practice` as a
+required redirect. The conflict was between this document and the
+*implementation*, not within this document. That conflict is now resolved:
+Phase A implemented `/practice` as canonical, matching §2 and §4.
+
+**Five decisions locked for Phase A:**
+
+1. **`/practice` is canonical.** Primary navigation is Work / Practice /
+   About. `/services` permanently redirects to `/practice`. Recorded in
+   `DECISIONS.md` #19, which supersedes `DECISIONS.md` #17 without erasing
+   it.
+2. **The nested CASA programme architecture is canonical and unchanged.**
+   `/work/casa`, `/work/casa/aviationworx`, `/work/casa/class`,
+   `/work/casa/course-system`, `/work/casa/learning-catalogue` and
+   `/work/casa/flight-examiner-rating` are the real routes. The flat
+   historical slugs in §5 (`/work/casa-flight-examiner-rating`,
+   `/work/casa-aviationworx-class`) are migration sources that should
+   eventually redirect to their nested equivalents — they were never
+   canonical destinations to "keep" as originally written, and §5 has been
+   corrected accordingly. The AviationWorx/CLASS historical mapping remains
+   REVIEW pending confirmation of which project the historical page actually
+   covered (§29).
+3. **Rise Design System and the ISQ eLearning Design System case study remain
+   distinct, unresolved concepts.** `/work/elearning-design-system` must not
+   be created. `/services/rise-design-systems` and
+   `/work/isq-elearning-design-system` are not to be merged or renamed to
+   fill that slug. §5, §22 and §23 have been corrected to mark that
+   destination REVIEW rather than an implemented or implementable target.
+4. **Blog remains DEFER.** No `/blog` route, content architecture or CMS was
+   introduced in Phase A. §12–§21's historical blog and instructional-design
+   URLs are unaffected and remain future work.
+5. **`/work/wellbeing-studio` already exists.** It is not a pending creation;
+   §24's "Status: CREATE" for this route reflected the state before this
+   codebase's V2/V3 work, not the current one. The historical
+   `/work/corporate-yoga-australia-website` mapping remains REVIEW, unchanged.
+
+**Also corrected in Phase A, not architectural:** the generated `sitemap.xml`
+no longer fabricates a `lastmod` value on every build (§27 already required
+this; the generator did not yet comply — it now omits `lastmod` entirely
+rather than introduce a content-date model). `/privacy` is excluded from the
+sitemap and marked `noindex` while its legal copy remains unfinished; `/404`
+is marked `noindex`. Neither is a new architectural decision — both follow
+directly from §27's existing rules.
+
+**Not implemented in Phase A, by design:** the historical WordPress redirect
+estate in §6–§21 beyond what was already in `vercel.json`. Phase A is
+foundation work only; that estate follows in a later phase once the current
+live site's actual URL inventory is confirmed (§28's own evidentiary
+standard applies here as much as to any content decision).

@@ -29,15 +29,15 @@ export default function Practice() {
   return (
     <>
       <Seo
-        title="Services | Glenn Hammond"
+        title="Practice | Glenn Hammond"
         description="Four layers, four defined engagements. Learning system reviews, platform and programme delivery, production and design systems, and embedded specialist work."
-        path="/services"
+        path="/practice"
         jsonLd={graph(
           personSchema,
           practiceSchema,
           breadcrumbSchema([
             { name: "Home", href: "/" },
-            { name: "Services", href: "/services" },
+            { name: "Practice", href: "/practice" },
           ])
         )}
       />

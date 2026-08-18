@@ -288,3 +288,41 @@ not fabricated screens.
 **Consequence** — the case study is honest but visually thinner than it
 should eventually be. See the implementation report for the full list of
 claims that need verification against the live system before publication.
+
+---
+
+# SEO migration Phase A (18 August 2026)
+
+## 19. `/practice` supersedes `/services` as the canonical capability route
+
+**Supersedes Decision 17.** Decision 17 is left exactly as written above — it
+was correct given what was known at the time, and the record stays intact.
+This entry does not rewrite it; it overrides its conclusion for a different,
+later reason.
+
+**What was built** — `/practice` is now the canonical route for the four-layer
+capability page. `routes.jsx`, `content/site.js` (nav and internal copy),
+`vercel.json`, `scripts/postbuild.mjs` and `scripts/verify.mjs` were all
+updated together. `vercel.json` now redirects `/services`,
+`/services/xapi-analytics` and `/design-system/*` directly to `/practice`
+(no chains). The two specialist-practice pages,
+`/services/rise-design-systems` and `/services/storyline-development`, keep
+their existing URLs unchanged — only their breadcrumbs and cross-links now
+point at `/practice` as the parent overview.
+
+**Why** — `docs/SEO-MIGRATION.md` (dated 18 Aug 2026) is an external
+architectural constraint document that locks in `/practice` as canonical and
+`/services → /practice` as a required redirect, with `Practice` named in
+primary navigation. Decision 17's reasoning ("`/services` is the route
+actually in `routes.jsx`") was sound as an internal-consistency fix at the
+time, but the migration document is the newer and more authoritative source
+for this specific question, and it was written with full knowledge of the
+prior state.
+
+**Consequence** — none of the underlying Services/Practice page content or
+visual treatment changed; this is a route and nav-label migration only. Any
+inbound link or bookmark to `/services` (however it accrued) is preserved via
+the 301. The two specialist pages remain nested under a `/services/` path
+segment that no longer matches their logical parent's URL — a known,
+accepted asymmetry recorded here rather than silently carried. Revisiting
+that nesting is out of scope for Phase A.

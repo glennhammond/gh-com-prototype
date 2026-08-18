@@ -2,7 +2,7 @@ import Layout from "./components/Layout.jsx";
 import Home from "./pages/Home.jsx";
 import Work from "./pages/Work.jsx";
 import CaseStudy from "./pages/CaseStudy.jsx";
-import Services from "./pages/Practice.jsx";
+import Practice from "./pages/Practice.jsx";
 import RiseDesignSystems from "./pages/RiseDesignSystems.jsx";
 import StorylineDevelopment from "./pages/StorylineDevelopment.jsx";
 import About from "./pages/About.jsx";
@@ -12,13 +12,17 @@ import NotFound from "./pages/NotFound.jsx";
 import { projects, casaSubprojects } from "./content/projects.js";
 
 /**
- * Route table — V3.1.
+ * Route table — V3.1, SEO migration Phase A (18 Aug 2026).
  *
- * Seven destinations: Home, Work, Services, About, Contact, plus two
- * specialist-practice pages nested under Services (Rise design systems,
- * Storyline development). Both sit under /services rather than in primary
- * navigation — they are how the work under the four-layer model gets built,
- * not a fifth top-level destination.
+ * Seven destinations: Home, Work, Practice, About, Contact, plus two
+ * specialist-practice pages (Rise design systems, Storyline development).
+ * Practice is canonical per docs/SEO-MIGRATION.md and DECISIONS.md #19,
+ * superseding the earlier /services routing decision (#17). The two
+ * specialist pages are preserved at their existing /services/* paths for
+ * now — see the route entries below — rather than moved under /practice,
+ * since Phase A is a route/naming migration, not a restructure.
+ * `/services` itself 301s to `/practice` at the Vercel edge (vercel.json);
+ * there is no `/services` route entry below.
  *
  * V3 adds one level of depth under /work. The CASA programme's children live
  * at /work/casa/<slug>, so the URL states the relationship without any
@@ -56,7 +60,7 @@ export const routes = [
         element: <CaseStudy />,
         getStaticPaths: () => casaSubprojects.map((p) => p.path.slice(1)),
       },
-      { path: "services", element: <Services /> },
+      { path: "practice", element: <Practice /> },
       { path: "services/rise-design-systems", element: <RiseDesignSystems /> },
       { path: "services/storyline-development", element: <StorylineDevelopment /> },
       { path: "about", element: <About /> },
