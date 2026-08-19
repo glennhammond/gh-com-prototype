@@ -19,7 +19,7 @@ import "./ServicePage.css";
  *
  * Sits under /services rather than in primary navigation, alongside Rise
  * design systems. Evidence here is the deeper of the two: CASA's reusable
- * Storyline production system, the Flight Examiner Rating programme, the
+ * Storyline production system, the Flight Examiner Rating program, the
  * sixty-plus ISQ courses redeveloped, and the self-directed interaction
  * prototypes. See content/services.js for the sourcing note.
  */
@@ -148,7 +148,7 @@ export default function StorylineDevelopment() {
           </ul>
           <p className="svc-evidence__more">
             Two of these belong to the same six-year engagement.{" "}
-            <Link to="/work/casa">See the full CASA programme</Link>
+            <Link to="/work/casa">See the full CASA program</Link>
           </p>
         </Section>
       )}

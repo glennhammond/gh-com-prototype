@@ -41,7 +41,7 @@ export const engagements = [
   },
   {
     id: "platform-programme",
-    name: "Platform & Programme Delivery",
+    name: "Platform & program Delivery",
     kind: "Full delivery",
     duration: "3–9 months",
     layers: ["experience", "content", "platform", "operations"],
@@ -49,7 +49,7 @@ export const engagements = [
     buyer:
       "An organisation replacing, migrating or building a learning environment and the content that lives in it.",
     trigger:
-      "An LMS contract ending, a merger, a failed implementation, or a new mandatory programme.",
+      "An LMS contract ending, a merger, a failed implementation, or a new mandatory program.",
     includes: [
       "Strategy and learning architecture",
       "Platform build or migration",

@@ -54,14 +54,14 @@ export const about = {
       role: "eLearning Specialist",
       org: "Civil Aviation Safety Authority",
       detail:
-        "Regulated aviation learning including the Flight Examiner Rating programme, and a reusable learning-production system for the regulator: style manual, authoring templates, asset libraries and team processes.",
+        "Regulated aviation learning including the Flight Examiner Rating program, and a reusable learning-production system for the regulator: style manual, authoring templates, asset libraries and team processes.",
     },
     {
       period: "2014 – 2015",
       role: "Online Learning Coordinator",
       org: "Goodstart Institute of Early Learning",
       detail:
-        "Developed the MyPortal learning management system for 640 centres nationally and produced accredited Certificate III and Diploma programmes in early childhood education and care.",
+        "Developed the MyPortal learning management system for 640 centres nationally and produced accredited Certificate III and Diploma programs in early childhood education and care.",
     },
     {
       period: "Earlier",

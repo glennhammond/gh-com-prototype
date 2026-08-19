@@ -27,13 +27,13 @@ import {
 import "./CaseStudy.css";
 
 /**
- * Case study and programme template — V3.
+ * Case study and program template — V3.
  *
- * One template, driven by which fields a record actually has. A programme
- * overview and a subproject page are the same component: the programme simply
+ * One template, driven by which fields a record actually has. A program
+ * overview and a subproject page are the same component: the program simply
  * has a map and children where a project has constraints and a decision log.
  *
- * Resolution is by pathname rather than by a route param, because programme
+ * Resolution is by pathname rather than by a route param, because program
  * children live one level deeper (/work/casa/class) and keying on the full
  * path keeps a single source of truth in content/projects.js.
  *
@@ -41,11 +41,11 @@ import "./CaseStudy.css";
  * rather than rendered empty. v3.1 changes the SEQUENCING and the surfaces,
  * not the content or the information architecture:
  *
- *   shortened ink introduction → pale metadata strip → programme rail →
+ *   shortened ink introduction → pale metadata strip → program rail →
  *   primary evidence on paper → in 60 seconds on raised paper →
  *   evidence note → situation → what was wrong → constraints → role →
  *   [system architecture] → [selected components] → evidence figures →
- *   key decisions → one ink argument band → subprojects / programme map →
+ *   key decisions → one ink argument band → subprojects / program map →
  *   [governance] → outcomes → reflection → testimonial →
  *   previous/next → related → contact on raised paper
  *
@@ -347,7 +347,7 @@ export default function CaseStudy() {
         </section>
       )}
 
-      {/* --- Programme children --------------------------------------------- */}
+      {/* --- program children --------------------------------------------- */}
       {isProgramme && (
         <>
           <ProgrammeMap programme={project} />

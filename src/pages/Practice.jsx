@@ -30,7 +30,7 @@ export default function Practice() {
     <>
       <Seo
         title="Services | Glenn Hammond"
-        description="Four layers, four defined engagements. Learning system reviews, platform and programme delivery, production and design systems, and embedded specialist work."
+        description="Four layers, four defined engagements. Learning system reviews, platform and program delivery, production and design systems, and embedded specialist work."
         path="/services"
         jsonLd={graph(
           personSchema,
@@ -47,7 +47,7 @@ export default function Practice() {
           level={1}
           eyebrow="Practice"
           headline="Four layers, one owner."
-          standfirst="I work across all four layers of a learning programme rather than taking one and handing the rest on. That is not a claim to be better at each discipline than a specialist in it — it is a claim that the decisions between them need a single owner. Two of those layers have their own specialist practice: Rise design systems and premium development, and advanced Storyline development."
+          standfirst="I work across all four layers of a learning program rather than taking one and handing the rest on. That is not a claim to be better at each discipline than a specialist in it — it is a claim that the decisions between them need a single owner. Two of those layers have their own specialist practice: Rise design systems and premium development, and advanced Storyline development."
         />
         <LayerTabs />
       </div>
@@ -98,7 +98,7 @@ export default function Practice() {
             </h3>
             <p>
               <strong>Rise</strong> is responsive and content-led: efficient
-              to develop and maintain, suited to scalable programmes and
+              to develop and maintain, suited to scalable programs and
               course suites, and strongest for structured, content-rich
               learning enhanced through reusable systems and custom
               components.

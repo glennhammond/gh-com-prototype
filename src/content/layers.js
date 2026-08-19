@@ -44,12 +44,12 @@ export const layers = [
     /** Bespoke mark from the icon set. Colour is never the only signal:
      *  the icon, the numeral and the name always travel with the swatch. */
     icon: "layer-content",
-    what: "The programmes, scenarios, assessment and media. The substance people are there for.",
+    what: "The programs, scenarios, assessment and media. The substance people are there for.",
     fails: "Accurate and unusable, or engaging and wrong. Rarely both right.",
     brings:
       "Learning design, scenario and assessment craft, subject-matter expert collaboration, video and instructional media.",
     capabilities: [
-      "Learning and programme design",
+      "Learning and program design",
       "Scenario and assessment design",
       "Technical content translation",
       "Video and instructional media",

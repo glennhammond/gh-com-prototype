@@ -1202,8 +1202,8 @@ const isqDesignSystem = {
   card: {
     kicker: "Design system · Independent Schools Queensland",
     /* No approved screenshot exists yet. The system's own architecture is
-       shown instead of a hatched gap plate, the same device the homepage
-       FeaturedSystem section already uses for the same reason (v3.3). */
+       shown instead of a hatched gap plate — the same device the homepage
+       Selected work sequence uses for this project (v3.4). */
     map: ["Foundations", "Learning patterns", "Components", "Platform implementation", "Governance"],
     headline: "Turning course-level solutions into a shared organisational system",
     summary:
@@ -2321,8 +2321,15 @@ export const workIndex = {
   lab: [prototypes],
 };
 
-/** Home shows three. Order is deliberate: live product, program, award. */
-export const featured = [wellbeingStudio, casaProgramme, connectAndLearn];
+/** Home's "Selected work" sequence (v3.5 — placeholder phase). Three
+ *  individually art-directed entries, not a card grid — see
+ *  SelectedWork.jsx. Order and visual weight now follow strategic
+ *  importance, not which record happened to have the richest imagery:
+ *  Wellbeing Studio leads as the primary flagship, ISQ Connect & Learn is
+ *  second, CASA Flight Examiner Rating is third. All three placement
+ *  images are placehold.co placeholders for this phase — see the asset
+ *  recommendations at the top of SelectedWork.jsx. */
+export const featured = [wellbeingStudio, connectAndLearn, casaFer];
 
 /** Previous/next within the whole portfolio, program children included. */
 const readingOrder = projects.map((p) => p.path);

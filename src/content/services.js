@@ -13,7 +13,7 @@ import { STATUS, SOURCE } from "./status.js";
  *
  * Evidence is asymmetric and the copy says so rather than smoothing it over.
  * Storyline has six years of dated, attributable work (CASA's reusable
- * production system, the Flight Examiner Rating programme, sixty-plus ISQ
+ * production system, the Flight Examiner Rating program, sixty-plus ISQ
  * courses redeveloped). Rise has one system: the ISQ eLearning Design
  * System. Both pages point at real, verifiable evidence and nothing else —
  * see `content/projects.js` for the underlying project records and
@@ -191,7 +191,7 @@ export const storylineDevelopment = {
   experience: {
     eyebrow: "Experience across the Articulate ecosystem",
     body: [
-      "Six years inside the Civil Aviation Safety Authority (2015–2021) built and maintained a reusable Storyline production system for the regulator's design team — a style manual, authoring templates, specified components with documented states, and an icon and step-marker library used across the Flight Examiner Rating programme and the wider CASA learning catalogue.",
+      "Six years inside the Civil Aviation Safety Authority (2015–2021) built and maintained a reusable Storyline production system for the regulator's design team — a style manual, authoring templates, specified components with documented states, and an icon and step-marker library used across the Flight Examiner Rating program and the wider CASA learning catalogue.",
       "That production-system discipline carried forward: more than sixty Storyline courses were redeveloped to a single architecture at Independent Schools Queensland, run alongside a platform migration inside a single term. Recognised as an Articulate eLearning Hero. [Confirm earliest Articulate tools used and approximate dates, for a fuller account of the ecosystem history.]",
     ],
   },

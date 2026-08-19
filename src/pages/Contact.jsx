@@ -17,7 +17,7 @@ export default function Contact() {
     <>
       <Seo
         title="Start a conversation | Glenn Hammond"
-        description="Tell me what is happening with your learning platform, programme or production system. Brisbane, working with organisations across Australia."
+        description="Tell me what is happening with your learning platform, program or production system. Brisbane, working with organisations across Australia."
         path="/contact"
         jsonLd={graph(
           personSchema,

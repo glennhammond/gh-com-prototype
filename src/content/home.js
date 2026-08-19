@@ -1,41 +1,24 @@
 import { STATUS, SOURCE } from "./status.js";
 
 /**
- * v3.2 adds `featuredSystem`, a dedicated homepage section for the ISQ
- * eLearning Design System, positioned between the proof strip and
- * "Selected work".
- *
- * It is deliberately not a fourth project card. The design system is the
- * clearest single piece of evidence for the four-layer proposition the site
- * presents. See DECISIONS.md §18.
- */
-
-/**
- * Homepage copy, V2 sequence.
+ * Homepage copy, V3 sequence.
  *
  * V1 ran:
  * claim → framework → flagship → evidence → belief → capability → close.
+ * V2 added a standalone "featured system" band for the ISQ eLearning Design
+ * System ahead of the selected-work trio.
  *
- * A first-time visitor met Glenn's diagnostic model before seeing enough work
- * to care about it, and met his argument before meeting him.
+ * V3 removes that standalone band. The hero now carries its own evidence
+ * figure (Wellbeing Studio), and the ISQ Design System is folded into the
+ * "Selected work" sequence as part of the Connect & Learn entry rather than
+ * treated as a separate abstract system — they are the same story: a
+ * platform migration, and the shared framework it produced afterwards. See
+ * `src/components/SelectedWork.jsx`.
  *
- * V2 runs:
- * claim → proof strip → featured system → selected work → model →
- * specialist development → how to buy → Glenn → close.
- *
- * Proof arrives within the first two viewport heights. The four-layer model
- * appears once attention has been earned, and no primary action requires the
- * visitor to decode it.
- *
- * Two additional beats support that sequence:
- *
- * 1. A featured-system band for the ISQ eLearning Design System immediately
- *    ahead of the selected-work trio.
- * 2. A compact Rise and Storyline specialist-development band directly after
- *    the four-layer model.
- *
- * This makes both specialist services visible before a visitor reaches the
- * detailed Services page without displacing the top-of-page positioning.
+ * V3 runs:
+ * claim (with its own evidence) → proof strip → selected work (three
+ * projects, individually art-directed) → model → specialist development →
+ * how to buy → Glenn → close.
  *
  * All copy is PROPOSED, awaiting approval.
  */
@@ -49,14 +32,25 @@ export const home = {
     eyebrow: "Learning systems · Brisbane, working Australia-wide",
     headline: "The course is the easy part.",
     standfirst:
-      "A course is one layer of four. The platform it runs on, the content around it and the production system that keeps it current are the other three — and they are where learning programmes actually come apart. I design all four, and I own the joins.",
+      "A course is one layer of four. The platform it runs on, the content around it and the production system that keeps it current are the other three — and they are where learning programs actually come apart. I design all four, and I own the joins.",
     primaryCta: {
-      href: "/work/isq-elearning-design-system",
-      label: "View the ISQ design-system case study",
+      href: "/work/wellbeing-studio",
+      label: "View the Wellbeing Studio case study",
     },
     secondaryCta: {
       href: "/work",
-      label: "All four projects",
+      label: "See all projects",
+    },
+    figure: {
+      placeholder: {
+        width: 1600,
+        height: 1000,
+        label: "WELLBEING STUDIO — 2027 PRODUCT VIEW",
+      },
+      alt: "Placeholder for the 2027 Wellbeing Studio product interface, the redeveloped member experience this hero anticipates.",
+      area: "Wellbeing Studio — 2027 product",
+      caption:
+        "A workplace wellbeing platform built for Corporate Yoga Australia: product strategy, interface design, the Moodle architecture underneath it, and the weekly publishing workflow that keeps it running. The current interface is being redeveloped for 2027, so this position anticipates the new product rather than showing the live one.",
     },
   },
 
@@ -85,47 +79,18 @@ export const home = {
       "Independent Schools Queensland · Civil Aviation Safety Authority · Goodstart Early Learning · Corporate Yoga Australia",
   },
 
-  /* 03 — the ISQ eLearning Design System, featured in its own right. */
-  featuredSystem: {
-    eyebrow: "Featured system",
-    title: "ISQ eLearning Design System",
-    statement:
-      "A shared framework connecting learning design, visual language, reusable components, accessibility and technical delivery across ISQ's digital learning ecosystem.",
-    evidence: [
-      "A growing catalogue of core and approved components",
-      "Cross-platform foundations, shared across Rise and Moodle",
-      "Documented learning patterns and implementation guidance",
-      "Operational governance and versioning",
-    ],
-    capabilities: [
-      "Learning design",
-      "Design systems",
-      "UX and interface design",
-      "Front-end development",
-      "Accessibility",
-      "Governance",
-    ],
-    primaryCta: {
-      href: "/work/isq-elearning-design-system",
-      label: "View case study",
-    },
-    secondaryCta: {
-      href: "https://isq-elearning-design-system.vercel.app/",
-      label: "Explore live system",
-    },
-    status: STATUS.PROPOSED,
-    source: SOURCE.ISQ_DS_BRIEF,
-  },
-
-  /* 04 — selected work */
+  /* 03 — selected work. Three projects, individually art-directed — see
+     SelectedWork.jsx. Wellbeing Studio leads as the primary flagship, ISQ
+     is second, CASA is third — hierarchy by strategic weight, not by which
+     record has the richest imagery. */
   work: {
     eyebrow: "Selected work",
-    headline: "Three more projects, three different kinds of proof.",
+    headline: "Three flagship projects, three different kinds of proof.",
     standfirst:
-      "A platform built from nothing, a regulator's training programme, and a migration that had to happen while sixty courses were being rebuilt.",
+      "A wellbeing business turned into a product, a platform migration run against a fixed deadline, and a national examiner program built inside a regulator.",
   },
 
-  /* 05 — the model, after proof has earned it */
+  /* 04 — the model, after proof has earned it */
   framework: {
     eyebrow: "How I read a problem",
     headline: "Four layers. Most organisations buy them separately.",
@@ -133,7 +98,7 @@ export const home = {
       "This is the diagnostic I use, not a test you have to pass. It matters because the work is rarely lost inside a layer — it is lost between them, in the handover nobody scoped.",
   },
 
-  /* 06 — Rise and Storyline, after the model has been introduced */
+  /* 05 — Rise and Storyline, after the model has been introduced */
   specialistDevelopment: {
     eyebrow: "How it gets built",
     headline: "Specialist digital learning development",
@@ -159,7 +124,7 @@ export const home = {
     },
   },
 
-  /* 07 — how to buy */
+  /* 06 — how to buy */
   buy: {
     eyebrow: "Where most work starts",
     headline: "A Learning System Review.",
@@ -173,7 +138,7 @@ export const home = {
     },
   },
 
-  /* 08 — Glenn */
+  /* 07 — Glenn */
   person: {
     eyebrow: "Who you would be working with",
     headline: "One person, accountable for the joins.",
@@ -187,7 +152,7 @@ export const home = {
     },
   },
 
-  /* 09 — close */
+  /* 08 — close */
   close: {
     headline: "Tell me what is happening.",
     body:
@@ -201,6 +166,6 @@ export const home = {
   seo: {
     title: "Glenn Hammond — Learning systems design",
     description:
-      "I design all four layers of a learning programme: the experience, the content, the platform and the production system that keeps it running. Fifteen years across aviation, education, government and workplace wellbeing.",
+      "I design all four layers of a learning program: the experience, the content, the platform and the production system that keeps it running. Fifteen years across aviation, education, government and workplace wellbeing.",
   },
 };

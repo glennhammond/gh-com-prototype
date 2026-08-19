@@ -15,13 +15,28 @@
   padding-block: clamp(44px, 6.5vw, 96px) clamp(40px, 5.5vw, 80px);
 }
 
+/* Asymmetric, not a centred column: the claim leads on the left, the
+   evidence sits on the right, unequal widths and both top-aligned so the
+   composition reads as one deliberate spread rather than a centred split
+   template. */
+.hero__inner {
+  display: grid;
+  gap: var(--space-7);
+}
+
+@media (min-width: 860px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
 .hero__eyebrow {
   color: var(--brass-light);
 }
 
-/* 74px, not 99px. The homepage keeps the largest display step because it has
-   no primary image to hold it against, but it is still a display step, not
-   a billboard. */
+/* 74px, not 99px. Column width now does most of the wrapping work, so the
+   headline only needs a loose outer cap rather than a tight ch measure. */
 .hero__title {
   margin-top: var(--space-4);
   font-family: var(--font-display);
@@ -29,7 +44,7 @@
   font-size: var(--size-display-xl);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
-  max-width: 14ch;
+  max-width: 18ch;
 }
 
 .hero__standfirst {
@@ -43,8 +58,72 @@
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  align-items: center;
+  gap: var(--space-5);
   margin-top: var(--space-6);
+}
+
+/* The quiet second action: one filled primary CTA, one text-weight link,
+   never two competing buttons. */
+.hero__secondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.hero__secondary:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+/* --- Hero visual: the evidence figure, not a decorative image -----------
+   Placeholder phase: a placehold.co plate stands in for the 2027 Wellbeing
+   Studio product view. No frame, no mock chrome — the composition has to
+   read as strong with a neutral grey box as it will with the real asset. */
+
+.hero__visual {
+  min-width: 0;
+}
+
+.hero__figure {
+  margin: 0;
+  max-width: none;
+}
+
+@media (max-width: 859px) {
+  .hero__figure {
+    max-width: 560px;
+  }
+}
+
+.hero__figure-label {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-light);
+}
+
+.hero__figure-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero__figure-cap {
+  margin-top: var(--space-4);
+  font-size: var(--size-caption);
+  line-height: 1.55;
+  color: var(--on-ink-dim);
+  max-width: 44ch;
 }
 
 /* ==== 02 Proof strip: ruled index on raised paper ======================== */
@@ -108,55 +187,9 @@
   line-height: 1.8;
 }
 
-/* ==== 03 Selected work: lead card plus supporting grid, on paper ========= */
-
-.home-work__head {
-  max-width: 60ch;
-  margin-bottom: var(--space-7);
-}
-
-.home-work__head .display-l {
-  margin-top: var(--space-3);
-  max-width: 20ch;
-}
-
-.home-work__head .lede {
-  margin-top: var(--space-4);
-}
-
-.home-work__grid {
-  display: grid;
-  gap: var(--space-7) var(--space-6);
-  list-style: none;
-  margin: var(--space-7) 0 0;
-  padding: var(--space-7) 0 0;
-  border-top: 1px solid var(--rule);
-}
-
-@media (min-width: 760px) {
-  .home-work__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.home-work__all {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-top: var(--space-5);
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--text);
-  text-decoration: none;
-  border-bottom: 2px solid var(--brass);
-}
-
-.home-work__all:hover {
-  color: var(--mineral-ink);
-  border-bottom-color: var(--mineral-ink);
-}
+/* Selected work has its own component and stylesheet — see
+   SelectedWork.jsx / SelectedWork.css. It is one editorial sequence, not a
+   card grid, so it did not belong in this page-level stylesheet. */
 
 /* ==== 04 The four-layer model, on paper ================================== */
 
@@ -385,77 +418,6 @@
   margin-top: var(--space-3);
   font-size: var(--size-small);
   color: var(--on-ink-dim);
-}
-
-/* ==== 03a Featured system: ISQ, ahead of the selected-work trio =========== */
-
-.home-system {
-  background: var(--paper-raised);
-  border-block: 1px solid var(--rule-strong);
-}
-
-.home-system__inner {
-  max-width: var(--measure-lede);
-}
-
-.home-system__body {
-  margin-top: var(--space-4);
-}
-
-.home-system__points {
-  list-style: none;
-  margin: var(--space-5) 0 0;
-  padding: 0;
-  display: grid;
-  gap: var(--space-2);
-}
-
-.home-system__points li {
-  position: relative;
-  padding-left: var(--space-5);
-  font-size: var(--size-small);
-  color: var(--text-secondary);
-}
-
-.home-system__points li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.7em;
-  width: 12px;
-  height: 1px;
-  background: var(--brass);
-}
-
-.home-system__areas {
-  margin-top: var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: 0.08em;
-  color: var(--text-tertiary, var(--text-secondary));
-}
-
-.home-system__actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: var(--space-5);
-}
-
-.home-system__external {
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--text);
-  text-decoration: none;
-  border-bottom: 2px solid var(--brass);
-}
-
-.home-system__external:hover {
-  color: var(--mineral-ink);
-  border-bottom-color: var(--mineral-ink);
 }
 
 /* ==== 04a Specialist development: Rise / Storyline, after the model ====== */

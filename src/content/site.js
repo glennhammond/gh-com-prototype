@@ -13,7 +13,7 @@ export const site = {
    *  The role title is retained on About and in structured data. */
   descriptor: "Learning systems",
   descriptorLong:
-    "Learning systems · platforms, programmes and the production behind them",
+    "Learning systems · platforms, programs and the production behind them",
   roleTitle: "Digital Learning & Experience Designer",
 
   location: {
