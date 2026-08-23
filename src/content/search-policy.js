@@ -1,14 +1,18 @@
 // @ts-check
 
+import { knowledgeResources } from './knowledge.js';
+
 /**
- * Search/indexability policy for THE RECORD.
+ * Search/indexability policy for THE RECORD and retained standalone knowledge.
  *
  * Route existence and search inclusion are deliberately separate concerns.
  * Every canonical Project, Record and Artefact must be represented here.
  * Artefacts are opt-in: omission is a validation error, not an implicit index.
+ * Retained knowledge is similarly explicit and remains outside a conventional
+ * blog/content cadence.
  */
 
-/** @typedef {'project'|'record'|'artefact'|'supporting'} DirectEntryType */
+/** @typedef {'project'|'record'|'artefact'|'knowledge'|'supporting'} DirectEntryType */
 /**
  * @typedef {Object} SearchPolicyEntry
  * @property {boolean} index
@@ -142,8 +146,19 @@ export const searchPolicy = {
   },
 };
 
+/** @type {Record<string, SearchPolicyEntry>} */
+export const knowledgeSearchPolicy = {
+  'principles-assessment-rules-evidence': {
+    index: true,
+    sitemap: true,
+    canonical: '/principles-of-assessment-and-rules-of-evidence',
+    directEntry: 'knowledge',
+    reason: 'Externally cited historical URL with durable VET-assessment intent; rebuilt against the current 2025 Standards rather than retained as stale legacy content.',
+  },
+};
+
 const groups = ['projects', 'records', 'artefacts'];
-const validDirectEntry = new Set(['project', 'record', 'artefact', 'supporting']);
+const validDirectEntry = new Set(['project', 'record', 'artefact', 'knowledge', 'supporting']);
 
 const assert = (condition, message) => {
   if (!condition) throw new Error(`Search policy validation: ${message}`);
@@ -151,7 +166,7 @@ const assert = (condition, message) => {
 
 /**
  * Validates the search policy against THE RECORD content without importing the
- * content estate into client metadata code.
+ * legacy content estate into client metadata code.
  * @param {{projects: Array<{id:string,path:string}>, records: Array<{id:string,path:string}>, artefacts: Array<{id:string,path:string}>}} content
  */
 export function validateSearchPolicy(content) {
@@ -178,7 +193,30 @@ export function validateSearchPolicy(content) {
     }
   }
 
+  validateKnowledgeSearchPolicy();
   return searchPolicy;
+}
+
+export function validateKnowledgeSearchPolicy() {
+  const ids = new Set(knowledgeResources.map((resource) => resource.id));
+  assert(Object.keys(knowledgeSearchPolicy).length === knowledgeResources.length, 'knowledge policy must cover every retained knowledge resource exactly once');
+
+  for (const resource of knowledgeResources) {
+    const policy = knowledgeSearchPolicy[resource.id];
+    assert(policy, `knowledge ${resource.id} has no search policy`);
+    assert(typeof policy.index === 'boolean', `knowledge ${resource.id}.index must be boolean`);
+    assert(typeof policy.sitemap === 'boolean', `knowledge ${resource.id}.sitemap must be boolean`);
+    assert(!policy.sitemap || policy.index, `knowledge ${resource.id} cannot be in sitemap while noindex`);
+    assert(policy.canonical === resource.path, `knowledge ${resource.id} canonical must equal ${resource.path}`);
+    assert(policy.directEntry === 'knowledge', `knowledge ${resource.id} must use directEntry=knowledge`);
+    assert(typeof policy.reason === 'string' && policy.reason.trim().length > 20, `knowledge ${resource.id} needs an editorial/search rationale`);
+  }
+
+  for (const id of Object.keys(knowledgeSearchPolicy)) {
+    assert(ids.has(id), `knowledge search policy contains unknown id ${id}`);
+  }
+
+  return knowledgeSearchPolicy;
 }
 
 /** @param {string} path */
@@ -191,6 +229,11 @@ export function evidenceSearchForPath(path) {
   return null;
 }
 
+/** @param {string} path */
+export function knowledgeSearchForPath(path) {
+  return Object.values(knowledgeSearchPolicy).find((policy) => policy.canonical === path) ?? null;
+}
+
 /**
  * Evidence routes not explicitly approved by this policy are migration-only
  * and therefore noindex. Legacy specialist service routes are also quarantined
@@ -198,8 +241,10 @@ export function evidenceSearchForPath(path) {
  * @param {string} path
  */
 export function shouldNoindexPath(path) {
-  const policy = evidenceSearchForPath(path);
-  if (policy) return !policy.index;
+  const evidencePolicy = evidenceSearchForPath(path);
+  if (evidencePolicy) return !evidencePolicy.index;
+  const knowledgePolicy = knowledgeSearchForPath(path);
+  if (knowledgePolicy) return !knowledgePolicy.index;
   if (path.startsWith('/work/')) return true;
   if (path.startsWith('/services/')) return true;
   return false;
@@ -215,4 +260,11 @@ export function getIndexableEvidencePaths(content) {
       .filter((item) => searchPolicy[group][item.id].sitemap)
       .map((item) => searchPolicy[group][item.id].canonical),
   );
+}
+
+export function getIndexableKnowledgePaths() {
+  validateKnowledgeSearchPolicy();
+  return knowledgeResources
+    .filter((resource) => knowledgeSearchPolicy[resource.id].sitemap)
+    .map((resource) => knowledgeSearchPolicy[resource.id].canonical);
 }
