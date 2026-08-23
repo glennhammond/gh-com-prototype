@@ -12,7 +12,7 @@
  */
 
 /**
- * @typedef {'rebuild'|'consolidate'|'retire'|'review'} LegacyAction
+ * @typedef {'preserve'|'rebuild'|'consolidate'|'retire'|'review'} LegacyAction
  * @typedef {Object} LegacyArticle
  * @property {string} wpId
  * @property {string} slug
@@ -286,6 +286,9 @@ export function validateInheritedRedirectPolicy() {
   if (inheritedArticleRedirects.length !== inheritedRedirectCapture.articleCount) {
     throw new Error(`Inherited redirects: expected ${inheritedRedirectCapture.articleCount} article mappings, found ${inheritedArticleRedirects.length}`);
   }
+  if (inheritedRedirectCapture.articleSourceForms !== inheritedRedirectCapture.articleCount * 2) {
+    throw new Error('Inherited redirects: articleSourceForms must represent permalink + ?p= source for every captured article');
+  }
 
   const ids = new Set();
   const slugs = new Set();
@@ -294,8 +297,15 @@ export function validateInheritedRedirectPolicy() {
     if (slugs.has(entry.slug)) throw new Error(`Inherited redirects: duplicate slug ${entry.slug}`);
     ids.add(entry.wpId);
     slugs.add(entry.slug);
-    if (entry.launchReady && ['review', 'rebuild', 'consolidate', 'retire'].includes(entry.action)) {
-      throw new Error(`Inherited redirects: ${entry.slug} cannot be launch-ready while ${entry.action} remains unresolved`);
+
+    if (entry.launchReady && entry.action !== 'preserve') {
+      throw new Error(`Inherited redirects: ${entry.slug} can only be launch-ready after it reaches preserve state`);
+    }
+    if (entry.action === 'preserve' && !entry.destination) {
+      throw new Error(`Inherited redirects: preserved article ${entry.slug} needs a final canonical destination`);
+    }
+    if (entry.launchReady && !entry.destination) {
+      throw new Error(`Inherited redirects: launch-ready article ${entry.slug} needs a destination`);
     }
   }
 
