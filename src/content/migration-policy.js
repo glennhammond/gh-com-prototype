@@ -53,42 +53,41 @@ export const liveSitemapMigration = [
     action: 'rebuild',
     launchReady: false,
     destination: '/blog/clean-design-elearning',
-    reason: 'Potentially evergreen design/UX knowledge; preserve the URL if the content still earns standalone value.',
+    reason: 'The current source is generic/draft-like but the underlying subject can support a stronger first-hand UX/learning-design note if Search Console evidence justifies preserving the URL.',
   },
   {
     path: '/blog/design-system',
-    action: 'rebuild',
+    action: 'consolidate',
     launchReady: false,
-    destination: '/blog/design-system',
-    reason: 'Supports a genuine production-systems authority territory but must be reconciled with first-hand ISQ/CASA evidence.',
+    reason: 'The current article is a draft and asserts integrations/outcomes too broadly. Its useful ideas belong with first-hand ISQ/CASA production-system evidence, not as a parallel generic authority claim.',
   },
   {
     path: '/blog/master-slides-in-storyline',
     action: 'rebuild',
     launchReady: false,
     destination: '/blog/master-slides-in-storyline',
-    reason: 'Known evergreen Storyline resource; preserve/rebuild at the existing URL unless first-party performance evidence overturns this.',
+    reason: 'Contains substantial first-hand Storyline experience and production-system thinking. Preserve/rebuild at the existing URL unless first-party performance evidence overturns this.',
   },
   {
     path: '/blog/scenario-writing-that-feels-real',
     action: 'rebuild',
     launchReady: false,
     destination: '/blog/scenario-writing-that-feels-real',
-    reason: 'Potential evergreen learning-design resource with professional relevance.',
+    reason: 'Potential evergreen learning-design resource with professional relevance; source/route relationship still requires recovery and quality review.',
   },
   {
     path: '/blog/storyline-tips-that-actually-help',
     action: 'rebuild',
     launchReady: false,
     destination: '/blog/storyline-tips-that-actually-help',
-    reason: 'Potential evergreen Storyline resource; needs quality/search review before cutover.',
+    reason: 'Potential evergreen Storyline resource; source/route relationship and current quality still require review before cutover.',
   },
   {
     path: '/blog/ux-for-learning',
     action: 'rebuild',
     launchReady: false,
     destination: '/blog/ux-for-learning',
-    reason: 'Strong strategic overlap with learning experience/product practice; preserve if content quality supports it.',
+    reason: 'Strategically aligned topic, but the current article is generic. Keep the URL only if rebuilt around first-hand product/learning evidence and first-party search evidence supports retention.',
   },
   {
     path: '/blog/welcome',
@@ -101,14 +100,14 @@ export const liveSitemapMigration = [
     action: 'rebuild',
     launchReady: false,
     destination: '/blog/xapi-basics',
-    reason: 'xAPI is an emerging authority territory; content requires technical currency review before retention.',
+    reason: 'xAPI is an emerging authority territory, but the current article is too simplified for the evidence/governance standard now used in the practice. Rebuild only after current Experience Intelligence evidence can support it.',
   },
   {
     path: '/blog/xapi-isnt-scary',
     action: 'consolidate',
     launchReady: false,
     destination: '/blog/xapi-basics',
-    reason: 'Likely overlap with xAPI basics, but semantic equivalence and external-link evidence must be checked before consolidation.',
+    reason: 'Substantially overlaps xAPI basics and makes broader learning-outcome claims than the evidence supports. Consolidate only after the surviving xAPI surface is rebuilt and external-link evidence is checked.',
   },
   {
     path: '/contact',
@@ -146,25 +145,66 @@ export const liveSitemapMigration = [
     reason: 'Wellbeing Studio is a plausible successor only if it genuinely encompasses the historical website-project intent.',
   },
 
-  // Current eLearning Design System child URLs. These were present in the live
-  // sitemap at capture time; broad redirection to Practice is explicitly
-  // prohibited until the ISQ/design-system evidence architecture is resolved.
-  ...[
-    'asset-register',
-    'atomic-design',
-    'colours',
-    'core-more-bore',
-    'course-structure',
-    'images-icons',
-    'overview',
-    'storyline',
-    'typography',
-  ].map((slug) => ({
-    path: `/work/elearning-design-system/${slug}`,
-    action: /** @type {const} */ ('review'),
+  // Current eLearning Design System child URLs. Source recovery shows these are
+  // one coherent system rather than nine independent authority pages. They are
+  // therefore consolidation candidates into a future evidenced ISQ Design
+  // System Project → Record → Artefact cluster. Exact destinations stay open
+  // until that cluster is canonical and the first-party search data is known.
+  {
+    path: '/work/elearning-design-system/overview',
+    action: 'consolidate',
     launchReady: false,
-    reason: 'Live design-system child URL requires individual content/search-equity review before any redirect or rebuild decision.',
-  })),
+    destination: '/work/isq-elearning-design-system',
+    reason: 'The overview is project-level material and should become the entry surface for the evidenced ISQ Design System rather than survive as a parallel mini-site overview.',
+  },
+  {
+    path: '/work/elearning-design-system/atomic-design',
+    action: 'consolidate',
+    launchReady: false,
+    reason: 'Useful system-architecture explanation, but better represented inside the canonical design-system architecture/evidence surface than as a separate indexed page.',
+  },
+  {
+    path: '/work/elearning-design-system/asset-register',
+    action: 'consolidate',
+    launchReady: false,
+    reason: 'Asset governance is meaningful evidence but belongs inside the design-system governance/implementation story rather than as an independent search landing page.',
+  },
+  {
+    path: '/work/elearning-design-system/colours',
+    action: 'consolidate',
+    launchReady: false,
+    reason: 'Visual-foundation material is too narrow to justify an independent indexed result; preserve its evidence inside a system-foundations artefact.',
+  },
+  {
+    path: '/work/elearning-design-system/core-more-bore',
+    action: 'rebuild',
+    launchReady: false,
+    reason: 'This is a distinct learning-design pattern rather than merely a visual-system child. Reassess as a retained knowledge note or pattern-level Record before deciding its final URL.',
+  },
+  {
+    path: '/work/elearning-design-system/course-structure',
+    action: 'consolidate',
+    launchReady: false,
+    reason: 'Reusable course-flow guidance belongs with documented learning patterns inside the canonical design-system evidence rather than as a standalone project child.',
+  },
+  {
+    path: '/work/elearning-design-system/images-icons',
+    action: 'consolidate',
+    launchReady: false,
+    reason: 'Imagery/icon guidance is a system foundation and should be retained as evidence within the canonical design-system cluster, not as an independent search result.',
+  },
+  {
+    path: '/work/elearning-design-system/storyline',
+    action: 'consolidate',
+    launchReady: false,
+    reason: 'The current page mixes useful template evidence with unverified xAPI claims. Preserve the verified Storyline implementation evidence inside the canonical system/production architecture.',
+  },
+  {
+    path: '/work/elearning-design-system/typography',
+    action: 'consolidate',
+    launchReady: false,
+    reason: 'Currently indexed historical foundation material; retain its evidence and authority but consolidate into a stronger foundations artefact rather than perpetuating thin child pages.',
+  },
 ];
 
 /**
