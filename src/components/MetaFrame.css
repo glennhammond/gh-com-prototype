@@ -7,17 +7,19 @@
 
 .meta-frame__resident {
   min-height: 64px;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  gap: 0 var(--space-4);
 }
 
 .meta-frame__identity {
+  grid-column: 1;
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
   min-height: 44px;
+  width: fit-content;
   text-decoration: none;
 }
 
@@ -38,7 +40,12 @@
   color: var(--text-tertiary);
 }
 
+/* Progressive enhancement: without JavaScript the navigation remains visible
+   and the inert disclosure control is absent. The inline .js flag in
+   index.html switches the small-screen navigation back to a disclosure. */
 .meta-frame__toggle {
+  display: none;
+  grid-column: 2;
   min-width: 44px;
   min-height: 44px;
   border: 0;
@@ -51,17 +58,32 @@
 }
 
 .meta-frame__nav {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+  position: static;
+  padding: var(--space-3) 0 var(--space-4);
+  border-top: 1px solid var(--rule-soft);
+}
+
+.js .meta-frame__toggle {
+  display: block;
+}
+
+.js .meta-frame__nav {
   display: none;
   position: absolute;
   inset: 64px 0 auto;
+  width: auto;
   background: var(--paper-raised);
+  border-top: 0;
   border-bottom: 1px solid var(--rule);
   padding: var(--space-4) var(--gutter) var(--space-5);
 }
 
-.meta-frame__nav.is-open {
+.js .meta-frame__nav.is-open {
   display: grid;
-  gap: var(--space-2);
 }
 
 .meta-frame__nav-link,
@@ -133,15 +155,22 @@
 @media (min-width: 760px) {
   .meta-frame__resident {
     min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
   }
 
-  .meta-frame__toggle {
+  .meta-frame__toggle,
+  .js .meta-frame__toggle {
     display: none;
   }
 
-  .meta-frame__nav {
+  .meta-frame__nav,
+  .js .meta-frame__nav {
     display: flex;
     position: static;
+    width: auto;
     align-items: center;
     gap: var(--space-5);
     padding: 0;

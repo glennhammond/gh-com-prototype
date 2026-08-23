@@ -6,6 +6,7 @@ import '../styles/global.css';
 import './Layout.css';
 
 const scrollPositions = new Map();
+const focusTargets = new Map();
 
 function RouteEffects() {
   const location = useLocation();
@@ -25,6 +26,33 @@ function RouteEffects() {
   }, [location.key]);
 
   useEffect(() => {
+    const key = location.key;
+
+    const rememberTarget = (target) => {
+      const control = target instanceof Element
+        ? target.closest('a, button, input, select, textarea, [tabindex]')
+        : null;
+
+      if (control instanceof HTMLElement && control.id && control.id !== 'main') {
+        focusTargets.set(key, control.id);
+      } else if (control) {
+        focusTargets.delete(key);
+      }
+    };
+
+    const onFocusIn = (event) => rememberTarget(event.target);
+    const onPointerDown = (event) => rememberTarget(event.target);
+
+    document.addEventListener('focusin', onFocusIn);
+    document.addEventListener('pointerdown', onPointerDown);
+
+    return () => {
+      document.removeEventListener('focusin', onFocusIn);
+      document.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [location.key]);
+
+  useEffect(() => {
     const restoreId = location.state?.restoreFocusId;
     const hashId = location.hash ? decodeURIComponent(location.hash.slice(1)) : null;
 
@@ -34,11 +62,21 @@ function RouteEffects() {
     outerFrame = window.requestAnimationFrame(() => {
       innerFrame = window.requestAnimationFrame(() => {
         if (navigationType === 'POP') {
+          let restoredHistoryState = false;
           const position = scrollPositions.get(location.key);
           if (position) {
             window.scrollTo({ left: position.x, top: position.y, behavior: 'auto' });
-            return;
+            restoredHistoryState = true;
           }
+
+          const focusId = focusTargets.get(location.key);
+          const focusTarget = focusId ? document.getElementById(focusId) : null;
+          if (focusTarget) {
+            focusTarget.focus({ preventScroll: true });
+            restoredHistoryState = true;
+          }
+
+          if (restoredHistoryState) return;
         }
 
         if (restoreId) {

@@ -11,9 +11,9 @@
 .record-opening__title {
   margin-top: var(--space-4);
   max-width: 15ch;
-  font-size: clamp(2.7rem, 7vw, 6.8rem);
-  line-height: 0.97;
-  letter-spacing: -0.045em;
+  font-size: var(--size-display-xl);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
 }
 
 .record-opening__lede {
@@ -182,9 +182,9 @@
 .record-exam-opening h1 {
   margin-top: var(--space-4);
   max-width: 17ch;
-  font-size: clamp(2.5rem, 6vw, 5.8rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.5rem, 5.2vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .record-exam-opening__summary {
@@ -320,9 +320,9 @@
 
 .artefact-inspection h1 {
   max-width: 16ch;
-  font-size: clamp(2.5rem, 6vw, 5.6rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .artefact-inspection__summary {
