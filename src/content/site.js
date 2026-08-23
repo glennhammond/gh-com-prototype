@@ -5,7 +5,7 @@ export const site = {
   name: 'Glenn Hammond',
   descriptor: 'Digital design and learning practice',
   descriptorLong: 'Digital design and learning practice · Brisbane, working Australia-wide',
-  roleTitle: 'Digital Learning & Experience Designer',
+  roleTitle: 'Digital Product, Experience & Learning Designer',
   location: {
     locality: 'Brisbane',
     region: 'QLD',
@@ -35,6 +35,7 @@ export const nav = [
 export const navCta = { href: '/contact', label: 'Contact' };
 export const footerLinks = [
   ...nav,
+  { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
   { href: '/privacy', label: 'Privacy' },
 ];
