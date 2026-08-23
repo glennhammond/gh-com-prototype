@@ -1,13 +1,36 @@
 import { Link } from 'react-router-dom';
-import PlaceholderShot from './PlaceholderShot.jsx';
+import { recordIndex } from '../content/the-record.js';
 import './SelectedWork.css';
+
+function EvidenceIndex({ project }) {
+  const records = project.recordIds.map((id) => recordIndex.recordById[id]);
+  const artefactCount = records.reduce((total, record) => total + record.artefactIds.length, 0);
+
+  return (
+    <div className="selwork__index" aria-label={`${project.title} evidence currently open`}>
+      <div className="selwork__index-head">
+        <span>{records.length} {records.length === 1 ? 'Record' : 'Records'}</span>
+        <span>{artefactCount} {artefactCount === 1 ? 'Artefact' : 'Artefacts'}</span>
+      </div>
+      <ol>
+        {records.map((record, index) => (
+          <li key={record.id}>
+            <span>{String(index + 1).padStart(2, '0')} · {record.centre}</span>
+            <Link to={record.path}>{record.title}</Link>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
 
 /**
  * Home evidence sequence sourced from THE RECORD.
  *
- * The four territories are deliberately not given equal visual weight:
- * Wellbeing is the active lead, ISQ carries strong systems proof, CASA provides
- * deep regulated-practice evidence, and TAFE establishes historical depth.
+ * Home previews territory and evidence density. Work remains the full composed
+ * field. The territories are deliberately unequal: Wellbeing is the active
+ * reference, ISQ carries systems evidence, CASA demonstrates regulated-practice
+ * depth, and TAFE is explicitly historical.
  */
 export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
   return (
@@ -21,23 +44,7 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
 
         <div className="selwork__list">
           <article className="selwork__item selwork__item--lead" aria-labelledby="selwork-wellbeing-title">
-            <div className="selwork__visual">
-              <PlaceholderShot
-                className="selwork__figure selwork__figure--main"
-                width={1600}
-                height={1000}
-                label="WELLBEING STUDIO — 2027 PRODUCT VIEW"
-                alt="Placeholder for the 2027 Wellbeing Studio product interface."
-                eager
-              />
-              <PlaceholderShot
-                className="selwork__figure selwork__figure--detail"
-                width={1200}
-                height={1200}
-                label="WELLBEING STUDIO — CONTEXTUAL ENTRY"
-                alt="Placeholder for a Wellbeing Studio contextual-entry detail."
-              />
-            </div>
+            <EvidenceIndex project={wellbeing} />
             <div className="selwork__copy">
               <p className="selwork__kicker">{wellbeing.organisation} · {wellbeing.period}</p>
               <h3 id="selwork-wellbeing-title" className="selwork__title">
@@ -45,23 +52,15 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
               </h3>
               <p className="selwork__body">
                 The 2027 redesign starts with situations in the working day rather
-                than a library taxonomy. Entry, live experiences and continuity are
-                being treated as one product problem.
+                than a library taxonomy. Entry, live experiences, continuity and
+                production proof are being treated as one connected product problem.
               </p>
               <Link className="selwork__link" to={wellbeing.path}>Enter the Wellbeing Studio Project</Link>
             </div>
           </article>
 
           <article className="selwork__item selwork__item--secondary" aria-labelledby="selwork-isq-title">
-            <div className="selwork__visual">
-              <PlaceholderShot
-                className="selwork__figure selwork__figure--main"
-                width={1600}
-                height={900}
-                label="ISQ — PLATFORM OVERVIEW"
-                alt="Placeholder for an ISQ Connect & Learn platform overview screen."
-              />
-            </div>
+            <EvidenceIndex project={isq} />
             <div className="selwork__copy">
               <p className="selwork__kicker">{isq.organisation} · {isq.period}</p>
               <h3 id="selwork-isq-title" className="selwork__title">
@@ -69,35 +68,20 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
               </h3>
               <p className="selwork__body">
                 Connect & Learn moved platforms while more than sixty Storyline
-                courses were rebuilt in parallel. The work later informed a reusable
-                eLearning design system for the organisation.
+                courses were rebuilt in parallel. The evidence focuses on why platform,
+                learning architecture, content estate and operations could not be serial hand-offs.
               </p>
-              <div className="selwork__evidence">
-                <dl className="selwork__stats">
-                  <div><dt>3<span>months</span></dt><dd>Engagement</dd></div>
-                  <div><dt>60+<span>courses</span></dt><dd>Rebuilt in parallel</dd></div>
-                  <div><dt>2×</dt><dd>Diamond Awards, LearnX 2024</dd></div>
-                </dl>
-                <ol className="selwork__map" aria-label="What the engagement connected">
-                  <li>Platform</li><li>Course estate</li><li>Production</li><li>Design system</li><li>Governance</li>
-                </ol>
-              </div>
-              <div className="selwork__actions">
-                <Link className="selwork__link" to={isq.path}>Enter the Connect &amp; Learn Project</Link>
-              </div>
+              <dl className="selwork__stats">
+                <div><dt>3<span>months</span></dt><dd>Engagement</dd></div>
+                <div><dt>60+<span>courses</span></dt><dd>Rebuilt in parallel</dd></div>
+                <div><dt>2×</dt><dd>Diamond Awards, LearnX 2024</dd></div>
+              </dl>
+              <Link className="selwork__link" to={isq.path}>Enter the Connect &amp; Learn Project</Link>
             </div>
           </article>
 
           <article className="selwork__item selwork__item--contained" aria-labelledby="selwork-casa-title">
-            <div className="selwork__visual">
-              <PlaceholderShot
-                className="selwork__figure selwork__figure--main"
-                width={1200}
-                height={900}
-                label="CASA — SCENARIO INTERACTION"
-                alt="Placeholder for a CASA Flight Examiner Rating scenario-interaction screen."
-              />
-            </div>
+            <EvidenceIndex project={casa} />
             <div className="selwork__copy">
               <p className="selwork__kicker">{casa.organisation} · {casa.period}</p>
               <p className="selwork__tag">Flight Examiner Rating</p>
@@ -105,9 +89,9 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
                 Learning for people whose job is assessing other people.
               </h3>
               <p className="selwork__body">
-                The Flight Examiner Rating work is evidence of learning designed
-                around professional judgement, supported by interaction, field media
-                and a wider operating context inside the regulator.
+                The Flight Examiner Rating work shows learning designed around
+                professional judgement, regulatory structure and assessment reasoning,
+                with recovered course evidence available for inspection.
               </p>
               <Link className="selwork__link" to={casa.path}>Enter the Flight Examiner Rating Project</Link>
             </div>
@@ -123,10 +107,10 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
               </h3>
               <p className="selwork__body">
                 Pathways used Storyline as a non-linear shared exploration environment
-                for Years 8–9 school sessions. Its value in THE RECORD is historical:
-                the original interface remains visible while the later evidence corrects
-                an older portfolio description that treated the experience as self-directed.
+                for Years 8–9 school sessions. Its original interface remains historical
+                evidence while the contemporary Record corrects the earlier portfolio interpretation.
               </p>
+              <EvidenceIndex project={tafe} />
               <Link className="selwork__link" to={tafe.path}>Enter the SkillsTech Pathways Project</Link>
             </div>
           </article>
