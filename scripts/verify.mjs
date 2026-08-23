@@ -153,7 +153,14 @@ const REQUIRED = {
   "work/isq-differentiated-learning.html": ["Years 7 to 10"],
   "work/goodstart-myportal.html": ["640 centres"],
   "work/interaction-prototypes.html": ["SCORM 2004"],
-  "practice.html": ["Four layers, one owner", "Learning System Review"],
+  "practice.html": [
+    "The work changes. Certain decisions keep recurring.",
+    "Start with the situation, not the inherited structure.",
+    "Keep connected decisions connected.",
+    "Solve at the altitude the problem requires.",
+    "Frame. Shape. Make. Evidence.",
+    "The public Record is selective",
+  ],
   "about.html": ["Where I have done it"],
   "contact.html": ["Tell me what is happening", "What does the problem seem closest to"],
   "privacy.html": ["must not go live"],
@@ -169,6 +176,21 @@ for (const [file, needles] of Object.entries(REQUIRED)) {
     if (!source.includes(needle)) {
       fail(`"${needle}" not present in pre-rendered ${file}`);
     }
+  }
+}
+
+/* Practice Architecture v1 regression gate. These are legacy organising
+   markers, not merely old phrases: if they return, the route has slipped back
+   into capability/commercial architecture. */
+const PRACTICE_LEGACY_MARKERS = [
+  "Four layers, one owner",
+  "Four engagements",
+  "The right tool for the learning problem",
+];
+const practiceSource = html["practice.html"] ?? "";
+for (const marker of PRACTICE_LEGACY_MARKERS) {
+  if (practiceSource.includes(marker)) {
+    fail(`Legacy Practice architecture marker returned: "${marker}"`);
   }
 }
 
