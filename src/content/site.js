@@ -36,4 +36,5 @@ export const navCta = { href: '/contact', label: 'Contact' };
 export const footerLinks = [
   ...nav,
   { href: '/contact', label: 'Contact' },
+  { href: '/privacy', label: 'Privacy' },
 ];
