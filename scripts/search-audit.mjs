@@ -12,11 +12,13 @@ import {
   statSync,
 } from 'node:fs';
 import { extname, join, relative, sep } from 'node:path';
+import { knowledgeResources } from '../src/content/knowledge.js';
 import { recordContent } from '../src/content/the-record.js';
 import {
   evidenceSearchForPath,
   getIndexableEvidencePaths,
   getIndexableKnowledgePaths,
+  knowledgeSearchPolicy,
   searchPolicy,
   validateSearchPolicy,
 } from '../src/content/search-policy.js';
@@ -92,6 +94,28 @@ if (!existsSync(DIST)) {
 
 validateSearchPolicy(recordContent);
 
+// The client-safe search policy contains only metadata. Here, on the build
+// side, prove that retained knowledge body content and policy still cover one
+// another exactly so neither can drift silently.
+const knowledgeIds = new Set(knowledgeResources.map((resource) => resource.id));
+const knowledgePolicyIds = new Set(Object.keys(knowledgeSearchPolicy));
+if (knowledgeIds.size !== knowledgePolicyIds.size) {
+  fail(`retained knowledge policy/content count mismatch: ${knowledgePolicyIds.size} policy entries for ${knowledgeIds.size} resources`);
+}
+for (const resource of knowledgeResources) {
+  const policy = knowledgeSearchPolicy[resource.id];
+  if (!policy) {
+    fail(`retained knowledge ${resource.id} has no search policy`);
+    continue;
+  }
+  if (policy.canonical !== resource.path) {
+    fail(`retained knowledge ${resource.id} canonical ${policy.canonical} does not match content path ${resource.path}`);
+  }
+}
+for (const id of knowledgePolicyIds) {
+  if (!knowledgeIds.has(id)) fail(`retained knowledge search policy contains unknown id ${id}`);
+}
+
 const corePaths = ['/', '/work', '/practice', '/about', '/contact'];
 const evidencePaths = getIndexableEvidencePaths(recordContent);
 const knowledgePaths = getIndexableKnowledgePaths();
@@ -118,13 +142,27 @@ if (!existsSync(sitemapFile)) {
 
 const vercel = JSON.parse(readFileSync('vercel.json', 'utf8'));
 const redirects = vercel.redirects ?? [];
-const redirectSources = new Set(redirects.map((redirect) => redirect.source));
+const unconditionalRedirects = redirects.filter((redirect) => !(redirect.has?.length));
+const redirectSources = new Set(unconditionalRedirects.map((redirect) => redirect.source));
 
 for (const redirect of redirects) {
   if (!redirect.permanent) fail(`redirect ${redirect.source} is not permanent`);
   if (redirect.source.includes(':') || redirect.source.includes('*')) {
     fail(`redirect ${redirect.source} is a wildcard/pattern; migration redirects must be ledger-specific`);
   }
+
+  // Conditional WordPress query redirects use source '/'. They do not replace
+  // the homepage and therefore must not be treated as a canonical-source
+  // collision or as part of the unconditional redirect-chain graph.
+  if (redirect.has?.length) {
+    for (const condition of redirect.has) {
+      if (condition.type !== 'query' || !condition.key || !condition.value) {
+        fail(`conditional redirect ${redirect.source} contains an unsupported/incomplete condition`);
+      }
+    }
+    continue;
+  }
+
   if (redirectSources.has(redirect.destination)) {
     fail(`redirect chain: ${redirect.source} → ${redirect.destination} → another redirect`);
   }
@@ -153,6 +191,7 @@ for (const route of expectedPaths) {
   const ogUrl = uniqueMetaContent(html, 'property', 'og:url');
   const robots = robotsValues(html);
   const h1s = [...html.matchAll(/<h1\b[^>]*>/gi)];
+  const mainLandmarks = [...html.matchAll(/<main\b[^>]*>/gi)];
   const expectedCanonical = `${SITE}${route === '/' ? '' : route}`;
 
   if (!title?.trim()) fail(`${route}: missing or duplicate title`);
@@ -166,6 +205,7 @@ for (const route of expectedPaths) {
     fail(`${route}: missing, duplicate or insubstantial meta description`);
   }
   if (h1s.length !== 1) fail(`${route}: expected exactly one h1, found ${h1s.length}`);
+  if (mainLandmarks.length !== 1) fail(`${route}: expected exactly one main landmark, found ${mainLandmarks.length}`);
   if (canonical !== expectedCanonical) {
     fail(`${route}: canonical ${canonical ?? 'missing/duplicate'} does not self-reference ${expectedCanonical}`);
   }
