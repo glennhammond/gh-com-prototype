@@ -4,32 +4,36 @@ import Button from "../components/Button.jsx";
 import Icon from "../components/Icon.jsx";
 import PlaceholderShot from "../components/PlaceholderShot.jsx";
 import SelectedWork from "../components/SelectedWork.jsx";
-import { getImage } from "../lib/media.js";
+import portraitAvif from "../assets/portrait/glenn-working-800.avif";
+import portraitWebp from "../assets/portrait/glenn-working-800.webp";
 import { home } from "../content/home.js";
 import { layers } from "../content/layers.js";
-import { projectByPath } from "../content/projects.js";
+import {
+  casaProject,
+  connectProject,
+  tafeProject,
+  wellbeingProject,
+} from "../content/the-record.js";
 import { site } from "../content/site.js";
 import { graph, personSchema, practiceSchema } from "../lib/schema.js";
 import "./Home.css";
 
 /**
- * Homepage — V3.
+ * Homepage — THE RECORD consolidation baseline.
  *
- * Composed rather than stacked: a dark opening with its own evidence figure,
- * a light proof band, one editorial "Selected work" sequence of three
- * individually art-directed projects, a compact model strip, a specialist
- * Rise and Storyline section, an offset offer block, a portrait split, and a
- * dark close.
- *
- * Exactly two ink bands: the opening and the close. Everything between them,
- * and the footer beneath them, sits on paper or raised paper. Dark is
- * punctuation, so the page reads light and the two dark moments carry weight.
+ * The opening and commercial/practice material remain deliberately stable
+ * while the evidence entry surface is now driven by THE RECORD itself rather
+ * than the legacy case-study estate. This keeps Home aligned with Work without
+ * turning it into a duplicate Work index.
  */
 export default function Home() {
-  const portrait = getImage("glenn-working");
-  const wellbeing = projectByPath["/work/wellbeing-studio"];
-  const isq = projectByPath["/work/connect-and-learn"];
-  const casa = projectByPath["/work/casa/flight-examiner-rating"];
+  const portrait = {
+    avif: portraitAvif,
+    webp: portraitWebp,
+    src: portraitWebp,
+    width: 800,
+    height: 1000,
+  };
 
   return (
     <>
@@ -99,8 +103,14 @@ export default function Home() {
       </section>
 
       {/* 03 — selected work ----------------------------------------------
-         One editorial sequence, not a card grid — see SelectedWork.jsx. */}
-      <SelectedWork intro={home.work} casa={casa} isq={isq} wellbeing={wellbeing} />
+         One editorial sequence, sourced from the canonical RECORD model. */}
+      <SelectedWork
+        intro={home.work}
+        wellbeing={wellbeingProject}
+        isq={connectProject}
+        casa={casaProject}
+        tafe={tafeProject}
+      />
 
       {/* 04 — the model ------------------------------------------------- */}
       <section
@@ -249,32 +259,30 @@ export default function Home() {
       {/* 07 — Glenn ----------------------------------------------------- */}
       <section className="section person" aria-labelledby="person-title">
         <div className="container person__inner">
-          {portrait && (
-            <div className="person__portrait">
-              <picture>
-                <source
-                  type="image/avif"
-                  srcSet={portrait.avif}
-                  sizes="(min-width: 900px) 300px, 60vw"
-                />
+          <div className="person__portrait">
+            <picture>
+              <source
+                type="image/avif"
+                srcSet={portrait.avif}
+                sizes="(min-width: 900px) 300px, 60vw"
+              />
 
-                <source
-                  type="image/webp"
-                  srcSet={portrait.webp}
-                  sizes="(min-width: 900px) 300px, 60vw"
-                />
+              <source
+                type="image/webp"
+                srcSet={portrait.webp}
+                sizes="(min-width: 900px) 300px, 60vw"
+              />
 
-                <img
-                  src={portrait.src}
-                  alt="Glenn Hammond at his desk, in profile."
-                  width={portrait.width}
-                  height={portrait.height}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-            </div>
-          )}
+              <img
+                src={portrait.src}
+                alt="Glenn Hammond at his desk, in profile."
+                width={portrait.width}
+                height={portrait.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </div>
 
           <div className="person__text">
             <p className="eyebrow">{home.person.eyebrow}</p>
