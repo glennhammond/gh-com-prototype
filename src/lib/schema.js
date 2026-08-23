@@ -2,11 +2,12 @@ import { site } from "../content/site.js";
 import { about } from "../content/about.js";
 
 /**
- * Structured data — Blueprint §25.
+ * Structured data — Blueprint §25 + Search 02 evidence discipline.
  *
- * Rule from the blueprint: no schema claim that has not been verified.
- * In particular, `award` states exactly what the Master Copy states and no
- * more; it is frozen until the LearnX certificate is supplied.
+ * Rule: no schema claim that has not been verified strongly enough for machine
+ * assertion. The LearnX award/project relationship remains an evidence gap, so
+ * no award property is emitted until the supporting certificate/relationship
+ * is qualified.
  */
 
 const url = (path) => `${site.origin}${path === "/" ? "" : path}`;
@@ -28,7 +29,6 @@ export const personSchema = {
   email: `mailto:${site.email}`,
   address,
   sameAs: [site.linkedin],
-  award: "Two Diamond Awards, Best eLearning Project, LearnX 2024",
   knowsAbout: [
     "Learning systems design",
     "Learning experience design",
