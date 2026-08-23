@@ -222,6 +222,99 @@ export const knowledgeResources = [
     evidenceNote:
       'This resource preserves the useful first-hand argument from the historical article while removing project-specific dimensions and recipes that should not be presented as universal Storyline practice. The core feature remains current in Storyline 360; the guidance here is framed as production-system practice rather than as undocumented product behaviour.',
   },
+  {
+    id: 'moodle-login-first',
+    type: 'article',
+    path: '/blog/how-to-set-moodles-login-page-as-the-sites-landing-page',
+    eyebrow: 'Retained knowledge · Moodle administration',
+    title: 'How to make Moodle show login first',
+    description:
+      'Current Moodle 5.x guidance for private or mixed-audience sites: when to force users to log in, how Site home behaves for guests and signed-in users, and when a separate redirect is unnecessary.',
+    updated: '24 August 2026',
+    introduction: [
+      'The useful question is not really “How do I make the login page my Moodle homepage?” It is “Should people be able to see anything before they authenticate?” Moodle already has settings for that decision, so most sites do not need a custom root redirect.',
+      'For a staff-only, compliance or invitation-only Moodle, the cleanest pattern is usually to require authentication before Site home is shown. If the site also has a genuine public audience, keep Site home public and make the unauthenticated state deliberately useful instead of trying to disguise it as a login screen.',
+    ],
+    sections: [
+      {
+        heading: 'Private site: use Force users to login',
+        paragraphs: [
+          'Moodle’s Force users to login setting is designed for this exact case. When it is enabled, unauthenticated visitors must authenticate before they can see Site home. In current Moodle administration the security settings sit under Site administration → General → Security → Site security settings; wording and menu grouping can vary slightly across supported versions.',
+        ],
+        bullets: [
+          'Use this when the LMS has no meaningful public-browsing purpose.',
+          'It is a better system-level rule than redirecting only the root URL, because authentication is enforced consistently rather than cosmetically.',
+          'Review guest access separately. Requiring login before Site home and allowing guest access to particular courses are different configuration decisions.',
+          'Keep the login experience concise: organisation identity, authentication method, password/help route and only the guidance people genuinely need to enter.',
+        ],
+      },
+      {
+        heading: 'Mixed audience: keep Site home public on purpose',
+        paragraphs: [
+          'If prospective participants, clients or other non-authenticated visitors need useful information, do not force them through login simply to preserve a clean screen. Current Moodle Site home settings allow different content choices for visitors and logged-in users.',
+        ],
+        bullets: [
+          'Configure Site home from Site administration → General → Site home → Site home settings.',
+          'Keep the public state small: what the site is, who it is for and a clear way to log in or find the relevant public information.',
+          'Do not expose a long course catalogue to guests simply because Moodle can render one there.',
+          'Treat public Site home as a product surface with a job, not as a collection of available blocks.',
+        ],
+      },
+      {
+        heading: 'Decide where signed-in users should land',
+        paragraphs: [
+          'Login and post-login destination are separate decisions. Moodle can send authenticated users to their Dashboard or to Site home, and the appropriate choice depends on whether the user usually arrives to resume their own learning or to browse a shared catalogue.',
+        ],
+        bullets: [
+          'Dashboard is usually stronger when returning participants mainly need their enrolled courses and progress.',
+          'Site home can be stronger when the shared catalogue, announcements or organisation-wide entry points are the real destination.',
+          'Current Moodle documentation places the “Home page for users” choice under Site administration → Appearance → Navigation.',
+          'Test this with the actual audience rather than choosing the prettier first screen in an administrator session.',
+        ],
+      },
+      {
+        heading: 'Avoid a web-server redirect unless you really need one',
+        paragraphs: [
+          'A reverse-proxy or web-server rewrite from `/` to `/login/index.php` can force a particular URL, but it is not the normal answer to a Moodle access-policy problem. It can also make a future public Site home, SSO flow or alternate authentication route harder to introduce.',
+        ],
+        bullets: [
+          'Use Moodle’s authentication policy first.',
+          'Use a direct login link in invitations or bookmarks when that is all you need.',
+          'Only add infrastructure-level redirects when there is a separate routing requirement and you have tested authentication, logout, password recovery and SSO flows.',
+        ],
+      },
+      {
+        heading: 'A quick decision rule',
+        ordered: [
+          'Ask whether unauthenticated visitors have a legitimate job to do on the Moodle site.',
+          'If no, enable Force users to login and design the login experience well.',
+          'If yes, keep Site home public and make its guest state intentionally useful and small.',
+          'Choose Dashboard or Site home separately as the signed-in destination.',
+          'Test the flow signed out, signed in, after logout and through any SSO/magic-link path before calling the entry experience finished.',
+        ],
+      },
+    ],
+    sources: [
+      {
+        label: 'MoodleDocs 5.2 — Site home settings',
+        href: 'https://docs.moodle.org/502/en/Site_home_settings',
+      },
+      {
+        label: 'MoodleDocs 5.2 — Change your front page',
+        href: 'https://docs.moodle.org/502/en/Change_your_front_page',
+      },
+      {
+        label: 'MoodleDocs — Privacy and forcing users to log in',
+        href: 'https://docs.moodle.org/501/en/Privacy',
+      },
+      {
+        label: 'MoodleDocs 5.2 — Reducing spam in Moodle',
+        href: 'https://docs.moodle.org/502/en/Reducing_spam_in_Moodle',
+      },
+    ],
+    evidenceNote:
+      'The historical source was dated 2013, marked draft, and contained administration paths that no longer match current Moodle 5.x. The resource has therefore been rebuilt around the current access-policy model instead of reproducing the old instructions. Its surviving professional value is the entry decision — private site, public Site home or post-login destination — not the exact menu labels from 2013.',
+  },
 ];
 
 export const knowledgeByPath = Object.fromEntries(
