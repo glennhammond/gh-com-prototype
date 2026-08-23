@@ -121,9 +121,10 @@ export default function Practice() {
               These are overlapping modes, not four steps. The language describes the practice now; it is
               not presented as terminology used by the historical projects.
             </p>
-            <p className="practice-classification practice-classification--inline">
-              {currentPracticeLens?.label} · {currentPracticeLens?.boundary}
-            </p>
+            <div className="practice-lens-boundary">
+              <p className="practice-classification">{currentPracticeLens?.label}</p>
+              <p className="practice-boundary">{currentPracticeLens?.boundary}</p>
+            </div>
           </div>
 
           <div className="practice-modes">
