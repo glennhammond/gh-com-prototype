@@ -39,9 +39,9 @@ export const home = {
   },
   person: {
     eyebrow: 'The practice',
-    headline: 'Show the thinking. Show the making. Show the evidence.',
+    headline: 'Frame. Shape. Make. Evidence.',
     body: [
-      'I work across product strategy, experience architecture, learning design, visual design, media, platforms and implementation. The useful boundary is not a discipline label; it is the point where the problem is genuinely solved.',
+      'Show the thinking. Show the making. Show the evidence. I work across product strategy, experience architecture, learning design, visual design, media, platforms and implementation; the useful boundary is the point where the problem is genuinely solved.',
       'This site is part of that evidence. Its information architecture, editorial model, interaction, accessibility and technical implementation are designed to demonstrate the same practice the work describes.',
     ],
     cta: { href: '/practice', label: 'How the practice works' },
