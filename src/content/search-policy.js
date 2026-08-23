@@ -157,6 +157,13 @@ export const knowledgeSearchPolicy = {
     directEntry: 'knowledge',
     reason: 'Externally cited historical URL with durable VET-assessment intent; rebuilt against the current 2025 Standards rather than retained as stale legacy content.',
   },
+  'master-slides-storyline': {
+    index: true,
+    sitemap: true,
+    canonical: '/blog/master-slides-in-storyline',
+    directEntry: 'knowledge',
+    reason: 'Recovered first-hand Storyline production guidance with durable system-design value; refreshed against current Storyline 360 feature documentation while preserving the existing canonical URL.',
+  },
 };
 
 const groups = ['projects', 'records', 'artefacts'];
