@@ -18,7 +18,7 @@ const address = {
   addressCountry: site.location.country,
 };
 
-/** Person — sitewide identity. Retains the role title recruiters expect. */
+/** Person — sitewide identity. */
 export const personSchema = {
   "@type": "Person",
   "@id": `${site.origin}/#person`,
@@ -30,11 +30,13 @@ export const personSchema = {
   sameAs: [site.linkedin],
   award: "Two Diamond Awards, Best eLearning Project, LearnX 2024",
   knowsAbout: [
-    "Learning systems design",
+    "Digital product strategy",
+    "Experience architecture",
     "Learning experience design",
+    "Interaction design",
     "Learning platforms",
-    "Moodle",
-    "Instructional design",
+    "Learning technology",
+    "Digital production systems",
     "Accessibility",
   ],
   alumniOf: undefined,
@@ -48,7 +50,7 @@ export const personSchema = {
 export const practiceSchema = {
   "@type": "ProfessionalService",
   "@id": `${site.origin}/#practice`,
-  name: "Glenn Hammond — Digital product, learning and systems practice",
+  name: "Glenn Hammond — Digital product, experience and learning practice",
   url: `${site.origin}/practice`,
   founder: { "@id": `${site.origin}/#person` },
   address,
@@ -57,7 +59,7 @@ export const practiceSchema = {
     "Digital product strategy and experience architecture",
     "Learning experience and interaction design",
     "Learning platform architecture and migration",
-    "Learning technology and production systems",
+    "Learning technology, production systems and implementation",
   ],
 };
 
