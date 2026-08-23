@@ -16,6 +16,7 @@ import { recordContent } from '../src/content/the-record.js';
 import {
   evidenceSearchForPath,
   getIndexableEvidencePaths,
+  getIndexableKnowledgePaths,
   searchPolicy,
   validateSearchPolicy,
 } from '../src/content/search-policy.js';
@@ -93,7 +94,8 @@ validateSearchPolicy(recordContent);
 
 const corePaths = ['/', '/work', '/practice', '/about', '/contact'];
 const evidencePaths = getIndexableEvidencePaths(recordContent);
-const expectedPaths = [...new Set([...corePaths, ...evidencePaths])];
+const knowledgePaths = getIndexableKnowledgePaths();
+const expectedPaths = [...new Set([...corePaths, ...evidencePaths, ...knowledgePaths])];
 
 const sitemapFile = join(DIST, 'sitemap.xml');
 if (!existsSync(sitemapFile)) {
