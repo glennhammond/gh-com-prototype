@@ -116,11 +116,11 @@ export const inheritedArticleRedirects = [
   {
     wpId: '156463',
     slug: 'master-slides-in-storyline',
-    action: 'rebuild',
-    launchReady: false,
+    action: 'preserve',
+    launchReady: true,
     destination: '/blog/master-slides-in-storyline',
     territory: 'storyline',
-    reason: 'Recovered source contains substantial first-hand Storyline production experience. Favoured for preservation at its current React URL after refresh and performance/backlink confirmation.',
+    reason: 'Recovered first-hand Storyline production guidance has been refreshed against current Articulate documentation. The canonical React URL is preserved and both historical WordPress source forms redirect directly to it.',
   },
   {
     wpId: '156466',
