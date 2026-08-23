@@ -36,10 +36,11 @@ export const inheritedArticleRedirects = [
   {
     wpId: '164',
     slug: 'how-to-set-moodles-user-login-page-as-the-sites-landing-page',
-    action: 'review',
-    launchReady: false,
+    action: 'preserve',
+    launchReady: true,
+    destination: '/blog/how-to-set-moodles-login-page-as-the-sites-landing-page',
     territory: 'moodle',
-    reason: 'Historic Moodle technical advice may now be version-sensitive. Preserve only if current accuracy and external/search value justify a refreshed resource.',
+    reason: 'The surviving 2013 source was a draft and its old React redirect pointed to a mismatched slug. The intent has been rebuilt against current Moodle 5.x access and Site home behaviour, and both historical WordPress source forms now resolve directly to the clean canonical resource.',
   },
   {
     wpId: '156431',
