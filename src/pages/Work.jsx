@@ -29,12 +29,13 @@ export default function Work() {
         <div className="container record-field__grid">
           {workProjects.map((project, index) => {
             const records = project.recordIds.map((id) => recordIndex.recordById[id]);
-            const isWellbeing = project.id === 'wellbeing-studio-2027';
+            const placement = project.placements.find((item) => item.surface === 'work');
+            const featured = Boolean(placement?.featured);
 
             return (
               <article
                 key={project.id}
-                className={`record-anchor record-anchor--${index + 1}${isWellbeing ? ' record-anchor--lead' : ''}`}
+                className={`record-anchor record-anchor--${index + 1}${featured ? ' record-anchor--lead' : ''}`}
                 aria-labelledby={`record-anchor-${project.id}`}
               >
                 <div className="record-anchor__index" aria-hidden="true">
@@ -48,19 +49,13 @@ export default function Work() {
                   <p className="record-anchor__proposition">{project.proposition}</p>
                   <p className="record-anchor__role">{project.role}</p>
 
-                  {records.length > 0 && records.map((record, recordIndexValue) => (
+                  {records.map((record) => (
                     <div
                       key={record.id}
-                      className={`record-point${recordIndexValue === 1 ? ' record-point--system' : ''}`}
+                      className="record-point"
                       aria-labelledby={`work-record-${record.id}`}
                     >
-                      <p className="record-point__context">
-                        {recordIndexValue === 0
-                          ? 'Inside this territory'
-                          : isWellbeing
-                            ? 'The product widened'
-                            : 'Another decision'}
-                      </p>
+                      <p className="record-point__context">{record.centre}</p>
                       <h3 id={`work-record-${record.id}`}>
                         <Link to={record.path}>{record.title}</Link>
                       </h3>
