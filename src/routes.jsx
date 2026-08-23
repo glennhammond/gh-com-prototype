@@ -1,75 +1,107 @@
-import Layout from "./components/Layout.jsx";
-import Home from "./pages/Home.jsx";
-import Work from "./pages/Work.jsx";
-import CaseStudy from "./pages/CaseStudy.jsx";
-import Practice from "./pages/Practice.jsx";
-import RiseDesignSystems from "./pages/RiseDesignSystems.jsx";
-import StorylineDevelopment from "./pages/StorylineDevelopment.jsx";
-import About from "./pages/About.jsx";
-import Contact from "./pages/Contact.jsx";
-import Privacy from "./pages/Privacy.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import { projects, casaSubprojects } from "./content/projects.js";
+import Layout from './components/Layout.jsx';
+import Work from './pages/Work.jsx';
+import Contact from './pages/Contact.jsx';
+import Privacy from './pages/Privacy.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 /**
- * Route table — V3.1, SEO migration Phase A (18 Aug 2026).
+ * THE RECORD production integration.
  *
- * Seven destinations: Home, Work, Practice, About, Contact, plus two
- * specialist-practice pages (Rise design systems, Storyline development).
- * Practice is canonical per docs/SEO-MIGRATION.md and DECISIONS.md #19,
- * superseding the earlier /services routing decision (#17). The two
- * specialist pages are preserved at their existing /services/* paths for
- * now — see the route entries below — rather than moved under /practice,
- * since Phase A is a route/naming migration, not a restructure.
- * `/services` itself 301s to `/practice` at the Vercel edge (vercel.json);
- * there is no `/services` route entry below.
- *
- * V3 adds one level of depth under /work. The CASA programme's children live
- * at /work/casa/<slug>, so the URL states the relationship without any
- * component having to. Two route entries are needed because React Router
- * matches segment by segment; both render the same CaseStudy component, which
- * resolves its record from the full pathname.
- *
- * Static paths come from content/projects.js, so adding a case study is a
- * one-file change and the sitemap follows automatically.
- *
- * Deliberately absent:
- *   /work/child-protection-program       → withheld, see content/projects.js
- *   /insights, /notes                    → no content exists; not created
- *
- * Every route is pre-rendered to static HTML by vite-react-ssg.
+ * Home and legacy case-study records are lazy route modules. This keeps the
+ * legacy projects.js content estate out of the route-independent client
+ * bootstrap while preserving static rendering through vite-react-ssg.
  */
-
-/** Top-level case studies: everything that is not a programme child. */
-const topLevel = projects.filter((p) => !p.programme);
-
 export const routes = [
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "work", element: <Work /> },
+      { index: true, lazy: () => import('./routes/HomeRoute.jsx') },
+      { path: 'work', element: <Work /> },
+
+      // THE RECORD: canonical Project → Record → Artefact routes.
+      // Detail surfaces are lazy route modules so evidence-specific code stays
+      // out of the route-independent bootstrap while SSG still pre-renders them.
+      { path: 'work/wellbeing-studio', lazy: () => import('./routes/WellbeingProjectRoute.jsx') },
+      { path: 'work/wellbeing-studio/contextual-entry', lazy: () => import('./routes/ContextualEntryRecordRoute.jsx') },
       {
-        path: "work/:slug",
-        element: <CaseStudy />,
-        getStaticPaths: () => topLevel.map((p) => p.path.slice(1)),
+        path: 'work/wellbeing-studio/contextual-entry/daily-wellbeing-journey',
+        lazy: () => import('./routes/DailyWellbeingArtefactRoute.jsx'),
       },
       {
-        path: "work/casa/:slug",
-        element: <CaseStudy />,
-        getStaticPaths: () => casaSubprojects.map((p) => p.path.slice(1)),
+        path: 'work/wellbeing-studio/connected-service',
+        lazy: () => import('./routes/ConnectedServiceRecordRoute.jsx'),
       },
-      { path: "practice", element: <Practice /> },
-      { path: "services/rise-design-systems", element: <RiseDesignSystems /> },
-      { path: "services/storyline-development", element: <StorylineDevelopment /> },
-      { path: "about", element: <About /> },
-      { path: "contact", element: <Contact /> },
-      { path: "privacy", element: <Privacy /> },
-      // Rendered to dist/404.html for the host's not-found handler, and also
-      // matched client-side by the catch-all below.
-      { path: "404", element: <NotFound /> },
-      { path: "*", element: <NotFound /> },
+      {
+        path: 'work/wellbeing-studio/connected-service/relationship-model',
+        lazy: () => import('./routes/ConnectedServiceArtefactRoute.jsx'),
+      },
+      {
+        path: 'work/wellbeing-studio/ruok-production-slice',
+        lazy: () => import('./routes/RuokProductionRecordRoute.jsx'),
+      },
+      {
+        path: 'work/wellbeing-studio/ruok-production-slice/qualification-map',
+        lazy: () => import('./routes/RuokQualificationArtefactRoute.jsx'),
+      },
+
+      // CASA: first non-WS THE RECORD territory.
+      {
+        path: 'work/casa/flight-examiner-rating',
+        lazy: () => import('./routes/CasaRecordProjectRoute.jsx'),
+      },
+      {
+        path: 'work/casa/flight-examiner-rating/examiner-judgement',
+        lazy: () => import('./routes/CasaJudgementRecordRoute.jsx'),
+      },
+      {
+        path: 'work/casa/flight-examiner-rating/examiner-judgement/assessment-reasoning',
+        lazy: () => import('./routes/CasaJudgementArtefactRoute.jsx'),
+      },
+
+      // ISQ Connect & Learn: Project → Record → Artefact.
+      {
+        path: 'work/connect-and-learn',
+        lazy: () => import('./routes/ConnectRecordProjectRoute.jsx'),
+      },
+      {
+        path: 'work/connect-and-learn/concurrent-migration',
+        lazy: () => import('./routes/ConnectMigrationRecordRoute.jsx'),
+      },
+      {
+        path: 'work/connect-and-learn/concurrent-migration/dependency-map',
+        lazy: () => import('./routes/ConnectDependencyArtefactRoute.jsx'),
+      },
+
+      // TAFE Queensland SkillsTech: historical Project → Record → Artefact.
+      {
+        path: 'work/tafe-pathways',
+        lazy: () => import('./routes/TafeRecordProjectRoute.jsx'),
+      },
+      {
+        path: 'work/tafe-pathways/supporting-conversation',
+        lazy: () => import('./routes/TafeConversationRecordRoute.jsx'),
+      },
+      {
+        path: 'work/tafe-pathways/supporting-conversation/exploration-environment',
+        lazy: () => import('./routes/TafeConversationArtefactRoute.jsx'),
+      },
+
+      // Historical project routes remain available during migration.
+      { path: 'work/:slug', lazy: () => import('./routes/LegacyTopLevelRoute.jsx') },
+      { path: 'work/casa/:slug', lazy: () => import('./routes/LegacyCasaRoute.jsx') },
+
+      { path: 'practice', lazy: () => import('./routes/PracticeRoute.jsx') },
+
+      // Legacy service/about routes remain addressable pending Go-Live SEO
+      // qualification, but are no longer part of the public global IA.
+      { path: 'services/rise-design-systems', lazy: () => import('./routes/RiseRoute.jsx') },
+      { path: 'services/storyline-development', lazy: () => import('./routes/StorylineRoute.jsx') },
+      { path: 'about', lazy: () => import('./routes/AboutRoute.jsx') },
+
+      { path: 'contact', element: <Contact /> },
+      { path: 'privacy', element: <Privacy /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ];

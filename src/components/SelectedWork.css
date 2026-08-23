@@ -1,0 +1,236 @@
+/* ==========================================================================
+   Selected evidence — Home preview of THE RECORD
+
+   Home shows territory and evidence density. Work owns the complete evidence
+   composition. No project mock-ups are invented here simply to fill space.
+   ========================================================================== */
+
+.selwork__head { max-width: 64ch; }
+.selwork__head .display-l { margin-top: var(--space-3); max-width: 22ch; }
+.selwork__head .lede { margin-top: var(--space-4); }
+
+.selwork__list { margin-top: var(--space-8); }
+
+.selwork__item {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--rule);
+}
+
+.selwork__item:first-child { padding-top: 0; border-top: 0; }
+.selwork__item + .selwork__item { margin-top: var(--space-8); }
+
+.selwork__kicker,
+.selwork__tag,
+.selwork__index-head,
+.selwork__index li > span {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+}
+
+.selwork__kicker { color: var(--text-tertiary); }
+.selwork__tag { margin-top: var(--space-2); color: var(--brass-ink); }
+
+.selwork__title {
+  margin-top: var(--space-3);
+  font-size: var(--size-display-l);
+  line-height: 1.12;
+  max-width: 20ch;
+}
+
+.selwork__body {
+  margin-top: var(--space-4);
+  font-size: var(--size-lede);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 46ch;
+}
+
+.selwork__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.selwork__link:hover,
+.selwork__index a:hover {
+  color: var(--mineral-ink);
+}
+
+/* The evidence index is a compressed version of the Project → Record depth.
+   It is deliberately architectural rather than card-like or image-led. */
+.selwork__index {
+  border-top: 3px solid var(--brass);
+  border-bottom: 1px solid var(--rule);
+  padding-top: var(--space-3);
+}
+
+.selwork__index-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  color: var(--text-tertiary);
+}
+
+.selwork__index ol {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.selwork__index li {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.selwork__index li:last-child { border-bottom: 0; }
+.selwork__index li > span { color: var(--brass-ink); }
+
+.selwork__index a {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--rule-strong);
+}
+
+/* Wellbeing — lead territory. Evidence density is allowed the largest field. */
+.selwork__item--lead {
+  display: grid;
+  gap: var(--space-7);
+}
+
+@media (min-width: 860px) {
+  .selwork__item--lead {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    align-items: start;
+  }
+}
+
+.selwork__item--lead .selwork__index {
+  padding: clamp(20px, 3vw, 36px);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--mineral);
+}
+
+/* ISQ — strong systems proof with operational scale beneath the evidence. */
+.selwork__item--secondary {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 1040px;
+}
+
+@media (min-width: 760px) {
+  .selwork__item--secondary {
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    align-items: start;
+  }
+}
+
+.selwork__item--secondary .selwork__title {
+  font-size: var(--size-display-m);
+  max-width: 22ch;
+}
+
+.selwork__stats {
+  margin: var(--space-5) 0 0;
+  border-top: 2px solid var(--rule-strong);
+  padding-top: var(--space-4);
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 460px) {
+  .selwork__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.selwork__stats dt {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.selwork__stats dt span {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.08em;
+  color: var(--brass-ink);
+}
+
+.selwork__stats dd {
+  margin: var(--space-2) 0 0;
+  font-size: var(--size-caption);
+  line-height: 1.4;
+  color: var(--text-secondary);
+  max-width: 20ch;
+}
+
+/* CASA — deep historical professional evidence, intentionally contained. */
+.selwork__item--contained {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 900px;
+}
+
+@media (min-width: 760px) {
+  .selwork__item--contained {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.selwork__item--contained .selwork__title {
+  font-size: var(--size-display-m);
+}
+
+/* TAFE — explicit archive treatment. The year is the visual evidence of age;
+   no contemporary mock-up is used to make historical work look current. */
+.selwork__item--archive {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 900px;
+  margin-left: auto;
+}
+
+.selwork__archive-index {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--rule-strong);
+}
+
+.selwork__item--archive .selwork__title {
+  font-size: var(--size-display-m);
+  max-width: 24ch;
+}
+
+.selwork__item--archive .selwork__body { font-size: 1rem; }
+.selwork__item--archive .selwork__index { margin-top: var(--space-5); }
+
+@media (min-width: 760px) {
+  .selwork__item--archive {
+    grid-template-columns: minmax(150px, 0.32fr) minmax(0, 1fr);
+  }
+}

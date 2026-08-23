@@ -16,17 +16,9 @@ import "./ServicePage.css";
 /**
  * Rise design systems and premium development.
  *
- * The URL stays at /services/rise-design-systems for now (SEO migration
- * Phase A preserves it as-is; see DECISIONS.md #19) even though the parent
- * overview page it logically sits under is now /practice — this is a
- * specialist practice inside the four-layer model (mostly Content and
- * Operations), not a fifth destination. Built from existing primitives only
- * (Section, Figure via ProjectCard, Button, Seo); no new shared components.
- *
- * Evidence is one project — the ISQ eLearning Design System — plus the live
- * reference site it describes. That asymmetry against Storyline's deeper
- * evidence base is deliberate and stated, not smoothed over. See
- * content/services.js for the sourcing note.
+ * The legacy /services URL remains addressable for specialist direct entry and
+ * SEO migration continuity. Practice Architecture v1 does not promote Rise as
+ * a core Practice claim until the canonical four-territory field supports it.
  */
 export default function RiseDesignSystems() {
   const evidenceProject = projectBySlug[copy.evidence.slug];
@@ -154,8 +146,7 @@ export default function RiseDesignSystems() {
           {copy.cta.label}
         </Button>
         <p className="svc-cta__more">
-          Not sure Rise is the right call?{" "}
-          <Link to="/practice">Compare it with Storyline on the Practice overview</Link>
+          <Link to="/practice">Return to the Practice evidence interpretation</Link>
         </p>
       </Section>
     </>

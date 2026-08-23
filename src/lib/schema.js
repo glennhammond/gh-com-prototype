@@ -44,20 +44,20 @@ export const personSchema = {
   })),
 };
 
-/** ProfessionalService — the practice. Service types mirror the four layers. */
+/** ProfessionalService — commercial metadata, subordinate to Practice evidence. */
 export const practiceSchema = {
   "@type": "ProfessionalService",
   "@id": `${site.origin}/#practice`,
-  name: "Glenn Hammond — Learning Systems",
-  url: site.origin,
+  name: "Glenn Hammond — Digital product, learning and systems practice",
+  url: `${site.origin}/practice`,
   founder: { "@id": `${site.origin}/#person` },
   address,
   areaServed: { "@type": "Country", name: "Australia" },
   serviceType: [
-    "Learning experience design",
-    "Learning content and programme design",
+    "Digital product strategy and experience architecture",
+    "Learning experience and interaction design",
     "Learning platform architecture and migration",
-    "Learning production and design systems",
+    "Learning technology and production systems",
   ],
 };
 

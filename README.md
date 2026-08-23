@@ -1,11 +1,20 @@
-# glennhammond.com — Release One prototype
+# glennhammond.com — THE RECORD
 
-High-fidelity working prototype built to the **Glenn Hammond Website Experience
-Blueprint v1.0**. Territory A, *The Whole System*; organising idea *Four Layers,
-One Owner*; visual territory *Instrument*.
+Production prototype for **THE RECORD**, Glenn Hammond’s professional evidence system.
 
-**Status: prototype for review. Not production.** The enquiry form is mocked and
-the privacy notice is deliberately unwritten. See `INTEGRATIONS.md`.
+The canonical evidence architecture is:
+
+```text
+Home → Work → Project → Record → Artefact
+```
+
+**Current status:** Whole-System Consolidation 02 canonical baseline.  
+**Branch:** `feat/record-production-integration-01`  
+**Go-live:** separate gate. This branch must not be merged to `main` merely because it is production-qualified.
+
+The current canonical field contains **4 Projects, 6 Records and 6 Artefacts** across Wellbeing Studio 2027, ISQ Connect & Learn, CASA Flight Examiner Rating and TAFE Queensland SkillsTech Pathways.
+
+See `docs/THE-RECORD-CANONICALISATION-02.md` for the current product architecture, flexible editorial grammar, route estate and migration decisions.
 
 ---
 
@@ -13,69 +22,110 @@ the privacy notice is deliberately unwritten. See `INTEGRATIONS.md`.
 
 ```bash
 npm install
-npm run dev          # http://localhost:5173
+npm run dev
 ```
 
-## Build and check
+## Build and qualify
 
 ```bash
-npm run build        # static pre-render to dist/ + sitemap and robots
-npm run verify       # guardrail checks against dist/
-npm run check        # both, in order
+npm run build
 ```
 
-`npm run verify` fails the build on placeholder copy, unapproved client names or
-logos, withheld routes appearing, missing metadata, broken internal links,
-third-party requests, or a blown performance budget. It is the blueprint's
-publishing guardrails expressed as code rather than as a checklist.
+`npm run build` now performs three production steps:
 
-## Regenerate imagery
+1. static pre-render via `vite-react-ssg`
+2. sitemap / robots generation
+3. publishing verification
+
+The verification gate checks no-JS content, metadata, internal links, withheld/unapproved material, sitemap integrity and performance budgets.
+
+For the additional review audit:
 
 ```bash
-npm run images
+npm run check
 ```
 
-Crops the raw Wellbeing Studio captures in `src/assets/ws/source/` to remove
-browser chrome and emits AVIF + WebP at two widths. Sources are never modified.
-Outputs are committed, so a clean checkout builds without running sharp.
+`npm run check` runs the qualified build and then `scripts/audit.mjs`.
 
 ---
 
-## What is here
+## Canonical routes
 
-| Route | Content |
-| --- | --- |
-| `/` | Homepage, seven beats |
-| `/work` | Work index with layer filter |
-| `/work/wellbeing-studio` | **Flagship** case study, including the decision log |
-| `/work/connect-and-learn` | Standard case study |
-| `/work/flight-examiner-rating` | Standard case study |
-| `/work/goodstart-myportal` | Project note |
-| `/practice` | Four layers + four engagements |
-| `/about` | Summary, method, dated history |
-| `/contact` | Layer-qualified enquiry |
-| `/privacy` | Structure only — requires approved legal content |
-| `/404` | Not found |
+### Entry and interpretation
 
-Ten indexable URLs, all pre-rendered to static HTML.
+```text
+/
+/work
+/practice
+/about
+/contact
+```
+
+`/privacy` remains addressable but `noindex` and is not included in the sitemap.
+
+### Evidence
+
+```text
+/work/wellbeing-studio
+  /contextual-entry
+    /daily-wellbeing-journey
+  /connected-service
+    /relationship-model
+  /ruok-production-slice
+    /qualification-map
+
+/work/connect-and-learn
+  /concurrent-migration
+    /dependency-map
+
+/work/casa/flight-examiner-rating
+  /examiner-judgement
+    /assessment-reasoning
+
+/work/tafe-pathways
+  /supporting-conversation
+    /exploration-environment
+```
+
+Legacy case-study and service routes still render during migration. Their continued existence does **not** make them canonical. They are omitted from the canonical sitemap and have explicit dispositions in the Consolidation 02 document.
+
+---
+
+## Current content authority
+
+`src/content/the-record.js` is the canonical evidence model for Project, Record, Artefact and evidence claims.
+
+The legacy `src/content/projects.js` estate remains available only because migration is incomplete. New THE RECORD work must not be added there by default.
+
+Key boundaries:
+
+- `the-record.js` — canonical professional evidence
+- `record-model.js` — evidence validation and hierarchy contract
+- `record-context.js` — Meta-Frame scope derived from canonical evidence data
+- `record-media.js` — scoped media helper for canonical evidence routes
+- `projects.js` / `media.js` — legacy estate pending migration
+
+---
 
 ## Stack
 
-React 18 · Vite 6 · `vite-react-ssg` · React Router 6 · plain CSS with design
-tokens. No CSS framework, no component library, no state library, no animation
-library. Content is plain JavaScript modules in `src/content/`, ready to move
-behind a git-backed CMS without touching a component.
+React 18 · Vite 6 · `vite-react-ssg` · React Router 6 · plain CSS with design tokens.
 
-## Documentation
+The site is statically pre-rendered, route-split and progressively enhanced. Canonical Record routes are designed to remain understandable without JavaScript; Back/Forward restoration and Artefact focus return enhance the browser journey where JavaScript is available.
 
-- `ARCHITECTURE.md` — how the code is organised and why
-- `DECISIONS.md` — every deviation from the blueprint, with its reason
-- `CONTENT-REGISTER.md` — status of every claim and asset; what is still missing
-- `INTEGRATIONS.md` — what must be wired up before this can go live
-- `VERIFICATION.md` — results of the checks run against this build
+---
+
+## Documentation authority
+
+Current:
+
+- `docs/THE-RECORD-CANONICALISATION-02.md` — canonical product and migration baseline
+- `ARCHITECTURE.md` — current technical architecture
+- `docs/SEO-MIGRATION.md` — earlier URL migration research; still useful, but superseded by Consolidation 02 where product architecture conflicts
+- `DECISIONS.md` — historical implementation decisions
+- `CONTENT-REGISTER.md` / `IMAGE-REGISTER.md` — legacy/content evidence registers
+- `VERIFICATION.md` — earlier qualification record; current deployments enforce verification in the build itself
 
 ## Licensing note
 
-`src/assets/fonts/` contains ITC Avant Garde Gothic Std, licensed to Glenn
-Hammond. Do not redistribute this repository publicly with those files in place.
-Inter and JetBrains Mono are SIL Open Font Licence and are bundled from npm.
+`src/assets/fonts/` contains licensed ITC Avant Garde Gothic Std files. Do not redistribute those font files.

@@ -17,13 +17,9 @@ import "./ServicePage.css";
 /**
  * Advanced Storyline development.
  *
- * The URL stays at /services/storyline-development for now (SEO migration
- * Phase A preserves it as-is; see DECISIONS.md #19) even though the parent
- * overview page it logically sits under is now /practice, alongside Rise
- * design systems. Evidence here is the deeper of the two: CASA's reusable
- * Storyline production system, the Flight Examiner Rating programme, the
- * sixty-plus ISQ courses redeveloped, and the self-directed interaction
- * prototypes. See content/services.js for the sourcing note.
+ * The legacy /services URL remains addressable for specialist direct entry and
+ * SEO migration continuity. Practice Architecture v1 no longer presents Rise
+ * and Storyline as parallel pillars; this route is subordinate technical depth.
  */
 export default function StorylineDevelopment() {
   const evidenceProjects = copy.evidence.slugs
@@ -165,8 +161,7 @@ export default function StorylineDevelopment() {
           {copy.cta.label}
         </Button>
         <p className="svc-cta__more">
-          Not sure Storyline is the right call?{" "}
-          <Link to="/practice">Compare it with Rise on the Practice overview</Link>
+          <Link to="/practice">Return to the Practice evidence interpretation</Link>
         </p>
       </Section>
     </>

@@ -1,206 +1,60 @@
-import { STATUS, SOURCE } from "./status.js";
+import { STATUS, SOURCE } from './status.js';
 
-/**
- * v3.2 adds `featuredSystem`, a dedicated homepage section for the ISQ
- * eLearning Design System, positioned between the proof strip and
- * "Selected work".
- *
- * It is deliberately not a fourth project card. The design system is the
- * clearest single piece of evidence for the four-layer proposition the site
- * presents. See DECISIONS.md §18.
- */
-
-/**
- * Homepage copy, V2 sequence.
- *
- * V1 ran:
- * claim → framework → flagship → evidence → belief → capability → close.
- *
- * A first-time visitor met Glenn's diagnostic model before seeing enough work
- * to care about it, and met his argument before meeting him.
- *
- * V2 runs:
- * claim → proof strip → featured system → selected work → model →
- * specialist development → how to buy → Glenn → close.
- *
- * Proof arrives within the first two viewport heights. The four-layer model
- * appears once attention has been earned, and no primary action requires the
- * visitor to decode it.
- *
- * Two additional beats support that sequence:
- *
- * 1. A featured-system band for the ISQ eLearning Design System immediately
- *    ahead of the selected-work trio.
- * 2. A compact Rise and Storyline specialist-development band directly after
- *    the four-layer model.
- *
- * This makes both specialist services visible before a visitor reaches the
- * detailed Practice page without displacing the top-of-page positioning.
- *
- * All copy is PROPOSED, awaiting approval.
- */
-
+/** Home copy reconciled to THE RECORD canonical entry architecture. */
 export const home = {
   status: STATUS.PROPOSED,
   source: SOURCE.BLUEPRINT,
-
-  /* 01 — the claim */
   hero: {
-    eyebrow: "Learning systems · Brisbane, working Australia-wide",
-    headline: "The course is the easy part.",
+    eyebrow: 'Digital design and learning practice · Brisbane',
+    headline: 'Thirty years of making digital things.',
     standfirst:
-      "A course is one layer of four. The platform it runs on, the content around it and the production system that keeps it current are the other three — and they are where learning programmes actually come apart. I design all four, and I own the joins.",
-    primaryCta: {
-      href: "/work/isq-elearning-design-system",
-      label: "View the ISQ design-system case study",
-    },
-    secondaryCta: {
-      href: "/work",
-      label: "All four projects",
-    },
+      'Still learning how to make them better. THE RECORD is a living professional evidence system: projects establish the territory, Records examine consequential decisions, and Artefacts let the evidence be inspected.',
+    primaryCta: { href: '/work', label: 'Enter THE RECORD' },
+    secondaryCta: { href: '/practice', label: 'Read the practice' },
   },
-
-  /* 02 — proof strip. Approved claims only. */
   proof: {
     items: [
-      {
-        value: "15+",
-        label:
-          "years designing learning for regulated, national and enterprise clients",
-      },
-      {
-        value: "6",
-        label: "years inside the aviation regulator, CASA",
-      },
-      {
-        value: "2×",
-        label: "Diamond Awards, Best eLearning Project, LearnX 2024",
-      },
-      {
-        value: "640",
-        label: "childcare centres served by a national platform he built",
-      },
+      { value: '15+', label: 'years designing digital learning across education, aviation and workplace wellbeing' },
+      { value: '6', label: 'years inside the Civil Aviation Safety Authority' },
+      { value: '2×', label: 'Diamond Awards, Best eLearning Project, LearnX 2024' },
+      { value: '60+', label: 'Storyline courses rebuilt during the Connect & Learn migration' },
     ],
     clients:
-      "Independent Schools Queensland · Civil Aviation Safety Authority · Goodstart Early Learning · Corporate Yoga Australia",
+      'Independent Schools Queensland · Civil Aviation Safety Authority · TAFE Queensland · Corporate Yoga Australia',
   },
-
-  /* 03 — the ISQ eLearning Design System, featured in its own right. */
-  featuredSystem: {
-    eyebrow: "Featured system",
-    title: "ISQ eLearning Design System",
-    statement:
-      "A shared framework connecting learning design, visual language, reusable components, accessibility and technical delivery across ISQ's digital learning ecosystem.",
-    evidence: [
-      "A growing catalogue of core and approved components",
-      "Cross-platform foundations, shared across Rise and Moodle",
-      "Documented learning patterns and implementation guidance",
-      "Operational governance and versioning",
-    ],
-    capabilities: [
-      "Learning design",
-      "Design systems",
-      "UX and interface design",
-      "Front-end development",
-      "Accessibility",
-      "Governance",
-    ],
-    primaryCta: {
-      href: "/work/isq-elearning-design-system",
-      label: "View case study",
-    },
-    secondaryCta: {
-      href: "https://isq-elearning-design-system.vercel.app/",
-      label: "Explore live system",
-    },
-    status: STATUS.PROPOSED,
-    source: SOURCE.ISQ_DS_BRIEF,
-  },
-
-  /* 04 — selected work */
   work: {
-    eyebrow: "Selected work",
-    headline: "Three more projects, three different kinds of proof.",
+    eyebrow: 'Selected evidence',
+    headline: 'Four territories. Different weight. One evidence system.',
     standfirst:
-      "A platform built from nothing, a regulator's training programme, and a migration that had to happen while sixty courses were being rebuilt.",
+      'Wellbeing Studio is the active reference territory. ISQ shows platform and production systems. CASA shows regulated professional learning. TAFE Pathways preserves historical interaction evidence without pretending old work is new work.',
   },
-
-  /* 05 — the model, after proof has earned it */
-  framework: {
-    eyebrow: "How I read a problem",
-    headline: "Four layers. Most organisations buy them separately.",
-    standfirst:
-      "This is the diagnostic I use, not a test you have to pass. It matters because the work is rarely lost inside a layer — it is lost between them, in the handover nobody scoped.",
-  },
-
-  /* 06 — Rise and Storyline, after the model has been introduced */
-  specialistDevelopment: {
-    eyebrow: "How it gets built",
-    headline: "Specialist digital learning development",
-    standfirst:
-      "Both sit inside Content and Operations above. Neither is a bolt-on.",
-    rise: {
-      headline: "Rise design systems",
-      body:
-        "Premium, scalable Rise experiences supported by custom components, HTML, CSS and reusable production standards.",
-      cta: {
-        href: "/services/rise-design-systems",
-        label: "Explore Rise design systems",
-      },
-    },
-    storyline: {
-      headline: "Advanced Storyline development",
-      body:
-        "Bespoke scenarios, simulations and interactive learning built on extensive experience across the Articulate ecosystem.",
-      cta: {
-        href: "/services/storyline-development",
-        label: "Explore Storyline development",
-      },
-    },
-  },
-
-  /* 07 — how to buy */
   buy: {
-    eyebrow: "Where most work starts",
-    headline: "A Learning System Review.",
+    eyebrow: 'Practice',
+    headline: 'The work changes altitude. The responsibility does not.',
     standfirst:
-      "Two to three weeks, across all four layers, ending in a written plan you can take to a budget holder — whether or not I do the work that follows.",
+      'Across these projects the work moves between product strategy, experience architecture, learning design, interaction, platforms, production and implementation.',
     body:
-      "Larger delivery work — building or migrating a platform with the content that lives in it, or building the production system an in-house team needs — usually starts here. It is the cheapest way to find out whether the problem is where you think it is.",
-    cta: {
-      href: "/practice",
-      label: "See all four engagements",
-    },
+      'Practice is where those recurring patterns are interpreted. THE RECORD remains the evidence underneath them, so the claims can be tested against the work.',
+    cta: { href: '/practice', label: 'Read the practice' },
   },
-
-  /* 08 — Glenn */
   person: {
-    eyebrow: "Who you would be working with",
-    headline: "One person, accountable for the joins.",
+    eyebrow: 'The practice',
+    headline: 'Frame. Shape. Make. Evidence.',
     body: [
-      "I have spent fifteen years on the parts of digital learning nobody puts in the brief. Six of them inside the aviation regulator, building learning for examiners who assess other examiners. Three months moving an entire professional learning estate off a platform it had outgrown. A year turning a wellbeing business into a product that runs without its founder in the room.",
-      "I work directly with internal teams rather than around them — usually alongside subject-matter experts, an IT function I do not control, and someone who will have to run the thing after I leave. That last person is the one I design for.",
+      'Show the thinking. Show the making. Show the evidence. I work across product strategy, experience architecture, learning design, visual design, media, platforms and implementation; the useful boundary is the point where the problem is genuinely solved.',
+      'This site is part of that evidence. Its information architecture, editorial model, interaction, accessibility and technical implementation are designed to demonstrate the same practice the work describes.',
     ],
-    cta: {
-      href: "/about",
-      label: "More about how I work",
-    },
+    cta: { href: '/practice', label: 'How the practice works' },
   },
-
-  /* 09 — close */
   close: {
-    headline: "Tell me what is happening.",
+    headline: 'Start with the problem, not the service label.',
     body:
-      "Most conversations start with someone describing a course problem that turns out to be a platform problem, or the reverse. A few sentences is enough — you do not need to have diagnosed it first.",
-    cta: {
-      href: "/contact",
-      label: "Start a conversation",
-    },
+      'If you recognise something in the work, describe what is happening. A few sentences is enough to start a useful conversation.',
+    cta: { href: '/contact', label: 'Contact Glenn' },
   },
-
   seo: {
-    title: "Glenn Hammond — Learning systems design",
+    title: 'Glenn Hammond — digital design and learning practice',
     description:
-      "I design all four layers of a learning programme: the experience, the content, the platform and the production system that keeps it running. Fifteen years across aviation, education, government and workplace wellbeing.",
+      'THE RECORD is Glenn Hammond’s living professional evidence system: projects, decisions, artefacts and outcomes across digital learning, product design and learning technology.',
   },
 };

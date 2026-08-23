@@ -1,117 +1,76 @@
-import Seo from "../components/Seo.jsx";
-import { SectionHead } from "../components/Section.jsx";
-import ProjectCard from "../components/ProjectCard.jsx";
-import Button from "../components/Button.jsx";
-import { workIndex } from "../content/projects.js";
-import { graph, personSchema, breadcrumbSchema } from "../lib/schema.js";
-import "./Work.css";
+import { Link } from 'react-router-dom';
+import Seo from '../components/Seo.jsx';
+import { recordIndex, workProjects } from '../content/the-record.js';
+import { breadcrumbSchema, graph, personSchema } from '../lib/schema.js';
+import './Work.css';
 
-/**
- * Work index — V3.
- *
- * V2 showed four projects as a lead card plus a grid. With thirteen routed
- * pages that structure stops communicating: everything looks equally
- * important, and the CASA program reads as one project among many rather
- * than as six years of work with five projects inside it.
- *
- * V3 uses three tiers, and the hierarchy is carried by scale and position
- * rather than by a badge:
- *
- *   1. Featured program  full-width, image left, five named projects listed
- *                          on the right. Nothing else on the page is this size.
- *   2. Case studies        a two-column grid, with the flagship taking the
- *                          first, wider cell.
- *   3. Prototypes          a compact row, visibly smaller, under a heading
- *                          that says what it is.
- *
- * Each tier has a real <h2>, so the hierarchy is in the document outline and
- * not only in the layout.
- */
 export default function Work() {
-  const { programme, featured, lab } = workIndex;
-  const [flagship, ...rest] = featured;
-
   return (
     <>
       <Seo
-        title="Selected work | Glenn Hammond"
-        description="A six-year learning program inside Australia's aviation safety regulator, a live wellbeing platform, an award-winning schools migration, and vocational, health and safety learning for education and government."
+        title="Work — THE RECORD | Glenn Hammond"
+        description="A curated field of projects and professional evidence across digital learning, product design, platforms, interaction and production systems."
         path="/work"
-        jsonLd={graph(
-          personSchema,
-          breadcrumbSchema([
-            { name: "Home", href: "/" },
-            { name: "Work", href: "/work" },
-          ])
-        )}
+        jsonLd={graph(personSchema, breadcrumbSchema([{ name: 'Work', href: '/work' }]))}
       />
 
-      <div className="section container">
-        <SectionHead
-          level={1}
-          eyebrow="Selected work"
-          headline="Learning systems in practice."
-          standfirst="From enterprise Moodle platforms and production systems to Storyline simulations and organisational design systems, these projects demonstrate how strategy becomes implementation."
-        />
-
-        {/* --- Tier 1: the program -------------------------------------- */}
-        <section className="work-tier" aria-labelledby="tier-programme">
-          <h2 id="tier-programme" className="work-tier__title">
-            <span className="work-tier__num" aria-hidden="true">01</span>
-            Featured program
-          </h2>
-          <ProjectCard project={programme} size="programme" eager />
-        </section>
-
-        {/* --- Tier 2: case studies ---------------------------------------- */}
-        <section className="work-tier" aria-labelledby="tier-cases">
-          <h2 id="tier-cases" className="work-tier__title">
-            <span className="work-tier__num" aria-hidden="true">02</span>
-            Case studies
-          </h2>
-          <ul className="work-grid">
-            <li className="work-grid__lead">
-              <ProjectCard project={flagship} size="lead" />
-            </li>
-            {rest.map((project) => (
-              <li key={project.slug}>
-                <ProjectCard project={project} />
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* --- Tier 3: prototypes ------------------------------------------ */}
-        <section className="work-tier" aria-labelledby="tier-lab">
-          <h2 id="tier-lab" className="work-tier__title">
-            <span className="work-tier__num" aria-hidden="true">03</span>
-            Prototypes and experiments
-          </h2>
-          <p className="work-tier__note">
-            Self-directed builds, not client deliverables. They show technique
-            and technical depth; they do not claim outcomes.
-          </p>
-          <ul className="work-lab">
-            {lab.map((project) => (
-              <li key={project.slug}>
-                <ProjectCard project={project} size="small" />
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <aside className="work-more">
+      <header className="record-work-head">
+        <div className="container record-work-head__inner">
+          <p className="eyebrow">THE RECORD · Work</p>
+          <h1>Work is where the practice is composed, not catalogued.</h1>
           <p>
-            Fifteen years produced more than this. Much of it sits inside
-            regulators, schools and former employers, and is not mine to
-            publish. If you need to see something closer to your own situation,
-            ask. I can usually talk you through it even when I cannot show it.
+            Projects establish territory. Records narrow attention to the decisions,
+            making and evidence worth examining inside it.
           </p>
-          <Button to="/contact" variant="outline">
-            Ask about a sector
-          </Button>
-        </aside>
-      </div>
+        </div>
+      </header>
+
+      <section className="record-field" aria-label="Selected project territories">
+        <div className="container record-field__grid">
+          {workProjects.map((project, index) => {
+            const records = project.recordIds.map((id) => recordIndex.recordById[id]);
+            const placement = project.placements.find((item) => item.surface === 'work');
+            const featured = Boolean(placement?.featured);
+
+            return (
+              <article
+                key={project.id}
+                className={`record-anchor record-anchor--${index + 1}${featured ? ' record-anchor--lead' : ''}`}
+                aria-labelledby={`record-anchor-${project.id}`}
+              >
+                <div className="record-anchor__index" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+                <div className="record-anchor__body">
+                  <p className="record-anchor__meta">{project.organisation} · {project.period}</p>
+                  <h2 id={`record-anchor-${project.id}`}>
+                    <Link to={project.path}>{project.title}</Link>
+                  </h2>
+                  <p className="record-anchor__proposition">{project.proposition}</p>
+                  <p className="record-anchor__role">{project.role}</p>
+
+                  {records.map((record) => (
+                    <div
+                      key={record.id}
+                      className="record-point"
+                      aria-labelledby={`work-record-${record.id}`}
+                    >
+                      <p className="record-point__context">{record.centre}</p>
+                      <h3 id={`work-record-${record.id}`}>
+                        <Link to={record.path}>{record.title}</Link>
+                      </h3>
+                      <p>{record.worthExamining}</p>
+                      <Link className="record-point__action" to={record.path}>
+                        Examine the decision
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }

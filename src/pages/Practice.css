@@ -1,214 +1,485 @@
-/* --- Rise / Storyline feature cards -----------------------------------------
-   Sits between the layer tabs and the engagements list: two specialist
-   practices inside the four-layer model, not a fifth destination. */
-
-.builds {
-  background: var(--paper-raised);
-  border-block: 1px solid var(--rule-strong);
-}
-
-.builds__cards {
-  display: grid;
-  gap: var(--space-6);
-}
-
-@media (min-width: 700px) {
-  .builds__cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-7) var(--space-6);
-  }
-}
-
-.builds__card {
-  border-top: 3px solid var(--brass);
-  padding-top: var(--space-4);
-}
-
-.builds__title {
-  font-size: var(--size-display-m);
-}
-
-.builds__body {
-  margin-top: var(--space-3);
-  line-height: 1.55;
-  color: var(--text-secondary);
-  max-width: 46ch;
-}
-
-.builds__cta {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-top: var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--text);
-  text-decoration: none;
-  border-bottom: 2px solid var(--brass);
-}
-
-.builds__cta:hover {
-  color: var(--mineral-ink);
-  border-bottom-color: var(--mineral-ink);
-}
-
-.builds__compare {
-  margin-top: var(--section-y-tight);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--rule);
-  max-width: var(--measure);
-}
-
-.builds__compare-title {
-  font-size: var(--size-display-s, 1.35rem);
-  margin-bottom: var(--space-3);
-}
-
-.builds__compare p {
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-.builds__compare p + p {
-  margin-top: var(--space-3);
-}
-
-/* v3.1: off ink. This is a list of routine content panels, not a moment of
-   emphasis, and at full height it was reading as an environment rather than
-   as punctuation. */
-.engagements {
-  background: var(--paper);
-  border-block: 1px solid var(--rule-strong);
-}
-
-.engagements__list {
-  display: grid;
-  gap: var(--space-6);
-}
-
-@media (min-width: 900px) {
-  .engagements__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-7) var(--space-6);
-  }
-}
-
-.engagement {
-  border-top: 3px solid var(--brass);
-  padding-top: var(--space-4);
-}
-
-.engagement__kind {
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--brass-ink);
-}
-
-.engagement__title {
-  margin-top: var(--space-2);
-  font-size: var(--size-display-m);
-}
-
-.engagement__lede {
-  margin-top: var(--space-3);
-  font-size: var(--size-lede);
-  line-height: 1.5;
-  color: var(--text);
-  max-width: 40ch;
-}
-
-.engagement__layers {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-4);
-  list-style: none;
-  margin: var(--space-4) 0 0;
-  padding: 0 0 var(--space-4);
+.practice-head {
+  padding-block: clamp(64px, 9vw, 136px) clamp(48px, 7vw, 96px);
   border-bottom: 1px solid var(--rule);
 }
 
-.engagement__detail {
-  display: grid;
-  gap: var(--space-1) var(--space-4);
-  margin: var(--space-4) 0 0;
-}
-
-@media (min-width: 560px) {
-  .engagement__detail {
-    grid-template-columns: 11rem minmax(0, 1fr);
-  }
-}
-
-.engagement__detail dt {
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brass-ink);
-  padding-top: 0.35em;
-}
-
-.engagement__detail dd {
-  margin: 0 0 var(--space-3);
-  font-size: var(--size-small);
-  line-height: 1.5;
-  color: var(--text-secondary);
-}
-
-.engagement__detail dd ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.engagement__detail dd li {
-  position: relative;
-  padding-left: var(--space-4);
-  padding-block: 2px;
-}
-
-.engagement__detail dd li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.85em;
-  width: 9px;
-  height: 1px;
-  background: var(--brass);
-}
-
-.engagement__evidence a {
-  color: var(--text);
-  text-decoration-color: var(--brass);
-}
-
-.engagement__note {
-  margin-top: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  border-left: 3px solid var(--brass);
-  background: var(--paper-raised);
-  font-size: var(--size-small);
-  color: var(--text-secondary);
-}
-
-.engagements__close {
-  margin-top: var(--section-y-tight);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--rule);
+.practice-head__inner {
   display: grid;
   gap: var(--space-4);
   justify-items: start;
 }
 
-.engagements__close p {
+.practice-head h1 {
+  max-width: 15ch;
+  font-size: clamp(2.7rem, 7.3vw, 6.7rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+}
+
+.practice-head__lede {
+  max-width: 57ch;
+  font-size: var(--size-lede);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.practice-head__integrity,
+.practice-boundary {
+  max-width: 68ch;
+  font-size: var(--size-small);
+  line-height: 1.6;
+  color: var(--text-tertiary);
+}
+
+.practice-head__integrity {
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--brass);
+}
+
+.practice-text-link,
+.practice-evidence__inspect,
+.practice-close__primary,
+.practice-close__secondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+.practice-text-link,
+.practice-evidence__inspect {
+  color: var(--text);
+  text-decoration-color: var(--brass);
+}
+
+.practice-section {
+  padding-block: var(--section-y);
+}
+
+.practice-section--raised {
+  background: var(--paper-raised);
+  border-block: 1px solid var(--rule);
+}
+
+.practice-section__head {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 700px;
+}
+
+.practice-section__head--wide {
+  max-width: 900px;
+}
+
+.practice-section__head h2,
+.practice-close h2 {
+  max-width: 18ch;
+  font-size: clamp(2.15rem, 5.2vw, 4.9rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.practice-section__head > p:not(.eyebrow):not(.practice-classification),
+.practice-specialist-layout > .practice-section__head > p:not(.eyebrow),
+.practice-contract__inner > .practice-section__head > p:not(.eyebrow) {
+  font-size: var(--size-lede);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.practice-claims {
+  margin-top: clamp(56px, 8vw, 112px);
+  display: grid;
+  gap: clamp(72px, 10vw, 144px);
+}
+
+.practice-claim {
+  display: grid;
+  gap: clamp(40px, 6vw, 84px);
+  padding-top: var(--space-5);
+  border-top: 2px solid var(--rule-strong);
+}
+
+.practice-claim__interpretation {
+  align-self: start;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.practice-classification,
+.practice-evidence-label,
+.practice-evidence__meta,
+.practice-mode__index,
+.practice-evolution__period {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+}
+
+.practice-classification,
+.practice-evidence__meta {
+  color: var(--brass-ink);
+}
+
+.practice-evidence-label,
+.practice-mode__index,
+.practice-evolution__period {
+  color: var(--text-tertiary);
+}
+
+.practice-claim h3,
+.practice-emerging__claim h3,
+.practice-specialist h3 {
+  max-width: 21ch;
+  font-size: clamp(1.75rem, 3.8vw, 3.45rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.practice-claim__summary {
+  max-width: 58ch;
+  font-size: var(--size-lede);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.practice-claim__evidence {
+  min-width: 0;
+}
+
+.practice-evidence {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.practice-evidence__item {
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.practice-evidence__record {
+  margin-top: var(--space-2);
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-  line-height: 1.3;
-  letter-spacing: var(--tracking-heading);
-  max-width: 40ch;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.2;
+}
+
+.practice-evidence__record a,
+.practice-specialist__records a {
+  text-decoration-thickness: 2px;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.2em;
+}
+
+.practice-evidence__record a:hover,
+.practice-evidence__record a:focus-visible,
+.practice-specialist__records a:hover,
+.practice-specialist__records a:focus-visible {
+  text-decoration-color: var(--brass);
+}
+
+.practice-evidence__note {
+  margin-top: var(--space-2);
+  max-width: 58ch;
+  font-size: var(--size-small);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.practice-evidence__inspect {
+  margin-top: var(--space-2);
+}
+
+.practice-modes__phrase {
+  margin-top: var(--space-3);
+  max-width: 19ch;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--text);
+}
+
+.practice-lens-boundary {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 86ch;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule);
+}
+
+.practice-modes {
+  margin-top: clamp(48px, 7vw, 88px);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.practice-mode {
+  min-width: 0;
+  padding-top: var(--space-4);
+  border-top: 3px solid var(--brass);
+}
+
+.practice-mode h3 {
+  margin-top: var(--space-2);
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+}
+
+.practice-mode p:last-child {
+  margin-top: var(--space-3);
+  max-width: 42ch;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.practice-evolution-layout,
+.practice-specialist-layout,
+.practice-contract__inner {
+  display: grid;
+  gap: clamp(48px, 8vw, 112px);
+}
+
+.practice-evolution {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.practice-evolution__item {
+  position: relative;
+  padding: 0 0 clamp(44px, 6vw, 72px) var(--space-5);
+  border-left: 2px solid var(--rule-strong);
+}
+
+.practice-evolution__item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 0.35rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brass);
+}
+
+.practice-evolution__item:last-child {
+  padding-bottom: 0;
+}
+
+.practice-evolution__item h3 {
+  margin-top: var(--space-2);
+  max-width: 25ch;
+  font-size: clamp(1.35rem, 2.8vw, 2.2rem);
+  line-height: 1.12;
+}
+
+.practice-evolution__item > p:not(.practice-evolution__period) {
+  margin-top: var(--space-2);
+  max-width: 54ch;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.practice-evolution__item .practice-text-link {
+  margin-top: var(--space-2);
+}
+
+.practice-emerging {
+  margin-top: clamp(48px, 7vw, 88px);
+  display: grid;
+  gap: clamp(48px, 7vw, 88px);
+}
+
+.practice-emerging__claim {
+  align-self: start;
+  padding-top: var(--space-4);
+  border-top: 3px solid var(--brass);
+}
+
+.practice-emerging__claim h3,
+.practice-emerging__claim .practice-claim__summary,
+.practice-emerging__claim .practice-boundary {
+  margin-top: var(--space-3);
+}
+
+.practice-evidence--compact {
+  margin-top: var(--space-5);
+}
+
+.practice-specialist {
+  align-self: start;
+  padding: var(--space-5);
+  background: var(--paper-raised);
+  border-top: 3px solid var(--brass);
+}
+
+.practice-specialist > p:not(.practice-classification) {
+  margin-top: var(--space-3);
+  max-width: 56ch;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.practice-specialist__records {
+  list-style: none;
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.practice-specialist__records li {
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+}
+
+.practice-specialist__records a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.practice-specialist .practice-text-link {
+  margin-top: var(--space-4);
+}
+
+.practice-contract {
+  background: var(--paper-raised);
+  border-block: 1px solid var(--rule-strong);
+}
+
+.practice-contract__definitions {
+  margin: 0;
+  display: grid;
+}
+
+.practice-contract__definitions > div {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+
+.practice-contract__definitions dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+.practice-contract__definitions dd {
+  margin: var(--space-2) 0 0;
+  max-width: 52ch;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.practice-close {
+  padding-block: clamp(64px, 9vw, 128px);
+}
+
+.practice-close__inner {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.practice-close__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-3);
+}
+
+.practice-close__primary,
+.practice-close__secondary {
+  padding-inline: var(--space-4);
+  text-decoration: none;
+}
+
+.practice-close__primary {
+  color: var(--action-foreground);
+  background: var(--action-primary);
+  border: 1px solid var(--action-primary);
+}
+
+.practice-close__primary:hover {
+  background: var(--action-hover);
+  border-color: var(--action-hover);
+}
+
+.practice-close__secondary {
+  color: var(--text);
+  border: 1px solid var(--action-primary);
+}
+
+.practice-close__secondary:hover {
+  color: var(--text);
+  background: var(--state-hover-surface);
+  border-color: var(--action-hover);
+}
+
+@media (min-width: 760px) {
+  .practice-modes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .practice-emerging {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 920px) {
+  .practice-claim {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  }
+
+  .practice-modes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .practice-evolution-layout,
+  .practice-specialist-layout,
+  .practice-contract__inner {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 520px) {
+  .practice-head h1 {
+    font-size: clamp(2.45rem, 14vw, 4.1rem);
+  }
+
+  .practice-section__head h2,
+  .practice-close h2 {
+    font-size: clamp(2rem, 11vw, 3.2rem);
+  }
+
+  .practice-specialist {
+    padding-inline: var(--space-4);
+  }
+
+  .practice-evolution__item {
+    padding-left: var(--space-4);
+  }
+
+  .practice-close__actions {
+    display: grid;
+    width: 100%;
+  }
+
+  .practice-close__primary,
+  .practice-close__secondary {
+    justify-content: center;
+    width: 100%;
+  }
 }

@@ -1,61 +1,40 @@
-import { STATUS, SOURCE } from "./status.js";
-
-/**
- * Site settings, navigation and contact details.
- * Facts here are confirmed in the Master Copy unless marked otherwise.
- */
+import { STATUS, SOURCE } from './status.js';
 
 export const site = {
-  origin: "https://glennhammond.com",
-  name: "Glenn Hammond",
-
-  /** Practice descriptor replaces the role title as the headline claim (BP §8).
-   *  The role title is retained on About and in structured data. */
-  descriptor: "Learning systems",
-  descriptorLong:
-    "Learning systems · platforms, programmes and the production behind them",
-  roleTitle: "Digital Learning & Experience Designer",
-
+  origin: 'https://glennhammond.com',
+  name: 'Glenn Hammond',
+  descriptor: 'Digital design and learning practice',
+  descriptorLong: 'Digital design and learning practice · Brisbane, working Australia-wide',
+  roleTitle: 'Digital Learning & Experience Designer',
   location: {
-    locality: "Brisbane",
-    region: "QLD",
-    country: "AU",
-    served: "Australia",
-    label: "Brisbane, working with organisations Australia-wide",
+    locality: 'Brisbane',
+    region: 'QLD',
+    country: 'AU',
+    served: 'Australia',
+    label: 'Brisbane, working with organisations Australia-wide',
     status: STATUS.APPROVED,
     source: SOURCE.MASTER_COPY,
   },
-
-  email: "glenn@glennhammond.com",
-  linkedin: "https://linkedin.com/in/glennhammond/",
-
-  /** Confirmed in the Master Copy: "Set the enquiry response expectation to
-   *  within 24 hours." Rendered on Contact and in the homepage close. */
+  email: 'glenn@glennhammond.com',
+  linkedin: 'https://linkedin.com/in/glennhammond/',
   responsePromise: {
-    text: "I read every enquiry myself and reply within 24 hours.",
-    short: "Replies within 24 hours",
+    text: 'I read every enquiry myself and reply within 24 hours.',
+    short: 'Replies within 24 hours',
     status: STATUS.APPROVED,
     source: SOURCE.MASTER_COPY,
   },
-
-  /** Confirmed decision: availability status is not displayed. */
   showAvailability: false,
-  /** Confirmed decision: no public downloadable CV. */
   offerCvDownload: false,
 };
 
-/** Five destinations (BP §11). "Practice" replaces "Services" — implemented
- *  per docs/SEO-MIGRATION.md (18 Aug 2026); see DECISIONS.md #19. */
+// Locked public IA. Home is available through the identity/wordmark.
 export const nav = [
-  { href: "/work", label: "Work" },
-  { href: "/practice", label: "Practice" },
-  { href: "/about", label: "About" },
+  { href: '/work', label: 'Work' },
+  { href: '/practice', label: 'Practice' },
 ];
-
-export const navCta = { href: "/contact", label: "Start a conversation" };
-
+export const navCta = { href: '/contact', label: 'Contact' };
 export const footerLinks = [
   ...nav,
-  { href: "/contact", label: "Contact" },
-  { href: "/privacy", label: "Privacy" },
+  { href: '/contact', label: 'Contact' },
+  { href: '/privacy', label: 'Privacy' },
 ];
