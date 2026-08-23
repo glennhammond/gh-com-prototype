@@ -1,0 +1,125 @@
+.knowledge-article__header {
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.knowledge-article__updated {
+  margin: 1.5rem 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-tertiary);
+}
+
+.knowledge-article__intro,
+.knowledge-article__copy {
+  display: grid;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-top: 2rem;
+  color: var(--text-secondary);
+  font-size: var(--step-1);
+  line-height: 1.7;
+}
+
+.knowledge-article__section--raised {
+  background: var(--paper-raised);
+}
+
+.knowledge-article__list {
+  display: grid;
+  gap: 0;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.knowledge-article__list li {
+  position: relative;
+  padding: 1rem 0 1rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.knowledge-article__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.65rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--brass);
+  border-radius: 50%;
+}
+
+.knowledge-article__steps {
+  display: grid;
+  gap: 0;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.knowledge-article__steps li {
+  display: grid;
+  grid-template-columns: minmax(3rem, 4.5rem) 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.knowledge-article__steps span {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--brass-ink);
+}
+
+.knowledge-article__steps p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.knowledge-article__sources {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+.knowledge-article__sources .eyebrow,
+.knowledge-article__sources .display-m {
+  color: inherit;
+}
+
+.knowledge-article__sources ul {
+  display: grid;
+  gap: 0;
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.knowledge-article__sources li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.knowledge-article__sources a {
+  display: block;
+  padding: 1rem 0;
+  color: var(--on-ink);
+  text-underline-offset: 0.2em;
+}
+
+.knowledge-article__sources .evnote {
+  margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  .knowledge-article__steps li {
+    grid-template-columns: 2.25rem 1fr;
+    gap: 1rem;
+  }
+}
