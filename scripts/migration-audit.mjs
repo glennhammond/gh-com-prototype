@@ -6,6 +6,12 @@ import {
   migrationDependencies,
   validateMigrationPolicy,
 } from '../src/content/migration-policy.js';
+import {
+  inheritedArticleRedirects,
+  inheritedPortfolioRedirects,
+  inheritedRedirectCapture,
+  validateInheritedRedirectPolicy,
+} from '../src/content/inherited-redirect-policy.js';
 
 const DIST = 'dist';
 const SITE = 'https://glennhammond.com';
@@ -23,16 +29,31 @@ if (!existsSync(DIST)) {
 }
 
 validateMigrationPolicy();
+validateInheritedRedirectPolicy();
 
 const sitemapPath = join(DIST, 'sitemap.xml');
 const sitemap = existsSync(sitemapPath) ? readFileSync(sitemapPath, 'utf8') : '';
 const vercel = JSON.parse(readFileSync('vercel.json', 'utf8'));
 const redirects = vercel.redirects ?? [];
-const redirectBySource = new Map(redirects.map((item) => [item.source, item]));
+
+const unconditionalRedirects = redirects.filter((item) => !(item.has?.length));
+const redirectBySource = new Map(unconditionalRedirects.map((item) => [item.source, item]));
 
 const routeFileExists = (path) => {
   const file = path === '/' ? 'index.html' : `${path.replace(/^\//, '')}.html`;
   return existsSync(join(DIST, file));
+};
+
+const assertRedirect = (source, destination, label = source) => {
+  const configured = redirectBySource.get(source);
+  if (!configured) {
+    fail(`${label}: launch-ready redirect is missing from vercel.json`);
+    return;
+  }
+  if (!configured.permanent) fail(`${label}: redirect is not permanent`);
+  if (configured.destination !== destination) {
+    fail(`${label}: redirect points to ${configured.destination}, expected ${destination}`);
+  }
 };
 
 for (const entry of liveSitemapMigration) {
@@ -50,15 +71,44 @@ for (const entry of liveSitemapMigration) {
   }
 
   if (entry.action === 'redirect') {
-    const configured = redirectBySource.get(entry.path);
-    if (!configured) {
-      fail(`${entry.path}: launch-ready redirect is missing from vercel.json`);
-    } else {
-      if (!configured.permanent) fail(`${entry.path}: redirect is not permanent`);
-      if (configured.destination !== entry.destination) {
-        fail(`${entry.path}: redirect points to ${configured.destination}, expected ${entry.destination}`);
-      }
-    }
+    assertRedirect(entry.path, entry.destination, entry.path);
+  }
+}
+
+// Historical portfolio rules are separate from today's sitemap because they
+// can still carry external equity. Only exact, semantically proven mappings
+// may become launch-ready.
+for (const entry of inheritedPortfolioRedirects) {
+  if (!entry.launchReady) continue;
+  if (entry.action === 'redirect') {
+    assertRedirect(entry.source, entry.destination, entry.source);
+  }
+}
+
+// A preserved WordPress identity has two historical source forms: its old
+// pretty permalink and /?p=<id>. Both must bypass any intermediate legacy page
+// and resolve directly to the same final canonical destination.
+for (const entry of inheritedArticleRedirects) {
+  if (!entry.launchReady) continue;
+  if (!routeFileExists(entry.destination)) {
+    fail(`${entry.slug}: preserved destination ${entry.destination} is not statically rendered`);
+  }
+  if (!sitemap.includes(`<loc>${SITE}${entry.destination}</loc>`)) {
+    fail(`${entry.slug}: preserved destination ${entry.destination} is not in the canonical sitemap`);
+  }
+
+  assertRedirect(`/${entry.slug}`, entry.destination, `/${entry.slug}`);
+
+  const queryRedirect = redirects.find((redirect) =>
+    redirect.source === '/' &&
+    redirect.permanent &&
+    redirect.destination === entry.destination &&
+    redirect.has?.some((condition) =>
+      condition.type === 'query' && condition.key === 'p' && condition.value === entry.wpId,
+    ),
+  );
+  if (!queryRedirect) {
+    fail(`/?p=${entry.wpId}: preserved WordPress query redirect to ${entry.destination} is missing`);
   }
 }
 
@@ -68,11 +118,24 @@ const unresolvedByAction = unresolved.reduce((acc, entry) => {
   return acc;
 }, {});
 
+const unresolvedInheritedArticles = inheritedArticleRedirects.filter((entry) => !entry.launchReady);
+const inheritedByAction = unresolvedInheritedArticles.reduce((acc, entry) => {
+  acc[entry.action] = (acc[entry.action] ?? 0) + 1;
+  return acc;
+}, {});
+const unresolvedPortfolio = inheritedPortfolioRedirects.filter((entry) => !entry.launchReady);
+
 note(
   `Live-estate snapshot: ${liveSitemapCapture.urlCount} sitemap URLs captured from ${liveSitemapCapture.sourceProject} on ${liveSitemapCapture.capturedAt}`,
 );
 note(`${liveSitemapMigration.length - unresolved.length} live URLs are launch-ready; ${unresolved.length} still require disposition/implementation`);
-note(`Unresolved by action: ${Object.entries(unresolvedByAction).map(([action, count]) => `${action} ${count}`).join(', ')}`);
+note(`Live unresolved by action: ${Object.entries(unresolvedByAction).map(([action, count]) => `${action} ${count}`).join(', ')}`);
+note(
+  `Inherited WordPress estate: ${inheritedRedirectCapture.articleCount} article identities / ${inheritedRedirectCapture.articleSourceForms} historical source forms captured from ${inheritedRedirectCapture.sourceProject}`,
+);
+note(`${inheritedArticleRedirects.length - unresolvedInheritedArticles.length} inherited articles are launch-ready; ${unresolvedInheritedArticles.length} remain unresolved`);
+note(`Inherited unresolved by action: ${Object.entries(inheritedByAction).map(([action, count]) => `${action} ${count}`).join(', ')}`);
+note(`${inheritedPortfolioRedirects.length - unresolvedPortfolio.length} inherited portfolio rule(s) are launch-ready; ${unresolvedPortfolio.length} remain unresolved`);
 
 const dependencyGaps = Object.entries(migrationDependencies)
   .filter(([, ready]) => !ready)
@@ -86,6 +149,12 @@ if (unresolved.length) {
   const message = `${unresolved.length} currently live sitemap URLs are not cutover-ready`;
   if (PUBLISHING) fail(message);
   else warn(`${message}; review builds remain allowed`);
+}
+
+if (unresolvedInheritedArticles.length || unresolvedPortfolio.length) {
+  const message = `${unresolvedInheritedArticles.length} inherited article identities and ${unresolvedPortfolio.length} inherited portfolio rules are not cutover-ready`;
+  if (PUBLISHING) fail(message);
+  else warn(`${message}; inherited authority remains protected from cutover`);
 }
 
 if (dependencyGaps.length) {
