@@ -16,13 +16,23 @@
       "permanent": true
     },
     {
-      "source": "/services/xapi-analytics",
-      "destination": "/practice",
+      "source": "/portfolio",
+      "destination": "/work",
       "permanent": true
     },
     {
-      "source": "/design-system/:slug*",
-      "destination": "/practice",
+      "source": "/profile",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio/migration-to-moodle",
+      "destination": "/work/connect-and-learn/concurrent-migration",
+      "permanent": true
+    },
+    {
+      "source": "/work/casa-flight-examiner-rating",
+      "destination": "/work/casa/flight-examiner-rating",
       "permanent": true
     }
   ],
