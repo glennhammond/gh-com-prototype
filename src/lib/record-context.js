@@ -1,6 +1,8 @@
 import {
   connectedServiceArtefact,
   connectedServiceRecord,
+  ruokProductionArtefact,
+  ruokProductionRecord,
   contextualEntryRecord,
   dailyWellbeingArtefact,
   wellbeingProject,
@@ -48,6 +50,22 @@ export function getRecordContext(pathname) {
       subject: connectedServiceArtefact.title,
       contextHref: connectedServiceRecord.path,
       contextLabel: connectedServiceRecord.title,
+    };
+  }
+  if (pathname === ruokProductionRecord.path) {
+    return {
+      resolution: 'record',
+      subject: ruokProductionRecord.title,
+      contextHref: wellbeingProject.path,
+      contextLabel: wellbeingProject.title,
+    };
+  }
+  if (pathname === ruokProductionArtefact.path) {
+    return {
+      resolution: 'artefact',
+      subject: ruokProductionArtefact.title,
+      contextHref: ruokProductionRecord.path,
+      contextLabel: ruokProductionRecord.title,
     };
   }
   if (pathname.startsWith('/work/')) {

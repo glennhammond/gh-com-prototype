@@ -5,6 +5,8 @@ import RecordPage from './pages/RecordPage.jsx';
 import ArtefactPage from './pages/ArtefactPage.jsx';
 import ConnectedServiceRecord from './pages/ConnectedServiceRecord.jsx';
 import ConnectedServiceArtefact from './pages/ConnectedServiceArtefact.jsx';
+import RuokProductionRecord from './pages/RuokProductionRecord.jsx';
+import RuokQualificationArtefact from './pages/RuokQualificationArtefact.jsx';
 import Contact from './pages/Contact.jsx';
 import Privacy from './pages/Privacy.jsx';
 import NotFound from './pages/NotFound.jsx';
@@ -38,6 +40,14 @@ export const routes = [
       {
         path: 'work/wellbeing-studio/connected-service/relationship-model',
         element: <ConnectedServiceArtefact />,
+      },
+      {
+        path: 'work/wellbeing-studio/ruok-production-slice',
+        element: <RuokProductionRecord />,
+      },
+      {
+        path: 'work/wellbeing-studio/ruok-production-slice/qualification-map',
+        element: <RuokQualificationArtefact />,
       },
 
       // Historical project routes remain available during migration.

@@ -37,7 +37,7 @@ export const recordContent = validateRecordContent({
           detail: 'The product model widened from content discovery to a connected service: Action, Return and Explore lead to useful experiences, with human-led activity, campaigns, programs and personal continuity connected only where they add value.',
         },
       ],
-      recordIds: ['ws-contextual-entry', 'ws-connected-service'],
+      recordIds: ['ws-contextual-entry', 'ws-connected-service', 'ws-ruok-production-slice'],
       placements: [{ surface: 'work', order: 1, role: 'anchor', featured: true }],
     },
     {
@@ -139,6 +139,39 @@ export const recordContent = validateRecordContent({
       evidenceBoundary: 'This Record supports the adopted product and experience architecture and the reasoning that produced it. It does not claim that the full connected-service model has been implemented or validated with participants; those remain separate evidence questions.',
       artefactIds: ['ws-connected-service-map'],
       evidenceClaimIds: ['ws-service-layer-definition', 'ws-action-return-explore', 'ws-human-connected', 'ws-earned-continuity'],
+      relationships: [
+        {
+          id: 'ws-service-proved-through-ruok',
+          verb: 'continued-in',
+          label: 'the R U OK? Day production slice',
+          href: '/work/wellbeing-studio/ruok-production-slice',
+          note: 'The broader connected-service architecture was deliberately reduced to a bounded campaign slice so the product could be proven without attempting to ship every future capability.',
+        },
+      ],
+    },
+
+    {
+      id: 'ws-ruok-production-slice',
+      projectId: 'wellbeing-studio-2027',
+      path: '/work/wellbeing-studio/ruok-production-slice',
+      title: 'Taking R U OK? Day through a production vertical slice',
+      centre: 'Production implementation',
+      context: 'Wellbeing Studio 2027 · R U OK? Day Production Pilot 01',
+      happened: 'R U OK? Day was chosen as the first bounded production release of Wellbeing Studio 2027. The work moved from a defined campaign slice into a real application route, then through participant-access, staging, Magic Link remediation, content integration and runtime-reliability work. Later product specification deliberately removed mandatory authentication from the RUOK core journey, retaining the proven infrastructure without allowing it to dictate participant behaviour.',
+      worthExamining: 'The useful evidence is not simply that a campaign page was built. It is the sequence of product definition, vertical-slice implementation, production qualification and subsequent correction: engineering proved what the platform could do, while product architecture retained the authority to decide what participants should actually be required to do.',
+      tension: 'The campaign had a fixed 10 September date and substantial infrastructure already existed. The risk ran in both directions: throw away proven foundations and build a disposable microsite, or preserve every existing capability — including authentication and inherited navigation — simply because it had already been engineered.',
+      move: 'Use R U OK? Day as a constrained production proof inside the real Studio. Extend durable content, media, database, deployment and access foundations; qualify them in deliberate gates; then re-evaluate each capability against participant value rather than treating implementation as product authority.',
+      making: [
+        'Commit 2c56d6b established the R U OK? Day Experience vertical slice inside the production application.',
+        'Run 02 added Neon Auth and participant authentication while preserving the existing Proof 06D operational foundations.',
+        'Run 03 established staging participant-access readiness; commit 0efb911 then fixed Magic Link redemption that could strand an authenticated participant on the sign-in route.',
+        'The production branch was hardened for staging Postgres reliability at c6a23a8 rather than accepting local success as production proof.',
+        'Launch Candidate 1 content integration progressed separately through 1892158, d57e18b and 72966d4, including media-integrity remediation before production reconciliation.',
+        'The later canonical RUOK Product Specification removed mandatory authentication, registration and profile behaviour from the core campaign journey: keep the engine, redraw the product around it.',
+      ],
+      evidenceBoundary: 'This Record supports the existence and sequence of the production slice, participant-access proof, staging/reliability work and later product correction. It does not claim the 10 September campaign has occurred, that participant outcomes have been measured, or that every launch gate is already closed.',
+      artefactIds: ['ws-ruok-production-gates'],
+      evidenceClaimIds: ['ws-ruok-slice-definition', 'ws-ruok-vertical-slice', 'ws-ruok-production-hardening', 'ws-ruok-auth-correction'],
       relationships: [],
     },
   ],
@@ -166,6 +199,19 @@ export const recordContent = validateRecordContent({
       summary: 'A non-linear product model showing how real working situations and CYA encounters enter through Action, Return or Explore, resolve in a Useful Experience, and connect to human-led activity, campaigns, programs or personal continuity only when useful.',
       accessibility: 'The model is reconstructed as ordered semantic groups rather than a flattened diagram image, preserving its relationships for keyboard, enlarged-text and assistive-technology use.',
       evidenceClaimIds: ['ws-service-layer-definition', 'ws-action-return-explore', 'ws-human-connected', 'ws-earned-continuity'],
+    },
+
+    {
+      id: 'ws-ruok-production-gates',
+      recordId: 'ws-ruok-production-slice',
+      path: '/work/wellbeing-studio/ruok-production-slice/qualification-map',
+      title: 'R U OK? Day production qualification map',
+      kind: 'Production evidence',
+      provenance: 'Wellbeing Studio Production Pilot 01 · August 2026',
+      status: 'Implemented and qualified evidence',
+      summary: 'A production-history map showing how a bounded campaign definition became a technical vertical slice, participant-access proof, staging and runtime hardening, parallel launch-candidate content integration, and finally a product correction that kept proven infrastructure while removing mandatory authentication from the core RUOK journey.',
+      accessibility: 'The production history is represented as semantic staged evidence with explicit commit identifiers, branch relationships and product corrections rather than as a flattened Git graph screenshot.',
+      evidenceClaimIds: ['ws-ruok-slice-definition', 'ws-ruok-vertical-slice', 'ws-ruok-production-hardening', 'ws-ruok-auth-correction'],
     },
   ],
   evidenceClaims: [
@@ -218,6 +264,35 @@ export const recordContent = validateRecordContent({
       basis: 'WS27 Interaction Architecture and Product Blueprint continuity principles.',
       limitation: 'Specific continuity mechanics remain subject to product-slice implementation and participant validation.',
     },
+
+    {
+      id: 'ws-ruok-slice-definition',
+      state: 'intended',
+      claim: 'R U OK? Day was defined as the first bounded production slice of Wellbeing Studio 2027 rather than a launch of the full future product.',
+      basis: 'Definitive Product Definition — R U OK? Day Experience Production Pilot 01 v1.1 and subsequent RUOK Product Specification.',
+      limitation: 'The exact participant contract evolved after the initial pilot definition, particularly around mandatory authentication.',
+    },
+    {
+      id: 'ws-ruok-vertical-slice',
+      state: 'implemented',
+      claim: 'A real R U OK? Day Experience vertical slice was implemented in the Wellbeing Studio production codebase at commit 2c56d6b, followed by participant-authentication and staging-access work.',
+      basis: 'Production repository history: 2c56d6b, f18b5f8 and 043f4fe.',
+      limitation: 'Implementation proves platform capability and delivery progress; it does not by itself establish final participant requirements.',
+    },
+    {
+      id: 'ws-ruok-production-hardening',
+      state: 'implemented',
+      claim: 'The pilot moved beyond local implementation into staging-access, Magic Link remediation, production Postgres reliability and Launch Candidate content/media integration work.',
+      basis: 'Production and LC1 repository history including 0efb911, c6a23a8, 1892158, d57e18b and 72966d4.',
+      limitation: 'The source history shows parallel production and LC1 branches at this point; this claim does not collapse that branch state into a fictional single linear release.',
+    },
+    {
+      id: 'ws-ruok-auth-correction',
+      state: 'intended',
+      claim: 'The later canonical RUOK Product Specification removed mandatory authentication, registration, participant profile and dashboard behaviour from the core campaign journey while retaining authentication as valuable WS27 infrastructure.',
+      basis: 'RUOK Product Specification v1: explicit non-requirements and “Keep the engine. Redraw the product around it.”',
+      limitation: 'This is a product-architecture correction after technical proof; it does not mean the earlier authentication engineering was wasted or invalid.',
+    },
   ],
 });
 
@@ -230,6 +305,8 @@ export const contextualEntryRecord = recordIndex.recordById['ws-contextual-entry
 export const dailyWellbeingArtefact = recordIndex.artefactById['ws-daily-wellbeing-journey'];
 export const connectedServiceRecord = recordIndex.recordById['ws-connected-service'];
 export const connectedServiceArtefact = recordIndex.artefactById['ws-connected-service-map'];
+export const ruokProductionRecord = recordIndex.recordById['ws-ruok-production-slice'];
+export const ruokProductionArtefact = recordIndex.artefactById['ws-ruok-production-gates'];
 export const wellbeingRecords = wellbeingProject.recordIds.map((id) => recordIndex.recordById[id]);
 export const recordRoutePaths = [
   ...recordContent.records.map((record) => record.path),

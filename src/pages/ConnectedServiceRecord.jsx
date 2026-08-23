@@ -20,6 +20,7 @@ const modes = [
 export default function ConnectedServiceRecord() {
   const record = connectedServiceRecord;
   const claims = record.evidenceClaimIds.map((id) => recordIndex.claimById[id]);
+  const relationship = record.relationships[0];
 
   return (
     <>
@@ -141,6 +142,18 @@ export default function ConnectedServiceRecord() {
           </ol>
         </div>
       </section>
+
+      {relationship && (
+        <section className="record-band record-band--ink on-ink" aria-labelledby="service-relationship-title">
+          <div className="container record-relationship">
+            <p className="record-relationship__verb">Continued in</p>
+            <h2 id="service-relationship-title">
+              <Link to={relationship.href}>{relationship.label}</Link>
+            </h2>
+            <p>{relationship.note}</p>
+          </div>
+        </section>
+      )}
     </>
   );
 }
