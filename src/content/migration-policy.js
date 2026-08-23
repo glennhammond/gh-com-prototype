@@ -63,10 +63,10 @@ export const liveSitemapMigration = [
   },
   {
     path: '/blog/master-slides-in-storyline',
-    action: 'rebuild',
-    launchReady: false,
+    action: 'retain',
+    launchReady: true,
     destination: '/blog/master-slides-in-storyline',
-    reason: 'Contains substantial first-hand Storyline experience and production-system thinking. Preserve/rebuild at the existing URL unless first-party performance evidence overturns this.',
+    reason: 'Recovered first-hand Storyline production guidance has been rebuilt against current Storyline 360 feature documentation and preserved at the existing canonical URL.',
   },
   {
     path: '/blog/scenario-writing-that-feels-real',
