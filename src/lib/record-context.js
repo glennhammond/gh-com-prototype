@@ -1,156 +1,58 @@
-import {
-  casaJudgementArtefact,
-  casaJudgementRecord,
-  casaProject,
-  connectDependencyArtefact,
-  connectMigrationRecord,
-  connectProject,
-  connectedServiceArtefact,
-  connectedServiceRecord,
-  ruokProductionArtefact,
-  ruokProductionRecord,
-  tafeConversationArtefact,
-  tafeConversationRecord,
-  tafeProject,
-  contextualEntryRecord,
-  dailyWellbeingArtefact,
-  wellbeingProject,
-} from '../content/the-record.js';
+import { recordContent, recordIndex } from '../content/the-record.js';
 
+const projectByPath = new Map(recordContent.projects.map((project) => [project.path, project]));
+const recordByPath = new Map(recordContent.records.map((record) => [record.path, record]));
+const artefactByPath = new Map(recordContent.artefacts.map((artefact) => [artefact.path, artefact]));
+
+/**
+ * Resolve THE RECORD scope from the canonical content model.
+ *
+ * This deliberately derives parentage from Project → Record → Artefact data
+ * rather than maintaining a second route hierarchy inside the Meta-Frame.
+ * Direct entry therefore receives the same widening context as internal
+ * navigation, and adding evidence to the model does not require another
+ * hand-authored path table here.
+ */
 export function getRecordContext(pathname) {
   if (pathname === '/work') {
     return { resolution: 'work', subject: 'Work' };
   }
-  if (pathname === wellbeingProject.path) {
+
+  const project = projectByPath.get(pathname);
+  if (project) {
     return {
       resolution: 'project',
-      subject: wellbeingProject.title,
+      subject: project.title,
       contextHref: '/work',
       contextLabel: 'Work',
     };
   }
-  if (pathname === contextualEntryRecord.path) {
+
+  const record = recordByPath.get(pathname);
+  if (record) {
+    const parentProject = recordIndex.projectById[record.projectId];
     return {
       resolution: 'record',
-      subject: contextualEntryRecord.title,
-      contextHref: wellbeingProject.path,
-      contextLabel: wellbeingProject.title,
+      subject: record.title,
+      contextHref: parentProject.path,
+      contextLabel: parentProject.title,
     };
   }
-  if (pathname === dailyWellbeingArtefact.path) {
+
+  const artefact = artefactByPath.get(pathname);
+  if (artefact) {
+    const parentRecord = recordIndex.recordById[artefact.recordId];
     return {
       resolution: 'artefact',
-      subject: dailyWellbeingArtefact.title,
-      contextHref: contextualEntryRecord.path,
-      contextLabel: contextualEntryRecord.title,
+      subject: artefact.title,
+      contextHref: parentRecord.path,
+      contextLabel: parentRecord.title,
     };
   }
-  if (pathname === connectedServiceRecord.path) {
-    return {
-      resolution: 'record',
-      subject: connectedServiceRecord.title,
-      contextHref: wellbeingProject.path,
-      contextLabel: wellbeingProject.title,
-    };
-  }
-  if (pathname === connectedServiceArtefact.path) {
-    return {
-      resolution: 'artefact',
-      subject: connectedServiceArtefact.title,
-      contextHref: connectedServiceRecord.path,
-      contextLabel: connectedServiceRecord.title,
-    };
-  }
-  if (pathname === ruokProductionRecord.path) {
-    return {
-      resolution: 'record',
-      subject: ruokProductionRecord.title,
-      contextHref: wellbeingProject.path,
-      contextLabel: wellbeingProject.title,
-    };
-  }
-  if (pathname === ruokProductionArtefact.path) {
-    return {
-      resolution: 'artefact',
-      subject: ruokProductionArtefact.title,
-      contextHref: ruokProductionRecord.path,
-      contextLabel: ruokProductionRecord.title,
-    };
-  }
-  if (pathname === casaProject.path) {
-    return {
-      resolution: 'project',
-      subject: casaProject.title,
-      contextHref: '/work',
-      contextLabel: 'Work',
-    };
-  }
-  if (pathname === casaJudgementRecord.path) {
-    return {
-      resolution: 'record',
-      subject: casaJudgementRecord.title,
-      contextHref: casaProject.path,
-      contextLabel: casaProject.title,
-    };
-  }
-  if (pathname === casaJudgementArtefact.path) {
-    return {
-      resolution: 'artefact',
-      subject: casaJudgementArtefact.title,
-      contextHref: casaJudgementRecord.path,
-      contextLabel: casaJudgementRecord.title,
-    };
-  }
-  if (pathname === tafeProject.path) {
-    return {
-      resolution: 'project',
-      subject: tafeProject.title,
-      contextHref: '/work',
-      contextLabel: 'Work',
-    };
-  }
-  if (pathname === tafeConversationRecord.path) {
-    return {
-      resolution: 'record',
-      subject: tafeConversationRecord.title,
-      contextHref: tafeProject.path,
-      contextLabel: tafeProject.title,
-    };
-  }
-  if (pathname === tafeConversationArtefact.path) {
-    return {
-      resolution: 'artefact',
-      subject: tafeConversationArtefact.title,
-      contextHref: tafeConversationRecord.path,
-      contextLabel: tafeConversationRecord.title,
-    };
-  }
-  if (pathname === connectProject.path) {
-    return {
-      resolution: 'project',
-      subject: connectProject.title,
-      contextHref: '/work',
-      contextLabel: 'Work',
-    };
-  }
-  if (pathname === connectMigrationRecord.path) {
-    return {
-      resolution: 'record',
-      subject: connectMigrationRecord.title,
-      contextHref: connectProject.path,
-      contextLabel: connectProject.title,
-    };
-  }
-  if (pathname === connectDependencyArtefact.path) {
-    return {
-      resolution: 'artefact',
-      subject: connectDependencyArtefact.title,
-      contextHref: connectMigrationRecord.path,
-      contextLabel: connectMigrationRecord.title,
-    };
-  }
+
   if (pathname.startsWith('/work/')) {
     return { resolution: 'legacy-work', subject: 'Work' };
   }
+
   return null;
 }
