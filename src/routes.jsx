@@ -7,9 +7,9 @@ import NotFound from './pages/NotFound.jsx';
 /**
  * THE RECORD production integration.
  *
- * Home and legacy case-study records are lazy route modules. This keeps the
- * legacy projects.js content estate out of the route-independent client
- * bootstrap while preserving static rendering through vite-react-ssg.
+ * Home, canonical evidence and retained knowledge are statically rendered.
+ * Legacy case-study records remain lazy migration routes so the old content
+ * estate stays out of the route-independent client bootstrap.
  */
 export const routes = [
   {
@@ -92,6 +92,13 @@ export const routes = [
       { path: 'work/casa/:slug', lazy: () => import('./routes/LegacyCasaRoute.jsx') },
 
       { path: 'practice', lazy: () => import('./routes/PracticeRoute.jsx') },
+
+      // Retained standalone knowledge. These are deliberately not a blog
+      // hierarchy; each URL must independently earn preservation/indexability.
+      {
+        path: 'principles-of-assessment-and-rules-of-evidence',
+        lazy: () => import('./routes/AssessmentPrinciplesRoute.jsx'),
+      },
 
       // Legacy service/about routes remain addressable pending Go-Live SEO
       // qualification, but are no longer part of the public global IA.
