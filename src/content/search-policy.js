@@ -1,7 +1,5 @@
 // @ts-check
 
-import { knowledgeResources } from './knowledge.js';
-
 /**
  * Search/indexability policy for THE RECORD and retained standalone knowledge.
  *
@@ -10,6 +8,10 @@ import { knowledgeResources } from './knowledge.js';
  * Artefacts are opt-in: omission is a validation error, not an implicit index.
  * Retained knowledge is similarly explicit and remains outside a conventional
  * blog/content cadence.
+ *
+ * Important dependency boundary: this module is imported by Seo.jsx and is
+ * therefore route-independent client code. It must contain policy metadata
+ * only; retained knowledge body content remains in lazy route modules.
  */
 
 /** @typedef {'project'|'record'|'artefact'|'knowledge'|'supporting'} DirectEntryType */
@@ -197,23 +199,19 @@ export function validateSearchPolicy(content) {
   return searchPolicy;
 }
 
+/**
+ * Policy-shape validation only. Exact coverage against retained knowledge body
+ * content is performed by the server-side search audit, preserving the client
+ * dependency boundary above.
+ */
 export function validateKnowledgeSearchPolicy() {
-  const ids = new Set(knowledgeResources.map((resource) => resource.id));
-  assert(Object.keys(knowledgeSearchPolicy).length === knowledgeResources.length, 'knowledge policy must cover every retained knowledge resource exactly once');
-
-  for (const resource of knowledgeResources) {
-    const policy = knowledgeSearchPolicy[resource.id];
-    assert(policy, `knowledge ${resource.id} has no search policy`);
-    assert(typeof policy.index === 'boolean', `knowledge ${resource.id}.index must be boolean`);
-    assert(typeof policy.sitemap === 'boolean', `knowledge ${resource.id}.sitemap must be boolean`);
-    assert(!policy.sitemap || policy.index, `knowledge ${resource.id} cannot be in sitemap while noindex`);
-    assert(policy.canonical === resource.path, `knowledge ${resource.id} canonical must equal ${resource.path}`);
-    assert(policy.directEntry === 'knowledge', `knowledge ${resource.id} must use directEntry=knowledge`);
-    assert(typeof policy.reason === 'string' && policy.reason.trim().length > 20, `knowledge ${resource.id} needs an editorial/search rationale`);
-  }
-
-  for (const id of Object.keys(knowledgeSearchPolicy)) {
-    assert(ids.has(id), `knowledge search policy contains unknown id ${id}`);
+  for (const [id, policy] of Object.entries(knowledgeSearchPolicy)) {
+    assert(typeof policy.index === 'boolean', `knowledge ${id}.index must be boolean`);
+    assert(typeof policy.sitemap === 'boolean', `knowledge ${id}.sitemap must be boolean`);
+    assert(!policy.sitemap || policy.index, `knowledge ${id} cannot be in sitemap while noindex`);
+    assert(typeof policy.canonical === 'string' && policy.canonical.startsWith('/'), `knowledge ${id} needs an absolute canonical path`);
+    assert(policy.directEntry === 'knowledge', `knowledge ${id} must use directEntry=knowledge`);
+    assert(typeof policy.reason === 'string' && policy.reason.trim().length > 20, `knowledge ${id} needs an editorial/search rationale`);
   }
 
   return knowledgeSearchPolicy;
@@ -264,7 +262,7 @@ export function getIndexableEvidencePaths(content) {
 
 export function getIndexableKnowledgePaths() {
   validateKnowledgeSearchPolicy();
-  return knowledgeResources
-    .filter((resource) => knowledgeSearchPolicy[resource.id].sitemap)
-    .map((resource) => knowledgeSearchPolicy[resource.id].canonical);
+  return Object.values(knowledgeSearchPolicy)
+    .filter((policy) => policy.sitemap)
+    .map((policy) => policy.canonical);
 }
