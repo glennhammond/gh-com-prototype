@@ -25,7 +25,7 @@ export default function About() {
     <>
       <Seo
         title="About | Glenn Hammond"
-        description="Fifteen years across learning design, digital platforms, media production and educational technology — in aviation, education, government, early learning and workplace wellbeing."
+        description="Fifteen years across digital learning, product and experience design, platforms and production systems — in aviation, education, government, early learning and workplace wellbeing."
         path="/about"
         jsonLd={graph(
           personSchema,
@@ -129,7 +129,7 @@ export default function About() {
           </div>
 
           <p className="about__more">
-            Wondering what working together actually looks like?{" "}
+            Wondering what working together looks like?{" "}
             <Link to="/practice">See how the practice is organised</Link>
           </p>
         </div>
