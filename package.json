@@ -3,14 +3,14 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "V3 prototype for glennhammond.com. Programme architecture, expanded portfolio, evidence-led case studies.",
+  "description": "THE RECORD production prototype for glennhammond.com: Project, Record and Artefact evidence architecture.",
   "scripts": {
     "dev": "vite",
-    "build": "vite-react-ssg build && node scripts/postbuild.mjs",
+    "build": "vite-react-ssg build && node scripts/postbuild.mjs && node scripts/verify.mjs",
     "preview": "vite preview --port 4173",
     "images": "node scripts/images.mjs",
     "verify": "node scripts/verify.mjs",
-    "check": "npm run build && npm run verify && npm run audit",
+    "check": "npm run build && npm run audit",
     "audit": "node scripts/audit.mjs"
   },
   "dependencies": {
