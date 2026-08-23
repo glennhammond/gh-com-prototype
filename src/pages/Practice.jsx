@@ -48,7 +48,7 @@ export default function Practice() {
     <>
       <Seo
         title="Practice — How the work holds together | Glenn Hammond"
-        description="An evidence-backed interpretation of the recurring decisions across Glenn Hammond’s digital product, learning, interaction, platform and production work."
+        description="An evidence-backed reading of the recurring decisions across Glenn Hammond’s digital product, learning, interaction, platform and production work."
         path="/practice"
         jsonLd={graph(
           personSchema,
@@ -65,13 +65,13 @@ export default function Practice() {
           <p className="eyebrow">THE RECORD · Practice</p>
           <h1>The work changes. Certain decisions keep recurring.</h1>
           <p className="practice-head__lede">
-            Practice is the interpretation layer of THE RECORD. It does not list everything I can do or
-            impose a method on old projects. It names the ways of working that recur when the evidence is
-            read across projects.
+            Practice reads across THE RECORD. It does not list everything I can do or impose a method on old
+            projects. It names the ways of working that recur when the evidence is read across projects.
           </p>
           <p className="practice-head__integrity">
-            <strong>Evidence boundary.</strong> The public Record is selective and currently reaches back to
-            2015. It should not be read as thirty years of canonical evidence.
+            <strong>What the evidence covers.</strong> The public evidence shown here is selective and currently
+            reaches back to 2015. The thirty-year line on Home describes career continuity, not thirty years of
+            work published in THE RECORD.
           </p>
           <Link className="practice-text-link" to="/work">
             Enter THE RECORD
@@ -85,8 +85,8 @@ export default function Practice() {
             <p className="eyebrow">Practice claims · 01</p>
             <h2 id="practice-recurring-title">What keeps recurring</h2>
             <p>
-              These are the strongest claims the current evidence field supports. Each is tested across all
-              four canonical Project territories before it earns the label proven recurring practice.
+              These are the strongest claims the current evidence field supports. Each is tested against all
+              four Projects currently in THE RECORD before it earns the label proven recurring practice.
             </p>
           </div>
 
@@ -114,8 +114,8 @@ export default function Practice() {
       <section className="practice-section practice-section--raised" aria-labelledby="practice-movement-title">
         <div className="container">
           <div className="practice-section__head practice-section__head--wide">
-            <p className="eyebrow">Current operating description</p>
-            <h2 id="practice-movement-title">A current way of describing the movement</h2>
+            <p className="eyebrow">Current practice</p>
+            <h2 id="practice-movement-title">How I describe the work now</h2>
             <p className="practice-modes__phrase">Frame. Shape. Make. Evidence.</p>
             <p>
               These are overlapping modes, not four steps. The language describes the practice now; it is
@@ -142,7 +142,7 @@ export default function Practice() {
       <section className="practice-section" aria-labelledby="practice-evolution-title">
         <div className="container practice-evolution-layout">
           <div className="practice-section__head">
-            <p className="eyebrow">Evolution · selective canonical field</p>
+            <p className="eyebrow">Evolution · selective evidence</p>
             <h2 id="practice-evolution-title">The practice has widened in altitude</h2>
             <p>
               The public Record shows a widening unit of design since 2015: from interaction and facilitated
@@ -241,7 +241,7 @@ export default function Practice() {
           <dl className="practice-contract__definitions">
             <div>
               <dt>{practiceClassifications['proven-recurring']}</dt>
-              <dd>Supported across multiple canonical Project territories.</dd>
+              <dd>Supported across multiple Projects in THE RECORD.</dd>
             </div>
             <div>
               <dt>{practiceClassifications['strong-emerging']}</dt>
@@ -253,7 +253,7 @@ export default function Practice() {
             </div>
             <div>
               <dt>{practiceClassifications['aspirational-positioning']}</dt>
-              <dd>Direction or biography that may be useful, but is not presented as canonical proof.</dd>
+              <dd>Direction or biography that may be useful, but is not presented as proven by THE RECORD.</dd>
             </div>
           </dl>
         </div>
@@ -262,7 +262,7 @@ export default function Practice() {
       <section className="practice-close" aria-labelledby="practice-close-title">
         <div className="container practice-close__inner">
           <p className="eyebrow">Follow the evidence</p>
-          <h2 id="practice-close-title">The interpretation is only useful if you can inspect the work.</h2>
+          <h2 id="practice-close-title">The claims are only useful if you can inspect the work.</h2>
           <div className="practice-close__actions">
             <Link className="practice-close__primary" to="/work">
               Examine THE RECORD
