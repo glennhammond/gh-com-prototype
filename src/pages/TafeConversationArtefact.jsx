@@ -201,10 +201,10 @@ export default function TafeConversationArtefact() {
             <div>
               <h2>What changed in the record</h2>
               <p>
-                An older portfolio description characterised Pathways as self-directed.
-                The later editorial inventory corrects that interpretation: it was
-                designed for facilitator-led Years 8–9 school sessions supporting a
-                careers adviser’s conversation. This Artefact follows that newer evidence.
+                Earlier portfolio copy described Pathways as self-directed. Recovered
+                project evidence shows that description was wrong: Pathways was designed
+                for facilitator-led Years 8–9 school sessions supporting a careers adviser’s
+                conversation. This Artefact follows the corrected evidence.
               </p>
             </div>
             <div>
