@@ -67,7 +67,7 @@ export const recordContent = validateRecordContent({
       role: 'Learning design, interaction design, Storyline development and media production',
       altitude: 'Artefact · experience · system',
       trajectory: [],
-      recordIds: [],
+      recordIds: ['casa-examiner-judgement'],
       placements: [{ surface: 'work', order: 3, role: 'anchor' }],
     },
     {
@@ -174,6 +174,30 @@ export const recordContent = validateRecordContent({
       evidenceClaimIds: ['ws-ruok-slice-definition', 'ws-ruok-vertical-slice', 'ws-ruok-production-hardening', 'ws-ruok-auth-correction'],
       relationships: [],
     },
+
+    {
+      id: 'casa-examiner-judgement',
+      projectId: 'casa-ferc',
+      path: '/work/casa/flight-examiner-rating/examiner-judgement',
+      title: 'Designing for examiner judgement rather than recall',
+      centre: 'Assessment reasoning',
+      context: 'CASA Flight Examiner Rating Course · regulated professional learning',
+      happened: 'The Flight Examiner Rating course was designed for air transport, helicopter and general aviation examiners — experienced assessors who test the people who train and test other pilots. The learning made regulatory hierarchy, principles of assessment and the broader dimensions of competency visible as connected reasoning structures rather than treating the regulation as content to restate.',
+      worthExamining: 'The audience already worked with regulation and assessment. Generic compliance treatment would have reduced credibility and attention. The design problem was how to preserve regulatory accuracy while giving senior practitioners structures they could recognise and apply in assessment judgement.',
+      tension: 'Restating the regulation accurately produces a document rather than a learning program. Simplifying until it is easy risks becoming untrue. In a safety-regulated domain, that is not merely an editorial weakness.',
+      move: 'Treat the examiner’s reasoning as the centre of the experience. Show which instrument governs, establish a shared model of assessment quality, and make the dimensions of competency visible beyond the single task an examiner can observe directly.',
+      making: [
+        'The Civil Aviation Act, regulations, orders, Part 61 licensing, Manual of Standards and Flight Examiner Handbook were mapped as an instrument hierarchy rather than presented as unrelated references.',
+        'Validity, reliability, flexibility and objectivity were made explicit as principles for judging assessment quality.',
+        'The four dimensions of competency were visualised so task skills could be considered alongside task management, contingency management and job-role environment skills.',
+        'Scenario and assessment design was grounded in the regulatory instrument hierarchy rather than separated from it.',
+        'Responsive delivery was treated as part of the learning context because examiners work at aerodromes and in aircraft, not only at desks.',
+      ],
+      evidenceBoundary: 'This Record supports the audience, design intent, assessment structure and recovered course artefacts. It does not claim participant numbers, evaluation results or measured program outcomes, which are not published in the source record.',
+      artefactIds: ['casa-assessment-reasoning-sequence'],
+      evidenceClaimIds: ['casa-examiner-audience', 'casa-reasoning-design', 'casa-assessment-principles', 'casa-competency-model'],
+      relationships: [],
+    },
   ],
   artefacts: [
     {
@@ -212,6 +236,19 @@ export const recordContent = validateRecordContent({
       summary: 'A production-history map showing how a bounded campaign definition became a technical vertical slice, participant-access proof, staging and runtime hardening, parallel launch-candidate content integration, and finally a product correction that kept proven infrastructure while removing mandatory authentication from the core RUOK journey.',
       accessibility: 'The production history is represented as semantic staged evidence with explicit commit identifiers, branch relationships and product corrections rather than as a flattened Git graph screenshot.',
       evidenceClaimIds: ['ws-ruok-slice-definition', 'ws-ruok-vertical-slice', 'ws-ruok-production-hardening', 'ws-ruok-auth-correction'],
+    },
+
+    {
+      id: 'casa-assessment-reasoning-sequence',
+      recordId: 'casa-examiner-judgement',
+      path: '/work/casa/flight-examiner-rating/examiner-judgement/assessment-reasoning',
+      title: 'Assessment reasoning sequence',
+      kind: 'Course evidence',
+      provenance: 'CASA Flight Examiner Rating Course · recovered production artefacts',
+      status: 'Implemented evidence',
+      summary: 'Three course artefacts showing the progression from regulatory instrument hierarchy, through principles of assessment, to the four dimensions of competency that inform examiner judgement.',
+      accessibility: 'Each recovered course image is presented with intrinsic dimensions, responsive sources, descriptive alt text and an explanatory caption so the evidentiary sequence remains understandable without depending on the screenshot alone.',
+      evidenceClaimIds: ['casa-reasoning-design', 'casa-assessment-principles', 'casa-competency-model'],
     },
   ],
   evidenceClaims: [
@@ -293,6 +330,34 @@ export const recordContent = validateRecordContent({
       basis: 'RUOK Product Specification v1: explicit non-requirements and “Keep the engine. Redraw the product around it.”',
       limitation: 'This is a product-architecture correction after technical proof; it does not mean the earlier authentication engineering was wasted or invalid.',
     },
+
+    {
+      id: 'casa-examiner-audience',
+      state: 'implemented',
+      claim: 'The Flight Examiner Rating Course and Professional Development Program served air transport, helicopter and general aviation examiners whose work includes assessing people who train and test other pilots.',
+      basis: 'Existing CASA Flight Examiner Rating project record and course metadata.',
+      limitation: 'Audience numbers are not published and are not claimed.',
+    },
+    {
+      id: 'casa-reasoning-design',
+      state: 'implemented',
+      claim: 'The course design centred the reasoning behind regulated assessment rather than treating the program as a restatement of rules.',
+      basis: 'Existing CASA project reframe and recovered course evidence.',
+      limitation: 'This claim describes the designed learning approach; it does not claim measured behaviour change.',
+    },
+    {
+      id: 'casa-assessment-principles',
+      state: 'implemented',
+      claim: 'The course explicitly represented validity, reliability, flexibility and objectivity as Principles of Assessment.',
+      basis: 'Recovered CASA course screen “Principles of Assessment”.',
+    },
+    {
+      id: 'casa-competency-model',
+      state: 'implemented',
+      claim: 'The course visualised competency as four dimensions: task skills, task management, contingency management and job-role environment skills.',
+      basis: 'Recovered CASA competency iceberg diagram and existing project caption.',
+      limitation: 'The artefact supports the model presented in the course; it does not establish evaluation outcomes.',
+    },
   ],
 });
 
@@ -307,6 +372,10 @@ export const connectedServiceRecord = recordIndex.recordById['ws-connected-servi
 export const connectedServiceArtefact = recordIndex.artefactById['ws-connected-service-map'];
 export const ruokProductionRecord = recordIndex.recordById['ws-ruok-production-slice'];
 export const ruokProductionArtefact = recordIndex.artefactById['ws-ruok-production-gates'];
+export const casaProject = recordIndex.projectById['casa-ferc'];
+export const casaJudgementRecord = recordIndex.recordById['casa-examiner-judgement'];
+export const casaJudgementArtefact = recordIndex.artefactById['casa-assessment-reasoning-sequence'];
+export const casaRecords = casaProject.recordIds.map((id) => recordIndex.recordById[id]);
 export const wellbeingRecords = wellbeingProject.recordIds.map((id) => recordIndex.recordById[id]);
 export const recordRoutePaths = [
   ...recordContent.records.map((record) => record.path),

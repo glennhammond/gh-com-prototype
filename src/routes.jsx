@@ -1,12 +1,5 @@
 import Layout from './components/Layout.jsx';
 import Work from './pages/Work.jsx';
-import RecordProject from './pages/RecordProject.jsx';
-import RecordPage from './pages/RecordPage.jsx';
-import ArtefactPage from './pages/ArtefactPage.jsx';
-import ConnectedServiceRecord from './pages/ConnectedServiceRecord.jsx';
-import ConnectedServiceArtefact from './pages/ConnectedServiceArtefact.jsx';
-import RuokProductionRecord from './pages/RuokProductionRecord.jsx';
-import RuokQualificationArtefact from './pages/RuokQualificationArtefact.jsx';
 import Contact from './pages/Contact.jsx';
 import Privacy from './pages/Privacy.jsx';
 import NotFound from './pages/NotFound.jsx';
@@ -26,28 +19,44 @@ export const routes = [
       { index: true, lazy: () => import('./routes/HomeRoute.jsx') },
       { path: 'work', element: <Work /> },
 
-      // THE RECORD: explicit canonical Project → Record → Artefact routes.
-      { path: 'work/wellbeing-studio', element: <RecordProject /> },
-      { path: 'work/wellbeing-studio/contextual-entry', element: <RecordPage /> },
+      // THE RECORD: canonical Project → Record → Artefact routes.
+      // Detail surfaces are lazy route modules so evidence-specific code stays
+      // out of the route-independent bootstrap while SSG still pre-renders them.
+      { path: 'work/wellbeing-studio', lazy: () => import('./routes/WellbeingProjectRoute.jsx') },
+      { path: 'work/wellbeing-studio/contextual-entry', lazy: () => import('./routes/ContextualEntryRecordRoute.jsx') },
       {
         path: 'work/wellbeing-studio/contextual-entry/daily-wellbeing-journey',
-        element: <ArtefactPage />,
+        lazy: () => import('./routes/DailyWellbeingArtefactRoute.jsx'),
       },
       {
         path: 'work/wellbeing-studio/connected-service',
-        element: <ConnectedServiceRecord />,
+        lazy: () => import('./routes/ConnectedServiceRecordRoute.jsx'),
       },
       {
         path: 'work/wellbeing-studio/connected-service/relationship-model',
-        element: <ConnectedServiceArtefact />,
+        lazy: () => import('./routes/ConnectedServiceArtefactRoute.jsx'),
       },
       {
         path: 'work/wellbeing-studio/ruok-production-slice',
-        element: <RuokProductionRecord />,
+        lazy: () => import('./routes/RuokProductionRecordRoute.jsx'),
       },
       {
         path: 'work/wellbeing-studio/ruok-production-slice/qualification-map',
-        element: <RuokQualificationArtefact />,
+        lazy: () => import('./routes/RuokQualificationArtefactRoute.jsx'),
+      },
+
+      // CASA: first non-WS THE RECORD territory.
+      {
+        path: 'work/casa/flight-examiner-rating',
+        lazy: () => import('./routes/CasaRecordProjectRoute.jsx'),
+      },
+      {
+        path: 'work/casa/flight-examiner-rating/examiner-judgement',
+        lazy: () => import('./routes/CasaJudgementRecordRoute.jsx'),
+      },
+      {
+        path: 'work/casa/flight-examiner-rating/examiner-judgement/assessment-reasoning',
+        lazy: () => import('./routes/CasaJudgementArtefactRoute.jsx'),
       },
 
       // Historical project routes remain available during migration.

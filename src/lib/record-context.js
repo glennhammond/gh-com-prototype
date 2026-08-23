@@ -1,4 +1,7 @@
 import {
+  casaJudgementArtefact,
+  casaJudgementRecord,
+  casaProject,
   connectedServiceArtefact,
   connectedServiceRecord,
   ruokProductionArtefact,
@@ -66,6 +69,30 @@ export function getRecordContext(pathname) {
       subject: ruokProductionArtefact.title,
       contextHref: ruokProductionRecord.path,
       contextLabel: ruokProductionRecord.title,
+    };
+  }
+  if (pathname === casaProject.path) {
+    return {
+      resolution: 'project',
+      subject: casaProject.title,
+      contextHref: '/work',
+      contextLabel: 'Work',
+    };
+  }
+  if (pathname === casaJudgementRecord.path) {
+    return {
+      resolution: 'record',
+      subject: casaJudgementRecord.title,
+      contextHref: casaProject.path,
+      contextLabel: casaProject.title,
+    };
+  }
+  if (pathname === casaJudgementArtefact.path) {
+    return {
+      resolution: 'artefact',
+      subject: casaJudgementArtefact.title,
+      contextHref: casaJudgementRecord.path,
+      contextLabel: casaJudgementRecord.title,
     };
   }
   if (pathname.startsWith('/work/')) {

@@ -48,14 +48,18 @@ export default function Work() {
                   <p className="record-anchor__proposition">{project.proposition}</p>
                   <p className="record-anchor__role">{project.role}</p>
 
-                  {isWellbeing && records.map((record, recordIndexValue) => (
+                  {records.length > 0 && records.map((record, recordIndexValue) => (
                     <div
                       key={record.id}
                       className={`record-point${recordIndexValue === 1 ? ' record-point--system' : ''}`}
                       aria-labelledby={`work-record-${record.id}`}
                     >
                       <p className="record-point__context">
-                        {recordIndexValue === 0 ? 'Inside this territory' : 'The product widened'}
+                        {recordIndexValue === 0
+                          ? 'Inside this territory'
+                          : isWellbeing
+                            ? 'The product widened'
+                            : 'Another decision'}
                       </p>
                       <h3 id={`work-record-${record.id}`}>
                         <Link to={record.path}>{record.title}</Link>
