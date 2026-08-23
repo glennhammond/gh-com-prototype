@@ -18,6 +18,7 @@ import { testimonials } from "../src/content/testimonials.js";
 import { isPublishable } from "../src/content/status.js";
 import {
   getIndexableEvidencePaths,
+  getIndexableKnowledgePaths,
   shouldNoindexPath,
   validateSearchPolicy,
 } from "../src/content/search-policy.js";
@@ -165,6 +166,11 @@ const REQUIRED = {
     "Frame. Shape. Make. Evidence.",
     "The public Record is selective",
   ],
+  "principles-of-assessment-and-rules-of-evidence.html": [
+    "The four Principles of Assessment",
+    "The four Rules of Evidence",
+    "Why validity appears twice",
+  ],
   "about.html": ["Where I have done it"],
   "contact.html": ["Tell me what is happening", "What does the problem seem closest to"],
   "privacy.html": ["must not go live"],
@@ -208,9 +214,9 @@ for (const [file, source] of Object.entries(html)) {
 }
 
 /* --- 6b. noindex — Search 02 contract --------------------------------------
-   404/privacy are deliberately excluded. Canonical evidence follows the
-   explicit search policy. Still-rendered legacy Work/service pages are
-   addressable for migration/review but quarantined from indexation. */
+   404/privacy are deliberately excluded. Canonical evidence and retained
+   knowledge follow explicit search policy. Still-rendered legacy Work/service
+   pages are addressable for migration/review but quarantined from indexation. */
 
 for (const [file, source] of Object.entries(html)) {
   const route = fileToRoute(file);
@@ -240,6 +246,7 @@ const routes = new Set([
   "/privacy",
   ...projects.map((p) => p.path),
   ...recordRoutePaths,
+  ...getIndexableKnowledgePaths(),
 ]);
 
 for (const [file, source] of Object.entries(html)) {
@@ -330,23 +337,23 @@ if (largestChunkKb > BUDGET.chunk) fail(`JS chunk budget exceeded: ${largestChun
 if (cssKb > BUDGET.css) fail(`CSS budget exceeded: ${cssKb}KB > ${BUDGET.css}KB`);
 if (largestImageKb > BUDGET.image) fail(`Image budget exceeded: ${largestImageKb}KB > ${BUDGET.image}KB`);
 
-/* --- 9. Third-party requests ------------------------------------------------ */
+/* --- 9. Third-party runtime requests ---------------------------------------
+   External evidence citations are ordinary links and are allowed. This gate
+   blocks load-time third-party dependencies only (scripts/images/media etc),
+   because those affect privacy, reliability and performance. */
 
-const ALLOWED_EXTERNAL_LINKS = ["isq-elearning-design-system.vercel.app"];
-const EVIDENCE_LINKS = ["https://isq-elearning-design-system.vercel.app"];
+const ALLOWED_EXTERNAL_RESOURCES = ["isq-elearning-design-system.vercel.app"];
 
 for (const [file, source] of Object.entries(html)) {
-  const srcs = [...source.matchAll(/\bsrc="(https?:\/\/[^"]+)"/g)].map((m) => m[1]);
-  const hrefs = [...source.matchAll(/\bhref="(https?:\/\/[^"]+)"/g)]
+  const externalSrcs = [...source.matchAll(/\bsrc="(https?:\/\/[^"]+)"/g)]
     .map((m) => m[1])
-    .filter((u) => !EVIDENCE_LINKS.some((allowed) => u.startsWith(allowed)));
-
-  const external = [...srcs, ...hrefs]
     .filter((u) => !u.startsWith("https://glennhammond.com"))
     .filter((u) => !u.includes("schema.org"))
-    .filter((u) => !u.includes("linkedin.com"))
-    .filter((u) => !ALLOWED_EXTERNAL_LINKS.some((allowed) => u.includes(allowed)));
-  if (external.length) fail(`Third-party resource referenced in ${file}: ${external.join(", ")}`);
+    .filter((u) => !ALLOWED_EXTERNAL_RESOURCES.some((allowed) => u.includes(allowed)));
+
+  if (externalSrcs.length) {
+    fail(`Third-party runtime resource referenced in ${file}: ${externalSrcs.join(", ")}`);
+  }
 }
 
 /* --- 10. Sitemap integrity — Search 02 ------------------------------------- */
@@ -362,9 +369,15 @@ if (!existsSync(sitemapPath)) {
   if (!/<loc>[^<]*\/practice<\/loc>/.test(sitemap)) fail("Sitemap is missing the canonical /practice URL");
 
   const indexableEvidence = getIndexableEvidencePaths(recordContent);
+  const indexableKnowledge = getIndexableKnowledgePaths();
   for (const route of indexableEvidence) {
     if (!sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) {
       fail(`Sitemap is missing indexable evidence route ${route}`);
+    }
+  }
+  for (const route of indexableKnowledge) {
+    if (!sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) {
+      fail(`Sitemap is missing retained knowledge route ${route}`);
     }
   }
   for (const route of recordRoutePaths.filter((route) => !indexableEvidence.includes(route))) {
@@ -372,7 +385,7 @@ if (!existsSync(sitemapPath)) {
       fail(`Sitemap includes evidence route explicitly excluded by search policy: ${route}`);
     }
   }
-  note(`Sitemap: ${indexableEvidence.length} evidence routes follow the explicit indexability contract; /services and /privacy absent; no fabricated lastmod`);
+  note(`Sitemap: ${indexableEvidence.length} evidence routes + ${indexableKnowledge.length} retained knowledge route(s) follow the explicit indexability contract; /services and /privacy absent; no fabricated lastmod`);
 }
 
 /* --- Report ----------------------------------------------------------------- */
