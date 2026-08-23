@@ -83,7 +83,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  min-width: 0;
   min-height: 44px;
+  overflow-wrap: anywhere;
   color: var(--text);
   font-size: var(--size-small);
   text-decoration: none;

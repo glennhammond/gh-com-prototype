@@ -27,7 +27,8 @@
 
 .record-field__grid {
   display: grid;
-  gap: clamp(72px, 10vw, 150px);
+  row-gap: clamp(72px, 10vw, 150px);
+  column-gap: clamp(12px, 2vw, 28px);
 }
 
 .record-anchor {
