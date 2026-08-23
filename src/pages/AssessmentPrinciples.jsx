@@ -49,7 +49,7 @@ export default function AssessmentPrinciples() {
         )}
       />
 
-      <main className="assessment-resource">
+      <article className="assessment-resource">
         <header className="section container container--narrow assessment-resource__header">
           <SectionHead level={1} eyebrow={resource.eyebrow} headline={resource.title} />
           <p className="assessment-resource__updated">Updated {resource.updated} · aligned to the 2025 Standards for RTOs</p>
@@ -133,7 +133,7 @@ export default function AssessmentPrinciples() {
             <EvidenceNote>{resource.evidenceNote}</EvidenceNote>
           </div>
         </section>
-      </main>
+      </article>
     </>
   );
 }
