@@ -12,6 +12,11 @@ import {
   inheritedRedirectCapture,
   validateInheritedRedirectPolicy,
 } from '../src/content/inherited-redirect-policy.js';
+import {
+  legacySitemapArticleSourceCapture,
+  legacySitemapArticleSources,
+  validateLegacySourceState,
+} from '../src/content/legacy-source-state.js';
 
 const DIST = 'dist';
 const SITE = 'https://glennhammond.com';
@@ -30,6 +35,7 @@ if (!existsSync(DIST)) {
 
 validateMigrationPolicy();
 validateInheritedRedirectPolicy();
+validateLegacySourceState();
 
 const sitemapPath = join(DIST, 'sitemap.xml');
 const sitemap = existsSync(sitemapPath) ? readFileSync(sitemapPath, 'utf8') : '';
@@ -125,11 +131,20 @@ const inheritedByAction = unresolvedInheritedArticles.reduce((acc, entry) => {
 }, {});
 const unresolvedPortfolio = inheritedPortfolioRedirects.filter((entry) => !entry.launchReady);
 
+const legacySourceCounts = Object.values(legacySitemapArticleSources).reduce((acc, evidence) => {
+  acc[evidence.state] = (acc[evidence.state] ?? 0) + 1;
+  return acc;
+}, {});
+
 note(
   `Live-estate snapshot: ${liveSitemapCapture.urlCount} sitemap URLs captured from ${liveSitemapCapture.sourceProject} on ${liveSitemapCapture.capturedAt}`,
 );
 note(`${liveSitemapMigration.length - unresolved.length} live URLs are launch-ready; ${unresolved.length} still require disposition/implementation`);
 note(`Live unresolved by action: ${Object.entries(unresolvedByAction).map(([action, count]) => `${action} ${count}`).join(', ')}`);
+note(
+  `Legacy sitemap article source-state: ${legacySitemapArticleSourceCapture.articleCount} entries — ` +
+  Object.entries(legacySourceCounts).map(([state, count]) => `${state} ${count}`).join(', '),
+);
 note(
   `Inherited WordPress estate: ${inheritedRedirectCapture.articleCount} article identities / ${inheritedRedirectCapture.articleSourceForms} historical source forms captured from ${inheritedRedirectCapture.sourceProject}`,
 );
