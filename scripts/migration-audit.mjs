@@ -13,6 +13,11 @@ import {
   validateInheritedRedirectPolicy,
 } from '../src/content/inherited-redirect-policy.js';
 import {
+  inheritedArticleSources,
+  inheritedSourceCapture,
+  validateInheritedSourceState,
+} from '../src/content/inherited-source-state.js';
+import {
   legacySitemapArticleSourceCapture,
   legacySitemapArticleSources,
   validateLegacySourceState,
@@ -35,6 +40,7 @@ if (!existsSync(DIST)) {
 
 validateMigrationPolicy();
 validateInheritedRedirectPolicy();
+validateInheritedSourceState(inheritedArticleRedirects);
 validateLegacySourceState();
 
 const sitemapPath = join(DIST, 'sitemap.xml');
@@ -136,6 +142,11 @@ const legacySourceCounts = Object.values(legacySitemapArticleSources).reduce((ac
   return acc;
 }, {});
 
+const inheritedSourceCounts = Object.values(inheritedArticleSources).reduce((acc, evidence) => {
+  acc[evidence.state] = (acc[evidence.state] ?? 0) + 1;
+  return acc;
+}, {});
+
 note(
   `Live-estate snapshot: ${liveSitemapCapture.urlCount} sitemap URLs captured from ${liveSitemapCapture.sourceProject} on ${liveSitemapCapture.capturedAt}`,
 );
@@ -147,6 +158,10 @@ note(
 );
 note(
   `Inherited WordPress estate: ${inheritedRedirectCapture.articleCount} article identities / ${inheritedRedirectCapture.articleSourceForms} historical source forms captured from ${inheritedRedirectCapture.sourceProject}`,
+);
+note(
+  `Inherited source survival: ${inheritedSourceCapture.articleCount} identities — ` +
+  Object.entries(inheritedSourceCounts).map(([state, count]) => `${state} ${count}`).join(', '),
 );
 note(`${inheritedArticleRedirects.length - unresolvedInheritedArticles.length} inherited articles are launch-ready; ${unresolvedInheritedArticles.length} remain unresolved`);
 note(`Inherited unresolved by action: ${Object.entries(inheritedByAction).map(([action, count]) => `${action} ${count}`).join(', ')}`);
