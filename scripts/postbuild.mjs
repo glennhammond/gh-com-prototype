@@ -7,17 +7,22 @@
  */
 import { writeFileSync } from 'node:fs';
 import { recordContent } from '../src/content/the-record.js';
-import { getIndexableEvidencePaths } from '../src/content/search-policy.js';
+import {
+  getIndexableEvidencePaths,
+  getIndexableKnowledgePaths,
+} from '../src/content/search-policy.js';
 
 const SITE = 'https://glennhammond.com';
 
 const evidencePaths = getIndexableEvidencePaths(recordContent);
+const knowledgePaths = getIndexableKnowledgePaths();
 
 const paths = [
   '/',
   '/work',
   ...evidencePaths,
   '/practice',
+  ...knowledgePaths,
   '/about',
   '/contact',
 ];
