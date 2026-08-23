@@ -1,21 +1,17 @@
 /**
  * Post-build sitemap + robots.
  *
- * The route table still renders the legacy estate during migration, but the
- * sitemap expresses the canonical product only. Keeping a route addressable is
- * not the same as declaring it canonical or asking search engines to discover it.
- * Redirects and destructive retirement remain a separate Go-Live Gate.
+ * The route table still renders parts of the legacy estate during migration,
+ * but the sitemap expresses only intentionally indexable canonical surfaces.
+ * Route existence is not search inclusion.
  */
 import { writeFileSync } from 'node:fs';
 import { recordContent } from '../src/content/the-record.js';
+import { getIndexableEvidencePaths } from '../src/content/search-policy.js';
 
 const SITE = 'https://glennhammond.com';
 
-const evidencePaths = [
-  ...recordContent.projects.map((project) => project.path),
-  ...recordContent.records.map((record) => record.path),
-  ...recordContent.artefacts.map((artefact) => artefact.path),
-];
+const evidencePaths = getIndexableEvidencePaths(recordContent);
 
 const paths = [
   '/',
@@ -35,4 +31,4 @@ const robots = `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`;
 
 writeFileSync('dist/sitemap.xml', sitemap);
 writeFileSync('dist/robots.txt', robots);
-console.log(`postbuild: sitemap.xml (${uniquePaths.length} canonical URLs), robots.txt`);
+console.log(`postbuild: sitemap.xml (${uniquePaths.length} intentional canonical URLs), robots.txt`);
