@@ -5,68 +5,19 @@ import { graph, personSchema, breadcrumbSchema } from "../lib/schema.js";
 import "./Privacy.css";
 
 /**
- * Privacy — structure only.
+ * Privacy — current website behaviour only.
  *
- * Blueprint §24 and §26 record this as a launch blocker: no privacy policy
- * exists, the enquiry form collects personal information and GA4 sets cookies,
- * and both require disclosure under the Australian Privacy Principles.
- *
- * This page is therefore the SHAPE of that notice with the factual scope
- * filled in from confirmed decisions, and every operative clause left as an
- * explicit gap. Nothing here is legal drafting and none of it should ship.
- * Writing plausible-sounding policy text would be the single most dangerous
- * kind of invented content on the site.
+ * The Minimum Amazing release deliberately does not enable the prototype
+ * enquiry submission seam or analytics. This page therefore states only what
+ * the current website does, rather than inventing policy language for planned
+ * integrations that are not running.
  */
-
-const SECTIONS = [
-  {
-    heading: "What is collected when you use the enquiry form",
-    known: [
-      "Name, organisation, email address, an optional indication of which layers you are stuck at, your message, and an optional timeframe.",
-      "Submissions are delivered by email. There is no separate long-term submission store.",
-    ],
-    needed:
-      "Confirmed retention period for the resulting email, and the process for handling an access or deletion request.",
-  },
-  {
-    heading: "Analytics",
-    known: [
-      "Google Analytics 4 is used to understand which pages are read and how people arrive.",
-      "Configuration is data-minimising: IP anonymisation on, Google Signals off, ad personalisation off.",
-    ],
-    needed:
-      "Confirmed data-retention setting, and a decision on whether a cookie notice is required for the final configuration.",
-  },
-  {
-    heading: "How information is used",
-    known: ["To reply to your enquiry, and for nothing else."],
-    needed:
-      "Standard disclosure wording, plus confirmation that no information is disclosed to third parties beyond the email and analytics providers named above.",
-  },
-  {
-    heading: "Third parties involved",
-    known: [
-      "Website hosting: Vercel.",
-      "Analytics: Google Analytics 4.",
-      "Email delivery for enquiries: to be confirmed at implementation.",
-    ],
-    needed:
-      "Final list of processors, and whether any of them store data outside Australia.",
-  },
-  {
-    heading: "Access, correction and complaints",
-    known: [],
-    needed:
-      "Contact route for access and correction requests, and the complaints pathway including reference to the Office of the Australian Information Commissioner.",
-  },
-];
-
 export default function Privacy() {
   return (
     <>
       <Seo
         title="Privacy | Glenn Hammond"
-        description="How information submitted through this website is handled."
+        description="A concise description of the information behaviour of the current glennhammond.com website."
         path="/privacy"
         noindex
         jsonLd={graph(
@@ -82,48 +33,49 @@ export default function Privacy() {
         <SectionHead
           level={1}
           eyebrow="Privacy"
-          headline="How information from this site is handled."
+          headline="What this website does with information."
+          standfirst="The current release is deliberately simple: it publishes professional work and provides links for direct contact."
         />
 
-        <div className="privacy__notice" role="note">
-          <h2 className="privacy__notice-title">
-            This notice is not finished, and must not go live as it stands
-          </h2>
-          <p>
-            The structure and factual scope below are correct and come from
-            confirmed decisions. The operative wording has deliberately not been
-            drafted: writing plausible-sounding privacy text without legal review
-            would be worse than having none.
-          </p>
-          <p>
-            Approved legal content is required before the enquiry form and
-            analytics go live. This is recorded as a launch blocker in the
-            blueprint.
-          </p>
-        </div>
-
         <div className="privacy__body">
-          {SECTIONS.map((section) => (
-            <section key={section.heading} className="privacy__section">
-              <h2 className="privacy__heading">{section.heading}</h2>
-              {section.known.length > 0 && (
-                <ul className="privacy__known">
-                  {section.known.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              )}
-              <p className="privacy__needed">
-                <span className="privacy__needed-label">Still required</span>
-                {section.needed}
-              </p>
-            </section>
-          ))}
+          <section className="privacy__section">
+            <h2 className="privacy__heading">No enquiry submission on the site</h2>
+            <p>
+              This release does not send or store a web enquiry. The contact page
+              provides an email link and a LinkedIn link instead. If you email me,
+              the message is handled through email rather than stored by this website.
+            </p>
+          </section>
+
+          <section className="privacy__section">
+            <h2 className="privacy__heading">No analytics or advertising tracking</h2>
+            <p>
+              This release does not include Google Analytics, advertising pixels,
+              personalisation, account tracking or marketing cookies.
+            </p>
+          </section>
+
+          <section className="privacy__section">
+            <h2 className="privacy__heading">External links</h2>
+            <p>
+              Some links open external services such as LinkedIn or email. Once you
+              choose to follow an external link, that service operates under its own
+              terms and information practices.
+            </p>
+          </section>
+
+          <section className="privacy__section">
+            <h2 className="privacy__heading">If the site changes</h2>
+            <p>
+              If a working enquiry form, analytics or another feature that changes
+              how the website handles information is introduced, this page will be
+              updated before that feature is enabled.
+            </p>
+          </section>
         </div>
 
         <p className="privacy__contact">
-          Questions about any of this in the meantime:{" "}
-          <a href={`mailto:${site.email}`}>{site.email}</a>.
+          Questions about the website: <a href={`mailto:${site.email}`}>{site.email}</a>.
         </p>
       </div>
     </>
