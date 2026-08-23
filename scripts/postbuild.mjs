@@ -1,50 +1,36 @@
 /**
- * Post-build: sitemap.xml and robots.txt, generated from the route table so
- * they cannot drift from what was actually rendered.
+ * Post-build sitemap + robots.
  *
- * SEO migration Phase A (18 Aug 2026, docs/SEO-MIGRATION.md §27):
- *   - /practice is canonical; /services is not listed (it 301s at the edge).
- *   - /privacy is excluded — it is noindex while its legal copy is unfinished
- *     (see Seo.jsx `noindex` and DECISIONS.md #19).
- *   - `lastmod` is omitted entirely rather than fabricated per-build. The
- *     migration doc requires genuine values or none; this repo does not yet
- *     track real per-page content dates, so none is the honest choice.
+ * Historical routes remain listed during production implementation because
+ * destructive migration decisions are a Go-Live Gate concern. THE RECORD's
+ * new Record and Artefact routes are added as canonical live URLs. Genuine
+ * lastmod dates remain omitted rather than fabricated.
  */
-import { writeFileSync } from "node:fs";
-import { projects } from "../src/content/projects.js";
+import { writeFileSync } from 'node:fs';
+import { projects } from '../src/content/projects.js';
+import { recordRoutePaths } from '../src/content/the-record.js';
 
-const SITE = "https://glennhammond.com";
+const SITE = 'https://glennhammond.com';
 
 const paths = [
-  "/",
-  "/work",
-  ...projects.map((p) => p.path),
-  "/practice",
-  "/services/rise-design-systems",
-  "/services/storyline-development",
-  "/about",
-  "/contact",
+  '/',
+  '/work',
+  ...projects.map((project) => project.path),
+  ...recordRoutePaths,
+  '/practice',
+  '/services/rise-design-systems',
+  '/services/storyline-development',
+  '/about',
+  '/contact',
 ];
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${paths
-  .map(
-    (p) => `  <url>
-    <loc>${SITE}${p === "/" ? "/" : p}</loc>
-  </url>`
-  )
-  .join("\n")}
-</urlset>
-`;
+const uniquePaths = [...new Set(paths)];
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${uniquePaths
+  .map((path) => `  <url>\n    <loc>${SITE}${path === '/' ? '/' : path}</loc>\n  </url>`)
+  .join('\n')}\n</urlset>\n`;
 
-const robots = `User-agent: *
-Allow: /
+const robots = `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`;
 
-Sitemap: ${SITE}/sitemap.xml
-`;
-
-writeFileSync("dist/sitemap.xml", sitemap);
-writeFileSync("dist/robots.txt", robots);
-
-console.log(`postbuild: sitemap.xml (${paths.length} URLs), robots.txt`);
+writeFileSync('dist/sitemap.xml', sitemap);
+writeFileSync('dist/robots.txt', robots);
+console.log(`postbuild: sitemap.xml (${uniquePaths.length} URLs), robots.txt`);

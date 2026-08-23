@@ -12,6 +12,7 @@ import { join, extname, relative, sep } from "node:path";
 import { gzipSync } from "node:zlib";
 import { clients } from "../src/content/clients.js";
 import { projects, withheldProjects } from "../src/content/projects.js";
+import { recordRoutePaths } from "../src/content/the-record.js";
 import { testimonials } from "../src/content/testimonials.js";
 import { isPublishable } from "../src/content/status.js";
 
@@ -124,9 +125,11 @@ for (const t of testimonials) {
 /* --- 5. Pre-rendered content (no-JS resilience) ---------------------------- */
 
 const REQUIRED = {
-  "index.html": ["The course is the easy part", "Learning System Review", "Operations"],
-  "work.html": ["Featured program", "Case studies", "Prototypes and experiments"],
-  "work/wellbeing-studio.html": ["Three decisions I would defend", "What it cost"],
+  "index.html": ["Thirty years of making digital things.", "THE RECORD", "Frame. Shape. Make. Evidence."],
+  "work.html": ["Work is where the practice is composed", "Wellbeing Studio 2027", "TAFE Queensland SkillsTech Pathways"],
+  "work/wellbeing-studio.html": ["The shape of the work", "Designing entry around moments in the working day"],
+  "work/wellbeing-studio/contextual-entry.html": ["Why examine this", "Inspect the artefact"],
+  "work/wellbeing-studio/contextual-entry/daily-wellbeing-journey.html": ["Need a reset between meetings?", "Arrival Reset Breath", "View Record"],
   "work/isq-elearning-design-system.html": ["ISQ eLearning Design System", "least complex implementation"],
   "work/casa.html": ["The five projects", "What the six years contained"],
   "work/casa/class.html": ["CASA Learning Academy for Safe Skies", "not public-facing"],
@@ -200,6 +203,7 @@ const routes = new Set([
   "/contact",
   "/privacy",
   ...projects.map((p) => p.path),
+  ...recordRoutePaths,
 ]);
 
 for (const [file, source] of Object.entries(html)) {
@@ -253,37 +257,52 @@ const css = files.filter((f) => f.endsWith(".css"));
 const fonts = files.filter((f) => f.endsWith(".woff2"));
 const images = files.filter((f) => /\.(avif|webp|png|jpg|svg)$/.test(f));
 
-/* V3: the JS budget moves from 120KB to 140KB gzipped, deliberately.
- *
- * V2 shipped 4 routed case studies and measured 102KB. V3 ships 14, and the
- * content records for all of them are in the client bundle because the site
- * hydrates the whole tree. Measured 126KB, of which roughly 24KB is the
- * additional case-study prose.
- *
- * This is a real regression, not a rounding error, and the fix is structural
- * rather than a matter of trimming: case-study records should be loaded per
- * route rather than bundled together, or the case-study routes should be
- * served as static HTML without hydration, since nothing on them is
- * interactive except the image dialog. Recorded in V3-STATUS.md as an open
- * item. The budget is raised rather than removed so the next regression still
- * fails the build. */
-const BUDGET = { js: 140, css: 30, image: 180 };
+/*
+ * Production Integration 01 changes the structural budget rather than simply
+ * lifting the old 140KB total-JS ceiling. Home and legacy CaseStudy content
+ * are route chunks, so the meaningful regression gate is the static import
+ * closure of the application entry plus a ceiling for any individual chunk.
+ * Total route JS is still reported as editorial growth debt, but it no longer
+ * pretends every route chunk is downloaded on first entry.
+ */
+const BUDGET = { initialJs: 120, chunk: 100, css: 30, image: 180 };
+const manifestPath = join(DIST, ".vite", "manifest.json");
+let initialJsKb = null;
 
-const jsKb = Math.round(sum(js) / 1024);
+if (!existsSync(manifestPath)) {
+  fail("Vite manifest missing; cannot qualify initial client JavaScript");
+} else {
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+  const entryKeys = Object.keys(manifest).filter((key) => manifest[key]?.isEntry);
+  const initialFiles = new Set();
+  const visit = (key) => {
+    const item = manifest[key];
+    if (!item) return;
+    if (item.file?.endsWith(".js")) initialFiles.add(join(DIST, item.file));
+    for (const imported of item.imports ?? []) visit(imported);
+  };
+  entryKeys.forEach(visit);
+  initialJsKb = Math.round(sum([...initialFiles]) / 1024);
+}
+
+const totalJsKb = Math.round(sum(js) / 1024);
+const largestChunkKb = js.length ? Math.round(Math.max(...js.map((f) => gz(f))) / 1024) : 0;
 const cssKb = Math.round(sum(css) / 1024);
 const fontKb = Math.round(fonts.reduce((n, f) => n + statSync(f).size, 0) / 1024);
-const largestImage = images.reduce(
-  (max, f) => Math.max(max, statSync(f).size),
-  0
-);
+const largestImage = images.reduce((max, f) => Math.max(max, statSync(f).size), 0);
 const largestImageKb = Math.round(largestImage / 1024);
 
-note(`JS ${jsKb}KB gzipped (budget ${BUDGET.js})`);
+if (initialJsKb !== null) note(`Initial JS ${initialJsKb}KB gzipped (budget ${BUDGET.initialJs})`);
+note(`Total route JS ${totalJsKb}KB gzipped (reported, not treated as initial payload)`);
+note(`Largest JS chunk ${largestChunkKb}KB gzipped (budget ${BUDGET.chunk})`);
 note(`CSS ${cssKb}KB gzipped (budget ${BUDGET.css})`);
 note(`Fonts ${fontKb}KB total across ${fonts.length} files`);
 note(`Largest image ${largestImageKb}KB (budget ${BUDGET.image})`);
 
-if (jsKb > BUDGET.js) fail(`JS budget exceeded: ${jsKb}KB > ${BUDGET.js}KB`);
+if (initialJsKb !== null && initialJsKb > BUDGET.initialJs)
+  fail(`Initial JS budget exceeded: ${initialJsKb}KB > ${BUDGET.initialJs}KB`);
+if (largestChunkKb > BUDGET.chunk)
+  fail(`JS chunk budget exceeded: ${largestChunkKb}KB > ${BUDGET.chunk}KB`);
 if (cssKb > BUDGET.css) fail(`CSS budget exceeded: ${cssKb}KB > ${BUDGET.css}KB`);
 if (largestImageKb > BUDGET.image)
   fail(`Image budget exceeded: ${largestImageKb}KB > ${BUDGET.image}KB`);
@@ -338,7 +357,11 @@ if (!existsSync(sitemapPath)) {
     fail("Sitemap contains a <lastmod> value; Phase A requires omitting it rather than fabricating one");
   if (!/<loc>[^<]*\/practice<\/loc>/.test(sitemap))
     fail("Sitemap is missing the canonical /practice URL");
-  note("Sitemap: /practice present, /services and /privacy absent, no fabricated lastmod");
+  for (const route of recordRoutePaths) {
+    if (!sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`))
+      fail(`Sitemap is missing THE RECORD route ${route}`);
+  }
+  note("Sitemap: /practice and THE RECORD routes present, /services and /privacy absent, no fabricated lastmod");
 }
 
 /* --- Report ----------------------------------------------------------------- */

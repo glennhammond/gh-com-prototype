@@ -1,0 +1,305 @@
+/* ==========================================================================
+   Selected work — one editorial sequence, not a card grid (v3.4)
+
+   Three entries, three different compositions. No shared card shape: each
+   `.selwork__item--*` is its own layout. What they share is the section's
+   vertical rhythm and the link/kicker typography, so the page still reads
+   as one system rather than three unrelated experiments.
+   ========================================================================== */
+
+.selwork__head {
+  max-width: 60ch;
+}
+
+.selwork__head .display-l {
+  margin-top: var(--space-3);
+  max-width: 22ch;
+}
+
+.selwork__head .lede {
+  margin-top: var(--space-4);
+}
+
+/* --- The sequence: generous whitespace between chapters, a hairline only,
+   no boxes. -------------------------------------------------------------- */
+
+.selwork__list {
+  margin-top: var(--space-8);
+}
+
+.selwork__item {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--rule);
+}
+
+.selwork__item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.selwork__item + .selwork__item {
+  margin-top: var(--space-8);
+}
+
+/* --- Shared typography: kicker, tag, title, body, links ------------------ */
+
+.selwork__kicker {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  max-width: none;
+}
+
+.selwork__tag {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  max-width: none;
+}
+
+.selwork__title {
+  margin-top: var(--space-3);
+  font-size: var(--size-display-l);
+  line-height: 1.12;
+  max-width: 20ch;
+}
+
+.selwork__body {
+  margin-top: var(--space-4);
+  font-size: var(--size-lede);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 46ch;
+}
+
+.selwork__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brass);
+}
+
+.selwork__link:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+.selwork__link--quiet {
+  color: var(--text-secondary);
+  border-bottom-color: var(--rule-strong);
+}
+
+.selwork__link--quiet:hover {
+  color: var(--mineral-ink);
+  border-bottom-color: var(--mineral-ink);
+}
+
+.selwork__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ==========================================================================
+   Wellbeing Studio — the primary flagship, the largest treatment: a
+   dominant image with a detail crop pinned over its corner, copy running
+   beside it. Leads the sequence and leads with the picture.
+   ========================================================================== */
+
+.selwork__item--lead {
+  display: grid;
+  gap: var(--space-7);
+}
+
+@media (min-width: 860px) {
+  .selwork__item--lead {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: start;
+  }
+}
+
+.selwork__item--lead .selwork__visual {
+  position: relative;
+  padding-bottom: clamp(28px, 6vw, 64px);
+}
+
+.selwork__item--lead .selwork__figure--main img {
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.selwork__item--lead .selwork__figure--detail {
+  position: absolute;
+  left: clamp(-16px, -4vw, -32px);
+  bottom: 0;
+  width: 38%;
+  max-width: 240px;
+  aspect-ratio: 1 / 1;
+  border: 4px solid var(--paper);
+  box-shadow: 0 14px 30px rgba(21, 25, 30, 0.16);
+}
+
+.selwork__item--lead .selwork__figure--detail img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+@media (max-width: 619px) {
+  .selwork__item--lead .selwork__visual {
+    padding-bottom: 0;
+  }
+
+  .selwork__item--lead .selwork__figure--detail {
+    position: static;
+    width: 46%;
+    max-width: 180px;
+    margin-top: var(--space-4);
+    box-shadow: none;
+    border-color: var(--rule);
+  }
+}
+
+/* ==========================================================================
+   ISQ — the second flagship, a medium two-column treatment: one placement
+   image plus the engagement's own figures and the design system's own map.
+   Smaller footprint than Wellbeing Studio, no overlap flourish.
+   ========================================================================== */
+
+.selwork__item--secondary {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 980px;
+}
+
+@media (min-width: 760px) {
+  .selwork__item--secondary {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: start;
+  }
+}
+
+.selwork__item--secondary .selwork__figure--main img {
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.selwork__item--secondary .selwork__title {
+  font-size: var(--size-display-m);
+  max-width: 22ch;
+}
+
+.selwork__evidence {
+  margin-top: var(--space-6);
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 460px) {
+  .selwork__evidence {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.selwork__stats {
+  margin: 0;
+  border-top: 2px solid var(--rule-strong);
+  padding-top: var(--space-4);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.selwork__stats dt {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.selwork__stats dt span {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.08em;
+  color: var(--brass-ink);
+}
+
+.selwork__stats dd {
+  margin: var(--space-2) 0 0;
+  font-size: var(--size-caption);
+  line-height: 1.4;
+  color: var(--text-secondary);
+  max-width: 20ch;
+}
+
+.selwork__map {
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid var(--rule-strong);
+  padding-top: var(--space-4);
+  list-style: none;
+  display: grid;
+}
+
+.selwork__map li {
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--rule-soft);
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.selwork__map li:first-child {
+  border-top: 0;
+}
+
+.selwork__item--secondary .selwork__actions {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.selwork__item--secondary .selwork__link {
+  margin-top: 0;
+}
+
+/* ==========================================================================
+   CASA — the third flagship, a contained single-column treatment: one
+   strong image carrying the entry, deliberately the smallest footprint of
+   the three. Present, not diminished.
+   ========================================================================== */
+
+.selwork__item--contained {
+  max-width: 640px;
+}
+
+.selwork__item--contained .selwork__visual {
+  max-width: 420px;
+}
+
+.selwork__item--contained .selwork__figure--main img {
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.selwork__item--contained .selwork__copy {
+  margin-top: var(--space-5);
+}

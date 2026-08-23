@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
 import Button from "../components/Button.jsx";
-import ProjectCard from "../components/ProjectCard.jsx";
-import FeaturedSystem from "../components/FeaturedSystem.jsx";
 import Icon from "../components/Icon.jsx";
+import PlaceholderShot from "../components/PlaceholderShot.jsx";
+import SelectedWork from "../components/SelectedWork.jsx";
 import { getImage } from "../lib/media.js";
 import { home } from "../content/home.js";
 import { layers } from "../content/layers.js";
-import { featured } from "../content/projects.js";
+import { projectByPath } from "../content/projects.js";
 import { site } from "../content/site.js";
 import { graph, personSchema, practiceSchema } from "../lib/schema.js";
 import "./Home.css";
 
 /**
- * Homepage — V2.
+ * Homepage — V3.
  *
- * Composed rather than stacked: a dark opening, a light proof band, the ISQ
- * eLearning Design System in its own featured section, a work sequence with
- * one lead card and two supporting cards, a compact model strip, a specialist
+ * Composed rather than stacked: a dark opening with its own evidence figure,
+ * a light proof band, one editorial "Selected work" sequence of three
+ * individually art-directed projects, a compact model strip, a specialist
  * Rise and Storyline section, an offset offer block, a portrait split, and a
  * dark close.
  *
@@ -27,7 +27,9 @@ import "./Home.css";
  */
 export default function Home() {
   const portrait = getImage("glenn-working");
-  const [lead, ...supporting] = featured;
+  const wellbeing = projectByPath["/work/wellbeing-studio"];
+  const isq = projectByPath["/work/connect-and-learn"];
+  const casa = projectByPath["/work/casa/flight-examiner-rating"];
 
   return (
     <>
@@ -41,22 +43,41 @@ export default function Home() {
       {/* 01 — the claim ------------------------------------------------- */}
       <section className="hero on-ink" aria-labelledby="hero-title">
         <div className="container hero__inner">
-          <p className="eyebrow hero__eyebrow">{home.hero.eyebrow}</p>
+          <div className="hero__text">
+            <p className="eyebrow hero__eyebrow">{home.hero.eyebrow}</p>
 
-          <h1 id="hero-title" className="hero__title">
-            {home.hero.headline}
-          </h1>
+            <h1 id="hero-title" className="hero__title">
+              {home.hero.headline}
+            </h1>
 
-          <p className="hero__standfirst">{home.hero.standfirst}</p>
+            <p className="hero__standfirst">{home.hero.standfirst}</p>
 
-          <div className="hero__actions">
-            <Button to={home.hero.primaryCta.href} variant="primary">
-              {home.hero.primaryCta.label}
-            </Button>
+            <div className="hero__actions">
+              <Button to={home.hero.primaryCta.href} variant="primary">
+                {home.hero.primaryCta.label}
+              </Button>
 
-            <Button to={home.hero.secondaryCta.href} variant="outline">
-              {home.hero.secondaryCta.label}
-            </Button>
+              <Link className="hero__secondary" to={home.hero.secondaryCta.href}>
+                {home.hero.secondaryCta.label}
+              </Link>
+            </div>
+          </div>
+
+          <div className="hero__visual">
+            <figure className="hero__figure">
+              <p className="hero__figure-label">{home.hero.figure.area}</p>
+              <PlaceholderShot
+                className="hero__figure-img"
+                width={home.hero.figure.placeholder.width}
+                height={home.hero.figure.placeholder.height}
+                label={home.hero.figure.placeholder.label}
+                alt={home.hero.figure.alt}
+                eager
+              />
+              <figcaption className="hero__figure-cap">
+                {home.hero.figure.caption}
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -77,41 +98,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 03 — featured system ------------------------------------------- */}
-      <FeaturedSystem content={home.featuredSystem} />
+      {/* 03 — selected work ----------------------------------------------
+         One editorial sequence, not a card grid — see SelectedWork.jsx. */}
+      <SelectedWork intro={home.work} casa={casa} isq={isq} wellbeing={wellbeing} />
 
-      {/* 04 — selected work --------------------------------------------- */}
-      <section className="section home-work" aria-labelledby="work-title">
-        <div className="container">
-          <header className="home-work__head">
-            <p className="eyebrow">{home.work.eyebrow}</p>
-
-            <h2 id="work-title" className="display-l">
-              {home.work.headline}
-            </h2>
-
-            <p className="lede">{home.work.standfirst}</p>
-          </header>
-
-          {lead && <ProjectCard project={lead} size="lead" eager />}
-
-          {supporting.length > 0 && (
-            <ul className="home-work__grid">
-              {supporting.map((project) => (
-                <li key={project.slug}>
-                  <ProjectCard project={project} />
-                </li>
-              ))}
-            </ul>
-          )}
-
-          <Link className="home-work__all" to="/work">
-            All four projects
-          </Link>
-        </div>
-      </section>
-
-      {/* 05 — the model ------------------------------------------------- */}
+      {/* 04 — the model ------------------------------------------------- */}
       <section
         className="section section--tight model"
         aria-labelledby="model-title"
@@ -162,7 +153,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06 — specialist development ----------------------------------- */}
+      {/* 05 — specialist development ----------------------------------- */}
       <section
         className="section section--tight specialist"
         aria-labelledby="specialist-title"
@@ -232,7 +223,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 07 — how to buy ------------------------------------------------ */}
+      {/* 06 — how to buy ------------------------------------------------ */}
       <section className="section buy" aria-labelledby="buy-title">
         <div className="container buy__inner">
           <div className="buy__offer">
@@ -255,7 +246,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 08 — Glenn ----------------------------------------------------- */}
+      {/* 07 — Glenn ----------------------------------------------------- */}
       <section className="section person" aria-labelledby="person-title">
         <div className="container person__inner">
           {portrait && (
@@ -311,7 +302,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 09 — close ----------------------------------------------------- */}
+      {/* 08 — close ----------------------------------------------------- */}
       <section
         className="section section--tight close on-ink"
         aria-labelledby="close-title"
