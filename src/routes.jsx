@@ -103,6 +103,10 @@ export const routes = [
         path: 'blog/master-slides-in-storyline',
         lazy: () => import('./routes/KnowledgeArticleRoute.jsx'),
       },
+      {
+        path: 'blog/how-to-set-moodles-login-page-as-the-sites-landing-page',
+        lazy: () => import('./routes/KnowledgeArticleRoute.jsx'),
+      },
 
       // Legacy service/about routes remain addressable pending Go-Live SEO
       // qualification, but are no longer part of the public global IA.
