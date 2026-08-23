@@ -1,24 +1,16 @@
 /* ==========================================================================
-   Homepage (v3.1)
+   Home — THE RECORD canonical entry surface
 
-   Two ink bands, the opening and the close, and nothing dark between them.
-   Approximate surface distribution across the page:
-     paper 68% · raised paper 12% · plate 8% · ink 10% · brass 1.5% ·
-     mineral 0.5%
+   Home establishes the proposition and the span of the evidence field. Work
+   composes the evidence. Practice interprets it. Home does not duplicate either.
    ========================================================================== */
-
-/* ==== 01 Opening: full-bleed type, no competing image ==================== */
 
 .hero {
   background: var(--ink);
   color: var(--on-ink);
-  padding-block: clamp(44px, 6.5vw, 96px) clamp(40px, 5.5vw, 80px);
+  padding-block: clamp(48px, 7vw, 104px) clamp(44px, 6vw, 88px);
 }
 
-/* Asymmetric, not a centred column: the claim leads on the left, the
-   evidence sits on the right, unequal widths and both top-aligned so the
-   composition reads as one deliberate spread rather than a centred split
-   template. */
 .hero__inner {
   display: grid;
   gap: var(--space-7);
@@ -26,17 +18,13 @@
 
 @media (min-width: 860px) {
   .hero__inner {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
     align-items: start;
   }
 }
 
-.hero__eyebrow {
-  color: var(--brass-light);
-}
+.hero__eyebrow { color: var(--brass-light); }
 
-/* 74px, not 99px. Column width now does most of the wrapping work, so the
-   headline only needs a loose outer cap rather than a tight ch measure. */
 .hero__title {
   margin-top: var(--space-4);
   font-family: var(--font-display);
@@ -63,8 +51,6 @@
   margin-top: var(--space-6);
 }
 
-/* The quiet second action: one filled primary CTA, one text-weight link,
-   never two competing buttons. */
 .hero__secondary {
   display: inline-flex;
   align-items: center;
@@ -73,60 +59,95 @@
   font-size: var(--size-meta);
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--text);
+  color: var(--on-ink);
   text-decoration: none;
-  border-bottom: 2px solid var(--brass);
+  border-bottom: 2px solid var(--brass-light);
 }
 
 .hero__secondary:hover {
-  color: var(--mineral-ink);
-  border-bottom-color: var(--mineral-ink);
+  color: var(--brass-light);
 }
 
-/* --- Hero visual: the evidence figure, not a decorative image -----------
-   Placeholder phase: a placehold.co plate stands in for the 2027 Wellbeing
-   Studio product view. No frame, no mock chrome — the composition has to
-   read as strong with a neutral grey box as it will with the real asset. */
-
-.hero__visual {
-  min-width: 0;
+/* The right-hand hero is an index of the evidence field, not a decorative
+   product image. It remains useful even before any particular project visual
+   is available and makes the site's information architecture visible at entry. */
+.hero__record-field {
+  align-self: stretch;
+  border-top: 3px solid var(--brass-light);
+  border-bottom: 1px solid var(--rule-ink);
+  padding-block: var(--space-4);
 }
 
-.hero__figure {
-  margin: 0;
-  max-width: none;
-}
-
-@media (max-width: 859px) {
-  .hero__figure {
-    max-width: 560px;
-  }
-}
-
-.hero__figure-label {
-  margin: 0 0 var(--space-3);
+.hero__record-field-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
   font-family: var(--font-mono);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
+  color: var(--on-ink-dim);
+}
+
+.hero__record-field-head p { margin: 0; }
+
+.hero__territories {
+  list-style: none;
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule-ink);
+}
+
+.hero__territories li {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--rule-ink);
+}
+
+.hero__territory-index {
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
   color: var(--brass-light);
 }
 
-.hero__figure-img {
+.hero__territories strong {
   display: block;
-  width: 100%;
-  height: auto;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--on-ink);
 }
 
-.hero__figure-cap {
-  margin-top: var(--space-4);
-  font-size: var(--size-caption);
-  line-height: 1.55;
+.hero__territories div > span {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--on-ink-dim);
-  max-width: 44ch;
 }
 
-/* ==== 02 Proof strip: ruled index on raised paper ======================== */
+.hero__record-depth {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--on-ink);
+}
+
+.hero__record-depth i {
+  color: var(--brass-light);
+  font-style: normal;
+}
 
 .proof {
   background: var(--paper-raised);
@@ -143,15 +164,11 @@
 }
 
 @media (min-width: 640px) {
-  .proof__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  .proof__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (min-width: 1000px) {
-  .proof__list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+  .proof__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 .proof__list li {
@@ -187,92 +204,11 @@
   line-height: 1.8;
 }
 
-/* Selected work has its own component and stylesheet — see
-   SelectedWork.jsx / SelectedWork.css. It is one editorial sequence, not a
-   card grid, so it did not belong in this page-level stylesheet. */
-
-/* ==== 04 The four-layer model, on paper ================================== */
-
-.model {
-  background: var(--paper);
-  border-block: 1px solid var(--rule);
+/* Practice bridge: one interpretation, not a miniature Practice page. */
+.buy {
+  background: var(--paper-raised);
+  border-top: 1px solid var(--rule);
 }
-
-.model__head {
-  max-width: 56ch;
-}
-
-.model__spine {
-  margin-bottom: var(--space-4);
-}
-
-.model__head .display-m {
-  margin-top: var(--space-3);
-}
-
-.model__lede {
-  margin-top: var(--space-3);
-  color: var(--text-secondary);
-  max-width: 54ch;
-}
-
-.model__list {
-  display: grid;
-  gap: var(--space-5);
-  list-style: none;
-  margin: var(--space-6) 0 0;
-  padding: 0;
-}
-
-@media (min-width: 640px) {
-  .model__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1040px) {
-  .model__list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-6);
-  }
-}
-
-/* Three signals, never colour alone: the rule carries the layer colour, and
-   the icon, numeral and name travel with it. */
-.model__item {
-  border-top: 3px solid var(--layer);
-  padding-top: var(--space-4);
-}
-
-.model__icon {
-  color: var(--layer);
-  margin-bottom: var(--space-3);
-}
-
-.model__name {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  font-size: 1.05rem;
-}
-
-.model__num {
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  font-weight: 400;
-  letter-spacing: var(--tracking-meta);
-  color: var(--brass-ink);
-  font-variant-numeric: tabular-nums;
-}
-
-.model__what {
-  margin-top: var(--space-2);
-  font-size: var(--size-caption);
-  line-height: 1.55;
-  color: var(--text-secondary);
-}
-
-/* ==== 05 How to buy: offset split, on paper ============================== */
 
 .buy__inner {
   display: grid;
@@ -299,7 +235,6 @@
   max-width: 44ch;
 }
 
-/* The one brass gesture on this page. */
 .buy__aside {
   border-top: 3px solid var(--brass);
   padding-top: var(--space-4);
@@ -313,8 +248,6 @@
   color: var(--text-secondary);
   max-width: 46ch;
 }
-
-/* ==== 06 Glenn: portrait split, on raised paper ========================== */
 
 .person {
   background: var(--paper);
@@ -334,9 +267,6 @@
   }
 }
 
-/* Photographic evidence takes no mount: a border turns a photograph into a
-   specimen. A hairline is kept only because this sits on raised paper and
-   otherwise has no edge at all. */
 .person__portrait {
   border: 1px solid var(--rule);
   border-radius: var(--radius);
@@ -380,8 +310,6 @@
   border-bottom-color: var(--mineral-ink);
 }
 
-/* ==== 07 Close: the second and last ink band ============================= */
-
 .close {
   background: var(--ink);
   color: var(--on-ink);
@@ -418,70 +346,4 @@
   margin-top: var(--space-3);
   font-size: var(--size-small);
   color: var(--on-ink-dim);
-}
-
-/* ==== 04a Specialist development: Rise / Storyline, after the model ====== */
-
-/* v3.3: raised paper, not the model section's own paper. Both sections used
-   the same surface and sat back to back with only a hairline between them,
-   so they read as one long block rather than two designed moments. */
-.specialist {
-  background: var(--paper-raised);
-}
-
-.specialist__head {
-  max-width: var(--measure-lede);
-}
-
-.specialist__lede {
-  margin-top: var(--space-3);
-  color: var(--text-secondary);
-}
-
-.specialist__panels {
-  margin-top: var(--space-6);
-  display: grid;
-  gap: var(--space-6);
-}
-
-@media (min-width: 700px) {
-  .specialist__panels {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-7) var(--space-6);
-  }
-}
-
-.specialist__panel {
-  border-top: 3px solid var(--brass);
-  padding-top: var(--space-4);
-}
-
-.specialist__title {
-  font-size: var(--size-display-m);
-}
-
-.specialist__body {
-  margin-top: var(--space-3);
-  line-height: 1.55;
-  color: var(--text-secondary);
-  max-width: 42ch;
-}
-
-.specialist__cta {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-top: var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--text);
-  text-decoration: none;
-  border-bottom: 2px solid var(--brass);
-}
-
-.specialist__cta:hover {
-  color: var(--mineral-ink);
-  border-bottom-color: var(--mineral-ink);
 }
