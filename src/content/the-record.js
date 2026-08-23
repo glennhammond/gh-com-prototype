@@ -52,7 +52,7 @@ export const recordContent = validateRecordContent({
       role: 'Platform migration, learning architecture and eLearning development',
       altitude: 'Experience · content · platform',
       trajectory: [],
-      recordIds: [],
+      recordIds: ['isq-concurrent-migration'],
       placements: [{ surface: 'work', order: 2, role: 'anchor' }],
     },
     {
@@ -223,6 +223,31 @@ export const recordContent = validateRecordContent({
       evidenceClaimIds: ['tafe-facilitated-purpose', 'tafe-parallel-modes', 'tafe-spatial-exploration', 'tafe-stateful-storyline'],
       relationships: [],
     },
+
+    {
+      id: 'isq-concurrent-migration',
+      projectId: 'connect-and-learn',
+      path: '/work/connect-and-learn/concurrent-migration',
+      title: 'Designing the platform and course rebuild as one system',
+      centre: 'Platform and content concurrency',
+      context: 'ISQ Connect & Learn · platform migration and course redevelopment',
+      happened: 'Independent Schools Queensland moved professional learning from Cornerstone to an ISQ-hosted Moodle environment while more than sixty Storyline courses were redeveloped in parallel. Inside a three-month engagement, platform, learning architecture, course-estate and operational decisions had to inform each other rather than proceed as serial hand-offs.',
+      worthExamining: 'The interesting constraint was not simply migration speed. Freezing the destination before understanding the rebuilt course estate would have embedded the wrong structures; waiting for the destination to be complete before rebuilding courses would have made the delivery window impossible. The work had to remain coupled long enough for each stream to teach the others.',
+      tension: 'Platform migrations invite sequential thinking: configure the destination, move the content, then tidy operations. That sequence works only when the content model is already stable. Here the course estate itself was being redeveloped, so content decisions were still revealing what the platform needed to support.',
+      move: 'Treat platform migration, learning architecture, course redevelopment and operations as one delivery system. Set enough structure early to enable production, but keep that structure revisable while recurring course needs and operational friction are still becoming visible.',
+      making: [
+        'Cornerstone was replaced with an ISQ-hosted Moodle environment the organisation could host and control directly.',
+        'More than sixty Storyline courses were redeveloped while the destination environment was being shaped.',
+        'Learning architecture had to be settled early enough to prevent redevelopment churn and late enough to reflect the needs exposed by the course estate.',
+        'The migration preserved service continuity for existing school users rather than treating the platform change as a clean-slate launch.',
+        'Administrative processes that consumed staff time without improving learning were treated as part of the migration problem, not as immutable operational requirements.',
+        'The subsequent ISQ eLearning Design System formalised recurring learning patterns and production standards that the migration work had exposed.',
+      ],
+      evidenceBoundary: 'This Record supports the platform migration, the more-than-sixty-course rebuild, the three-month engagement and the documented concurrency between platform and content decisions. It does not publish the unresolved audience-size figure or claim learner-evaluation outcomes.',
+      artefactIds: ['isq-migration-dependency-map'],
+      evidenceClaimIds: ['isq-platform-migration', 'isq-course-estate', 'isq-concurrent-architecture', 'isq-operational-reduction'],
+      relationships: [],
+    },
   ],
   artefacts: [
     {
@@ -287,6 +312,19 @@ export const recordContent = validateRecordContent({
       summary: 'Recovered Pathways artefacts showing the non-linear wireframe, comparable industry data, category-filtered workplace map and persistent visual exploration modes used to support a facilitator-led careers conversation.',
       accessibility: 'Each historical interface image is presented with responsive sources, intrinsic dimensions, descriptive alt text and contemporary editorial framing. The original visual treatment is preserved rather than redesigned.',
       evidenceClaimIds: ['tafe-facilitated-purpose', 'tafe-parallel-modes', 'tafe-spatial-exploration', 'tafe-stateful-storyline'],
+    },
+
+    {
+      id: 'isq-migration-dependency-map',
+      recordId: 'isq-concurrent-migration',
+      path: '/work/connect-and-learn/concurrent-migration/dependency-map',
+      title: 'Migration dependency map',
+      kind: 'Delivery architecture',
+      provenance: 'ISQ Connect & Learn project record · 2024',
+      status: 'Implemented project evidence',
+      summary: 'A semantic dependency map showing why platform migration, learning architecture, more than sixty course rebuilds and operational migration had to move concurrently inside the same three-month engagement.',
+      accessibility: 'The dependency structure is represented as semantic ordered groups and explicit “informs” relationships rather than as a flattened process diagram, so the delivery logic remains understandable at enlarged text and with assistive technology.',
+      evidenceClaimIds: ['isq-platform-migration', 'isq-course-estate', 'isq-concurrent-architecture', 'isq-operational-reduction'],
     },
   ],
   evidenceClaims: [
@@ -424,6 +462,33 @@ export const recordContent = validateRecordContent({
       basis: 'August 2026 editorial inventory and Glenn’s implementation recollection.',
       limitation: 'The surviving screenshots do not expose the original variable or JavaScript source code directly.',
     },
+
+    {
+      id: 'isq-platform-migration',
+      state: 'implemented',
+      claim: 'Connect & Learn moved from Cornerstone to an ISQ-hosted Moodle environment that Independent Schools Queensland could host and control directly.',
+      basis: 'Existing Connect & Learn project record.',
+    },
+    {
+      id: 'isq-course-estate',
+      state: 'implemented',
+      claim: 'More than sixty Storyline courses were redeveloped in parallel with the platform migration inside a three-month engagement.',
+      basis: 'Existing Connect & Learn project brief and reframe.',
+      limitation: 'This claim describes the delivery scope; it does not publish learner numbers or evaluation outcomes.',
+    },
+    {
+      id: 'isq-concurrent-architecture',
+      state: 'implemented',
+      claim: 'Platform decisions and content decisions could not be sequenced one after another; learning architecture had to remain responsive to what the rebuilt courses required.',
+      basis: 'Existing Connect & Learn project reframe.',
+    },
+    {
+      id: 'isq-operational-reduction',
+      state: 'implemented',
+      claim: 'The migration addressed administrative processes that consumed staff time without improving the learning experience, rather than carrying those processes forward unchanged.',
+      basis: 'Existing Connect & Learn project situation and outcome.',
+      limitation: 'The project record supports reduced administrative overhead but does not publish a quantified time saving.',
+    },
   ],
 });
 
@@ -446,6 +511,10 @@ export const tafeProject = recordIndex.projectById['tafe-pathways'];
 export const tafeConversationRecord = recordIndex.recordById['tafe-supported-conversation'];
 export const tafeConversationArtefact = recordIndex.artefactById['tafe-facilitated-exploration'];
 export const tafeRecords = tafeProject.recordIds.map((id) => recordIndex.recordById[id]);
+export const connectProject = recordIndex.projectById['connect-and-learn'];
+export const connectMigrationRecord = recordIndex.recordById['isq-concurrent-migration'];
+export const connectDependencyArtefact = recordIndex.artefactById['isq-migration-dependency-map'];
+export const connectRecords = connectProject.recordIds.map((id) => recordIndex.recordById[id]);
 export const wellbeingRecords = wellbeingProject.recordIds.map((id) => recordIndex.recordById[id]);
 export const recordRoutePaths = [
   ...recordContent.records.map((record) => record.path),

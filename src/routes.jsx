@@ -59,6 +59,20 @@ export const routes = [
         lazy: () => import('./routes/CasaJudgementArtefactRoute.jsx'),
       },
 
+      // ISQ Connect & Learn: Project → Record → Artefact.
+      {
+        path: 'work/connect-and-learn',
+        lazy: () => import('./routes/ConnectRecordProjectRoute.jsx'),
+      },
+      {
+        path: 'work/connect-and-learn/concurrent-migration',
+        lazy: () => import('./routes/ConnectMigrationRecordRoute.jsx'),
+      },
+      {
+        path: 'work/connect-and-learn/concurrent-migration/dependency-map',
+        lazy: () => import('./routes/ConnectDependencyArtefactRoute.jsx'),
+      },
+
       // TAFE Queensland SkillsTech: historical Project → Record → Artefact.
       {
         path: 'work/tafe-pathways',

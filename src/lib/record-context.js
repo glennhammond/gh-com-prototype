@@ -2,6 +2,9 @@ import {
   casaJudgementArtefact,
   casaJudgementRecord,
   casaProject,
+  connectDependencyArtefact,
+  connectMigrationRecord,
+  connectProject,
   connectedServiceArtefact,
   connectedServiceRecord,
   ruokProductionArtefact,
@@ -120,6 +123,30 @@ export function getRecordContext(pathname) {
       subject: tafeConversationArtefact.title,
       contextHref: tafeConversationRecord.path,
       contextLabel: tafeConversationRecord.title,
+    };
+  }
+  if (pathname === connectProject.path) {
+    return {
+      resolution: 'project',
+      subject: connectProject.title,
+      contextHref: '/work',
+      contextLabel: 'Work',
+    };
+  }
+  if (pathname === connectMigrationRecord.path) {
+    return {
+      resolution: 'record',
+      subject: connectMigrationRecord.title,
+      contextHref: connectProject.path,
+      contextLabel: connectProject.title,
+    };
+  }
+  if (pathname === connectDependencyArtefact.path) {
+    return {
+      resolution: 'artefact',
+      subject: connectDependencyArtefact.title,
+      contextHref: connectMigrationRecord.path,
+      contextLabel: connectMigrationRecord.title,
     };
   }
   if (pathname.startsWith('/work/')) {
