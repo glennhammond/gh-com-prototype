@@ -69,9 +69,9 @@ export default function Practice() {
             projects. It names the ways of working that recur when the evidence is read across projects.
           </p>
           <p className="practice-head__integrity">
-            <strong>What the evidence covers.</strong> The public evidence shown here is selective and currently
-            reaches back to 2015. The thirty-year line on Home describes career continuity, not thirty years of
-            work published in THE RECORD.
+            <strong>What the evidence covers.</strong> The public Record is selective and currently reaches back
+            to 2015. The thirty-year line on Home describes career continuity, not thirty years of work
+            published in THE RECORD.
           </p>
           <Link className="practice-text-link" to="/work">
             Enter THE RECORD
