@@ -27,10 +27,10 @@ export const about = {
   approach: {
     heading: "How I work",
     paragraphs: [
-      "Most learning problems arrive described as content problems. A course is not landing, so the request is for a better course. Often the course is fine and the platform is making it unusable, or the content is fine and nobody has owned the workflow that keeps it current.",
-      "So I start with the whole system rather than the brief, and I stay across all four layers rather than handing one to somebody else. That is not a claim to be better at each discipline than a specialist in it. It is a claim that the decisions between the disciplines are where the work is usually lost, and that those decisions need one owner.",
+      "I start with the situation rather than the requested deliverable. Sometimes the useful answer is a better course. Sometimes the constraint sits in the platform, workflow, information architecture, service or the decisions between them. The first job is to understand what is limiting the experience before committing to the thing we will make.",
+      "That often means moving between product strategy, experience architecture, learning design, interaction, platforms and implementation. I do not treat that as a claim to replace every specialist. I keep connected decisions connected long enough to solve the problem at the altitude it requires.",
     ],
-    status: STATUS.PROPOSED,
+    status: STATUS.APPROVED,
   },
 
   /** Dated professional history — recruiters and diligence (BP §5, §15). */
@@ -54,14 +54,14 @@ export const about = {
       role: "eLearning Specialist",
       org: "Civil Aviation Safety Authority",
       detail:
-        "Regulated aviation learning including the Flight Examiner Rating programme, and a reusable learning-production system for the regulator: style manual, authoring templates, asset libraries and team processes.",
+        "Regulated aviation learning including the Flight Examiner Rating program, and a reusable learning-production system for the regulator: style manual, authoring templates, asset libraries and team processes.",
     },
     {
       period: "2014 – 2015",
       role: "Online Learning Coordinator",
       org: "Goodstart Institute of Early Learning",
       detail:
-        "Developed the MyPortal learning management system for 640 centres nationally and produced accredited Certificate III and Diploma programmes in early childhood education and care.",
+        "Developed the MyPortal learning management system for 640 centres nationally and produced accredited Certificate III and Diploma programs in early childhood education and care.",
     },
     {
       period: "Earlier",
