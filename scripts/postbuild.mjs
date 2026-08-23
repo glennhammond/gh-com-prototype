@@ -1,27 +1,30 @@
 /**
  * Post-build sitemap + robots.
  *
- * Historical routes remain listed during production implementation because
- * destructive migration decisions are a Go-Live Gate concern. THE RECORD's
- * new Record and Artefact routes are added as canonical live URLs. Genuine
- * lastmod dates remain omitted rather than fabricated.
+ * The route table still renders the legacy estate during migration, but the
+ * sitemap expresses the canonical product only. Keeping a route addressable is
+ * not the same as declaring it canonical or asking search engines to discover it.
+ * Redirects and destructive retirement remain a separate Go-Live Gate.
  */
 import { writeFileSync } from 'node:fs';
-import { projects } from '../src/content/projects.js';
-import { recordRoutePaths } from '../src/content/the-record.js';
+import { recordContent } from '../src/content/the-record.js';
 
 const SITE = 'https://glennhammond.com';
+
+const evidencePaths = [
+  ...recordContent.projects.map((project) => project.path),
+  ...recordContent.records.map((record) => record.path),
+  ...recordContent.artefacts.map((artefact) => artefact.path),
+];
 
 const paths = [
   '/',
   '/work',
-  ...projects.map((project) => project.path),
-  ...recordRoutePaths,
+  ...evidencePaths,
   '/practice',
-  '/services/rise-design-systems',
-  '/services/storyline-development',
   '/about',
   '/contact',
+  '/privacy',
 ];
 
 const uniquePaths = [...new Set(paths)];
@@ -33,4 +36,4 @@ const robots = `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`;
 
 writeFileSync('dist/sitemap.xml', sitemap);
 writeFileSync('dist/robots.txt', robots);
-console.log(`postbuild: sitemap.xml (${uniquePaths.length} URLs), robots.txt`);
+console.log(`postbuild: sitemap.xml (${uniquePaths.length} canonical URLs), robots.txt`);
