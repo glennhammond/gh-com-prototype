@@ -51,6 +51,28 @@
       ],
       "destination": "/blog/master-slides-in-storyline",
       "permanent": true
+    },
+    {
+      "source": "/how-to-set-moodles-user-login-page-as-the-sites-landing-page",
+      "destination": "/blog/how-to-set-moodles-login-page-as-the-sites-landing-page",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-set-moodles-user-login-page-as-the-sites-landing-page",
+      "destination": "/blog/how-to-set-moodles-login-page-as-the-sites-landing-page",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "p",
+          "value": "164"
+        }
+      ],
+      "destination": "/blog/how-to-set-moodles-login-page-as-the-sites-landing-page",
+      "permanent": true
     }
   ],
   "headers": [
