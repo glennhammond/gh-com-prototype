@@ -2,7 +2,7 @@
 
 **Date:** 24 August 2026  
 **Branch:** `feat/record-production-integration-01`  
-**Status:** In progress — implementation complete in branch; latest Master Slides preview qualification still pending Vercel Git pickup
+**Status:** In progress — branch implementation advanced; deployed qualification currently blocked by the Vercel Hobby build-rate limit
 
 ## Purpose
 
@@ -28,9 +28,9 @@ Captured estate:
   - `/?p=<id>` WordPress query URL
 - historical Portfolio rules, including the unsafe `/portfolio/:path*` wildcard
 
-`src/content/inherited-redirect-policy.js` now records these identities independently of the current live-sitemap inventory.
+`src/content/inherited-redirect-policy.js` records these identities independently of the current live-sitemap inventory.
 
-`scripts/migration-audit.mjs` now requires every launch-ready preserved WordPress identity to prove that:
+`scripts/migration-audit.mjs` requires every launch-ready preserved WordPress identity to prove that:
 
 - its final canonical destination is statically rendered;
 - the destination is intentionally listed in the new sitemap;
@@ -40,7 +40,7 @@ Captured estate:
 
 A future `PUBLISH=1` build cannot pass while unresolved inherited article identities or inherited Portfolio rules remain.
 
-## 2. Master Slides in Storyline — first inherited article recovery
+## 2. Master Slides in Storyline — inherited article recovery 01
 
 Historical identity:
 
@@ -77,9 +77,47 @@ New architecture:
   - `/master-slides-in-storyline` → `/blog/master-slides-in-storyline`
   - `/?p=156463` → `/blog/master-slides-in-storyline`
 
-Both historical source forms are configured to bypass intermediate legacy pages.
+Both historical source forms bypass intermediate legacy pages.
 
-## 3. Retained knowledge now has a reusable article family
+## 3. Moodle login-first — inherited article recovery 02
+
+Historical identity:
+
+- WordPress id: `164`
+- historical permalink: `/how-to-set-moodles-user-login-page-as-the-sites-landing-page`
+- old React redirect destination: `/blog/how-to-set-moodles-user-login-page-as-the-sites-landing-page`
+- surviving source slug: `/blog/how-to-set-moodles-login-page-as-the-sites-landing-page`
+
+Disposition: **PRESERVE, rebuilt**.
+
+Source recovery showed two separate problems in the old estate:
+
+1. the surviving article was dated 2013 and marked `draft`;
+2. the old Vercel redirect pointed to a slug containing `user-login`, while the actual source slug does not.
+
+Simply carrying the old redirect graph forward would therefore preserve a broken migration.
+
+The useful intent remains current. Moodle 5.x still supports:
+
+- requiring authentication before users can see Site home;
+- separate Site home configuration for guests and authenticated users;
+- a configurable signed-in destination such as Dashboard or Site home.
+
+The resource has therefore been rebuilt as an access/entry decision guide rather than a brittle menu-click recipe.
+
+Canonical retained resource:
+
+`/blog/how-to-set-moodles-login-page-as-the-sites-landing-page`
+
+Migration rules now converge on it directly:
+
+- `/how-to-set-moodles-user-login-page-as-the-sites-landing-page` → canonical resource;
+- `/?p=164` → canonical resource;
+- broken old intermediate `/blog/how-to-set-moodles-user-login-page-as-the-sites-landing-page` → canonical resource.
+
+This is a genuine authority repair: the new graph is both more current and more correct than the graph being replaced.
+
+## 4. Retained knowledge now has a reusable article family
 
 `KnowledgeArticle.jsx` provides a shared retained-knowledge article surface rather than creating a bespoke page for every recovered resource.
 
@@ -97,7 +135,15 @@ The renderer supports:
 
 The article family is lazy-routed so body content does not enter the route-independent client bundle.
 
-## 4. Landmark hardening
+Current retained knowledge set:
+
+1. Principles of Assessment and Rules of Evidence
+2. Master Slides in Storyline
+3. How to make Moodle show login first
+
+Each resource independently earns indexability; there is no Blog index requirement and no publishing cadence implied by this set.
+
+## 5. Landmark and search hardening
 
 Deployed inspection of the first retained resource found a nested `<main>` landmark because `Layout` already supplies the page main and `AssessmentPrinciples` also used one.
 
@@ -105,9 +151,14 @@ That page root is now `<article>` instead.
 
 The search architecture audit has been strengthened to require exactly one `<main>` landmark on every intentionally indexable route.
 
-This converts a manual discovery into a regression guard for future retained knowledge.
+The search audit also now:
 
-## 5. Live sitemap is a discovery inventory, not unquestioned truth
+- verifies retained-knowledge body content and search-policy coverage one-to-one on the build side;
+- keeps retained knowledge body content out of route-independent client policy code;
+- handles conditional WordPress `/?p=` redirects separately from unconditional route redirects;
+- rejects canonical-source collisions and redirect chains without falsely treating a conditional homepage query redirect as replacing `/`.
+
+## 6. Live sitemap is a discovery inventory, not unquestioned truth
 
 Further source inspection of the old `gh.com-react` estate found an important reliability problem.
 
@@ -124,18 +175,40 @@ The current public application also returns the temporary `Interim` experience r
 
 A deployed request to `/blog/scenario-writing-that-feels-real` therefore returns HTTP 200 with the generic root shell and root canonical metadata, not a distinct server-rendered article.
 
-Two current-sitemap slugs were also not found in the present markdown registry:
+### Source-state classification of current sitemap articles
+
+Source inspection now distinguishes the old sitemap article entries as follows.
+
+**Surviving non-draft source:**
+
+- `/blog/master-slides-in-storyline` — now rebuilt/preserved
+- `/blog/ux-for-learning` — survives; quality/authority review still required
+- `/blog/xapi-basics` — survives; technical/evidence-led rebuild still required
+
+**Draft source advertised by the old sitemap:**
+
+- `/blog/ai-patterns-elearning`
+- `/blog/clean-design-elearning`
+- `/blog/design-system`
+- `/blog/storyline-tips-that-actually-help`
+- `/blog/welcome`
+- `/blog/xapi-isnt-scary`
+
+The old production post registry filters `status: draft` when `PROD` is true, so these sitemap entries are not evidence of a healthy published article surface.
+
+**No matching current source recovered:**
 
 - `/blog/scenario-writing-that-feels-real`
-- `/blog/storyline-tips-that-actually-help`
 
-These remain migration investigation items because Search Console/backlink evidence is still unavailable, but they are **not automatic rebuild commitments**.
+The earlier assumption that `storyline-tips-that-actually-help` was also source-missing was incorrect and has been withdrawn; the file exists but is explicitly draft.
 
 Migration rule therefore becomes:
 
 > A legacy sitemap URL is discovery evidence. A destructive or rebuild decision requires route/source/search/backlink evidence appropriate to the risk.
 
-## 6. Historical analytics property exists
+Draft and source-missing sitemap entries remain protected as investigation items until first-party search/backlink evidence is available, but they are not automatic rebuild commitments.
+
+## 7. Historical analytics property exists
 
 The old production source contains GA4 measurement id:
 
@@ -147,7 +220,7 @@ This confirms that the `analyticsBaselineCaptured` launch dependency represents 
 
 No direct Google Analytics or Search Console connector is currently available in the installed/plugin catalogue, so the baseline cannot be exported autonomously from this environment.
 
-## 7. Backlink data access
+## 8. Backlink data access
 
 Semrush is connected, but backlink research remains unavailable because the account does not currently have sufficient API units.
 
@@ -155,7 +228,7 @@ This is an evidence-access constraint, not evidence that backlinks do not exist.
 
 The migration ledger therefore continues to block destructive action where backlink/citation evidence could materially change the decision.
 
-## 8. Core / More / Bore disposition
+## 9. Core / More / Bore disposition
 
 The historical design-system child `/work/elearning-design-system/core-more-bore` remains separated from the other visual/system foundations because it is a learning-design method rather than simply a design token or asset page.
 
@@ -169,30 +242,61 @@ Possible future dispositions remain:
 - incorporate into a future Practice/Record discussion as an internal decision method;
 - retire if first-party search/link evidence is negligible.
 
-## 9. Current qualification state
+## 10. Qualification infrastructure and Vercel block
 
-The branch contains the complete Master Slides implementation and migration policy changes.
+A GitHub Actions production-quality workflow has been added at:
 
-Expected next qualified build state:
+`.github/workflows/quality.yml`
 
-- 22 intentional indexable canonicals;
-- 2 retained knowledge resources;
-- 1 explicitly noindexed Artefact;
-- 7 configured permanent redirects, including one conditional WordPress query redirect;
-- live-sitemap migration inventory: 7 launch-ready / 20 unresolved;
-- inherited WordPress inventory: 1 launch-ready / 27 unresolved;
-- inherited Portfolio inventory: 1 launch-ready / 2 unresolved.
+It runs Node 24, `npm ci`, then the repository's complete `npm run check` production gate on pushes and pull requests.
 
-**Important:** these expected counts are not yet claimed as deployed qualification because Vercel Git integration has not yet surfaced a deployment after commit `b1d0354d50ea8237200e2bf2bd838387d5585f7d`. The branch is ahead of the latest visible preview deployment.
+This is a durable independent quality channel, not a replacement for deployed-output verification.
+
+The current autonomous GitHub App write path has not produced a visible Actions run through the available workflow-run connector, so no Actions pass is claimed yet.
+
+The missing Vercel previews are now explained: GitHub reports the Vercel commit status as failure with `upgradeToPro=build-rate-limit` for the new Hobby project.
+
+Therefore:
+
+- latest branch changes are **not** treated as deployed qualification;
+- the absence of previews is **not** treated as a code/build failure;
+- no attempt has been made to promote or move the production domain;
+- manual deploy tooling was rejected because the connector's runtime schema did not expose the required explicit preview/project/file inputs safely.
+
+## 11. Current branch state and expected next qualified counts
+
+The branch currently contains:
+
+- THE RECORD explicit search policy;
+- retained knowledge policy and renderer;
+- three retained knowledge resources;
+- two repaired inherited WordPress identities;
+- live-sitemap and inherited-redirect cutover gates;
+- one-main landmark qualification;
+- GitHub production-quality workflow.
+
+Expected next successful production build state:
+
+- **23 intentional indexable canonicals**;
+- **3 retained knowledge resources**;
+- **1 explicitly noindexed Artefact**;
+- **10 configured permanent redirect rules**, including two conditional WordPress query redirects;
+- live-sitemap migration inventory: **7 launch-ready / 20 unresolved**;
+- inherited WordPress inventory: **2 launch-ready / 26 unresolved**;
+- inherited Portfolio inventory: **1 launch-ready / 2 unresolved**.
+
+These counts are branch expectations, not deployed claims, until the Vercel rate-limit condition allows a current preview or another trusted CI result is available.
 
 No production domain has been moved, no production deployment has been promoted, and `main` has not been merged.
 
-## 10. Next autonomous sequence
+## 12. Next autonomous sequence
 
-1. Qualify the Master Slides integration as soon as the branch preview appears in Vercel.
-2. Verify both historical Master Slides redirects against deployed output.
-3. Continue source recovery of the old Storyline/Moodle/xAPI estate.
-4. Prefer consolidation over one-for-one article recreation where intent overlaps.
-5. Keep AI/year-sensitive content in review unless it can be rebuilt into genuinely current first-hand work.
+1. Continue source-state classification of the inherited WordPress estate while preview builds are rate-limited.
+2. Prefer recovering surviving first-hand/currentable material over recreating deleted legacy posts.
+3. Keep draft, phantom and year-sensitive material in investigation unless first-party search/backlink evidence gives it independent value.
+4. Reassess `/blog/ux-for-learning` and `/blog/xapi-basics` as the two strongest surviving non-draft sitemap resources after Master Slides.
+5. Prefer consolidation over one-for-one Storyline article recreation where the historic intent overlaps the stronger retained production-system resource.
 6. Keep design-system child consolidation blocked until the canonical ISQ Design System evidence architecture is defined rather than adding a fifth Project for migration convenience.
-7. Keep public cutover blocked until first-party search/analytics baselines and inherited authority decisions reach an acceptable launch state.
+7. Export GA4, Search Console and Bing baselines before any destructive cutover decision once access is available.
+8. Qualify the current branch and historical redirects on a new Vercel preview as soon as the project can build again.
+9. Keep public cutover blocked until first-party search/analytics baselines and inherited authority decisions reach an acceptable launch state.
