@@ -8,7 +8,7 @@ export const home = {
     eyebrow: 'Digital design and learning practice · Brisbane',
     headline: 'Thirty years of making digital things.',
     standfirst:
-      'Still learning how to make them better. THE RECORD is a living professional evidence system: projects establish the territory, Records examine consequential decisions, and Artefacts let the evidence be inspected.',
+      'Still learning how to make them better. THE RECORD is a selective, living professional evidence system: Projects establish the territory, Records examine consequential decisions, and Artefacts let the evidence be inspected.',
     primaryCta: { href: '/work', label: 'Enter THE RECORD' },
     secondaryCta: { href: '/practice', label: 'Read the practice' },
   },
@@ -34,7 +34,7 @@ export const home = {
     standfirst:
       'Across these projects the work moves between product strategy, experience architecture, learning design, interaction, platforms, production and implementation.',
     body:
-      'Practice is where those recurring patterns are interpreted. THE RECORD remains the evidence underneath them, so the claims can be tested against the work.',
+      'Practice reads across those projects to find recurring patterns. THE RECORD remains the evidence underneath them, so the claims can be tested against the work.',
     cta: { href: '/practice', label: 'Read the practice' },
   },
   person: {
@@ -55,6 +55,6 @@ export const home = {
   seo: {
     title: 'Glenn Hammond — digital design and learning practice',
     description:
-      'THE RECORD is Glenn Hammond’s living professional evidence system: projects, decisions, artefacts and outcomes across digital learning, product design and learning technology.',
+      'THE RECORD is Glenn Hammond’s selective professional evidence system: projects, decisions and artefacts across digital product, experience architecture, digital learning and learning technology.',
   },
 };
