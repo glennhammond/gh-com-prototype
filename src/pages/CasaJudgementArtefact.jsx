@@ -5,28 +5,67 @@ import {
   casaJudgementRecord,
   casaProject,
 } from '../content/the-record.js';
-import { getImage } from '../lib/media.js';
+import { recordImage } from '../lib/record-media.js';
+import regulation480Avif from '../assets/casa/casa-regulation-480.avif';
+import regulation800Avif from '../assets/casa/casa-regulation-800.avif';
+import regulation1600Avif from '../assets/casa/casa-regulation-1600.avif';
+import regulation480Webp from '../assets/casa/casa-regulation-480.webp';
+import regulation800Webp from '../assets/casa/casa-regulation-800.webp';
+import regulation1600Webp from '../assets/casa/casa-regulation-1600.webp';
+import assessment480Avif from '../assets/casa/casa-assessment-480.avif';
+import assessment800Avif from '../assets/casa/casa-assessment-800.avif';
+import assessment1600Avif from '../assets/casa/casa-assessment-1600.avif';
+import assessment480Webp from '../assets/casa/casa-assessment-480.webp';
+import assessment800Webp from '../assets/casa/casa-assessment-800.webp';
+import assessment1600Webp from '../assets/casa/casa-assessment-1600.webp';
+import competency480Avif from '../assets/casa/casa-competency-480.avif';
+import competency800Avif from '../assets/casa/casa-competency-800.avif';
+import competency1600Avif from '../assets/casa/casa-competency-1600.avif';
+import competency480Webp from '../assets/casa/casa-competency-480.webp';
+import competency800Webp from '../assets/casa/casa-competency-800.webp';
+import competency1600Webp from '../assets/casa/casa-competency-1600.webp';
 import { breadcrumbSchema, graph, personSchema } from '../lib/schema.js';
 import './RecordExperience.css';
 import './CasaRecord.css';
 
+const images = {
+  regulation: recordImage({
+    avif: [[480, regulation480Avif], [800, regulation800Avif], [1600, regulation1600Avif]],
+    webp: [[480, regulation480Webp], [800, regulation800Webp], [1600, regulation1600Webp]],
+    width: 1600,
+    height: 924,
+  }),
+  assessment: recordImage({
+    avif: [[480, assessment480Avif], [800, assessment800Avif], [1600, assessment1600Avif]],
+    webp: [[480, assessment480Webp], [800, assessment800Webp], [1600, assessment1600Webp]],
+    width: 1600,
+    height: 731,
+  }),
+  competency: recordImage({
+    avif: [[480, competency480Avif], [800, competency800Avif], [1600, competency1600Avif]],
+    webp: [[480, competency480Webp], [800, competency800Webp], [1600, competency1600Webp]],
+    width: 1600,
+    height: 844,
+  }),
+};
+
 const evidence = [
   {
-    image: 'casa-regulation',
+    image: images.regulation,
     label: '01 · Regulatory structure',
     title: 'Know which instrument governs',
     alt: 'A course diagram mapping the Civil Aviation Act 1988 through regulations, orders, Part 61 licensing, the Manual of Standards and the Flight Examiner Handbook.',
     body: 'The hierarchy is drawn once and used as a reference structure. The evidence is not that examiners need to discover these documents exist; it is that the course makes their relationship visible when a question has to be resolved.',
   },
   {
-    image: 'casa-assessment',
+    image: images.assessment,
     label: '02 · Assessment quality',
     title: 'Make the principles of sound assessment explicit',
     alt: 'A course screen titled Principles of Assessment with validity, reliability, flexibility and objectivity presented as expandable sections.',
     body: 'Validity, reliability, flexibility and objectivity create a shared language for evaluating the quality of assessment rather than reducing the examiner role to a procedural checklist.',
   },
   {
-    image: 'casa-competency',
+    image: images.competency,
     label: '03 · Competency judgement',
     title: 'Show what sits below the visible task',
     alt: 'An iceberg diagram showing task skills above the surface and task management, contingency management and job-role environment skills below it.',
@@ -35,20 +74,17 @@ const evidence = [
 ];
 
 function EvidenceFigure({ item, eager = false }) {
-  const image = getImage(item.image);
-  if (!image) return null;
-
   return (
     <figure className="casa-evidence-figure">
       <div className="casa-evidence-figure__image">
         <picture>
-          <source type="image/avif" srcSet={image.avif} sizes="(min-width: 900px) 52vw, 92vw" />
-          <source type="image/webp" srcSet={image.webp} sizes="(min-width: 900px) 52vw, 92vw" />
+          <source type="image/avif" srcSet={item.image.avif} sizes="(min-width: 900px) 52vw, 92vw" />
+          <source type="image/webp" srcSet={item.image.webp} sizes="(min-width: 900px) 52vw, 92vw" />
           <img
-            src={image.src}
+            src={item.image.src}
             alt={item.alt}
-            width={image.width}
-            height={image.height}
+            width={item.image.width}
+            height={item.image.height}
             loading={eager ? 'eager' : 'lazy'}
             decoding={eager ? 'sync' : 'async'}
           />
@@ -106,7 +142,7 @@ export default function CasaJudgementArtefact() {
 
           <div className="casa-evidence-sequence">
             {evidence.map((item, index) => (
-              <EvidenceFigure key={item.image} item={item} eager={index === 0} />
+              <EvidenceFigure key={item.label} item={item} eager={index === 0} />
             ))}
           </div>
 
