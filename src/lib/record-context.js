@@ -6,6 +6,9 @@ import {
   connectedServiceRecord,
   ruokProductionArtefact,
   ruokProductionRecord,
+  tafeConversationArtefact,
+  tafeConversationRecord,
+  tafeProject,
   contextualEntryRecord,
   dailyWellbeingArtefact,
   wellbeingProject,
@@ -93,6 +96,30 @@ export function getRecordContext(pathname) {
       subject: casaJudgementArtefact.title,
       contextHref: casaJudgementRecord.path,
       contextLabel: casaJudgementRecord.title,
+    };
+  }
+  if (pathname === tafeProject.path) {
+    return {
+      resolution: 'project',
+      subject: tafeProject.title,
+      contextHref: '/work',
+      contextLabel: 'Work',
+    };
+  }
+  if (pathname === tafeConversationRecord.path) {
+    return {
+      resolution: 'record',
+      subject: tafeConversationRecord.title,
+      contextHref: tafeProject.path,
+      contextLabel: tafeProject.title,
+    };
+  }
+  if (pathname === tafeConversationArtefact.path) {
+    return {
+      resolution: 'artefact',
+      subject: tafeConversationArtefact.title,
+      contextHref: tafeConversationRecord.path,
+      contextLabel: tafeConversationRecord.title,
     };
   }
   if (pathname.startsWith('/work/')) {

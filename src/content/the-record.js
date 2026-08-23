@@ -82,7 +82,7 @@ export const recordContent = validateRecordContent({
       role: 'Project lead, interaction design and Storyline development',
       altitude: 'Artefact · experience',
       trajectory: [],
-      recordIds: [],
+      recordIds: ['tafe-supported-conversation'],
       placements: [{ surface: 'work', order: 4, role: 'anchor' }],
     },
   ],
@@ -198,6 +198,31 @@ export const recordContent = validateRecordContent({
       evidenceClaimIds: ['casa-examiner-audience', 'casa-reasoning-design', 'casa-assessment-principles', 'casa-competency-model'],
       relationships: [],
     },
+
+    {
+      id: 'tafe-supported-conversation',
+      projectId: 'tafe-pathways',
+      path: '/work/tafe-pathways/supporting-conversation',
+      title: 'Designing technology to support a conversation, not replace it',
+      centre: 'Facilitated exploration',
+      context: 'TAFE Queensland SkillsTech Pathways · Years 8–9 careers sessions',
+      happened: 'Pathways was designed for facilitated Years 8–9 school sessions. Students and a TAFE careers adviser could move non-linearly through industry data, job profiles, workplace imagery, maps and summaries rather than following a prescribed module sequence. The technology gave the adviser a shared environment to explore with the group rather than attempting to automate the adviser’s role.',
+      worthExamining: 'Digital careers products often assume the goal is self-service. This project had a human expert already in the experience. The consequential design decision was to make the software expand what that person could show, compare and discuss instead of treating the conversation as friction to remove.',
+      tension: 'A self-directed careers flow can answer a sequence of predefined questions efficiently, but it also decides the sequence before the room has spoken. In a facilitated school session, that risks turning the adviser into someone who advances slides rather than someone who follows curiosity.',
+      move: 'Build an explorable information environment with persistent navigation and several parallel modes. Keep industry data, career profiles, workplace context and summaries close enough that the facilitator can change direction when a question emerges without losing the shared frame.',
+      making: [
+        'Five persistent modes — Home, Industry Data, Job Profiles, Slideshow and Summary — supported movement without forcing a single sequence.',
+        'Industry-level navigation and approximately twenty careers created breadth without flattening every career into one long list.',
+        'Job profiles were placed into an interactive map/environment so careers could be discussed spatially and visually.',
+        'Comparable industry data created stable reference points; JavaScript dynamically counted the statistics in response to a SkillsTech team request.',
+        'Extensive Storyline variables maintained state across the experience, helping the piece behave more like an application than a slide-based module.',
+        'Glenn led the project and engaged former colleague Elisha Gillett to work with him.',
+      ],
+      evidenceBoundary: 'This Record supports the facilitator-led purpose, the non-linear information architecture, the recovered interface evidence and the implementation characteristics documented in the editorial inventory. It does not claim enrolment, career-choice or session-effectiveness outcomes.',
+      artefactIds: ['tafe-facilitated-exploration'],
+      evidenceClaimIds: ['tafe-facilitated-purpose', 'tafe-parallel-modes', 'tafe-spatial-exploration', 'tafe-stateful-storyline'],
+      relationships: [],
+    },
   ],
   artefacts: [
     {
@@ -249,6 +274,19 @@ export const recordContent = validateRecordContent({
       summary: 'Three course artefacts showing the progression from regulatory instrument hierarchy, through principles of assessment, to the four dimensions of competency that inform examiner judgement.',
       accessibility: 'Each recovered course image is presented with intrinsic dimensions, responsive sources, descriptive alt text and an explanatory caption so the evidentiary sequence remains understandable without depending on the screenshot alone.',
       evidenceClaimIds: ['casa-reasoning-design', 'casa-assessment-principles', 'casa-competency-model'],
+    },
+
+    {
+      id: 'tafe-facilitated-exploration',
+      recordId: 'tafe-supported-conversation',
+      path: '/work/tafe-pathways/supporting-conversation/exploration-environment',
+      title: 'Facilitated exploration environment',
+      kind: 'Historical interaction evidence',
+      provenance: 'TAFE Queensland SkillsTech Pathways · recovered 2015 artefacts',
+      status: 'Historical evidence',
+      summary: 'Recovered Pathways artefacts showing the non-linear wireframe, comparable industry data, category-filtered workplace map and persistent visual exploration modes used to support a facilitator-led careers conversation.',
+      accessibility: 'Each historical interface image is presented with responsive sources, intrinsic dimensions, descriptive alt text and contemporary editorial framing. The original visual treatment is preserved rather than redesigned.',
+      evidenceClaimIds: ['tafe-facilitated-purpose', 'tafe-parallel-modes', 'tafe-spatial-exploration', 'tafe-stateful-storyline'],
     },
   ],
   evidenceClaims: [
@@ -358,6 +396,34 @@ export const recordContent = validateRecordContent({
       basis: 'Recovered CASA competency iceberg diagram and existing project caption.',
       limitation: 'The artefact supports the model presented in the course; it does not establish evaluation outcomes.',
     },
+
+    {
+      id: 'tafe-facilitated-purpose',
+      state: 'implemented',
+      claim: 'Pathways was designed for facilitator-led Years 8–9 school sessions, deliberately supporting conversation with a TAFE careers adviser rather than replacing that person with self-directed software.',
+      basis: 'GH.COM editorial inventory completed August 2026 from Glenn’s project recollection and surviving artefacts.',
+      limitation: 'An older portfolio case-study draft described the tool as self-directed; the later inventory is the corrected professional record used here.',
+    },
+    {
+      id: 'tafe-parallel-modes',
+      state: 'implemented',
+      claim: 'The interface used persistent, non-linear exploration modes including Industry Data, Job Profiles, Slideshow and Summary rather than a required linear lesson sequence.',
+      basis: 'Recovered Pathways interface screens and wireframe.',
+    },
+    {
+      id: 'tafe-spatial-exploration',
+      state: 'implemented',
+      claim: 'Career exploration included a category-filtered interactive map/environment alongside industry data and job profiles.',
+      basis: 'Recovered TAFE map and industry-data artefacts.',
+      limitation: 'The artefacts demonstrate the interaction design; no usage analytics are claimed.',
+    },
+    {
+      id: 'tafe-stateful-storyline',
+      state: 'implemented',
+      claim: 'The Pathways build used extensive Storyline variables and JavaScript for dynamically counting industry statistics, contributing to application-like behaviour beyond conventional slide progression.',
+      basis: 'August 2026 editorial inventory and Glenn’s implementation recollection.',
+      limitation: 'The surviving screenshots do not expose the original variable or JavaScript source code directly.',
+    },
   ],
 });
 
@@ -376,6 +442,10 @@ export const casaProject = recordIndex.projectById['casa-ferc'];
 export const casaJudgementRecord = recordIndex.recordById['casa-examiner-judgement'];
 export const casaJudgementArtefact = recordIndex.artefactById['casa-assessment-reasoning-sequence'];
 export const casaRecords = casaProject.recordIds.map((id) => recordIndex.recordById[id]);
+export const tafeProject = recordIndex.projectById['tafe-pathways'];
+export const tafeConversationRecord = recordIndex.recordById['tafe-supported-conversation'];
+export const tafeConversationArtefact = recordIndex.artefactById['tafe-facilitated-exploration'];
+export const tafeRecords = tafeProject.recordIds.map((id) => recordIndex.recordById[id]);
 export const wellbeingRecords = wellbeingProject.recordIds.map((id) => recordIndex.recordById[id]);
 export const recordRoutePaths = [
   ...recordContent.records.map((record) => record.path),

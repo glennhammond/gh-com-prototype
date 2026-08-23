@@ -59,6 +59,20 @@ export const routes = [
         lazy: () => import('./routes/CasaJudgementArtefactRoute.jsx'),
       },
 
+      // TAFE Queensland SkillsTech: historical Project → Record → Artefact.
+      {
+        path: 'work/tafe-pathways',
+        lazy: () => import('./routes/TafeRecordProjectRoute.jsx'),
+      },
+      {
+        path: 'work/tafe-pathways/supporting-conversation',
+        lazy: () => import('./routes/TafeConversationRecordRoute.jsx'),
+      },
+      {
+        path: 'work/tafe-pathways/supporting-conversation/exploration-environment',
+        lazy: () => import('./routes/TafeConversationArtefactRoute.jsx'),
+      },
+
       // Historical project routes remain available during migration.
       { path: 'work/:slug', lazy: () => import('./routes/LegacyTopLevelRoute.jsx') },
       { path: 'work/casa/:slug', lazy: () => import('./routes/LegacyCasaRoute.jsx') },
