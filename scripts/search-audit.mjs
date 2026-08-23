@@ -45,10 +45,36 @@ const fileToRoute = (file) => {
   return `/${normal.slice(0, -5)}`;
 };
 
-const one = (html, regex) => {
-  const matches = [...html.matchAll(regex)];
+const tags = (html, tagName) =>
+  [...html.matchAll(new RegExp(`<${tagName}\\b[^>]*>`, 'gi'))].map((match) => match[0]);
+
+const attribute = (tag, name) =>
+  new RegExp(`\\b${name}=["']([^"']*)["']`, 'i').exec(tag)?.[1] ?? null;
+
+const uniqueMetaContent = (html, selectorName, selectorValue) => {
+  const matches = tags(html, 'meta').filter(
+    (tag) => attribute(tag, selectorName)?.toLowerCase() === selectorValue.toLowerCase(),
+  );
+  return matches.length === 1 ? attribute(matches[0], 'content') : null;
+};
+
+const uniqueLinkHref = (html, rel) => {
+  const matches = tags(html, 'link').filter(
+    (tag) => attribute(tag, 'rel')?.toLowerCase() === rel.toLowerCase(),
+  );
+  return matches.length === 1 ? attribute(matches[0], 'href') : null;
+};
+
+const titleText = (html) => {
+  const matches = [...html.matchAll(/<title\b[^>]*>([\s\S]*?)<\/title>/gi)];
   return matches.length === 1 ? matches[0][1] : null;
 };
+
+const robotsValues = (html) =>
+  tags(html, 'meta')
+    .filter((tag) => attribute(tag, 'name')?.toLowerCase() === 'robots')
+    .map((tag) => attribute(tag, 'content'))
+    .filter(Boolean);
 
 const textContent = (html) => html
   .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
@@ -119,12 +145,12 @@ for (const route of expectedPaths) {
     continue;
   }
 
-  const title = one(html, /<title>([\s\S]*?)<\/title>/g);
-  const description = one(html, /<meta\s+name="description"\s+content="([^"]+)"\s*\/?\s*>/g);
-  const canonical = one(html, /<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?\s*>/g);
-  const ogUrl = one(html, /<meta\s+property="og:url"\s+content="([^"]+)"\s*\/?\s*>/g);
-  const robots = [...html.matchAll(/<meta\s+name="robots"\s+content="([^"]+)"\s*\/?\s*>/g)].map((match) => match[1]);
-  const h1s = [...html.matchAll(/<h1\b[^>]*>/g)];
+  const title = titleText(html);
+  const description = uniqueMetaContent(html, 'name', 'description');
+  const canonical = uniqueLinkHref(html, 'canonical');
+  const ogUrl = uniqueMetaContent(html, 'property', 'og:url');
+  const robots = robotsValues(html);
+  const h1s = [...html.matchAll(/<h1\b[^>]*>/gi)];
   const expectedCanonical = `${SITE}${route === '/' ? '' : route}`;
 
   if (!title?.trim()) fail(`${route}: missing or duplicate title`);
@@ -153,8 +179,8 @@ for (const route of expectedPaths) {
     fail(`${route}: built HTML contains too little primary text (${visibleText.length} characters)`);
   }
 
-  for (const match of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
-    const href = match[1].replace(/\/$/, '') || '/';
+  for (const match of html.matchAll(/<a\b[^>]*href=["']([^"']+)["']/gi)) {
+    const href = match[1].split(/[?#]/)[0].replace(/\/$/, '') || '/';
     if (redirectSources.has(href)) {
       fail(`${route}: internal link points to redirect source ${href} instead of its final canonical destination`);
     }
@@ -172,10 +198,10 @@ for (const [id, policy] of Object.entries(searchPolicy.artefacts)) {
     fail(`noindex artefact ${id} is not statically rendered at ${policy.canonical}`);
     continue;
   }
-  if (!/<meta\s+name="robots"\s+content="noindex, follow"\s*\/?\s*>/.test(html)) {
+  if (!robotsValues(html).some((value) => value.toLowerCase() === 'noindex, follow')) {
     fail(`noindex artefact ${id} lacks robots noindex, follow`);
   }
-  const canonical = one(html, /<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?\s*>/g);
+  const canonical = uniqueLinkHref(html, 'canonical');
   if (canonical !== `${SITE}${policy.canonical}`) {
     fail(`noindex artefact ${id} does not self-canonicalise`);
   }
@@ -188,7 +214,7 @@ for (const [file, html] of htmlPages) {
   const evidencePolicy = evidenceSearchForPath(route);
   const migrationOnlyWork = route.startsWith('/work/') && !evidencePolicy;
   const legacyService = route.startsWith('/services/');
-  if ((migrationOnlyWork || legacyService) && !/<meta\s+name="robots"\s+content="noindex, follow"\s*\/?\s*>/.test(html)) {
+  if ((migrationOnlyWork || legacyService) && !robotsValues(html).some((value) => value.toLowerCase() === 'noindex, follow')) {
     fail(`${route}: migration-only route is addressable but not quarantined with noindex, follow`);
   }
 }
