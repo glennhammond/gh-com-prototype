@@ -5,15 +5,76 @@ import {
   tafeConversationRecord,
   tafeProject,
 } from '../content/the-record.js';
-import { getImage } from '../lib/media.js';
+import { recordImage } from '../lib/record-media.js';
+import wireframe480Avif from '../assets/tafe/tafe-wireframe-480.avif';
+import wireframe800Avif from '../assets/tafe/tafe-wireframe-800.avif';
+import wireframe480Webp from '../assets/tafe/tafe-wireframe-480.webp';
+import wireframe800Webp from '../assets/tafe/tafe-wireframe-800.webp';
+import industry480Avif from '../assets/tafe/tafe-industry-data-480.avif';
+import industry800Avif from '../assets/tafe/tafe-industry-data-800.avif';
+import industry1600Avif from '../assets/tafe/tafe-industry-data-1600.avif';
+import industry480Webp from '../assets/tafe/tafe-industry-data-480.webp';
+import industry800Webp from '../assets/tafe/tafe-industry-data-800.webp';
+import industry1600Webp from '../assets/tafe/tafe-industry-data-1600.webp';
+import admin480Avif from '../assets/tafe/tafe-map-admin-480.avif';
+import admin800Avif from '../assets/tafe/tafe-map-admin-800.avif';
+import admin1600Avif from '../assets/tafe/tafe-map-admin-1600.avif';
+import admin480Webp from '../assets/tafe/tafe-map-admin-480.webp';
+import admin800Webp from '../assets/tafe/tafe-map-admin-800.webp';
+import admin1600Webp from '../assets/tafe/tafe-map-admin-1600.webp';
+import trades480Avif from '../assets/tafe/tafe-map-trades-480.avif';
+import trades800Avif from '../assets/tafe/tafe-map-trades-800.avif';
+import trades1600Avif from '../assets/tafe/tafe-map-trades-1600.avif';
+import trades480Webp from '../assets/tafe/tafe-map-trades-480.webp';
+import trades800Webp from '../assets/tafe/tafe-map-trades-800.webp';
+import trades1600Webp from '../assets/tafe/tafe-map-trades-1600.webp';
+import slideshow480Avif from '../assets/tafe/tafe-slideshow-480.avif';
+import slideshow800Avif from '../assets/tafe/tafe-slideshow-800.avif';
+import slideshow1600Avif from '../assets/tafe/tafe-slideshow-1600.avif';
+import slideshow480Webp from '../assets/tafe/tafe-slideshow-480.webp';
+import slideshow800Webp from '../assets/tafe/tafe-slideshow-800.webp';
+import slideshow1600Webp from '../assets/tafe/tafe-slideshow-1600.webp';
 import { breadcrumbSchema, graph, personSchema } from '../lib/schema.js';
 import './RecordExperience.css';
 import './TafeRecord.css';
 
+const images = {
+  wireframe: recordImage({
+    avif: [[480, wireframe480Avif], [800, wireframe800Avif]],
+    webp: [[480, wireframe480Webp], [800, wireframe800Webp]],
+    width: 800,
+    height: 741,
+  }),
+  industry: recordImage({
+    avif: [[480, industry480Avif], [800, industry800Avif], [1600, industry1600Avif]],
+    webp: [[480, industry480Webp], [800, industry800Webp], [1600, industry1600Webp]],
+    width: 1600,
+    height: 900,
+  }),
+  admin: recordImage({
+    avif: [[480, admin480Avif], [800, admin800Avif], [1600, admin1600Avif]],
+    webp: [[480, admin480Webp], [800, admin800Webp], [1600, admin1600Webp]],
+    width: 1600,
+    height: 900,
+  }),
+  trades: recordImage({
+    avif: [[480, trades480Avif], [800, trades800Avif], [1600, trades1600Avif]],
+    webp: [[480, trades480Webp], [800, trades800Webp], [1600, trades1600Webp]],
+    width: 1600,
+    height: 900,
+  }),
+  slideshow: recordImage({
+    avif: [[480, slideshow480Avif], [800, slideshow800Avif], [1600, slideshow1600Avif]],
+    webp: [[480, slideshow480Webp], [800, slideshow800Webp], [1600, slideshow1600Webp]],
+    width: 1600,
+    height: 905,
+  }),
+};
+
 const evidence = [
   {
     type: 'single',
-    image: 'tafe-wireframe',
+    image: images.wireframe,
     label: '01 · Structure before surface',
     title: 'A hub, not a funnel',
     alt: 'A wireframe flow diagram of the Pathways tool, showing an entry screen, a central hub and grouped screen clusters with connections between exploration modes.',
@@ -21,7 +82,7 @@ const evidence = [
   },
   {
     type: 'single',
-    image: 'tafe-industry-data',
+    image: images.industry,
     label: '02 · Shared reference points',
     title: 'Comparable industry data',
     alt: 'A TAFE Queensland industry data screen over a construction site photograph, listing six labour-market measures and showing a large number employed figure with persistent navigation below.',
@@ -29,7 +90,7 @@ const evidence = [
   },
   {
     type: 'pair',
-    images: ['tafe-map-admin', 'tafe-map-trades'],
+    images: [images.admin, images.trades],
     label: '03 · Spatial exploration',
     title: 'Put careers into an environment',
     alts: [
@@ -40,7 +101,7 @@ const evidence = [
   },
   {
     type: 'single',
-    image: 'tafe-slideshow',
+    image: images.slideshow,
     label: '04 · Workplace context',
     title: 'Let the environment carry part of the explanation',
     alt: 'A full-bleed workplace photograph in the Pathways slideshow mode with previous and next controls and persistent bottom navigation.',
@@ -48,15 +109,19 @@ const evidence = [
   },
 ];
 
-function Picture({ name, alt, eager = false }) {
-  const image = getImage(name);
-  if (!image) return null;
+function Picture({ image, alt, eager = false }) {
   return (
     <picture>
       <source type="image/avif" srcSet={image.avif} sizes="(min-width: 900px) 50vw, 94vw" />
       <source type="image/webp" srcSet={image.webp} sizes="(min-width: 900px) 50vw, 94vw" />
-      <img src={image.src} alt={alt} width={image.width} height={image.height}
-        loading={eager ? 'eager' : 'lazy'} decoding={eager ? 'sync' : 'async'} />
+      <img
+        src={image.src}
+        alt={alt}
+        width={image.width}
+        height={image.height}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding={eager ? 'sync' : 'async'}
+      />
     </picture>
   );
 }
@@ -105,12 +170,12 @@ export default function TafeConversationArtefact() {
                 <div className="tafe-evidence-figure__media">
                   {item.type === 'pair' ? (
                     <div className="tafe-evidence-pair">
-                      {item.images.map((name, imageIndex) => (
-                        <Picture key={name} name={name} alt={item.alts[imageIndex]} />
+                      {item.images.map((image, imageIndex) => (
+                        <Picture key={item.alts[imageIndex]} image={image} alt={item.alts[imageIndex]} />
                       ))}
                     </div>
                   ) : (
-                    <Picture name={item.image} alt={item.alt} eager={index === 0} />
+                    <Picture image={item.image} alt={item.alt} eager={index === 0} />
                   )}
                 </div>
                 <figcaption>
