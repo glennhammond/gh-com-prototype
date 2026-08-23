@@ -1,10 +1,10 @@
 /* ==========================================================================
    Selected work — one editorial sequence, not a card grid (v3.4)
 
-   Three entries, three different compositions. No shared card shape: each
-   `.selwork__item--*` is its own layout. What they share is the section's
+   Four entries with intentionally different weight. No shared card shape:
+   each `.selwork__item--*` is its own layout. What they share is the section's
    vertical rhythm and the link/kicker typography, so the page still reads
-   as one system rather than three unrelated experiments.
+   as one evidence system rather than four unrelated experiments.
    ========================================================================== */
 
 .selwork__head {
@@ -282,9 +282,9 @@
 }
 
 /* ==========================================================================
-   CASA — the third flagship, a contained single-column treatment: one
-   strong image carrying the entry, deliberately the smallest footprint of
-   the three. Present, not diminished.
+   CASA — the third territory, a contained single-column treatment: one
+   strong image carrying the entry. Present, but intentionally quieter than
+   the contemporary lead territories.
    ========================================================================== */
 
 .selwork__item--contained {
@@ -302,4 +302,41 @@
 
 .selwork__item--contained .selwork__copy {
   margin-top: var(--space-5);
+}
+
+/* ==========================================================================
+   TAFE — historical depth. No contemporary mock-up is introduced here: the
+   entry is intentionally typographic so the historical artefact remains
+   historical evidence rather than being cosmetically modernised on Home.
+   ========================================================================== */
+
+.selwork__item--archive {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 860px;
+}
+
+.selwork__archive-index {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--rule-strong);
+}
+
+.selwork__item--archive .selwork__title {
+  font-size: var(--size-display-m);
+  max-width: 24ch;
+}
+
+.selwork__item--archive .selwork__body {
+  font-size: 1rem;
+}
+
+@media (min-width: 760px) {
+  .selwork__item--archive {
+    grid-template-columns: minmax(150px, 0.32fr) minmax(0, 1fr);
+    margin-left: auto;
+  }
 }
