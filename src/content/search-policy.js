@@ -164,6 +164,13 @@ export const knowledgeSearchPolicy = {
     directEntry: 'knowledge',
     reason: 'Recovered first-hand Storyline production guidance with durable system-design value; refreshed against current Storyline 360 feature documentation while preserving the existing canonical URL.',
   },
+  'moodle-login-first': {
+    index: true,
+    sitemap: true,
+    canonical: '/blog/how-to-set-moodles-login-page-as-the-sites-landing-page',
+    directEntry: 'knowledge',
+    reason: 'Historic Moodle entry intent remains useful, but the 2013 draft has been rebuilt against current Moodle 5.x access, Site home and post-login navigation behaviour rather than migrated as stale instructions.',
+  },
 };
 
 const groups = ['projects', 'records', 'artefacts'];
