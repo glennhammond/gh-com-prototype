@@ -11,6 +11,46 @@
   },
   "redirects": [
     {
+      "source": "/glenn-hammond",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/elearning-design",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/storyline-development",
+      "destination": "/services/storyline-development",
+      "permanent": true
+    },
+    {
+      "source": "/moodle-customisation",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/xapi-elearning",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/elearning-authoring-tools",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/elearning-design-system",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/interaction-design",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
       "source": "/services",
       "destination": "/practice",
       "permanent": true
@@ -27,6 +67,50 @@
     }
   ],
   "headers": [
+    {
+      "source": "/work/casa",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/casa/aviationworx",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/casa/class",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/casa/course-system",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/casa/learning-catalogue",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/isq-elearning-design-system",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/isq-differentiated-learning",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/goodstart-myportal",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/sonic-healthplus",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/safetyhub-asbestos",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/work/interaction-prototypes",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [

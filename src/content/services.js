@@ -1,24 +1,15 @@
 import { STATUS, SOURCE } from "./status.js";
 
 /**
- * Rise and Storyline — specialist practices within the practice.
+ * Rise and Storyline — specialist production routes retained for direct entry
+ * and migration continuity.
  *
- * Neither of these is a parallel service line to the four layers in
- * `layers.js` or the four engagements in `engagements.js`. Both sit mostly
- * inside Content and Operations: Rise and Storyline are how the work gets
- * built, not a different kind of work. This file exists because that
- * positioning needs its own copy — a value proposition, a "when to use this"
- * judgement and a capability breakdown — that does not fit the layer or
- * engagement shape.
- *
- * Evidence is asymmetric and the copy says so rather than smoothing it over.
- * Storyline has six years of dated, attributable work (CASA's reusable
- * production system, the Flight Examiner Rating programme, sixty-plus ISQ
- * courses redeveloped). Rise has one system: the ISQ eLearning Design
- * System. Both pages point at real, verifiable evidence and nothing else —
- * see `content/projects.js` for the underlying project records and
- * `DECISIONS.md` #7 and #11 for why some of that evidence is still a
- * labelled placeholder rather than a screenshot.
+ * Practice Architecture v1 does not organise the practice around tools. These
+ * routes therefore provide subordinate production depth rather than parallel
+ * Practice pillars. Storyline has recurring canonical evidence across TAFE,
+ * CASA and ISQ. Rise retains useful evidence through the ISQ eLearning Design
+ * System but is not promoted as a core recurring Practice claim until the
+ * canonical field earns that stronger statement.
  */
 
 export const riseDesignSystems = {
@@ -133,7 +124,7 @@ export const storylineDevelopment = {
   whenItFits: {
     eyebrow: "When Storyline is the right choice",
     headline: "When the interaction carries the learning.",
-    body: "Storyline earns its cost when a learner needs to make a decision, practise a process, explore a consequence, work through a branching scenario or receive feedback tailored to what they actually did — not just what they clicked. Rise is content-led; Storyline is interaction-led, and the two are chosen for different reasons rather than ranked against each other (see “The right tool for the learning problem” on the Practice overview).",
+    body: "Storyline earns its cost when a learner needs to make a decision, practise a process, explore a consequence, work through a branching scenario or receive feedback tailored to what they did — not just what they clicked. The tool is justified by the learning objective, interaction requirement, accessibility, production constraints and maintenance model rather than by a fixed authoring preference.",
   },
 
   groups: [
@@ -192,7 +183,7 @@ export const storylineDevelopment = {
     eyebrow: "Experience across the Articulate ecosystem",
     body: [
       "Six years inside the Civil Aviation Safety Authority (2015–2021) built and maintained a reusable Storyline production system for the regulator's design team — a style manual, authoring templates, specified components with documented states, and an icon and step-marker library used across the Flight Examiner Rating programme and the wider CASA learning catalogue.",
-      "That production-system discipline carried forward: more than sixty Storyline courses were redeveloped to a single architecture at Independent Schools Queensland, run alongside a platform migration inside a single term. Recognised as an Articulate eLearning Hero. [Confirm earliest Articulate tools used and approximate dates, for a fuller account of the ecosystem history.]",
+      "That production-system discipline carried forward: more than sixty Storyline courses were redeveloped to a single architecture at Independent Schools Queensland, run alongside a platform migration inside a single term. Recognised as an Articulate eLearning Hero.",
     ],
   },
 
