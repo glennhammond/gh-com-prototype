@@ -1,66 +1,36 @@
 /* ==========================================================================
-   Selected work — one editorial sequence, not a card grid (v3.4)
+   Selected evidence — Home preview of THE RECORD
 
-   Four entries with intentionally different weight. No shared card shape:
-   each `.selwork__item--*` is its own layout. What they share is the section's
-   vertical rhythm and the link/kicker typography, so the page still reads
-   as one evidence system rather than four unrelated experiments.
+   Home shows territory and evidence density. Work owns the complete evidence
+   composition. No project mock-ups are invented here simply to fill space.
    ========================================================================== */
 
-.selwork__head {
-  max-width: 60ch;
-}
+.selwork__head { max-width: 64ch; }
+.selwork__head .display-l { margin-top: var(--space-3); max-width: 22ch; }
+.selwork__head .lede { margin-top: var(--space-4); }
 
-.selwork__head .display-l {
-  margin-top: var(--space-3);
-  max-width: 22ch;
-}
-
-.selwork__head .lede {
-  margin-top: var(--space-4);
-}
-
-/* --- The sequence: generous whitespace between chapters, a hairline only,
-   no boxes. -------------------------------------------------------------- */
-
-.selwork__list {
-  margin-top: var(--space-8);
-}
+.selwork__list { margin-top: var(--space-8); }
 
 .selwork__item {
   padding-top: var(--space-8);
   border-top: 1px solid var(--rule);
 }
 
-.selwork__item:first-child {
-  padding-top: 0;
-  border-top: 0;
-}
+.selwork__item:first-child { padding-top: 0; border-top: 0; }
+.selwork__item + .selwork__item { margin-top: var(--space-8); }
 
-.selwork__item + .selwork__item {
-  margin-top: var(--space-8);
-}
-
-/* --- Shared typography: kicker, tag, title, body, links ------------------ */
-
-.selwork__kicker {
+.selwork__kicker,
+.selwork__tag,
+.selwork__index-head,
+.selwork__index li > span {
   font-family: var(--font-mono);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
-  color: var(--text-tertiary);
-  max-width: none;
 }
 
-.selwork__tag {
-  margin-top: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--size-meta);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--brass-ink);
-  max-width: none;
-}
+.selwork__kicker { color: var(--text-tertiary); }
+.selwork__tag { margin-top: var(--space-2); color: var(--brass-ink); }
 
 .selwork__title {
   margin-top: var(--space-3);
@@ -91,33 +61,54 @@
   border-bottom: 2px solid var(--brass);
 }
 
-.selwork__link:hover {
+.selwork__link:hover,
+.selwork__index a:hover {
   color: var(--mineral-ink);
-  border-bottom-color: var(--mineral-ink);
 }
 
-.selwork__link--quiet {
-  color: var(--text-secondary);
-  border-bottom-color: var(--rule-strong);
+/* The evidence index is a compressed version of the Project → Record depth.
+   It is deliberately architectural rather than card-like or image-led. */
+.selwork__index {
+  border-top: 3px solid var(--brass);
+  border-bottom: 1px solid var(--rule);
+  padding-top: var(--space-3);
 }
 
-.selwork__link--quiet:hover {
-  color: var(--mineral-ink);
-  border-bottom-color: var(--mineral-ink);
+.selwork__index-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  color: var(--text-tertiary);
 }
 
-.selwork__figure img {
-  display: block;
-  width: 100%;
-  height: auto;
+.selwork__index ol {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
 }
 
-/* ==========================================================================
-   Wellbeing Studio — the primary flagship, the largest treatment: a
-   dominant image with a detail crop pinned over its corner, copy running
-   beside it. Leads the sequence and leads with the picture.
-   ========================================================================== */
+.selwork__index li {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--rule-soft);
+}
 
+.selwork__index li:last-child { border-bottom: 0; }
+.selwork__index li > span { color: var(--brass-ink); }
+
+.selwork__index a {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--rule-strong);
+}
+
+/* Wellbeing — lead territory. Evidence density is allowed the largest field. */
 .selwork__item--lead {
   display: grid;
   gap: var(--space-7);
@@ -125,76 +116,30 @@
 
 @media (min-width: 860px) {
   .selwork__item--lead {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
     align-items: start;
   }
 }
 
-.selwork__item--lead .selwork__visual {
-  position: relative;
-  padding-bottom: clamp(28px, 6vw, 64px);
-}
-
-.selwork__item--lead .selwork__figure--main img {
+.selwork__item--lead .selwork__index {
+  padding: clamp(20px, 3vw, 36px);
+  background: var(--paper-raised);
   border: 1px solid var(--rule);
-  background: #fff;
+  border-top: 4px solid var(--mineral);
 }
 
-.selwork__item--lead .selwork__figure--detail {
-  position: absolute;
-  left: clamp(-16px, -4vw, -32px);
-  bottom: 0;
-  width: 38%;
-  max-width: 240px;
-  aspect-ratio: 1 / 1;
-  border: 4px solid var(--paper);
-  box-shadow: 0 14px 30px rgba(21, 25, 30, 0.16);
-}
-
-.selwork__item--lead .selwork__figure--detail img {
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border: 1px solid var(--rule);
-  background: #fff;
-}
-
-@media (max-width: 619px) {
-  .selwork__item--lead .selwork__visual {
-    padding-bottom: 0;
-  }
-
-  .selwork__item--lead .selwork__figure--detail {
-    position: static;
-    width: 46%;
-    max-width: 180px;
-    margin-top: var(--space-4);
-    box-shadow: none;
-    border-color: var(--rule);
-  }
-}
-
-/* ==========================================================================
-   ISQ — the second flagship, a medium two-column treatment: one placement
-   image plus the engagement's own figures and the design system's own map.
-   Smaller footprint than Wellbeing Studio, no overlap flourish.
-   ========================================================================== */
-
+/* ISQ — strong systems proof with operational scale beneath the evidence. */
 .selwork__item--secondary {
   display: grid;
   gap: var(--space-6);
-  max-width: 980px;
+  max-width: 1040px;
 }
 
 @media (min-width: 760px) {
   .selwork__item--secondary {
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
     align-items: start;
   }
-}
-
-.selwork__item--secondary .selwork__figure--main img {
-  border: 1px solid var(--rule);
-  background: #fff;
 }
 
 .selwork__item--secondary .selwork__title {
@@ -202,24 +147,16 @@
   max-width: 22ch;
 }
 
-.selwork__evidence {
-  margin-top: var(--space-6);
-  display: grid;
-  gap: var(--space-6);
-}
-
-@media (min-width: 460px) {
-  .selwork__evidence {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  }
-}
-
 .selwork__stats {
-  margin: 0;
+  margin: var(--space-5) 0 0;
   border-top: 2px solid var(--rule-strong);
   padding-top: var(--space-4);
   display: grid;
   gap: var(--space-4);
+}
+
+@media (min-width: 460px) {
+  .selwork__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 .selwork__stats dt {
@@ -248,72 +185,31 @@
   max-width: 20ch;
 }
 
-.selwork__map {
-  margin: 0;
-  padding: 0;
-  border-top: 2px solid var(--rule-strong);
-  padding-top: var(--space-4);
-  list-style: none;
-  display: grid;
-}
-
-.selwork__map li {
-  padding: var(--space-2) 0;
-  border-top: 1px solid var(--rule-soft);
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: var(--text);
-}
-
-.selwork__map li:first-child {
-  border-top: 0;
-}
-
-.selwork__item--secondary .selwork__actions {
-  margin-top: var(--space-6);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-5);
-}
-
-.selwork__item--secondary .selwork__link {
-  margin-top: 0;
-}
-
-/* ==========================================================================
-   CASA — the third territory, a contained single-column treatment: one
-   strong image carrying the entry. Present, but intentionally quieter than
-   the contemporary lead territories.
-   ========================================================================== */
-
+/* CASA — deep historical professional evidence, intentionally contained. */
 .selwork__item--contained {
-  max-width: 640px;
+  display: grid;
+  gap: var(--space-6);
+  max-width: 900px;
 }
 
-.selwork__item--contained .selwork__visual {
-  max-width: 420px;
+@media (min-width: 760px) {
+  .selwork__item--contained {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    align-items: start;
+  }
 }
 
-.selwork__item--contained .selwork__figure--main img {
-  border: 1px solid var(--rule);
-  background: #fff;
+.selwork__item--contained .selwork__title {
+  font-size: var(--size-display-m);
 }
 
-.selwork__item--contained .selwork__copy {
-  margin-top: var(--space-5);
-}
-
-/* ==========================================================================
-   TAFE — historical depth. No contemporary mock-up is introduced here: the
-   entry is intentionally typographic so the historical artefact remains
-   historical evidence rather than being cosmetically modernised on Home.
-   ========================================================================== */
-
+/* TAFE — explicit archive treatment. The year is the visual evidence of age;
+   no contemporary mock-up is used to make historical work look current. */
 .selwork__item--archive {
   display: grid;
   gap: var(--space-5);
-  max-width: 860px;
+  max-width: 900px;
+  margin-left: auto;
 }
 
 .selwork__archive-index {
@@ -330,13 +226,11 @@
   max-width: 24ch;
 }
 
-.selwork__item--archive .selwork__body {
-  font-size: 1rem;
-}
+.selwork__item--archive .selwork__body { font-size: 1rem; }
+.selwork__item--archive .selwork__index { margin-top: var(--space-5); }
 
 @media (min-width: 760px) {
   .selwork__item--archive {
     grid-template-columns: minmax(150px, 0.32fr) minmax(0, 1fr);
-    margin-left: auto;
   }
 }
