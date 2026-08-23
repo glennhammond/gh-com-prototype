@@ -3,12 +3,13 @@ import PlaceholderShot from './PlaceholderShot.jsx';
 import './SelectedWork.css';
 
 /**
- * Home Foundation 01 selected-work sequence, reconciled to THE RECORD.
- * The visual hierarchy stays editorial rather than card-driven; labels now
- * name Projects rather than case studies and the old extra system route is
- * no longer surfaced as a fifth public territory.
+ * Home evidence sequence sourced from THE RECORD.
+ *
+ * The four territories are deliberately not given equal visual weight:
+ * Wellbeing is the active lead, ISQ carries strong systems proof, CASA provides
+ * deep regulated-practice evidence, and TAFE establishes historical depth.
  */
-export default function SelectedWork({ intro, wellbeing, isq, casa }) {
+export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
   return (
     <section className="section selwork" aria-labelledby="work-title">
       <div className="container">
@@ -38,7 +39,7 @@ export default function SelectedWork({ intro, wellbeing, isq, casa }) {
               />
             </div>
             <div className="selwork__copy">
-              <p className="selwork__kicker">Corporate Yoga Australia · 2026–27</p>
+              <p className="selwork__kicker">{wellbeing.organisation} · {wellbeing.period}</p>
               <h3 id="selwork-wellbeing-title" className="selwork__title">
                 From a content portal towards a connected wellbeing service.
               </h3>
@@ -62,7 +63,7 @@ export default function SelectedWork({ intro, wellbeing, isq, casa }) {
               />
             </div>
             <div className="selwork__copy">
-              <p className="selwork__kicker">Independent Schools Queensland · 2024</p>
+              <p className="selwork__kicker">{isq.organisation} · {isq.period}</p>
               <h3 id="selwork-isq-title" className="selwork__title">
                 One term. A platform migration and a course rebuild at once.
               </h3>
@@ -98,7 +99,7 @@ export default function SelectedWork({ intro, wellbeing, isq, casa }) {
               />
             </div>
             <div className="selwork__copy">
-              <p className="selwork__kicker">Civil Aviation Safety Authority · 2015–21</p>
+              <p className="selwork__kicker">{casa.organisation} · {casa.period}</p>
               <p className="selwork__tag">Flight Examiner Rating</p>
               <h3 id="selwork-casa-title" className="selwork__title">
                 Learning for people whose job is assessing other people.
@@ -109,6 +110,24 @@ export default function SelectedWork({ intro, wellbeing, isq, casa }) {
                 and a wider operating context inside the regulator.
               </p>
               <Link className="selwork__link" to={casa.path}>Enter the Flight Examiner Rating Project</Link>
+            </div>
+          </article>
+
+          <article className="selwork__item selwork__item--archive" aria-labelledby="selwork-tafe-title">
+            <div className="selwork__archive-index" aria-hidden="true">2015</div>
+            <div className="selwork__copy">
+              <p className="selwork__kicker">{tafe.organisation} · {tafe.period}</p>
+              <p className="selwork__tag">Historical evidence</p>
+              <h3 id="selwork-tafe-title" className="selwork__title">
+                Technology designed to give a careers adviser more ways to talk.
+              </h3>
+              <p className="selwork__body">
+                Pathways used Storyline as a non-linear shared exploration environment
+                for Years 8–9 school sessions. Its value in THE RECORD is historical:
+                the original interface remains visible while the later evidence corrects
+                an older portfolio description that treated the experience as self-directed.
+              </p>
+              <Link className="selwork__link" to={tafe.path}>Enter the SkillsTech Pathways Project</Link>
             </div>
           </article>
         </div>
