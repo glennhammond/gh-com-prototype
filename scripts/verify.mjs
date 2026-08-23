@@ -1,20 +1,26 @@
 /**
- * Build verification — Blueprint §17, §26, §27.
+ * Build verification — Blueprint §17, §26, §27 + Search 02.
  *
- * The blueprint asks for the publishing guardrails to be enforced in code
- * rather than remembered. This script reads the built output in dist/ and
- * fails on anything that must not ship.
+ * Publishing guardrails are enforced in code rather than remembered. Route
+ * existence and search inclusion are intentionally separate: the search policy
+ * decides indexability, while this verifier retains publication, evidence,
+ * performance, metadata and no-JS safeguards across the whole rendered estate.
  *
- * Run with:  npm run verify   (or npm run check to build first)
+ * Run with: npm run verify (or npm run check to build first)
  */
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, extname, relative, sep } from "node:path";
 import { gzipSync } from "node:zlib";
 import { clients } from "../src/content/clients.js";
 import { projects, withheldProjects } from "../src/content/projects.js";
-import { recordRoutePaths } from "../src/content/the-record.js";
+import { recordContent, recordRoutePaths } from "../src/content/the-record.js";
 import { testimonials } from "../src/content/testimonials.js";
 import { isPublishable } from "../src/content/status.js";
+import {
+  getIndexableEvidencePaths,
+  shouldNoindexPath,
+  validateSearchPolicy,
+} from "../src/content/search-policy.js";
 
 const DIST = "dist";
 const failures = [];
@@ -24,11 +30,6 @@ const notes = [];
 const fail = (m) => failures.push(m);
 const warn = (m) => warnings.push(m);
 const note = (m) => notes.push(m);
-
-/* --- helpers -------------------------------------------------------------- */
-
-/* path.relative() returns backslash-separated paths on Windows; every route
-   key in this file is forward-slash. Normalise before use as a lookup key. */
 const toPosix = (p) => p.split(sep).join("/");
 
 function walk(dir, out = []) {
@@ -40,10 +41,19 @@ function walk(dir, out = []) {
   return out;
 }
 
+const fileToRoute = (file) => {
+  const normal = toPosix(file);
+  if (normal === "index.html") return "/";
+  if (!normal.endsWith(".html")) return null;
+  return `/${normal.slice(0, -5)}`;
+};
+
 if (!existsSync(DIST)) {
   console.error("dist/ not found — run `npm run build` first.");
   process.exit(1);
 }
+
+validateSearchPolicy(recordContent);
 
 const files = walk(DIST);
 const htmlFiles = files.filter((f) => extname(f) === ".html");
@@ -66,13 +76,11 @@ const PLACEHOLDER = [
 
 for (const [file, source] of Object.entries(html)) {
   for (const pattern of PLACEHOLDER) {
-    if (pattern.test(source)) {
-      fail(`Placeholder ${pattern} found in ${file}`);
-    }
+    if (pattern.test(source)) fail(`Placeholder ${pattern} found in ${file}`);
   }
 }
 
-/* --- 2. Unapproved client names and logos ---------------------------------- */
+/* --- 2. Client-name and logo approvals ------------------------------------ */
 
 const unapprovedNames = clients.filter((c) => !c.nameApproved);
 for (const [file, source] of Object.entries(html)) {
@@ -84,8 +92,6 @@ for (const [file, source] of Object.entries(html)) {
   }
 }
 
-/* Only clients with logoApproved may have a mark in the build. The check is
-   scoped to logo assets so a project screenshot cannot trip it. */
 const approvedLogoStems = clients
   .filter((c) => c.logoApproved && c.logoFile)
   .map((c) => c.logoFile.replace(/\.[a-z]+$/i, ""));
@@ -101,9 +107,7 @@ for (const file of files) {
 
 for (const withheld of withheldProjects) {
   if (html[`work/${withheld.slug}.html`] || html[`work/${withheld.slug}/index.html`]) {
-    fail(
-      `Withheld project "${withheld.slug}" was rendered. ${withheld.reason}`
-    );
+    fail(`Withheld project "${withheld.slug}" was rendered. ${withheld.reason}`);
   } else {
     note(`Withheld as intended: /work/${withheld.slug}`);
   }
@@ -122,7 +126,7 @@ for (const t of testimonials) {
   }
 }
 
-/* --- 5. Pre-rendered content (no-JS resilience) ---------------------------- */
+/* --- 5. Pre-rendered content / no-JS resilience ---------------------------- */
 
 const REQUIRED = {
   "index.html": ["Thirty years of making digital things.", "THE RECORD", "Frame. Shape. Make. Evidence."],
@@ -173,15 +177,10 @@ for (const [file, needles] of Object.entries(REQUIRED)) {
     continue;
   }
   for (const needle of needles) {
-    if (!source.includes(needle)) {
-      fail(`"${needle}" not present in pre-rendered ${file}`);
-    }
+    if (!source.includes(needle)) fail(`"${needle}" not present in pre-rendered ${file}`);
   }
 }
 
-/* Practice Architecture v1 regression gate. These are legacy organising
-   markers, not merely old phrases: if they return, the route has slipped back
-   into capability/commercial architecture. */
 const PRACTICE_LEGACY_MARKERS = [
   "Four layers, one owner",
   "Four engagements",
@@ -198,11 +197,8 @@ for (const marker of PRACTICE_LEGACY_MARKERS) {
 
 for (const [file, source] of Object.entries(html)) {
   if (file === "404.html") continue;
-  // Tags carry a data-rh attribute from the head manager, so match loosely.
-  if (!/<title[^>]*>[^<]{10,}<\/title>/.test(source))
-    fail(`Missing or short <title> in ${file}`);
-  if (!/name="description"[^>]*content="[^"]{40,}"/.test(source))
-    fail(`Missing or short meta description in ${file}`);
+  if (!/<title[^>]*>[^<]{10,}<\/title>/.test(source)) fail(`Missing or short <title> in ${file}`);
+  if (!/name="description"[^>]*content="[^"]{40,}"/.test(source)) fail(`Missing or short meta description in ${file}`);
   if (!/rel="canonical"/.test(source)) fail(`Missing canonical in ${file}`);
   if (!/property="og:title"/.test(source)) fail(`Missing og:title in ${file}`);
   if (!/application\/ld\+json/.test(source)) warn(`No structured data in ${file}`);
@@ -211,16 +207,22 @@ for (const [file, source] of Object.entries(html)) {
   if (h1s.length !== 1) fail(`${file} has ${h1s.length} h1 elements, expected 1`);
 }
 
-/* --- 6b. noindex — SEO migration Phase A -----------------------------------
-   /404 and /privacy must carry a noindex robots meta tag; nothing else may,
-   so an indexable page can never be accidentally hidden from search. */
+/* --- 6b. noindex — Search 02 contract --------------------------------------
+   404/privacy are deliberately excluded. Canonical evidence follows the
+   explicit search policy. Still-rendered legacy Work/service pages are
+   addressable for migration/review but quarantined from indexation. */
 
-const NOINDEX_PAGES = new Set(["404.html", "privacy.html"]);
 for (const [file, source] of Object.entries(html)) {
+  const route = fileToRoute(file);
   const hasNoindex = /name="robots"[^>]*content="[^"]*noindex/i.test(source);
-  if (NOINDEX_PAGES.has(file)) {
-    if (!hasNoindex) fail(`${file} should carry a noindex robots meta tag but does not`);
-  } else if (hasNoindex) {
+  const shouldNoindex =
+    file === "404.html" ||
+    file === "privacy.html" ||
+    (route ? shouldNoindexPath(route) : false);
+
+  if (shouldNoindex && !hasNoindex) {
+    fail(`${file} should carry a noindex robots meta tag but does not`);
+  } else if (!shouldNoindex && hasNoindex) {
     fail(`${file} unexpectedly carries a noindex robots meta tag`);
   }
 }
@@ -249,10 +251,9 @@ for (const [file, source] of Object.entries(html)) {
   }
 }
 
-/* --- 7b. Editorial placeholders (V3) ---------------------------------------
-   This prototype deliberately renders its own gaps. They are counted and
-   listed here so nothing is forgotten, and they FAIL the build when
-   PUBLISH=1, which is the flag to set before a real launch build. */
+/* --- 7b. Editorial placeholders -------------------------------------------
+   Review builds count/list known factual gaps. PUBLISH=1 turns every remaining
+   editorial placeholder into a release failure. */
 
 const PUBLISHING = process.env.PUBLISH === "1";
 let placeholderCount = 0;
@@ -285,20 +286,11 @@ if (placeholderCount) {
 
 const gz = (f) => gzipSync(readFileSync(f)).length;
 const sum = (list) => list.reduce((n, f) => n + gz(f), 0);
-
 const js = files.filter((f) => f.endsWith(".js"));
 const css = files.filter((f) => f.endsWith(".css"));
 const fonts = files.filter((f) => f.endsWith(".woff2"));
 const images = files.filter((f) => /\.(avif|webp|png|jpg|svg)$/.test(f));
 
-/*
- * Production Integration 01 changes the structural budget rather than simply
- * lifting the old 140KB total-JS ceiling. Home and legacy CaseStudy content
- * are route chunks, so the meaningful regression gate is the static import
- * closure of the application entry plus a ceiling for any individual chunk.
- * Total route JS is still reported as editorial growth debt, but it no longer
- * pretends every route chunk is downloaded on first entry.
- */
 const BUDGET = { initialJs: 120, chunk: 100, css: 30, image: 180 };
 const manifestPath = join(DIST, ".vite", "manifest.json");
 let initialJsKb = null;
@@ -333,31 +325,14 @@ note(`CSS ${cssKb}KB gzipped (budget ${BUDGET.css})`);
 note(`Fonts ${fontKb}KB total across ${fonts.length} files`);
 note(`Largest image ${largestImageKb}KB (budget ${BUDGET.image})`);
 
-if (initialJsKb !== null && initialJsKb > BUDGET.initialJs)
-  fail(`Initial JS budget exceeded: ${initialJsKb}KB > ${BUDGET.initialJs}KB`);
-if (largestChunkKb > BUDGET.chunk)
-  fail(`JS chunk budget exceeded: ${largestChunkKb}KB > ${BUDGET.chunk}KB`);
+if (initialJsKb !== null && initialJsKb > BUDGET.initialJs) fail(`Initial JS budget exceeded: ${initialJsKb}KB > ${BUDGET.initialJs}KB`);
+if (largestChunkKb > BUDGET.chunk) fail(`JS chunk budget exceeded: ${largestChunkKb}KB > ${BUDGET.chunk}KB`);
 if (cssKb > BUDGET.css) fail(`CSS budget exceeded: ${cssKb}KB > ${BUDGET.css}KB`);
-if (largestImageKb > BUDGET.image)
-  fail(`Image budget exceeded: ${largestImageKb}KB > ${BUDGET.image}KB`);
+if (largestImageKb > BUDGET.image) fail(`Image budget exceeded: ${largestImageKb}KB > ${BUDGET.image}KB`);
 
 /* --- 9. Third-party requests ------------------------------------------------ */
 
-/* Outbound links a human clicks (not fetched resources) are allow-listed
-   individually, same treatment as linkedin.com below. Currently: the ISQ
-   eLearning Design System reference site, linked from the homepage featured
-   section and the ISQ case study per the v3.2 brief. */
 const ALLOWED_EXTERNAL_LINKS = ["isq-elearning-design-system.vercel.app"];
-
-/* This check exists to keep the page free of resources the browser fetches
- * automatically on load — scripts, embeds, trackers — per the blueprint's
- * zero-third-party-connections rule. It does not need to block a plain,
- * user-initiated <a href> to a verified piece of Glenn's own evidence: that
- * is a reference link in copy, not a connection the page makes for you.
- * EVIDENCE_LINKS is for exactly that — an explicit, narrow allowlist of
- * outbound <a href> targets. src attributes (script, img, iframe, etc.) are
- * checked separately below and are never exempted, so an embed or tracker
- * pointed at one of these domains would still fail the build. */
 const EVIDENCE_LINKS = ["https://isq-elearning-design-system.vercel.app"];
 
 for (const [file, source] of Object.entries(html)) {
@@ -371,31 +346,33 @@ for (const [file, source] of Object.entries(html)) {
     .filter((u) => !u.includes("schema.org"))
     .filter((u) => !u.includes("linkedin.com"))
     .filter((u) => !ALLOWED_EXTERNAL_LINKS.some((allowed) => u.includes(allowed)));
-  if (external.length) {
-    fail(`Third-party resource referenced in ${file}: ${external.join(", ")}`);
-  }
+  if (external.length) fail(`Third-party resource referenced in ${file}: ${external.join(", ")}`);
 }
 
-/* --- 10. Sitemap integrity — SEO migration Phase A -------------------------- */
+/* --- 10. Sitemap integrity — Search 02 ------------------------------------- */
 
 const sitemapPath = join(DIST, "sitemap.xml");
 if (!existsSync(sitemapPath)) {
   fail("dist/sitemap.xml not found");
 } else {
   const sitemap = readFileSync(sitemapPath, "utf8");
-  if (/<loc>[^<]*\/privacy<\/loc>/.test(sitemap))
-    fail("Sitemap includes /privacy, which is noindex and must not be listed");
-  if (/<loc>[^<]*\/services<\/loc>/.test(sitemap))
-    fail("Sitemap includes /services, which now 301s to /practice");
-  if (/<lastmod>/.test(sitemap))
-    fail("Sitemap contains a <lastmod> value; Phase A requires omitting it rather than fabricating one");
-  if (!/<loc>[^<]*\/practice<\/loc>/.test(sitemap))
-    fail("Sitemap is missing the canonical /practice URL");
-  for (const route of recordRoutePaths) {
-    if (!sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`))
-      fail(`Sitemap is missing THE RECORD route ${route}`);
+  if (/<loc>[^<]*\/privacy<\/loc>/.test(sitemap)) fail("Sitemap includes /privacy, which is noindex and must not be listed");
+  if (/<loc>[^<]*\/services<\/loc>/.test(sitemap)) fail("Sitemap includes /services, which redirects to /practice");
+  if (/<lastmod>/.test(sitemap)) fail("Sitemap contains a <lastmod> value without a trustworthy modification source");
+  if (!/<loc>[^<]*\/practice<\/loc>/.test(sitemap)) fail("Sitemap is missing the canonical /practice URL");
+
+  const indexableEvidence = getIndexableEvidencePaths(recordContent);
+  for (const route of indexableEvidence) {
+    if (!sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) {
+      fail(`Sitemap is missing indexable evidence route ${route}`);
+    }
   }
-  note("Sitemap: /practice and THE RECORD routes present, /services and /privacy absent, no fabricated lastmod");
+  for (const route of recordRoutePaths.filter((route) => !indexableEvidence.includes(route))) {
+    if (sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) {
+      fail(`Sitemap includes evidence route explicitly excluded by search policy: ${route}`);
+    }
+  }
+  note(`Sitemap: ${indexableEvidence.length} evidence routes follow the explicit indexability contract; /services and /privacy absent; no fabricated lastmod`);
 }
 
 /* --- Report ----------------------------------------------------------------- */
