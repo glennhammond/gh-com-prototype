@@ -99,6 +99,10 @@ export const routes = [
         path: 'principles-of-assessment-and-rules-of-evidence',
         lazy: () => import('./routes/AssessmentPrinciplesRoute.jsx'),
       },
+      {
+        path: 'blog/master-slides-in-storyline',
+        lazy: () => import('./routes/KnowledgeArticleRoute.jsx'),
+      },
 
       // Legacy service/about routes remain addressable pending Go-Live SEO
       // qualification, but are no longer part of the public global IA.
