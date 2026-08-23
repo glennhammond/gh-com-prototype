@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
-import {
-  contextualEntryRecord,
-  wellbeingProject,
-} from '../content/the-record.js';
+import { wellbeingProject, wellbeingRecords } from '../content/the-record.js';
 import { breadcrumbSchema, graph, personSchema } from '../lib/schema.js';
 import './RecordExperience.css';
 
@@ -78,22 +75,22 @@ export default function RecordProject() {
             <p className="eyebrow">Evidence landscape</p>
             <h2 id="record-map-title">Records</h2>
             <p>
-              This first production slice opens one consequential decision in full.
-              More Records are added only as their evidence is ready.
+              Records narrow the Project to consequential decisions. Depth is added
+              when the evidence can support it, not to make the territory look full.
             </p>
           </div>
 
           <ol className="record-map">
-            <li>
-              <p className="record-map__context">Contextual entry · 2026</p>
-              <h3>
-                <Link to={contextualEntryRecord.path}>{contextualEntryRecord.title}</Link>
-              </h3>
-              <p>{contextualEntryRecord.worthExamining}</p>
-              <Link className="record-map__action" to={contextualEntryRecord.path}>
-                Examine the Record
-              </Link>
-            </li>
+            {wellbeingRecords.map((record) => (
+              <li key={record.id}>
+                <p className="record-map__context">{record.centre} · 2026</p>
+                <h3><Link to={record.path}>{record.title}</Link></h3>
+                <p>{record.worthExamining}</p>
+                <Link className="record-map__action" to={record.path}>
+                  Examine the Record
+                </Link>
+              </li>
+            ))}
           </ol>
 
           <Link className="record-widen" to="/work">Return to Work</Link>

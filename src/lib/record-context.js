@@ -1,4 +1,6 @@
 import {
+  connectedServiceArtefact,
+  connectedServiceRecord,
   contextualEntryRecord,
   dailyWellbeingArtefact,
   wellbeingProject,
@@ -30,6 +32,22 @@ export function getRecordContext(pathname) {
       subject: dailyWellbeingArtefact.title,
       contextHref: contextualEntryRecord.path,
       contextLabel: contextualEntryRecord.title,
+    };
+  }
+  if (pathname === connectedServiceRecord.path) {
+    return {
+      resolution: 'record',
+      subject: connectedServiceRecord.title,
+      contextHref: wellbeingProject.path,
+      contextLabel: wellbeingProject.title,
+    };
+  }
+  if (pathname === connectedServiceArtefact.path) {
+    return {
+      resolution: 'artefact',
+      subject: connectedServiceArtefact.title,
+      contextHref: connectedServiceRecord.path,
+      contextLabel: connectedServiceRecord.title,
     };
   }
   if (pathname.startsWith('/work/')) {

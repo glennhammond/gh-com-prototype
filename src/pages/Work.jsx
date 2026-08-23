@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
-import { contextualEntryRecord, workProjects } from '../content/the-record.js';
+import { recordIndex, workProjects } from '../content/the-record.js';
 import { breadcrumbSchema, graph, personSchema } from '../lib/schema.js';
 import './Work.css';
 
@@ -28,7 +28,9 @@ export default function Work() {
       <section className="record-field" aria-label="Selected project territories">
         <div className="container record-field__grid">
           {workProjects.map((project, index) => {
+            const records = project.recordIds.map((id) => recordIndex.recordById[id]);
             const isWellbeing = project.id === 'wellbeing-studio-2027';
+
             return (
               <article
                 key={project.id}
@@ -39,27 +41,31 @@ export default function Work() {
                   {String(index + 1).padStart(2, '0')}
                 </div>
                 <div className="record-anchor__body">
-                  <p className="record-anchor__meta">
-                    {project.organisation} · {project.period}
-                  </p>
+                  <p className="record-anchor__meta">{project.organisation} · {project.period}</p>
                   <h2 id={`record-anchor-${project.id}`}>
                     <Link to={project.path}>{project.title}</Link>
                   </h2>
                   <p className="record-anchor__proposition">{project.proposition}</p>
                   <p className="record-anchor__role">{project.role}</p>
 
-                  {isWellbeing && (
-                    <div className="record-point" aria-labelledby="contextual-record-title">
-                      <p className="record-point__context">Inside this territory</p>
-                      <h3 id="contextual-record-title">
-                        <Link to={contextualEntryRecord.path}>{contextualEntryRecord.title}</Link>
+                  {isWellbeing && records.map((record, recordIndexValue) => (
+                    <div
+                      key={record.id}
+                      className={`record-point${recordIndexValue === 1 ? ' record-point--system' : ''}`}
+                      aria-labelledby={`work-record-${record.id}`}
+                    >
+                      <p className="record-point__context">
+                        {recordIndexValue === 0 ? 'Inside this territory' : 'The product widened'}
+                      </p>
+                      <h3 id={`work-record-${record.id}`}>
+                        <Link to={record.path}>{record.title}</Link>
                       </h3>
-                      <p>{contextualEntryRecord.worthExamining}</p>
-                      <Link className="record-point__action" to={contextualEntryRecord.path}>
+                      <p>{record.worthExamining}</p>
+                      <Link className="record-point__action" to={record.path}>
                         Examine the decision
                       </Link>
                     </div>
-                  )}
+                  ))}
                 </div>
               </article>
             );

@@ -3,10 +3,7 @@
   border-bottom: 1px solid var(--rule);
 }
 
-.record-work-head__inner {
-  display: grid;
-  gap: var(--space-4);
-}
+.record-work-head__inner { display: grid; gap: var(--space-4); }
 
 .record-work-head h1 {
   max-width: 17ch;
@@ -21,9 +18,7 @@
   color: var(--text-secondary);
 }
 
-.record-field {
-  padding-block: var(--section-y);
-}
+.record-field { padding-block: var(--section-y); }
 
 .record-field__grid {
   display: grid;
@@ -52,13 +47,9 @@
 
 .record-anchor__index,
 .record-anchor__role,
-.record-point__context {
-  color: var(--text-tertiary);
-}
+.record-point__context { color: var(--text-tertiary); }
 
-.record-anchor__meta {
-  color: var(--brass-ink);
-}
+.record-anchor__meta { color: var(--brass-ink); }
 
 .record-anchor h2 {
   margin-top: var(--space-3);
@@ -88,9 +79,7 @@
   color: var(--text-secondary);
 }
 
-.record-anchor__role {
-  margin-top: var(--space-4);
-}
+.record-anchor__role { margin-top: var(--space-4); }
 
 .record-point {
   margin-top: clamp(48px, 7vw, 92px);
@@ -98,6 +87,11 @@
   max-width: 720px;
   padding: var(--space-4) 0 var(--space-4) var(--space-5);
   border-left: 3px solid var(--brass);
+}
+
+.record-point--system {
+  margin-left: clamp(0px, 11vw, 176px);
+  border-left-color: var(--mineral);
 }
 
 .record-point h3 {
@@ -120,29 +114,12 @@
 }
 
 @media (min-width: 840px) {
-  .record-field__grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-  }
-
-  .record-anchor {
-    grid-column: 2 / 12;
-  }
-
-  .record-anchor--lead {
-    grid-column: 1 / 13;
-  }
-
-  .record-anchor--2 {
-    grid-column: 3 / 12;
-  }
-
-  .record-anchor--3 {
-    grid-column: 1 / 10;
-  }
-
-  .record-anchor--4 {
-    grid-column: 4 / 13;
-  }
+  .record-field__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .record-anchor { grid-column: 2 / 12; }
+  .record-anchor--lead { grid-column: 1 / 13; }
+  .record-anchor--2 { grid-column: 3 / 12; }
+  .record-anchor--3 { grid-column: 1 / 10; }
+  .record-anchor--4 { grid-column: 4 / 13; }
 
   .record-anchor--lead h2 {
     font-size: clamp(3.2rem, 7vw, 6.7rem);
@@ -151,15 +128,10 @@
 }
 
 @media (max-width: 520px) {
-  .record-anchor {
-    grid-template-columns: 1fr;
-  }
-
-  .record-anchor__index {
-    margin-bottom: var(--space-2);
-  }
-
-  .record-point {
+  .record-anchor { grid-template-columns: 1fr; }
+  .record-anchor__index { margin-bottom: var(--space-2); }
+  .record-point,
+  .record-point--system {
     margin-left: 0;
     padding-left: var(--space-4);
   }

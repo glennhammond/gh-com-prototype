@@ -34,10 +34,10 @@ export const recordContent = validateRecordContent({
           period: '2027 direction',
           id: 'connected-service',
           label: 'Useful action becomes continuity',
-          detail: 'The next product question is what should happen after a useful action: what the Studio should remember, return to and connect to live human support.',
+          detail: 'The product model widened from content discovery to a connected service: Action, Return and Explore lead to useful experiences, with human-led activity, campaigns, programs and personal continuity connected only where they add value.',
         },
       ],
-      recordIds: ['ws-contextual-entry'],
+      recordIds: ['ws-contextual-entry', 'ws-connected-service'],
       placements: [{ surface: 'work', order: 1, role: 'anchor', featured: true }],
     },
     {
@@ -112,10 +112,34 @@ export const recordContent = validateRecordContent({
           id: 'ws-entry-led-to-continuity',
           verb: 'led-to',
           label: 'the connected-service model',
-          href: '/work/wellbeing-studio#connected-service',
-          note: 'Once entry is designed around a useful moment, the next question is what the Studio should remember and return to afterwards.',
+          href: '/work/wellbeing-studio/connected-service',
+          note: 'Once entry is designed around a useful moment, the next question is what the Studio should remember, connect and make available afterwards.',
         },
       ],
+    },
+    {
+      id: 'ws-connected-service',
+      projectId: 'wellbeing-studio-2027',
+      path: '/work/wellbeing-studio/connected-service',
+      title: 'From content portal to connected wellbeing service',
+      centre: 'Product reframe',
+      context: 'Wellbeing Studio 2027 · Product strategy and experience architecture',
+      happened: 'The redesign stopped treating Wellbeing Studio as a set of destinations such as Home, Practice Library, Live and My Studio. Participant situations and journeys were used to derive a behavioural model — Action, Return and Explore — with Useful Experience at the centre and campaigns, programs, human-led experiences and continuity connected around it.',
+      worthExamining: 'This was not a navigation tidy-up. Changing the unit of design from pages and content types to useful participant experiences changed what the product is, what deserves persistence, when identity matters and how digital activity connects to CYA’s human service.',
+      tension: 'The existing implementation already contained useful pages, navigation and technical infrastructure. Preserving those structures by default would have let the prototype define the product: a familiar content portal with live and personal areas attached.',
+      move: 'Start from real working situations, CYA encounters and return behaviour. Let Action minimise the distance to something useful, Return make trusted experiences easy to retrieve, and Explore support deliberate browsing without organising the whole product around a catalogue.',
+      making: [
+        'Action, Return and Explore became behavioural modes rather than proposed navigation labels.',
+        'Useful Experience became the centre of participant value; a successful journey may legitimately end there.',
+        'Human-led and digital experiences were placed inside one CYA service ecosystem rather than treated as separate channels.',
+        'Campaigns, programs and physical CYA encounters became contextual entry conditions capable of deep-linking into the same product.',
+        'Continuity was made proportionate and earned: recent, saved, practitioner, live and program relationships matter only where they create participant value.',
+        'Authentication was reframed as an interruption that must preserve original intent rather than a destination participants should be sent to.',
+      ],
+      evidenceBoundary: 'This Record supports the adopted product and experience architecture and the reasoning that produced it. It does not claim that the full connected-service model has been implemented or validated with participants; those remain separate evidence questions.',
+      artefactIds: ['ws-connected-service-map'],
+      evidenceClaimIds: ['ws-service-layer-definition', 'ws-action-return-explore', 'ws-human-connected', 'ws-earned-continuity'],
+      relationships: [],
     },
   ],
   artefacts: [
@@ -130,6 +154,18 @@ export const recordContent = validateRecordContent({
       summary: 'A desktop and mobile interaction model that makes day stage the primary entry point into the Practice Library and keeps need, practice type and duration as secondary refinement.',
       accessibility: 'The inspection below reconstructs the interaction semantically in HTML so the evidence remains understandable without relying on the original visual concept image.',
       evidenceClaimIds: ['ws-contextual-intent', 'ws-contextual-implementation'],
+    },
+    {
+      id: 'ws-connected-service-map',
+      recordId: 'ws-connected-service',
+      path: '/work/wellbeing-studio/connected-service/relationship-model',
+      title: 'Connected service relationship model',
+      kind: 'Product architecture',
+      provenance: 'WS27 Experience Architecture · Product Blueprint v1',
+      status: 'Architectural evidence',
+      summary: 'A non-linear product model showing how real working situations and CYA encounters enter through Action, Return or Explore, resolve in a Useful Experience, and connect to human-led activity, campaigns, programs or personal continuity only when useful.',
+      accessibility: 'The model is reconstructed as ordered semantic groups rather than a flattened diagram image, preserving its relationships for keyboard, enlarged-text and assistive-technology use.',
+      evidenceClaimIds: ['ws-service-layer-definition', 'ws-action-return-explore', 'ws-human-connected', 'ws-earned-continuity'],
     },
   ],
   evidenceClaims: [
@@ -154,6 +190,34 @@ export const recordContent = validateRecordContent({
       basis: 'Practice Library Concept C implementation notes.',
       limitation: 'The source establishes implementation feasibility, not measured product impact.',
     },
+    {
+      id: 'ws-service-layer-definition',
+      state: 'intended',
+      claim: 'Wellbeing Studio 2027 is defined as CYA’s digital service layer for connecting people with useful wellbeing experiences from real working-life situations, CYA encounters and ongoing service relationships.',
+      basis: 'WS27 Product Blueprint v1 and consolidated Interaction Architecture.',
+      limitation: 'This is the adopted product architecture; it does not assert that every experience family is already implemented.',
+    },
+    {
+      id: 'ws-action-return-explore',
+      state: 'intended',
+      claim: 'Action, Return and Explore are the core behavioural modes, with Useful Experience at the centre rather than a conventional content catalogue or dashboard.',
+      basis: 'WS27 Phase 2 discovery, Phase 3A information architecture and Product Blueprint v1.',
+      limitation: 'The model is architectural product evidence, not participant-validation evidence.',
+    },
+    {
+      id: 'ws-human-connected',
+      state: 'intended',
+      claim: 'Digital practices, human-led experiences, workplace delivery, campaigns and programs belong to one connected CYA service ecosystem.',
+      basis: 'WS27 Phase 2 and Phase 3A product strategy and experience architecture.',
+      limitation: 'The architecture establishes the intended relationship; implementation maturity varies by experience.',
+    },
+    {
+      id: 'ws-earned-continuity',
+      state: 'intended',
+      claim: 'Continuity is useful only when it creates participant value; successful journeys may end without forcing sign-in, progress, follow-up or a dashboard state.',
+      basis: 'WS27 Interaction Architecture and Product Blueprint continuity principles.',
+      limitation: 'Specific continuity mechanics remain subject to product-slice implementation and participant validation.',
+    },
   ],
 });
 
@@ -164,9 +228,12 @@ export const workProjects = [...recordContent.projects].sort(
 export const wellbeingProject = recordIndex.projectById['wellbeing-studio-2027'];
 export const contextualEntryRecord = recordIndex.recordById['ws-contextual-entry'];
 export const dailyWellbeingArtefact = recordIndex.artefactById['ws-daily-wellbeing-journey'];
+export const connectedServiceRecord = recordIndex.recordById['ws-connected-service'];
+export const connectedServiceArtefact = recordIndex.artefactById['ws-connected-service-map'];
+export const wellbeingRecords = wellbeingProject.recordIds.map((id) => recordIndex.recordById[id]);
 export const recordRoutePaths = [
-  contextualEntryRecord.path,
-  dailyWellbeingArtefact.path,
+  ...recordContent.records.map((record) => record.path),
+  ...recordContent.artefacts.map((artefact) => artefact.path),
 ];
 
 export const evidenceStateLabel = {
