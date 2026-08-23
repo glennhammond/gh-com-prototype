@@ -24,7 +24,6 @@ const paths = [
   '/practice',
   '/about',
   '/contact',
-  '/privacy',
 ];
 
 const uniquePaths = [...new Set(paths)];
