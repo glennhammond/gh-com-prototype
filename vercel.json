@@ -11,6 +11,46 @@
   },
   "redirects": [
     {
+      "source": "/glenn-hammond",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/elearning-design",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/storyline-development",
+      "destination": "/services/storyline-development",
+      "permanent": true
+    },
+    {
+      "source": "/moodle-customisation",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/xapi-elearning",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/elearning-authoring-tools",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/elearning-design-system",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
+      "source": "/interaction-design",
+      "destination": "/practice",
+      "permanent": true
+    },
+    {
       "source": "/services",
       "destination": "/practice",
       "permanent": true
