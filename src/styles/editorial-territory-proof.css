@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Editorial Territory — proof surface scope
+
+   This file is intentionally temporary and branch-specific. It maps legacy
+   component tokens to the qualified semantic system ONLY inside Home, Work
+   and the persistent Meta-Frame. Other routes retain their current contract.
+   ========================================================================== */
+
+/* --- Light canonical surfaces -------------------------------------------- */
+
+.proof,
+.selwork,
+.buy,
+.person,
+.record-work-head,
+.record-field,
+.meta-frame {
+  --paper: var(--field);
+  --paper-raised: var(--field-raised);
+  --plate: var(--evidence-field);
+  --text: var(--text-primary);
+  --text-secondary: var(--text-secondary-et);
+  --text-tertiary: #697781;
+  --rule: var(--rule-neutral);
+  --rule-strong: var(--rule-structural);
+  --rule-soft: var(--rule-soft-et);
+  --brass: var(--signal);
+  --brass-ink: var(--signal-text);
+  --link: var(--text-primary);
+  --link-hover: var(--structure);
+  --link-underline: var(--signal);
+  --focus-color: var(--focus-field);
+  --action-primary: var(--structure);
+  --action-hover: var(--structure-deep);
+  --action-active: #071c2a;
+  --action-foreground: var(--field);
+}
+
+/* --- Dark Home thresholds ------------------------------------------------- */
+
+.hero,
+.close {
+  --paper: var(--structure);
+  --paper-raised: var(--structure-deep);
+  --plate: var(--structure);
+  --text: var(--field);
+  --text-secondary: #cdd5da;
+  --text-tertiary: #b8c3ca;
+  --rule: rgba(241, 243, 244, 0.22);
+  --rule-strong: rgba(241, 243, 244, 0.4);
+  --rule-soft: rgba(241, 243, 244, 0.12);
+  --brass: var(--signal-on-structure);
+  --brass-ink: var(--signal-on-structure);
+  --link: var(--field);
+  --link-hover: var(--signal-on-structure);
+  --link-underline: var(--signal-on-structure);
+  --focus-color: var(--focus-structure);
+  --action-primary: var(--signal-on-structure);
+  --action-hover: #f6b659;
+  --action-active: #dc8b22;
+  --action-foreground: var(--structure);
+}
+
+/* --- Home: keep Avant Garde scarce --------------------------------------- */
+
+.selwork .display-l,
+.selwork .selwork__title,
+.selwork .selwork__index a,
+.selwork .selwork__stats dt,
+.selwork .selwork__archive-index {
+  font-family: var(--font-utility);
+}
+
+.selwork .display-l,
+.selwork .selwork__title,
+.selwork .selwork__index a {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.selwork .selwork__stats dt,
+.selwork .selwork__archive-index {
+  font-weight: 650;
+}
+
+/* The index is architectural. Repeated signal bars are replaced by structure;
+   signal remains available for active/focus/consequence states. */
+.selwork .selwork__index {
+  border-top-color: var(--rule-structural);
+}
+
+.selwork .selwork__item--lead .selwork__index {
+  border-top-color: var(--structure);
+}
+
+/* Remove the retired mineral/project-colour hover vocabulary. */
+.selwork .selwork__link:hover,
+.selwork .selwork__index a:hover {
+  color: var(--structure);
+}
+
+/* --- Meta-Frame: global identity apparatus, not a legacy page restyle ---- */
+
+.meta-frame {
+  background: color-mix(in srgb, var(--field) 96%, transparent);
+  border-bottom-color: var(--rule-neutral);
+}
+
+.meta-frame .meta-frame__nav,
+.meta-frame .meta-frame__scope {
+  background: var(--field-raised);
+}
+
+.meta-frame .meta-frame__nav-link.is-active {
+  text-decoration-color: var(--signal);
+}
+
+/* --- Home FIELD surfaces -------------------------------------------------- */
+
+.proof,
+.selwork,
+.buy,
+.person {
+  color: var(--text-primary);
+}
+
+/* Home's inherited eyebrows now use the qualified index/signal roles locally. */
+.proof .eyebrow,
+.selwork .eyebrow,
+.buy .eyebrow,
+.person .eyebrow {
+  font-family: var(--font-index);
+  color: var(--signal-text);
+}
+
+/* --- Work FIELD ----------------------------------------------------------- */
+
+.record-work-head,
+.record-field {
+  color: var(--text-primary);
+}
+
+.record-work-head .eyebrow {
+  font-family: var(--font-index);
+  color: var(--signal-text);
+}
