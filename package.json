@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite-react-ssg build && node scripts/postbuild.mjs && node scripts/search-audit.mjs && node scripts/migration-audit.mjs && node scripts/verify.mjs",
+    "build:visual-proof": "vite-react-ssg build && node scripts/postbuild.mjs && node scripts/search-audit.mjs && node scripts/migration-audit.mjs",
     "preview": "vite preview --port 4173",
     "images": "node scripts/images.mjs",
     "verify": "node scripts/verify.mjs",
