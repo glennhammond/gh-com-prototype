@@ -1,9 +1,12 @@
 /* ==========================================================================
    Editorial Territory — isolated implementation proof 01
 
-   Additive compatibility layer derived from Brand Architecture 02.6 / 03.2.
-   It intentionally keeps legacy token names alive while giving canonical
-   surfaces semantic roles. Nothing in this file deletes the previous system.
+   Semantic tokens derived from Brand Architecture 02.6 / 03.2.
+
+   Important migration rule: these tokens are additive only. They do NOT
+   alias or replace the legacy palette at :root. Canonical surfaces opt into
+   them explicitly so the historical/legacy estate cannot be restyled by
+   accident while this proof is still being qualified.
    ========================================================================== */
 
 :root {
@@ -19,8 +22,10 @@
   --signal-text: #984b00;
   --signal-on-structure: #f1a33c;
   --rule-neutral: #b5bfc7;
+  --rule-structural: #8d9aa4;
+  --rule-soft-et: #dce2e6;
 
-  /* Functional focus uses the accessible signal step, not graphic orange.
+  /* Functional focus uses an accessible signal step, not graphic orange.
      #D97706 on #F1F3F4 is ~2.86:1; #984B00 is ~5.65:1. */
   --focus-field: var(--signal-text);
   --focus-structure: var(--signal-on-structure);
@@ -35,26 +40,10 @@
 
   /* Motion contract. Static proof first; travel is reserved for later gates. */
   --motion-travel: 480ms;
-
-  /* Compatibility aliases. Legacy names remain valid while the canonical
-     routes migrate; deleting them is a later regression-qualified step. */
-  --paper: var(--field);
-  --paper-raised: var(--field-raised);
-  --plate: var(--evidence-field);
-  --text: var(--text-primary);
-  --text-secondary: var(--text-secondary-et);
-  --brass: var(--signal);
-  --brass-ink: var(--signal-text);
-  --brass-light: var(--signal-on-structure);
-  --rule: var(--rule-neutral);
-  --rule-strong: #8d9aa4;
-  --rule-soft: #dce2e6;
-  --rule-ink: rgba(241, 243, 244, 0.22);
-  --focus-color: var(--focus-field);
-  --focus-color-ink: var(--focus-structure);
 }
 
-/* Semantic type roles. HTML heading level never decides brand voice. */
+/* Semantic type roles. HTML heading level never decides brand voice once a
+   surface has migrated into Editorial Territory. */
 .type-territory {
   font-family: var(--font-territory);
   font-weight: 500;
@@ -78,24 +67,4 @@
   font-weight: 400;
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
-}
-
-/* Dark contextual surfaces keep their own functional contrast context. */
-.on-ink {
-  --paper: var(--structure-deep);
-  --paper-raised: var(--structure);
-  --plate: var(--structure);
-  --plate-deep: #17364d;
-  --text: var(--field);
-  --text-secondary: #cdd5da;
-  --text-tertiary: #b8c3ca;
-  --rule: rgba(241, 243, 244, 0.22);
-  --rule-soft: rgba(241, 243, 244, 0.12);
-  --rule-strong: rgba(241, 243, 244, 0.38);
-  --brass: var(--signal-on-structure);
-  --brass-ink: var(--signal-on-structure);
-  --link: var(--field);
-  --link-hover: var(--signal-on-structure);
-  --link-underline: var(--signal-on-structure);
-  --focus-color: var(--focus-structure);
 }
