@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigationType } from 'react-router-dom';
 import MetaFrame from './MetaFrame.jsx';
 import Footer from './Footer.jsx';
 import '../styles/global.css';
+import '../styles/editorial-territory-proof.css';
 import './Layout.css';
 
 const scrollPositions = new Map();
