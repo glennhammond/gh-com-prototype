@@ -1,6 +1,9 @@
 /* ==========================================================================
    Global styles: reset, base typography, layout primitives, utilities.
    Component-specific rules live beside their component.
+
+   Editorial Territory tokens are imported additively. Legacy route defaults
+   remain unchanged until each surface is explicitly migrated and qualified.
    ========================================================================== */
 
 @import "./fonts.css";
@@ -39,7 +42,7 @@ html {
 body {
   background: var(--paper);
   color: var(--text);
-  font-family: var(--font-utility);
+  font-family: var(--font-body);
   font-size: var(--size-body);
   line-height: var(--leading-body);
   font-synthesis-weight: none;
@@ -67,10 +70,9 @@ textarea {
   color: inherit;
 }
 
-/* --- Base typography ------------------------------------------------------
-   Heading semantics no longer imply brand display typography. The default
-   heading voice is utility sans; territory and authored reading are explicit
-   roles applied only where the composition earns them.                      */
+/* --- Legacy base typography ----------------------------------------------
+   Kept deliberately while the proof is isolated. Migrated routes override
+   these roles explicitly rather than changing the entire estate at once. */
 
 h1,
 h2,
@@ -78,7 +80,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-utility);
+  font-family: var(--font-display);
   font-weight: 600;
   line-height: var(--leading-heading);
   letter-spacing: var(--tracking-heading);
@@ -99,9 +101,7 @@ strong {
   font-weight: 600;
 }
 
-/* --- Links ----------------------------------------------------------------
-   Ink text with a signal rule. The colour sits in the underline rather than in
-   the text, so a link remains identifiable without depending on colour alone. */
+/* --- Links ---------------------------------------------------------------- */
 
 a {
   color: var(--link);
@@ -117,8 +117,7 @@ a:hover {
   text-decoration-color: currentColor;
 }
 
-/* --- Focus ----------------------------------------------------------------
-   Highly visible, never clipped, never obscured by the sticky header.        */
+/* --- Focus ---------------------------------------------------------------- */
 
 :focus {
   outline: none;
@@ -130,7 +129,6 @@ a:hover {
   border-radius: 1px;
 }
 
-/* Anything that can be jumped to or focused clears the sticky header. */
 :target,
 [id] {
   scroll-margin-top: calc(var(--header-h) + var(--space-4));
@@ -143,10 +141,10 @@ a:hover {
   left: -9999px;
   top: 0;
   z-index: 200;
-  background: var(--structure-deep);
-  color: var(--field);
+  background: var(--ink);
+  color: var(--on-ink);
   padding: var(--space-3) var(--space-4);
-  font-family: var(--font-index);
+  font-family: var(--font-mono);
   font-size: var(--size-meta);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -212,15 +210,16 @@ a:hover {
   }
 }
 
-/* --- Type utilities ------------------------------------------------------- */
+/* --- Legacy type utilities ------------------------------------------------
+   Explicit semantic Editorial Territory roles live in editorial-territory.css. */
 
 .eyebrow {
-  font-family: var(--font-index);
+  font-family: var(--font-mono);
   font-size: var(--size-meta);
   font-weight: 400;
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
-  color: var(--signal-text);
+  color: var(--brass-ink);
   max-width: none;
 }
 
@@ -228,18 +227,16 @@ a:hover {
   color: var(--text-tertiary);
 }
 
-/* Existing explicit display utilities remain available as a compatibility
-   layer. Canonical surfaces should prefer the semantic .type-* roles. */
 .display-xl {
-  font-family: var(--font-territory);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: var(--size-display-xl);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
 }
 
 .display-l {
-  font-family: var(--font-territory);
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--size-display-l);
   line-height: 1.06;
@@ -247,7 +244,7 @@ a:hover {
 }
 
 .display-m {
-  font-family: var(--font-territory);
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--size-display-m);
   line-height: var(--leading-heading);
@@ -275,7 +272,7 @@ a:hover {
 }
 
 .accent {
-  color: var(--signal-text);
+  color: var(--brass-ink);
 }
 
 .visually-hidden {
@@ -319,7 +316,7 @@ a:hover {
   top: 1.05em;
   width: 10px;
   height: 1px;
-  background: var(--signal);
+  background: var(--brass);
 }
 
 .prose li:last-child {
