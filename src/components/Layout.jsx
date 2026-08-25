@@ -4,6 +4,7 @@ import MetaFrame from './MetaFrame.jsx';
 import Footer from './Footer.jsx';
 import '../styles/global.css';
 import '../styles/editorial-territory-proof.css';
+import '../styles/editorial-territory-record-proof.css';
 import './Layout.css';
 
 const scrollPositions = new Map();
