@@ -5,6 +5,7 @@
 
 @import "./fonts.css";
 @import "./tokens.css";
+@import "./editorial-territory.css";
 @import "./system.css";
 
 /* --- Reset ---------------------------------------------------------------- */
@@ -38,7 +39,7 @@ html {
 body {
   background: var(--paper);
   color: var(--text);
-  font-family: var(--font-body);
+  font-family: var(--font-utility);
   font-size: var(--size-body);
   line-height: var(--leading-body);
   font-synthesis-weight: none;
@@ -66,7 +67,10 @@ textarea {
   color: inherit;
 }
 
-/* --- Base typography ------------------------------------------------------ */
+/* --- Base typography ------------------------------------------------------
+   Heading semantics no longer imply brand display typography. The default
+   heading voice is utility sans; territory and authored reading are explicit
+   roles applied only where the composition earns them.                      */
 
 h1,
 h2,
@@ -74,8 +78,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-display);
-  font-weight: 600; /* Demi. Bold is reserved for the homepage display step */
+  font-family: var(--font-utility);
+  font-weight: 600;
   line-height: var(--leading-heading);
   letter-spacing: var(--tracking-heading);
   text-wrap: balance;
@@ -96,9 +100,8 @@ strong {
 }
 
 /* --- Links ----------------------------------------------------------------
-   Ink text with a brass rule. The colour sits in the underline rather than in
-   the text, so a link is still identifiable in forced-colours mode and never
-   depends on colour alone.                                                   */
+   Ink text with a signal rule. The colour sits in the underline rather than in
+   the text, so a link remains identifiable without depending on colour alone. */
 
 a {
   color: var(--link);
@@ -140,10 +143,10 @@ a:hover {
   left: -9999px;
   top: 0;
   z-index: 200;
-  background: var(--ink);
-  color: var(--on-ink);
+  background: var(--structure-deep);
+  color: var(--field);
   padding: var(--space-3) var(--space-4);
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -176,7 +179,6 @@ a:hover {
   padding-block: var(--section-y-tight);
 }
 
-/* Full-bleed ink band. Sets .on-ink token overrides via the component. */
 .band {
   background: var(--paper);
   color: var(--text);
@@ -210,18 +212,15 @@ a:hover {
   }
 }
 
-/* --- Type utilities -------------------------------------------------------
-   One mono size, 11px. Uppercase mono is permitted for field labels, evidence
-   labels, section numbers, tier names, chips and buttons, and for nothing
-   longer than about four words.                                              */
+/* --- Type utilities ------------------------------------------------------- */
 
 .eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   font-weight: 400;
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
-  color: var(--brass-ink);
+  color: var(--signal-text);
   max-width: none;
 }
 
@@ -229,24 +228,26 @@ a:hover {
   color: var(--text-tertiary);
 }
 
+/* Existing explicit display utilities remain available as a compatibility
+   layer. Canonical surfaces should prefer the semantic .type-* roles. */
 .display-xl {
-  font-family: var(--font-display);
-  font-weight: 700;
+  font-family: var(--font-territory);
+  font-weight: 600;
   font-size: var(--size-display-xl);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
 }
 
 .display-l {
-  font-family: var(--font-display);
-  font-weight: 600; /* Demi, not Bold */
+  font-family: var(--font-territory);
+  font-weight: 600;
   font-size: var(--size-display-l);
   line-height: 1.06;
   letter-spacing: var(--tracking-display);
 }
 
 .display-m {
-  font-family: var(--font-display);
+  font-family: var(--font-territory);
   font-weight: 600;
   font-size: var(--size-display-m);
   line-height: var(--leading-heading);
@@ -273,12 +274,10 @@ a:hover {
   max-width: var(--measure-caption);
 }
 
-/* Brass as text is always the darker step. */
 .accent {
-  color: var(--brass-ink);
+  color: var(--signal-text);
 }
 
-/* Visually hidden but available to assistive technology. */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -320,7 +319,7 @@ a:hover {
   top: 1.05em;
   width: 10px;
   height: 1px;
-  background: var(--brass);
+  background: var(--signal);
 }
 
 .prose li:last-child {
