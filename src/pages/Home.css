@@ -1,14 +1,14 @@
 /* ==========================================================================
-   Home — THE RECORD canonical entry surface
+   Home — Editorial Territory implementation proof 01
 
-   Home establishes the proposition and the span of the evidence field. Work
-   composes the evidence. Practice interprets it. Home does not duplicate either.
+   Home is the strongest identity threshold: STRUCTURE territory, scarce
+   Avant Garde, authored serif framing, then a decisive return to FIELD.
    ========================================================================== */
 
 .hero {
-  background: var(--ink);
-  color: var(--on-ink);
-  padding-block: clamp(48px, 7vw, 104px) clamp(44px, 6vw, 88px);
+  background: var(--structure);
+  color: var(--field);
+  padding-block: clamp(48px, 6vw, 84px) clamp(42px, 5vw, 72px);
 }
 
 .hero__inner {
@@ -23,24 +23,28 @@
   }
 }
 
-.hero__eyebrow { color: var(--brass-light); }
+.hero__eyebrow { color: var(--signal-on-structure); }
 
 .hero__title {
   margin-top: var(--space-4);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--size-display-xl);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
   max-width: 18ch;
+  font-family: var(--font-territory);
+  font-weight: 500;
+  font-size: var(--size-display-xl);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--field);
 }
 
 .hero__standfirst {
   margin-top: var(--space-5);
-  font-size: var(--size-lede);
-  line-height: 1.55;
-  color: var(--on-ink-dim);
-  max-width: var(--measure-lede);
+  max-width: 46ch;
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: clamp(1.12rem, 2vw, 1.42rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #cdd5da;
 }
 
 .hero__actions {
@@ -55,26 +59,22 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--on-ink);
+  color: var(--field);
   text-decoration: none;
-  border-bottom: 2px solid var(--brass-light);
+  border-bottom: 2px solid var(--signal-on-structure);
 }
 
-.hero__secondary:hover {
-  color: var(--brass-light);
-}
+.hero__secondary:hover { color: var(--signal-on-structure); }
 
-/* The right-hand hero is an index of the evidence field, not a decorative
-   product image. It remains useful even before any particular project visual
-   is available and makes the site's information architecture visible at entry. */
+/* Evidence-field index: information, not a second brand display. */
 .hero__record-field {
   align-self: stretch;
-  border-top: 3px solid var(--brass-light);
-  border-bottom: 1px solid var(--rule-ink);
+  border-top: 3px solid var(--signal-on-structure);
+  border-bottom: 1px solid rgba(241, 243, 244, 0.22);
   padding-block: var(--space-4);
 }
 
@@ -83,11 +83,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: var(--space-2) var(--space-4);
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
-  color: var(--on-ink-dim);
+  color: #cdd5da;
 }
 
 .hero__record-field-head p { margin: 0; }
@@ -96,7 +96,7 @@
   list-style: none;
   margin: var(--space-5) 0 0;
   padding: 0;
-  border-top: 1px solid var(--rule-ink);
+  border-top: 1px solid rgba(241, 243, 244, 0.22);
 }
 
 .hero__territories li {
@@ -104,31 +104,33 @@
   grid-template-columns: 42px minmax(0, 1fr);
   gap: var(--space-3);
   padding-block: var(--space-3);
-  border-bottom: 1px solid var(--rule-ink);
+  border-bottom: 1px solid rgba(241, 243, 244, 0.22);
 }
 
 .hero__territory-index {
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
-  color: var(--brass-light);
+  color: var(--signal-on-structure);
 }
 
 .hero__territories strong {
   display: block;
-  font-family: var(--font-display);
+  font-family: var(--font-utility);
+  font-weight: 600;
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--on-ink);
+  letter-spacing: -0.02em;
+  color: var(--field);
 }
 
 .hero__territories div > span {
   display: block;
   margin-top: 3px;
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--on-ink-dim);
+  color: #cdd5da;
 }
 
 .hero__record-depth {
@@ -137,20 +139,21 @@
   align-items: center;
   gap: var(--space-2);
   margin-top: var(--space-4);
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
-  color: var(--on-ink);
+  color: var(--field);
 }
 
 .hero__record-depth i {
-  color: var(--brass-light);
+  color: var(--signal-on-structure);
   font-style: normal;
 }
 
+/* Territory ends here. All subsequent evidence returns decisively to FIELD. */
 .proof {
-  background: var(--paper-raised);
+  background: var(--field-raised);
   border-bottom: 1px solid var(--rule);
   padding-block: var(--space-6);
 }
@@ -178,8 +181,8 @@
 
 .proof__value {
   display: block;
-  font-family: var(--font-display);
-  font-weight: 700;
+  font-family: var(--font-utility);
+  font-weight: 650;
   font-size: clamp(1.9rem, 3.6vw, 2.6rem);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -204,9 +207,9 @@
   line-height: 1.8;
 }
 
-/* Practice bridge: one interpretation, not a miniature Practice page. */
+/* Practice bridge: interpretation without another territory moment. */
 .buy {
-  background: var(--paper-raised);
+  background: var(--field-raised);
   border-top: 1px solid var(--rule);
 }
 
@@ -226,17 +229,20 @@
 .buy__offer .display-l {
   margin-top: var(--space-3);
   max-width: 14ch;
+  font-family: var(--font-utility);
+  font-weight: 600;
 }
 
 .buy__lede {
   margin-top: var(--space-4);
+  max-width: 44ch;
+  font-family: var(--font-reading);
   font-size: var(--size-lede);
   line-height: 1.55;
-  max-width: 44ch;
 }
 
 .buy__aside {
-  border-top: 3px solid var(--brass);
+  border-top: 3px solid var(--signal);
   padding-top: var(--space-4);
   display: grid;
   gap: var(--space-4);
@@ -250,7 +256,7 @@
 }
 
 .person {
-  background: var(--paper);
+  background: var(--field);
   border-block: 1px solid var(--rule);
 }
 
@@ -283,6 +289,8 @@
 .person__text .display-m {
   margin-top: var(--space-3);
   max-width: 20ch;
+  font-family: var(--font-utility);
+  font-weight: 600;
 }
 
 .person__para {
@@ -296,23 +304,24 @@
   align-items: center;
   min-height: 44px;
   margin-top: var(--space-4);
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--text);
   text-decoration: none;
-  border-bottom: 2px solid var(--brass);
+  border-bottom: 2px solid var(--signal);
 }
 
 .person__link:hover {
-  color: var(--mineral-ink);
-  border-bottom-color: var(--mineral-ink);
+  color: var(--structure);
+  border-bottom-color: var(--structure);
 }
 
+/* Closing threshold is the one additional dark punctuation point on Home. */
 .close {
-  background: var(--ink);
-  color: var(--on-ink);
+  background: var(--structure-deep);
+  color: var(--field);
 }
 
 .close__inner {
@@ -328,16 +337,22 @@
   }
 }
 
+.close .display-l {
+  font-family: var(--font-utility);
+  font-weight: 600;
+  color: var(--field);
+}
+
 .close__body {
   margin-top: var(--space-4);
-  color: var(--on-ink-dim);
+  color: #cdd5da;
   max-width: 46ch;
 }
 
 .close__promise {
   margin-top: var(--space-4);
   font-size: var(--size-small);
-  color: var(--on-ink-dim);
+  color: #cdd5da;
   line-height: 1.6;
   max-width: 38ch;
 }
@@ -345,5 +360,22 @@
 .close__alt {
   margin-top: var(--space-3);
   font-size: var(--size-small);
-  color: var(--on-ink-dim);
+  color: #cdd5da;
+}
+
+@media (max-width: 520px) {
+  .hero {
+    padding-block: 40px 46px;
+  }
+
+  .hero__title {
+    font-size: clamp(2.15rem, 10vw, 2.85rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__standfirst {
+    font-size: 1.12rem;
+    line-height: 1.5;
+  }
 }
