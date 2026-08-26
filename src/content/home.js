@@ -1,15 +1,15 @@
 import { STATUS, SOURCE } from './status.js';
 
-/** Home copy reconciled to THE RECORD canonical entry architecture. */
+/** Home copy for Glenn Hammond's public practice and body of work. */
 export const home = {
   status: STATUS.PROPOSED,
   source: SOURCE.BLUEPRINT,
   hero: {
-    eyebrow: 'Digital design and learning practice · Brisbane',
+    eyebrow: 'Digital products · experiences · learning · systems',
     headline: 'Thirty years of making digital things.',
     standfirst:
-      'Still learning how to make them better. THE RECORD is a living professional evidence system: projects establish the territory, Records examine consequential decisions, and Artefacts let the evidence be inspected.',
-    primaryCta: { href: '/work', label: 'Enter THE RECORD' },
+      'Still learning how to make them better. This site brings together projects across digital products, experiences, learning and systems. Each project opens into decisions worth examining and work that can still be inspected.',
+    primaryCta: { href: '/work', label: 'View the work' },
     secondaryCta: { href: '/practice', label: 'Read the practice' },
   },
   proof: {
@@ -23,18 +23,18 @@ export const home = {
       'Independent Schools Queensland · Civil Aviation Safety Authority · TAFE Queensland · Corporate Yoga Australia',
   },
   work: {
-    eyebrow: 'Selected evidence',
-    headline: 'Four territories. Different weight. One evidence system.',
+    eyebrow: 'Selected work',
+    headline: 'Different periods. Different disciplines. Work that can still be examined.',
     standfirst:
-      'Wellbeing Studio is the active reference territory. ISQ shows platform and production systems. CASA shows regulated professional learning. TAFE Pathways preserves historical interaction evidence without pretending old work is new work.',
+      'Wellbeing Studio shows contemporary product and service work. ISQ shows platform and production systems. CASA shows regulated professional learning. TAFE Pathways preserves historical interaction work without pretending old work is new work.',
   },
   buy: {
     eyebrow: 'Practice',
-    headline: 'The work changes altitude. The responsibility does not.',
+    headline: 'The work changes scale. The responsibility does not.',
     standfirst:
       'Across these projects the work moves between product strategy, experience architecture, learning design, interaction, platforms, production and implementation.',
     body:
-      'Practice is where those recurring patterns are interpreted. THE RECORD remains the evidence underneath them, so the claims can be tested against the work.',
+      'Practice is where the recurring patterns are interpreted: how problems are framed, decisions are made, systems are shaped and the work is carried through to something usable.',
     cta: { href: '/practice', label: 'Read the practice' },
   },
   person: {
@@ -53,8 +53,8 @@ export const home = {
     cta: { href: '/contact', label: 'Contact Glenn' },
   },
   seo: {
-    title: 'Glenn Hammond — digital design and learning practice',
+    title: 'Glenn Hammond — digital products, experiences, learning and systems',
     description:
-      'THE RECORD is Glenn Hammond’s living professional evidence system: projects, decisions, artefacts and outcomes across digital learning, product design and learning technology.',
+      'Glenn Hammond’s work across digital products, experiences, learning, platforms and systems, with projects, decisions and inspectable artefacts from contemporary and historical practice.',
   },
 };
