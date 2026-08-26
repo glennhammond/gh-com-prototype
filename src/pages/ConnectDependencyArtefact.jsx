@@ -72,7 +72,7 @@ export default function ConnectDependencyArtefact() {
               <p className="artefact-inspection__summary">{connectDependencyArtefact.summary}</p>
               <Link className="artefact-back" to={connectMigrationRecord.path}
                 state={internalEntry && returnFocusId ? { restoreFocusId: returnFocusId } : undefined}>
-                {internalEntry ? 'Return to Record' : 'View Record'}
+                {internalEntry ? 'Return to Record' : 'Read the analysis'}
               </Link>
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function ConnectDependencyArtefact() {
             <div>
               <h2>Why no reconstructed platform screen</h2>
               <p>
-                The existing project record does not rely on learner-facing Connect &
+                The existing project analysis does not rely on learner-facing Connect &
                 Learn screenshots for this claim. The useful artefact here is the
                 dependency structure of the work, not a speculative recreation of the
                 2024 interface.
@@ -138,7 +138,7 @@ export default function ConnectDependencyArtefact() {
               <h2>Evidence treatment</h2>
               <p>{connectDependencyArtefact.accessibility}</p>
               <p>
-                Conflicting audience-size figures remain excluded. The Record relies on
+                Conflicting audience-size figures remain excluded. The analysis relies on
                 the confirmed migration, course-estate and engagement facts only.
               </p>
             </div>
