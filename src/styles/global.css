@@ -1,10 +1,14 @@
 /* ==========================================================================
    Global styles: reset, base typography, layout primitives, utilities.
    Component-specific rules live beside their component.
+
+   Editorial Territory tokens are imported additively. Legacy route defaults
+   remain unchanged until each surface is explicitly migrated and qualified.
    ========================================================================== */
 
 @import "./fonts.css";
 @import "./tokens.css";
+@import "./editorial-territory.css";
 @import "./system.css";
 
 /* --- Reset ---------------------------------------------------------------- */
@@ -66,7 +70,9 @@ textarea {
   color: inherit;
 }
 
-/* --- Base typography ------------------------------------------------------ */
+/* --- Legacy base typography ----------------------------------------------
+   Migrated routes override these roles explicitly rather than changing the
+   entire estate at once. */
 
 h1,
 h2,
@@ -75,7 +81,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
-  font-weight: 600; /* Demi. Bold is reserved for the homepage display step */
+  font-weight: 600;
   line-height: var(--leading-heading);
   letter-spacing: var(--tracking-heading);
   text-wrap: balance;
@@ -95,10 +101,7 @@ strong {
   font-weight: 600;
 }
 
-/* --- Links ----------------------------------------------------------------
-   Ink text with a brass rule. The colour sits in the underline rather than in
-   the text, so a link is still identifiable in forced-colours mode and never
-   depends on colour alone.                                                   */
+/* --- Links ---------------------------------------------------------------- */
 
 a {
   color: var(--link);
@@ -114,8 +117,7 @@ a:hover {
   text-decoration-color: currentColor;
 }
 
-/* --- Focus ----------------------------------------------------------------
-   Highly visible, never clipped, never obscured by the sticky header.        */
+/* --- Focus ---------------------------------------------------------------- */
 
 :focus {
   outline: none;
@@ -127,7 +129,6 @@ a:hover {
   border-radius: 1px;
 }
 
-/* Anything that can be jumped to or focused clears the sticky header. */
 :target,
 [id] {
   scroll-margin-top: calc(var(--header-h) + var(--space-4));
@@ -176,7 +177,6 @@ a:hover {
   padding-block: var(--section-y-tight);
 }
 
-/* Full-bleed ink band. Sets .on-ink token overrides via the component. */
 .band {
   background: var(--paper);
   color: var(--text);
@@ -210,10 +210,8 @@ a:hover {
   }
 }
 
-/* --- Type utilities -------------------------------------------------------
-   One mono size, 11px. Uppercase mono is permitted for field labels, evidence
-   labels, section numbers, tier names, chips and buttons, and for nothing
-   longer than about four words.                                              */
+/* --- Legacy type utilities ------------------------------------------------
+   Semantic Editorial Territory roles live in editorial-territory.css. */
 
 .eyebrow {
   font-family: var(--font-mono);
@@ -239,7 +237,7 @@ a:hover {
 
 .display-l {
   font-family: var(--font-display);
-  font-weight: 600; /* Demi, not Bold */
+  font-weight: 600;
   font-size: var(--size-display-l);
   line-height: 1.06;
   letter-spacing: var(--tracking-display);
@@ -273,12 +271,10 @@ a:hover {
   max-width: var(--measure-caption);
 }
 
-/* Brass as text is always the darker step. */
 .accent {
   color: var(--brass-ink);
 }
 
-/* Visually hidden but available to assistive technology. */
 .visually-hidden {
   position: absolute;
   width: 1px;
