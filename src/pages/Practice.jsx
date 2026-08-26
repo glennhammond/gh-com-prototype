@@ -16,12 +16,15 @@ function EvidenceList({ evidence, compact = false }) {
   return (
     <ul className={`practice-evidence${compact ? ' practice-evidence--compact' : ''}`}>
       {evidence.map(({ project, record, artefact, note }) => (
-        <li key={`${record.id}-${artefact?.id ?? 'record'}`} className="practice-evidence__item">
+        <li
+          key={`${project.id}-${record?.id ?? 'project'}-${artefact?.id ?? 'evidence'}`}
+          className="practice-evidence__item"
+        >
           <p className="practice-evidence__meta">
             {project.title} · {project.period}
           </p>
           <p className="practice-evidence__record">
-            <Link to={record.path}>{record.title}</Link>
+            <Link to={record?.path ?? project.path}>{record?.title ?? project.title}</Link>
           </p>
           <p className="practice-evidence__note">{note}</p>
           {artefact && (
@@ -85,8 +88,8 @@ export default function Practice() {
             <p className="eyebrow">Practice claims · 01</p>
             <h2 id="practice-recurring-title">What keeps recurring</h2>
             <p>
-              These are the strongest claims the work shown here supports. Each is tested across the four
-              project families before it is treated as a proven recurring part of the practice.
+              These are the strongest claims the work shown here supports. Each is tested across the five
+              canonical project families before it is treated as a proven recurring part of the practice.
             </p>
           </div>
 
