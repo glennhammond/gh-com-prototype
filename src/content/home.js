@@ -53,8 +53,8 @@ export const home = {
     cta: { href: '/contact', label: 'Contact Glenn' },
   },
   seo: {
-    title: 'Glenn Hammond — digital products, experiences, learning and systems',
+    title: 'Glenn Hammond — digital learning, products & experience design',
     description:
-      'Glenn Hammond’s work across digital products, experiences, learning, platforms and systems, with projects, decisions and inspectable artefacts from contemporary and historical practice.',
+      'Glenn Hammond is a Brisbane-based Digital Learning & Experience Designer working across eLearning, digital products, platforms and systems, with first-hand project evidence from Australian education, aviation and workplace wellbeing.',
   },
 };
