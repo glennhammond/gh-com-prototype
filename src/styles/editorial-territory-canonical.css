@@ -1,0 +1,546 @@
+/* ==========================================================================
+   Editorial Territory — canonical surface adoption
+
+   Qualified static implementation for Home → Work → Project → Record →
+   Artefact and the information-dense Evidence Grid mode.
+
+   This layer deliberately scopes compatibility aliases to canonical surfaces.
+   Legacy routes retain the pre-existing token and typography contract.
+   ========================================================================== */
+
+/* --- Home, Work and persistent Meta-Frame -------------------------------- */
+.proof,
+.selwork,
+.buy,
+.person,
+.record-work-head,
+.record-field,
+.meta-frame {
+  --paper: var(--field);
+  --paper-raised: var(--field-raised);
+  --plate: var(--evidence-field);
+  --text: var(--text-primary);
+  --text-secondary: var(--text-secondary-et);
+  --text-tertiary: #697781;
+  --rule: var(--rule-neutral);
+  --rule-strong: var(--rule-structural);
+  --rule-soft: var(--rule-soft-et);
+  --brass: var(--signal);
+  --brass-ink: var(--signal-text);
+  --link: var(--text-primary);
+  --link-hover: var(--structure);
+  --link-underline: var(--signal);
+  --focus-color: var(--focus-field);
+  --action-primary: var(--structure);
+  --action-hover: var(--structure-deep);
+  --action-active: #071c2a;
+  --action-foreground: var(--field);
+}
+
+.hero,
+.close {
+  --paper: var(--structure);
+  --paper-raised: var(--structure-deep);
+  --plate: var(--structure);
+  --text: var(--field);
+  --text-secondary: #cdd5da;
+  --text-tertiary: #b8c3ca;
+  --rule: rgba(241, 243, 244, 0.22);
+  --rule-strong: rgba(241, 243, 244, 0.4);
+  --rule-soft: rgba(241, 243, 244, 0.12);
+  --brass: var(--signal-on-structure);
+  --brass-ink: var(--signal-on-structure);
+  --link: var(--field);
+  --link-hover: var(--signal-on-structure);
+  --link-underline: var(--signal-on-structure);
+  --focus-color: var(--focus-structure);
+  --action-primary: var(--signal-on-structure);
+  --action-hover: #f6b659;
+  --action-active: #dc8b22;
+  --action-foreground: var(--structure);
+}
+
+/* Home evidence field: Avant Garde is territory, not repeated hierarchy. */
+.selwork .display-l,
+.selwork .selwork__title,
+.selwork .selwork__index a,
+.selwork .selwork__stats dt,
+.selwork .selwork__archive-index {
+  font-family: var(--font-utility);
+}
+
+.selwork .display-l,
+.selwork .selwork__title,
+.selwork .selwork__index a {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.selwork .selwork__stats dt,
+.selwork .selwork__archive-index {
+  font-weight: 650;
+}
+
+.selwork .selwork__index {
+  border-top-color: var(--rule-structural);
+}
+
+.selwork .selwork__item--lead .selwork__index {
+  border-top-color: var(--structure);
+}
+
+.selwork .selwork__link:hover,
+.selwork .selwork__index a:hover {
+  color: var(--structure);
+}
+
+.meta-frame {
+  background: color-mix(in srgb, var(--field) 96%, transparent);
+  border-bottom-color: var(--rule-neutral);
+}
+
+.meta-frame .meta-frame__nav,
+.meta-frame .meta-frame__scope {
+  background: var(--field-raised);
+}
+
+.meta-frame .meta-frame__nav-link.is-active {
+  text-decoration-color: var(--signal);
+}
+
+.proof,
+.selwork,
+.buy,
+.person,
+.record-work-head,
+.record-field {
+  color: var(--text-primary);
+}
+
+.proof .eyebrow,
+.selwork .eyebrow,
+.buy .eyebrow,
+.person .eyebrow,
+.record-work-head .eyebrow {
+  font-family: var(--font-index);
+  color: var(--signal-text);
+}
+
+/* --- Canonical Project / Record / Artefact field ------------------------- */
+.record-band:not(.record-band--ink),
+.record-exam-opening,
+.artefact-inspection {
+  --paper: var(--field);
+  --paper-raised: var(--field-raised);
+  --plate: var(--evidence-field);
+  --plate-deep: var(--evidence-field);
+  --ink: var(--structure-deep);
+  --ink-raised: var(--structure);
+  --on-ink: var(--field);
+  --on-ink-dim: #cdd5da;
+  --text: var(--text-primary);
+  --text-secondary: var(--text-secondary-et);
+  --text-tertiary: #697781;
+  --rule: var(--rule-neutral);
+  --rule-strong: var(--rule-structural);
+  --rule-soft: var(--rule-soft-et);
+  --rule-ink: rgba(241, 243, 244, 0.22);
+  --brass: var(--signal);
+  --brass-ink: var(--signal-text);
+  --brass-light: var(--signal-on-structure);
+  --mineral: var(--structure);
+  --mineral-ink: var(--structure);
+  --mineral-light: var(--signal-on-structure);
+  --link: var(--text-primary);
+  --link-hover: var(--structure);
+  --link-underline: var(--signal);
+  --focus-color: var(--focus-field);
+}
+
+/* Project is the principal territorial moment. */
+.record-opening {
+  --paper: var(--structure);
+  --paper-raised: var(--structure-deep);
+  --text: var(--field);
+  --text-secondary: #cdd5da;
+  --text-tertiary: #b8c3ca;
+  --rule: rgba(241, 243, 244, 0.22);
+  --rule-strong: rgba(241, 243, 244, 0.42);
+  --rule-soft: rgba(241, 243, 244, 0.13);
+  --brass: var(--signal-on-structure);
+  --brass-ink: var(--signal-on-structure);
+  --link: var(--field);
+  --link-hover: var(--signal-on-structure);
+  --link-underline: var(--signal-on-structure);
+  --focus-color: var(--focus-structure);
+  background: var(--structure);
+  color: var(--field);
+  border-bottom-color: rgba(241, 243, 244, 0.22);
+  padding-block: clamp(58px, 8vw, 110px) clamp(52px, 7vw, 92px);
+}
+
+.record-opening .eyebrow {
+  font-family: var(--font-index);
+  color: var(--signal-on-structure);
+}
+
+.record-opening .record-opening__title {
+  max-width: 17ch;
+  font-family: var(--font-territory);
+  font-weight: 500;
+  font-size: clamp(3rem, 6.6vw, 6rem);
+  line-height: 1.01;
+  letter-spacing: -0.028em;
+  color: var(--field);
+}
+
+.record-opening .record-opening__lede {
+  max-width: 48ch;
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: clamp(1.12rem, 1.8vw, 1.38rem);
+  line-height: 1.52;
+  letter-spacing: -0.008em;
+  color: #cdd5da;
+}
+
+.record-opening .record-facts {
+  border-top-color: rgba(241, 243, 244, 0.42);
+}
+
+.record-opening .record-facts div {
+  border-bottom-color: rgba(241, 243, 244, 0.2);
+}
+
+.record-opening .record-facts dt {
+  font-family: var(--font-index);
+  color: #b8c3ca;
+}
+
+.record-opening .record-facts dd {
+  color: var(--field);
+}
+
+/* Territory ends; Project evidence returns to the editorial field. */
+.record-band:not(.record-band--ink) {
+  background: var(--field);
+  color: var(--text-primary);
+}
+
+.record-band.record-band--raised {
+  background: var(--field-raised);
+}
+
+.record-band .eyebrow {
+  font-family: var(--font-index);
+  color: var(--signal-text);
+}
+
+.record-band .record-band__copy h2,
+.record-band .record-trajectory h3,
+.record-band .record-map h3 {
+  font-family: var(--font-utility);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.record-band .record-band__copy h2 {
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  line-height: 1.08;
+}
+
+.record-band .record-band__split > p,
+.record-band .record-band__copy > p:not(.eyebrow) {
+  font-family: var(--font-reading);
+  font-size: clamp(1.03rem, 1.5vw, 1.18rem);
+  line-height: 1.62;
+  color: var(--text-secondary-et);
+}
+
+.record-band .record-trajectory__period,
+.record-band .record-map__context,
+.record-band .record-map__action,
+.record-band .record-widen {
+  font-family: var(--font-index);
+}
+
+/* Record is authored argument, not a second territory. */
+.record-exam-opening {
+  background: var(--field);
+  color: var(--text-primary);
+  padding-block: clamp(48px, 7vw, 92px) var(--space-7);
+}
+
+.record-exam-opening .record-exam-opening__project {
+  font-family: var(--font-index);
+  color: var(--text-secondary-et);
+}
+
+.record-exam-opening h1 {
+  max-width: 18ch;
+  font-family: var(--font-utility);
+  font-weight: 600;
+  font-size: clamp(2.45rem, 5vw, 4.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+.record-exam-opening .record-exam-opening__summary > p:first-child {
+  max-width: 50ch;
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: clamp(1.12rem, 1.8vw, 1.36rem);
+  line-height: 1.58;
+  letter-spacing: -0.008em;
+  color: var(--text-secondary-et);
+}
+
+.record-exam-opening .record-why {
+  border-top-color: var(--signal);
+}
+
+.record-exam-opening .record-why strong,
+.record-exam-opening .artefact-kicker,
+.record-exam-opening .artefact-preview__action {
+  font-family: var(--font-index);
+}
+
+.record-exam-opening .artefact-preview {
+  background: var(--evidence-field);
+  border-color: var(--rule-neutral);
+}
+
+.record-exam-opening .artefact-preview__stage {
+  background: var(--field-raised);
+  border-top: 1px solid var(--rule-neutral);
+}
+
+.record-exam-opening .artefact-preview h2 {
+  font-family: var(--font-utility);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.record-exam-opening .artefact-preview p:not(.artefact-kicker) {
+  color: var(--text-secondary-et);
+}
+
+/* Relationship bands are true thresholds, not additional display moments. */
+.record-band.record-band--ink {
+  --paper: var(--structure-deep);
+  --paper-raised: var(--structure);
+  --text: var(--field);
+  --text-secondary: #cdd5da;
+  --text-tertiary: #b8c3ca;
+  --rule: rgba(241, 243, 244, 0.22);
+  --rule-strong: rgba(241, 243, 244, 0.4);
+  --rule-soft: rgba(241, 243, 244, 0.12);
+  --brass: var(--signal-on-structure);
+  --brass-ink: var(--signal-on-structure);
+  --brass-light: var(--signal-on-structure);
+  --link: var(--field);
+  --link-hover: var(--signal-on-structure);
+  --link-underline: var(--signal-on-structure);
+  --focus-color: var(--focus-structure);
+  background: var(--structure-deep);
+  color: var(--field);
+}
+
+.record-band.record-band--ink .record-relationship h2 {
+  font-family: var(--font-utility);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--field);
+}
+
+.record-band.record-band--ink .record-relationship p {
+  color: #cdd5da;
+}
+
+/* Artefact is the quietest state: mount, index and provenance. */
+.artefact-inspection {
+  background: var(--field);
+  color: var(--text-primary);
+}
+
+.artefact-inspection .artefact-kicker,
+.artefact-inspection .artefact-back {
+  font-family: var(--font-index);
+}
+
+.artefact-inspection h1 {
+  max-width: 18ch;
+  font-family: var(--font-utility);
+  font-weight: 600;
+  font-size: clamp(2.25rem, 4.4vw, 4.1rem);
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+}
+
+.artefact-inspection .artefact-inspection__summary {
+  font-family: var(--font-reading);
+  font-size: clamp(1.05rem, 1.5vw, 1.22rem);
+  line-height: 1.58;
+  color: var(--text-secondary-et);
+}
+
+.artefact-inspection .artefact-shell {
+  background: var(--evidence-field);
+  border-color: var(--rule-neutral);
+}
+
+.artefact-inspection .artefact-surface {
+  background: var(--field-raised);
+}
+
+.artefact-inspection .artefact-surface h2,
+.artefact-inspection .artefact-surface h3,
+.artefact-inspection .artefact-suggestion strong,
+.artefact-inspection .artefact-notes h2 {
+  font-family: var(--font-utility);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.artefact-inspection .artefact-suggestion {
+  background: var(--field);
+  border-left-color: var(--signal);
+}
+
+.artefact-inspection .artefact-stage-list .is-current {
+  box-shadow: inset 0 -3px 0 var(--signal);
+}
+
+.artefact-inspection .artefact-filter-group > p,
+.artefact-inspection .artefact-practice-list span {
+  font-family: var(--font-index);
+}
+
+.artefact-inspection .artefact-notes p {
+  color: var(--text-secondary-et);
+}
+
+/* Evidence Grid / ISQ: density earns the instrument mode. */
+.artefact-inspection .connect-dependency-shell,
+.record-exam-opening .connect-stream-preview {
+  background: var(--evidence-field);
+  border-color: var(--rule-neutral);
+}
+
+.artefact-inspection .connect-dependency-map,
+.record-exam-opening .connect-stream-preview {
+  background: var(--field-raised);
+}
+
+.artefact-inspection .connect-dependency-map__centre {
+  background: var(--field);
+  border-top: 3px solid var(--structure);
+}
+
+.artefact-inspection .connect-dependency-map__centre h2,
+.artefact-inspection .connect-dependency-map__streams h3,
+.record-exam-opening .connect-stream-preview strong,
+.artefact-inspection .connect-gates strong,
+.artefact-inspection .connect-gates h2 {
+  font-family: var(--font-utility);
+  font-weight: 600;
+}
+
+.artefact-inspection .connect-stream-state {
+  color: var(--signal-text);
+}
+
+.artefact-inspection .connect-stream-feeds {
+  color: var(--structure);
+}
+
+.artefact-inspection .connect-gates {
+  border-top-color: var(--rule-structural);
+}
+
+.artefact-inspection .connect-evidence-conclusion,
+.artefact-inspection .casa-evidence-conclusion,
+.artefact-inspection .tafe-evidence-conclusion {
+  background: var(--structure-deep);
+  color: var(--field);
+  border-left-color: var(--signal-on-structure);
+}
+
+.artefact-inspection .connect-evidence-conclusion h2,
+.artefact-inspection .casa-evidence-conclusion h2,
+.artefact-inspection .tafe-evidence-conclusion h2 {
+  font-family: var(--font-utility);
+  color: var(--field);
+}
+
+.artefact-inspection .connect-evidence-conclusion > p:last-child,
+.artefact-inspection .casa-evidence-conclusion > p:last-child,
+.artefact-inspection .tafe-evidence-conclusion > p:last-child {
+  color: #cdd5da;
+}
+
+/* CASA: preserve recovered evidence; modernise the frame only. */
+.record-exam-opening .casa-reasoning-preview,
+.artefact-inspection .casa-evidence-figure__image {
+  background: var(--evidence-field);
+  border-color: var(--rule-neutral);
+}
+
+.record-exam-opening .casa-reasoning-preview__lead {
+  background: var(--field-raised);
+  border-top-color: var(--structure);
+}
+
+.record-exam-opening .casa-reasoning-preview__lead h2,
+.record-exam-opening .casa-reasoning-preview__steps strong,
+.artefact-inspection .casa-evidence-figure figcaption h2 {
+  font-family: var(--font-utility);
+  font-weight: 600;
+}
+
+/* TAFE: historical evidence remains historical. */
+.record-exam-opening .tafe-mode-preview,
+.artefact-inspection .tafe-evidence-figure__media {
+  background: var(--evidence-field);
+  border-color: var(--rule-neutral);
+}
+
+.record-exam-opening .tafe-mode-preview__lead {
+  background: var(--field-raised);
+  border-top-color: var(--structure);
+}
+
+.record-exam-opening .tafe-mode-preview__lead h2,
+.record-exam-opening .tafe-mode-preview strong,
+.artefact-inspection .tafe-evidence-figure figcaption h2 {
+  font-family: var(--font-utility);
+  font-weight: 600;
+}
+
+/* Mobile keeps hierarchy through measure and spacing, not cropped display. */
+@media (max-width: 560px) {
+  .record-opening {
+    padding-block: 44px 50px;
+  }
+
+  .record-opening .record-opening__title {
+    font-size: clamp(2.25rem, 11vw, 3rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+  }
+
+  .record-exam-opening h1 {
+    font-size: clamp(2.1rem, 10vw, 2.85rem);
+    line-height: 1.05;
+  }
+
+  .artefact-inspection h1 {
+    font-size: clamp(2rem, 9.5vw, 2.65rem);
+    line-height: 1.06;
+  }
+
+  .artefact-inspection .artefact-stage-list .is-current {
+    box-shadow: inset 3px 0 0 var(--signal);
+  }
+}
