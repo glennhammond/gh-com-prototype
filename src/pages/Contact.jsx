@@ -17,7 +17,7 @@ export default function Contact() {
     <>
       <Seo
         title="Start a conversation | Glenn Hammond"
-        description="Tell me what is happening with your learning platform, programme or production system. Brisbane, working with organisations across Australia."
+        description="Tell me what is happening with your digital product, learning experience, platform or production system. Brisbane, working with organisations across Australia."
         path="/contact"
         jsonLd={graph(
           personSchema,
@@ -34,7 +34,7 @@ export default function Contact() {
             level={1}
             eyebrow="Start a conversation"
             headline="Tell me what is happening."
-            standfirst="Most conversations start with someone describing a course problem that turns out to be a platform problem, or the reverse. A few sentences is enough to begin."
+            standfirst="Most conversations start with a problem described in one category and turn out to cross several. A few sentences is enough to begin."
           />
         </div>
 
@@ -67,8 +67,8 @@ export default function Contact() {
               <li>I read it myself. Every enquiry, not a filtered inbox.</li>
               <li>A reply within 24 hours, even if the answer is that I am not the right person.</li>
               <li>
-                If it looks like a fit, a 30-minute call to work out which layer
-                the problem is actually on.
+                If it looks like a fit, a 30-minute call to work out what is really
+                driving the problem and where I can be useful.
               </li>
             </ol>
 
