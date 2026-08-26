@@ -130,11 +130,11 @@ for (const t of testimonials) {
 /* --- 5. Pre-rendered content / no-JS resilience ---------------------------- */
 
 const REQUIRED = {
-  "index.html": ["Thirty years of making digital things.", "THE RECORD", "Frame. Shape. Make. Evidence."],
-  "work.html": ["Work is where the practice is composed", "Wellbeing Studio 2027", "TAFE Queensland SkillsTech Pathways"],
+  "index.html": ["Thirty years of making digital things.", "Still learning how to make them better.", "Frame. Shape. Make. Evidence."],
+  "work.html": ["Projects across digital products, experiences, learning and systems.", "Wellbeing Studio 2027", "TAFE Queensland SkillsTech Pathways"],
   "work/wellbeing-studio.html": ["The shape of the work", "Designing entry around moments in the working day"],
   "work/wellbeing-studio/contextual-entry.html": ["Why examine this", "Inspect the artefact"],
-  "work/wellbeing-studio/contextual-entry/daily-wellbeing-journey.html": ["Need a reset between meetings?", "Arrival Reset Breath", "View Record"],
+  "work/wellbeing-studio/contextual-entry/daily-wellbeing-journey.html": ["Need a reset between meetings?", "Arrival Reset Breath", "Read the analysis"],
   "work/wellbeing-studio/connected-service.html": ["Useful Experience is the centre", "Inspect the relationship model", "the R U OK? Day production slice"],
   "work/wellbeing-studio/connected-service/relationship-model.html": ["Action / Return / Explore", "Continue only when continuing is useful"],
   "work/wellbeing-studio/ruok-production-slice.html": ["Capability proved", "The team proved authentication", "Inspect the production map"],
@@ -184,6 +184,14 @@ for (const [file, needles] of Object.entries(REQUIRED)) {
   }
   for (const needle of needles) {
     if (!source.includes(needle)) fail(`"${needle}" not present in pre-rendered ${file}`);
+  }
+}
+
+// Visual Identity 04: THE RECORD remains the canonical internal model but must
+// not leak into rendered public identity, metadata or navigation.
+for (const [file, source] of Object.entries(html)) {
+  if (/\bTHE RECORD\b/.test(source)) {
+    fail(`Public identity leak "THE RECORD" found in ${file}`);
   }
 }
 
