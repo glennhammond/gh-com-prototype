@@ -2,7 +2,7 @@ import { STATUS, SOURCE } from './status.js';
 
 /** Home copy for Glenn Hammond's public practice and body of work. */
 export const home = {
-  status: STATUS.PROPOSED,
+  status: STATUS.APPROVED,
   source: SOURCE.BLUEPRINT,
   hero: {
     eyebrow: 'Digital products · experiences · learning · systems',
