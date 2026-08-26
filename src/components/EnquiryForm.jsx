@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { layers } from "../content/layers.js";
 import { site } from "../content/site.js";
 import { validateForm, validateField, hasErrors, errorSummary } from "../lib/validation.js";
 import "./EnquiryForm.css";
@@ -13,6 +12,13 @@ const EMPTY = {
   layers: [],
 };
 
+const PROBLEM_AREAS = [
+  { id: "product-experience", name: "Product / experience" },
+  { id: "learning-content", name: "Learning / content" },
+  { id: "platform-technology", name: "Platform / technology" },
+  { id: "production-operations", name: "Production / operations" },
+];
+
 const TIMEFRAMES = [
   "Not sure yet",
   "Exploring for next budget cycle",
@@ -22,36 +28,26 @@ const TIMEFRAMES = [
 ];
 
 /**
- * Layer-qualified enquiry — Blueprint §21.
+ * Enquiry form — six fields, four required.
  *
- * Six fields, four required. Deliberately no phone field and no budget
- * dropdown: both suppress enquiries from exactly the senior buyers worth
- * having, who will disclose both on the call anyway. The layer question does
- * the qualifying that a budget dropdown pretends to do, and it demonstrates
- * the framework working rather than merely describing it.
+ * No phone field and no budget dropdown. The optional area question is there
+ * only to provide useful context before a reply; it is deliberately ordinary
+ * language rather than a public-facing framework the visitor has to learn.
  *
  * PROTOTYPE BEHAVIOUR — submission is mocked. `submitEnquiry` below is the
  * single seam a production endpoint plugs into; nothing else changes. See
  * INTEGRATIONS.md. No secret, key or endpoint is present in this bundle.
- *
- * Accessibility:
- *   - native inputs and a real <fieldset> for the layer group
- *   - errors are announced, listed at the top, and each links to its field
- *   - aria-invalid and aria-describedby wire each message to its input
- *   - validation runs on submit, then per-field on change once a field has
- *     already failed, so nobody is corrected while still typing
  */
 export default function EnquiryForm() {
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [state, setState] = useState("idle"); // idle | sending | sent | error
+  const [state, setState] = useState("idle");
   const summaryRef = useRef(null);
   const statusRef = useRef(null);
 
   const setField = (name, value) => {
     setValues((v) => ({ ...v, [name]: value }));
-    // Only re-validate a field that has already been marked wrong.
     if (submitted || errors[name]) {
       setErrors((e) => {
         const next = { ...e };
@@ -63,11 +59,11 @@ export default function EnquiryForm() {
     }
   };
 
-  const toggleLayer = (id) => {
+  const toggleArea = (id) => {
     setValues((v) => ({
       ...v,
       layers: v.layers.includes(id)
-        ? v.layers.filter((l) => l !== id)
+        ? v.layers.filter((item) => item !== id)
         : [...v.layers, id],
     }));
   };
@@ -80,7 +76,6 @@ export default function EnquiryForm() {
     setErrors(found);
 
     if (hasErrors(found)) {
-      // Move focus to the summary so the problem is announced immediately.
       requestAnimationFrame(() => summaryRef.current?.focus());
       return;
     }
@@ -169,28 +164,21 @@ export default function EnquiryForm() {
       />
 
       <fieldset className="enquiry__layers">
-        <legend>What does the problem seem closest to?</legend>
+        <legend>Where does the problem seem to sit?</legend>
         <p className="enquiry__hint" id="layers-hint">
-          Optional, and guessing is fine — half of these conversations start on
-          the wrong layer.
+          Optional. Choose more than one if it crosses boundaries; guessing is fine.
         </p>
         <div className="enquiry__layer-options" aria-describedby="layers-hint">
-          {layers.map((layer) => (
-            <label
-              key={layer.id}
-              className="enquiry__layer"
-              style={{ "--layer": `var(${layer.token})` }}
-            >
+          {PROBLEM_AREAS.map((area) => (
+            <label key={area.id} className="enquiry__layer">
               <input
                 type="checkbox"
                 name="layers"
-                value={layer.id}
-                checked={values.layers.includes(layer.id)}
-                onChange={() => toggleLayer(layer.id)}
+                value={area.id}
+                checked={values.layers.includes(area.id)}
+                onChange={() => toggleArea(area.id)}
               />
-              <span className="enquiry__layer-swatch" aria-hidden="true" />
-              <span className="enquiry__layer-num">{layer.number}</span>
-              <span className="enquiry__layer-name">{layer.name}</span>
+              <span className="enquiry__layer-name">{area.name}</span>
             </label>
           ))}
         </div>
@@ -229,8 +217,6 @@ export default function EnquiryForm() {
         </select>
       </div>
 
-      {/* Spam trap. Never announced, never focusable, never a CAPTCHA
-          (WCAG 2.2 SC 3.3.8). */}
       <div className="enquiry__trap" aria-hidden="true">
         <label htmlFor="company-url">Do not fill this in</label>
         <input id="company-url" name="company-url" type="text" tabIndex={-1} autoComplete="off" />
@@ -252,8 +238,6 @@ export default function EnquiryForm() {
     </form>
   );
 }
-
-/* -------------------------------------------------------------------------- */
 
 function Field({
   id,
@@ -301,15 +285,6 @@ function Field({
   );
 }
 
-/* -------------------------------------------------------------------------- */
-
-/**
- * The only seam a production endpoint needs to replace.
- *
- * Intended production shape (see INTEGRATIONS.md):
- *   POST /api/enquiry  → Vercel serverless function → Resend → glenn@…
- *   No submission store, per the confirmed decision in the Master Copy.
- */
 async function submitEnquiry(values) {
   if (import.meta.env.DEV) {
     console.info("[enquiry] mocked submission", values);
