@@ -11,8 +11,8 @@ export const practiceClassifications = {
 /**
  * Practice interprets the canonical evidence architecture without exposing
  * that architecture as a public-facing brand. Evidence references use internal
- * Record / Artefact ids and are resolved below so broken or manufactured
- * relationships fail during the build.
+ * Project / Record / Artefact ids and are resolved below so broken or
+ * manufactured relationships fail during the build.
  */
 export const practiceClaims = [
   {
@@ -34,6 +34,10 @@ export const practiceClaims = [
         recordId: 'isq-concurrent-migration',
         artefactId: 'isq-migration-dependency-map',
         note: 'A serial migration sequence was rejected because platform, course-estate and operational decisions needed to remain coupled.',
+      },
+      {
+        projectId: 'isq-elearning-design-system',
+        note: 'Recurring course-level decisions were reframed as an operational design-system problem spanning patterns, foundations, reusable components, accessibility and implementation governance.',
       },
       {
         recordId: 'casa-examiner-judgement',
@@ -66,6 +70,10 @@ export const practiceClaims = [
         recordId: 'isq-concurrent-migration',
         artefactId: 'isq-migration-dependency-map',
         note: 'Platform migration and more than sixty Storyline rebuilds had to teach each other inside one delivery system.',
+      },
+      {
+        projectId: 'isq-elearning-design-system',
+        note: 'Learning patterns, visual foundations, Rise implementation, accessibility and component governance were treated as connected parts of one operational system rather than isolated style decisions.',
       },
       {
         recordId: 'casa-examiner-judgement',
@@ -103,6 +111,10 @@ export const practiceClaims = [
         recordId: 'isq-concurrent-migration',
         artefactId: 'isq-migration-dependency-map',
         note: 'The unit of work widened from courses to learning architecture, platform migration and operational continuity.',
+      },
+      {
+        projectId: 'isq-elearning-design-system',
+        note: 'Repeated course-level production choices widened into a reusable organisational system spanning components, patterns, accessibility, templates and governance.',
       },
       {
         recordId: 'ws-connected-service',
@@ -276,23 +288,29 @@ export const practiceEvolution = [
 ];
 
 function resolveEvidence(entry) {
-  const record = recordIndex.recordById[entry.recordId];
-  if (!record) {
+  const record = entry.recordId ? recordIndex.recordById[entry.recordId] : null;
+  if (entry.recordId && !record) {
     throw new Error(`Practice evidence references missing Record "${entry.recordId}"`);
   }
 
-  const project = recordIndex.projectById[record.projectId];
+  const projectId = entry.projectId ?? record?.projectId;
+  const project = projectId ? recordIndex.projectById[projectId] : null;
   if (!project) {
-    throw new Error(`Practice evidence Record "${record.id}" has no canonical Project`);
+    throw new Error(`Practice evidence has no canonical Project`);
+  }
+  if (record && record.projectId !== project.id) {
+    throw new Error(
+      `Practice evidence Record "${record.id}" does not belong to Project "${project.id}"`,
+    );
   }
 
   const artefact = entry.artefactId ? recordIndex.artefactById[entry.artefactId] : null;
   if (entry.artefactId && !artefact) {
     throw new Error(`Practice evidence references missing Artefact "${entry.artefactId}"`);
   }
-  if (artefact && artefact.recordId !== record.id) {
+  if (artefact && (!record || artefact.recordId !== record.id)) {
     throw new Error(
-      `Practice evidence Artefact "${artefact.id}" does not belong to Record "${record.id}"`,
+      `Practice evidence Artefact "${artefact.id}" does not belong to the referenced Record`,
     );
   }
 
@@ -320,10 +338,13 @@ function validatePracticeClaims() {
       );
     }
 
-    if (claim.publicGroup === 'core' && projects.size !== canonicalProjectIds.size) {
-      throw new Error(
-        `Core Practice claim "${claim.id}" must currently be tested against all canonical Projects`,
-      );
+    if (claim.publicGroup === 'core') {
+      const missingProjects = [...canonicalProjectIds].filter((id) => !projects.has(id));
+      if (missingProjects.length) {
+        throw new Error(
+          `Core Practice claim "${claim.id}" must currently be tested against all canonical Projects; missing ${missingProjects.join(', ')}`,
+        );
+      }
     }
   }
 }
