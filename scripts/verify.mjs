@@ -136,15 +136,15 @@ const REQUIRED = {
   "work/wellbeing-studio/contextual-entry.html": ["Why examine this", "Inspect the artefact"],
   "work/wellbeing-studio/contextual-entry/daily-wellbeing-journey.html": ["Need a reset between meetings?", "Arrival Reset Breath", "Read the analysis"],
   "work/wellbeing-studio/connected-service.html": ["Useful Experience is the centre", "Inspect the relationship model", "the R U OK? Day production slice"],
-  "work/wellbeing-studio/connected-service/relationship-model.html": ["Action / Return / Explore", "Continue only when continuing is useful"],
+  "work/wellbeing-studio/connected-service/relationship-model.html": ["Action / Return / Explore", "Continue only when continuing is useful", "Read the analysis"],
   "work/wellbeing-studio/ruok-production-slice.html": ["Capability proved", "The team proved authentication", "Inspect the production map"],
-  "work/wellbeing-studio/ruok-production-slice/qualification-map.html": ["Production rule", "Product correction", "2c56d6b", "View Record"],
+  "work/wellbeing-studio/ruok-production-slice/qualification-map.html": ["Production rule", "Product correction", "2c56d6b", "Read the analysis"],
   "work/casa/flight-examiner-rating.html": ["Assessment inside a safety regulator", "Designing for examiner judgement rather than recall"],
   "work/casa/flight-examiner-rating/examiner-judgement.html": ["Accuracy without application becomes a document", "Inspect the evidence sequence"],
-  "work/casa/flight-examiner-rating/examiner-judgement/assessment-reasoning.html": ["Know which instrument governs", "Make the principles of sound assessment explicit", "Show what sits below the visible task", "View Record"],
+  "work/casa/flight-examiner-rating/examiner-judgement/assessment-reasoning.html": ["Know which instrument governs", "Make the principles of sound assessment explicit", "Show what sits below the visible task", "Read the analysis"],
   "work/connect-and-learn.html": ["The platform could not wait for the courses", "Designing the platform and course rebuild as one system"],
   "work/connect-and-learn/concurrent-migration.html": ["Sequential delivery would have made the wrong decisions look final", "Inspect the dependency map"],
-  "work/connect-and-learn/concurrent-migration/dependency-map.html": ["Shape the destination and the estate together", "What serial delivery would get wrong", "View Record"],
+  "work/connect-and-learn/concurrent-migration/dependency-map.html": ["Shape the destination and the estate together", "What serial delivery would get wrong", "Read the analysis"],
   "work/isq-elearning-design-system.html": ["ISQ eLearning Design System", "least complex implementation"],
   "work/casa.html": ["The five projects", "What the six years contained"],
   "work/casa/class.html": ["CASA Learning Academy for Safe Skies", "not public-facing"],
@@ -152,7 +152,7 @@ const REQUIRED = {
   "work/casa/course-system.html": ["Template or prototype"],
   "work/tafe-pathways.html": ["A digital environment inside a human conversation", "Designing technology to support a conversation, not replace it"],
   "work/tafe-pathways/supporting-conversation.html": ["A careers tool can answer questions", "Inspect the exploration environment"],
-  "work/tafe-pathways/supporting-conversation/exploration-environment.html": ["A hub, not a funnel", "Comparable industry data", "Put careers into an environment", "View Record"],
+  "work/tafe-pathways/supporting-conversation/exploration-environment.html": ["A hub, not a funnel", "Comparable industry data", "Put careers into an environment", "Read the analysis"],
   "work/sonic-healthplus.html": ["Sonic HealthPlus"],
   "work/safetyhub-asbestos.html": ["Safetyhub"],
   "work/isq-differentiated-learning.html": ["Years 7 to 10"],
@@ -162,9 +162,10 @@ const REQUIRED = {
     "The work changes. Certain decisions keep recurring.",
     "Start with the situation, not the inherited structure.",
     "Keep connected decisions connected.",
-    "Solve at the altitude the problem requires.",
+    "Solve at the scale the problem requires.",
     "Frame. Shape. Make. Evidence.",
-    "The public Record is selective",
+    "The work shown here is selective",
+    "The practice has widened in scope",
   ],
   "principles-of-assessment-and-rules-of-evidence.html": [
     "The four Principles of Assessment",
@@ -187,11 +188,20 @@ for (const [file, needles] of Object.entries(REQUIRED)) {
   }
 }
 
-// Visual Identity 04: THE RECORD remains the canonical internal model but must
-// not leak into rendered public identity, metadata or navigation.
+// Visual Identity 04 public-language contract. The internal evidence model may
+// keep its canonical terms in source and governance, but these phrases must not
+// return as public branding, explanatory taxonomy or obsolete CTA language.
+const PUBLIC_IDENTITY_FORBIDDEN = [
+  [/\bTHE RECORD\b/, "THE RECORD"],
+  [/Evidence landscape/i, "Evidence landscape"],
+  [/professional evidence system/i, "professional evidence system"],
+  [/one evidence grammar/i, "one evidence grammar"],
+  [/<dt>Altitude<\/dt>/i, "Altitude metadata label"],
+  [/>\s*View Record\s*</i, "View Record CTA"],
+];
 for (const [file, source] of Object.entries(html)) {
-  if (/\bTHE RECORD\b/.test(source)) {
-    fail(`Public identity leak "THE RECORD" found in ${file}`);
+  for (const [pattern, label] of PUBLIC_IDENTITY_FORBIDDEN) {
+    if (pattern.test(source)) fail(`Public identity leak "${label}" found in ${file}`);
   }
 }
 
