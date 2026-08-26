@@ -133,8 +133,9 @@ jobs:
             const page = await context.newPage();
 
             await page.goto(base + '/about', { waitUntil: 'networkidle' });
-            assert(await page.locator('.site-header__brand').isVisible(), 'Retained header brand is not visible');
-            assert(await page.locator('.site-header__descriptor').count() === 0, 'Retained header still carries a permanent descriptor beside Glenn Hammond');
+            const identity = page.locator('.meta-frame__identity');
+            assert(await identity.isVisible(), 'Global Glenn Hammond identity is not visible');
+            assert((await identity.getAttribute('aria-label')) === 'Glenn Hammond, home', 'Global identity is not Glenn Hammond name-only');
 
             await page.goto(base + '/contact', { waitUntil: 'networkidle' });
             const legend = (await page.locator('.enquiry__layers legend').textContent())?.trim();
