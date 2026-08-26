@@ -1,8 +1,8 @@
 /* ==========================================================================
-   Selected evidence — Home preview of THE RECORD
+   Selected work — Home evidence preview
 
-   Home shows territory and evidence density. Work owns the complete evidence
-   composition. No project mock-ups are invented here simply to fill space.
+   Real attributable evidence leads where it clarifies a project. Structural
+   evidence remains first-class where no truthful project-specific image exists.
    ========================================================================== */
 
 .selwork__head { max-width: 64ch; }
@@ -22,7 +22,8 @@
 .selwork__kicker,
 .selwork__tag,
 .selwork__index-head,
-.selwork__index li > span {
+.selwork__index li > span,
+.selwork__evidence-label {
   font-family: var(--font-mono);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
@@ -66,12 +67,59 @@
   color: var(--mineral-ink);
 }
 
-/* The evidence index is a compressed version of the Project → Record depth.
-   It is deliberately architectural rather than card-like or image-led. */
+/* Real evidence is shown as a complete frame, never as a decorative crop. */
+.selwork__evidence-column {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-5);
+  align-content: start;
+}
+
+.selwork__evidence-view {
+  margin: 0;
+  min-width: 0;
+}
+
+.selwork__evidence-frame {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--plate);
+}
+
+.selwork__evidence-frame picture {
+  display: block;
+}
+
+.selwork__evidence-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.selwork__evidence-view figcaption {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule-soft);
+  font-size: var(--size-caption);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 62ch;
+}
+
+.selwork__evidence-label {
+  color: var(--brass-ink);
+}
+
+/* The index exposes editorial depth in ordinary public language. */
 .selwork__index {
   border-top: 3px solid var(--brass);
   border-bottom: 1px solid var(--rule);
   padding-top: var(--space-3);
+  min-width: 0;
 }
 
 .selwork__index-head {
@@ -108,7 +156,8 @@
   text-decoration-color: var(--rule-strong);
 }
 
-/* Wellbeing — lead territory. Evidence density is allowed the largest field. */
+/* Wellbeing — current work, with the live source state explicitly separated
+   from the future-state redesign. */
 .selwork__item--lead {
   display: grid;
   gap: var(--space-7);
@@ -122,13 +171,14 @@
 }
 
 .selwork__item--lead .selwork__index {
-  padding: clamp(20px, 3vw, 36px);
+  padding: clamp(18px, 2.5vw, 30px);
   background: var(--paper-raised);
   border: 1px solid var(--rule);
   border-top: 4px solid var(--mineral);
 }
 
-/* ISQ — strong systems proof with operational scale beneath the evidence. */
+/* ISQ — intentionally structural. There is no borrowed image from another ISQ
+   project merely to make the sequence visually symmetrical. */
 .selwork__item--secondary {
   display: grid;
   gap: var(--space-6);
@@ -185,16 +235,16 @@
   max-width: 20ch;
 }
 
-/* CASA — deep historical professional evidence, intentionally contained. */
+/* CASA — recovered regulated-learning evidence, intentionally contained. */
 .selwork__item--contained {
   display: grid;
   gap: var(--space-6);
-  max-width: 900px;
+  max-width: 1040px;
 }
 
 @media (min-width: 760px) {
   .selwork__item--contained {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
     align-items: start;
   }
 }
@@ -203,18 +253,18 @@
   font-size: var(--size-display-m);
 }
 
-/* TAFE — explicit archive treatment. The year is the visual evidence of age;
-   no contemporary mock-up is used to make historical work look current. */
+/* TAFE — explicit archive treatment. The year and original wireframe both
+   signal age; neither is redrawn to resemble current product work. */
 .selwork__item--archive {
   display: grid;
-  gap: var(--space-5);
-  max-width: 900px;
+  gap: var(--space-6);
+  max-width: 1040px;
   margin-left: auto;
 }
 
 .selwork__archive-index {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.05em;
@@ -231,6 +281,7 @@
 
 @media (min-width: 760px) {
   .selwork__item--archive {
-    grid-template-columns: minmax(150px, 0.32fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+    align-items: start;
   }
 }
