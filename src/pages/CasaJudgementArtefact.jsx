@@ -135,7 +135,7 @@ export default function CasaJudgementArtefact() {
                 to={casaJudgementRecord.path}
                 state={internalEntry && returnFocusId ? { restoreFocusId: returnFocusId } : undefined}
               >
-                {internalEntry ? 'Return to Record' : 'View Record'}
+                {internalEntry ? 'Return to Record' : 'Read the analysis'}
               </Link>
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function CasaJudgementArtefact() {
               <p>{casaJudgementArtefact.accessibility}</p>
               <p>
                 The images remain visual evidence; the captions state only what the
-                existing project record and recovered course screens support.
+                existing project analysis and recovered course screens support.
               </p>
             </div>
           </div>
