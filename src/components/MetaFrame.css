@@ -28,7 +28,7 @@
 
 .meta-frame__record,
 .meta-frame__context {
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
@@ -43,7 +43,7 @@
   min-height: 44px;
   border: 0;
   background: transparent;
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
@@ -69,7 +69,7 @@
   display: flex;
   align-items: center;
   min-height: 44px;
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
@@ -79,7 +79,7 @@
 .meta-frame__nav-link.is-active {
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-decoration-color: var(--brass);
+  text-decoration-color: var(--signal);
 }
 
 .meta-frame__contact {
@@ -107,14 +107,17 @@
   text-decoration-thickness: 1px;
 }
 
+/* Persistent orientation uses utility typography, not the scarce territory
+   voice. Project identity remains in the subject text and hierarchy. */
 .meta-frame__subject {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: var(--font-display);
+  font-family: var(--font-utility);
   font-size: var(--size-small);
   font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .meta-frame__scope--project .meta-frame__subject {
