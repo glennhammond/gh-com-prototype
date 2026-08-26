@@ -1,20 +1,19 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Wordmark from "./Wordmark.jsx";
-import { nav, navCta, site } from "../content/site.js";
+import { nav, navCta } from "../content/site.js";
 import "./Header.css";
 
 /**
- * Site header — Blueprint §11.
+ * Site header for retained/legacy routes.
  *
- * Wordmark left; Work, Practice, About right; "Start a conversation" as a
- * bordered link rather than a filled button, because a filled CTA in a
- * practice header reads as a funnel.
+ * Glenn Hammond is the permanent identity. Route context and page content do
+ * the explanatory work; the header does not attach a service descriptor or a
+ * second brand to the name.
  *
- * Under 900px this collapses to a disclosure panel. Four items do not warrant
- * a hamburger on tablet, so the breakpoint is deliberately low. With
- * JavaScript unavailable the toggle is hidden and the full nav is shown —
- * navigation never depends on hydration.
+ * Under 900px this collapses to a disclosure panel. With JavaScript
+ * unavailable the toggle is hidden and the full nav is shown, so navigation
+ * never depends on hydration.
  */
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -22,10 +21,8 @@ export default function Header() {
   const toggleRef = useRef(null);
   const { pathname } = useLocation();
 
-  // Close on route change so the panel never persists across a navigation.
   useEffect(() => setOpen(false), [pathname]);
 
-  // Escape closes and returns focus to the control that opened it.
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => {
@@ -41,11 +38,8 @@ export default function Header() {
   return (
     <header className="site-header" data-open={open || undefined}>
       <div className="site-header__inner container">
-        <Link className="site-header__brand" to="/">
+        <Link className="site-header__brand" to="/" aria-label="Glenn Hammond, home">
           <Wordmark className="site-header__mark" />
-          <span className="site-header__descriptor" aria-hidden="true">
-            {site.descriptor}
-          </span>
         </Link>
 
         <button
