@@ -1,0 +1,281 @@
+name: Visual Identity browser QA (temporary)
+
+on:
+  push:
+    branches:
+      - feat/visual-identity-03-production-candidate-01
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout production candidate
+        uses: actions/checkout@v4
+
+      - name: Use Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install candidate dependencies
+        run: npm ci
+
+      - name: Install temporary Playwright runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Build with normal production command
+        run: npm run build
+
+      - name: Start local production preview
+        run: |
+          npm run preview -- --host 127.0.0.1 > /tmp/gh-preview.log 2>&1 &
+          echo $! > /tmp/gh-preview.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              echo 'Preview ready'
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/gh-preview.log
+          exit 1
+
+      - name: Create browser qualification runner
+        run: |
+          mkdir -p browser-qa/screenshots
+          cat > browser-qa/run.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import { writeFile } from 'node:fs/promises';
+
+          const base = 'http://127.0.0.1:4173';
+          const results = [];
+          const screenshots = [];
+
+          function assert(condition, message) {
+            if (!condition) throw new Error(message);
+          }
+
+          async function check(name, fn) {
+            try {
+              await fn();
+              results.push({ name, status: 'PASS', detail: '' });
+            } catch (error) {
+              results.push({ name, status: 'FAIL', detail: error?.message || String(error) });
+            }
+          }
+
+          const browser = await chromium.launch({ headless: true });
+
+          const viewports = [
+            { name: '1440', width: 1440, height: 1000 },
+            { name: '820', width: 820, height: 1000 },
+            { name: '390', width: 390, height: 844 },
+          ];
+
+          const surfaces = [
+            ['home', '/'],
+            ['work', '/work'],
+            ['project-ws', '/work/wellbeing-studio'],
+            ['record-ws', '/work/wellbeing-studio/contextual-entry'],
+            ['artefact-ws', '/work/wellbeing-studio/contextual-entry/daily-wellbeing-journey'],
+            ['evidence-isq', '/work/connect-and-learn/concurrent-migration/dependency-map'],
+            ['evidence-casa', '/work/casa/flight-examiner-rating/examiner-judgement/assessment-reasoning'],
+            ['evidence-tafe', '/work/tafe-pathways/supporting-conversation/exploration-environment'],
+          ];
+
+          for (const viewport of viewports) {
+            const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height } });
+            const page = await context.newPage();
+            for (const [slug, path] of surfaces) {
+              await check(`Responsive ${viewport.name} · ${slug}`, async () => {
+                const response = await page.goto(base + path, { waitUntil: 'networkidle' });
+                assert(response?.ok(), `${path} returned HTTP ${response?.status()}`);
+                await page.evaluate(async () => { if (document.fonts?.ready) await document.fonts.ready; });
+                const layout = await page.evaluate(() => ({
+                  scrollWidth: document.documentElement.scrollWidth,
+                  clientWidth: document.documentElement.clientWidth,
+                  h1: document.querySelector('h1')?.textContent?.trim() || '',
+                }));
+                assert(layout.scrollWidth <= layout.clientWidth + 1, `Horizontal overflow: ${layout.scrollWidth}px > ${layout.clientWidth}px`);
+                assert(layout.h1.length > 0, 'No visible H1 content found');
+                const file = `browser-qa/screenshots/${viewport.name}-${slug}.png`;
+                await page.screenshot({ path: file, fullPage: false });
+                screenshots.push(file);
+              });
+            }
+            await context.close();
+          }
+
+          await check('Qualified font files are available', async () => {
+            const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+            const page = await context.newPage();
+            await page.goto(base + '/', { waitUntil: 'networkidle' });
+            const available = await page.evaluate(async () => {
+              await document.fonts.ready;
+              return {
+                territory: document.fonts.check('500 32px "ITC Avant Garde Std"'),
+                reading: document.fonts.check('400 20px "Source Serif 4"'),
+                utility: document.fonts.check('600 20px "InterVariable"'),
+                index: document.fonts.check('400 11px "JetBrains Mono"'),
+              };
+            });
+            for (const [role, ok] of Object.entries(available)) assert(ok, `${role} font not available`);
+            await context.close();
+          });
+
+          await check('Typography roles resolve on canonical surfaces', async () => {
+            const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+            const page = await context.newPage();
+            const expectations = [
+              ['/', '.hero__title', 'Avant Garde'],
+              ['/', '.hero__standfirst', 'Source Serif'],
+              ['/work', '.record-work-head h1', 'Inter'],
+              ['/work', '.record-work-head p:last-child', 'Source Serif'],
+              ['/work/wellbeing-studio', '.record-opening__title', 'Avant Garde'],
+              ['/work/wellbeing-studio', '.record-opening__lede', 'Source Serif'],
+              ['/work/wellbeing-studio/contextual-entry', '.record-exam-opening h1', 'Inter'],
+              ['/work/wellbeing-studio/contextual-entry', '.record-exam-opening__summary > p:first-child', 'Source Serif'],
+              ['/work/wellbeing-studio/contextual-entry/daily-wellbeing-journey', '.artefact-inspection h1', 'Inter'],
+              ['/work/wellbeing-studio/contextual-entry/daily-wellbeing-journey', '.artefact-inspection__summary', 'Source Serif'],
+            ];
+            for (const [path, selector, expected] of expectations) {
+              await page.goto(base + path, { waitUntil: 'networkidle' });
+              const family = await page.locator(selector).evaluate((el) => getComputedStyle(el).fontFamily);
+              assert(family.includes(expected), `${path} ${selector}: expected ${expected}, got ${family}`);
+            }
+            await context.close();
+          });
+
+          await check('Record → Artefact → Record restores focus', async () => {
+            const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+            const page = await context.newPage();
+            await page.goto(base + '/work/wellbeing-studio/contextual-entry', { waitUntil: 'networkidle' });
+            const evidence = page.locator('#artefact-daily-wellbeing-journey');
+            await evidence.scrollIntoViewIfNeeded();
+            await evidence.focus();
+            await evidence.click();
+            await page.waitForURL('**/daily-wellbeing-journey');
+            const returnLink = page.getByRole('link', { name: 'Return to Record' });
+            assert(await returnLink.isVisible(), 'Internal Artefact entry did not expose Return to Record');
+            await returnLink.click();
+            await page.waitForURL('**/contextual-entry');
+            await page.waitForTimeout(250);
+            const activeId = await page.evaluate(() => document.activeElement?.id || '');
+            assert(activeId === 'artefact-daily-wellbeing-journey', `Expected evidence-link focus restoration, got ${activeId || 'none'}`);
+            await context.close();
+          });
+
+          await check('Direct Artefact entry widens to View Record', async () => {
+            const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+            const page = await context.newPage();
+            await page.goto(base + '/work/wellbeing-studio/contextual-entry/daily-wellbeing-journey', { waitUntil: 'networkidle' });
+            const label = (await page.locator('.artefact-back').textContent())?.trim();
+            assert(label === 'View Record', `Expected View Record on direct entry, got ${label}`);
+            await context.close();
+          });
+
+          await check('Browser POP restores Record scroll position', async () => {
+            const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+            const page = await context.newPage();
+            await page.goto(base + '/work/wellbeing-studio/contextual-entry', { waitUntil: 'networkidle' });
+            await page.evaluate(() => window.scrollTo(0, Math.min(950, document.documentElement.scrollHeight - innerHeight - 20)));
+            await page.waitForTimeout(150);
+            const before = await page.evaluate(() => window.scrollY);
+            assert(before > 200, `Test page did not scroll far enough (${before}px)`);
+            await page.locator('#artefact-daily-wellbeing-journey').click();
+            await page.waitForURL('**/daily-wellbeing-journey');
+            await page.goBack({ waitUntil: 'domcontentloaded' });
+            await page.waitForTimeout(500);
+            const after = await page.evaluate(() => window.scrollY);
+            assert(Math.abs(after - before) <= 140, `POP scroll restore drifted from ${before}px to ${after}px`);
+            await context.close();
+          });
+
+          await check('Mobile menu Escape restores toggle focus', async () => {
+            const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+            const page = await context.newPage();
+            await page.goto(base + '/work', { waitUntil: 'networkidle' });
+            const toggle = page.locator('.meta-frame__toggle');
+            assert(await toggle.isVisible(), 'Mobile menu toggle is not visible');
+            await toggle.click();
+            assert((await toggle.getAttribute('aria-expanded')) === 'true', 'Menu did not open');
+            await page.keyboard.press('Escape');
+            await page.waitForTimeout(100);
+            assert((await toggle.getAttribute('aria-expanded')) === 'false', 'Escape did not close menu');
+            const focused = await toggle.evaluate((el) => document.activeElement === el);
+            assert(focused, 'Escape did not restore focus to menu toggle');
+            await context.close();
+          });
+
+          await check('Reduced motion keeps continuity without animation', async () => {
+            const context = await browser.newContext({ viewport: { width: 820, height: 1000 }, reducedMotion: 'reduce' });
+            const page = await context.newPage();
+            await page.goto(base + '/work', { waitUntil: 'networkidle' });
+            const state = await page.evaluate(() => ({
+              scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior,
+              transition: getComputedStyle(document.querySelector('.meta-frame__nav-link')).transitionDuration,
+            }));
+            assert(state.scrollBehavior === 'auto', `Expected auto scroll behavior, got ${state.scrollBehavior}`);
+            const firstDuration = Number.parseFloat(state.transition) || 0;
+            assert(firstDuration <= 0.0011, `Expected ~1ms transition, got ${state.transition}`);
+            await context.close();
+          });
+
+          await check('No-JS mobile keeps content usable and hides dead controls', async () => {
+            const context = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
+            const page = await context.newPage();
+            const response = await page.goto(base + '/work/wellbeing-studio/contextual-entry', { waitUntil: 'domcontentloaded' });
+            assert(response?.ok(), `No-JS Record returned HTTP ${response?.status()}`);
+            assert(await page.locator('h1').isVisible(), 'No-JS Record H1 is not visible');
+            const toggleVisible = await page.locator('.meta-frame__toggle').isVisible();
+            assert(!toggleVisible, 'No-JS mobile exposes a menu control that cannot work');
+            const workLink = page.locator('.meta-frame__nav-link', { hasText: 'Work' });
+            assert(await workLink.isVisible(), 'No-JS mobile primary navigation is not available');
+            await context.close();
+          });
+
+          await browser.close();
+
+          const failed = results.filter((r) => r.status === 'FAIL');
+          const rows = results.map((r) => `| ${r.status} | ${r.name} | ${r.detail.replaceAll('|', '\\|')} |`).join('\n');
+          const report = `## Visual Identity 03 — real-browser QA\n\nCandidate: \`${process.env.GITHUB_SHA || 'local'}\`\n\n| Result | Check | Detail |\n| --- | --- | --- |\n${rows}\n\nScreenshots captured: **${screenshots.length}** viewport PNGs (1440 / 820 / 390 across canonical and evidence-heavy surfaces).\n\n${failed.length ? `**Browser gate: FAIL — ${failed.length} check(s) require correction.**` : '**Browser gate: PASS.**'}\n`;
+          await writeFile('browser-qa/report.md', report);
+          await writeFile('browser-qa/report.json', JSON.stringify({ results, screenshots, failed: failed.length }, null, 2));
+          console.log(report);
+          if (failed.length) process.exitCode = 1;
+          EOF
+
+      - name: Run real-browser qualification
+        id: browser_qa
+        continue-on-error: true
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        run: node browser-qa/run.mjs
+
+      - name: Upload browser screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-identity-browser-qa-${{ github.sha }}
+          path: browser-qa/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Publish browser report to draft PR
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr comment 7 --body-file browser-qa/report.md
+
+      - name: Enforce browser gate
+        if: steps.browser_qa.outcome != 'success'
+        run: exit 1
