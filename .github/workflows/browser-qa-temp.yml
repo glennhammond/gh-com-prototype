@@ -101,6 +101,26 @@ jobs:
             await context.close();
           }
 
+          await check('Public identity language stays behind the work', async () => {
+            const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+            const page = await context.newPage();
+            const forbidden = [
+              ['THE RECORD', /\bTHE RECORD\b/],
+              ['Evidence landscape', /Evidence landscape/i],
+              ['professional evidence system', /professional evidence system/i],
+              ['one evidence grammar', /one evidence grammar/i],
+            ];
+            const paths = ['/', '/work', '/practice', '/work/wellbeing-studio', '/work/wellbeing-studio/contextual-entry'];
+            for (const path of paths) {
+              await page.goto(base + path, { waitUntil: 'networkidle' });
+              const text = await page.locator('body').innerText();
+              for (const [label, pattern] of forbidden) {
+                assert(!pattern.test(text), `${path} exposes public identity phrase: ${label}`);
+              }
+            }
+            await context.close();
+          });
+
           await check('Qualified font files are available', async () => {
             const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
             const page = await context.newPage();
@@ -160,12 +180,12 @@ jobs:
             await context.close();
           });
 
-          await check('Direct Artefact entry widens to View Record', async () => {
+          await check('Direct Artefact entry widens to analysis', async () => {
             const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
             const page = await context.newPage();
             await page.goto(base + '/work/wellbeing-studio/contextual-entry/daily-wellbeing-journey', { waitUntil: 'networkidle' });
             const label = (await page.locator('.artefact-back').textContent())?.trim();
-            assert(label === 'View Record', `Expected View Record on direct entry, got ${label}`);
+            assert(label === 'Read the analysis', `Expected Read the analysis on direct entry, got ${label}`);
             await context.close();
           });
 
@@ -232,7 +252,7 @@ jobs:
           await browser.close();
           const failed = results.filter((r) => r.status === 'FAIL');
           const rows = results.map((r) => `| ${r.status} | ${r.name} | ${r.detail.replaceAll('|', '\\|')} |`).join('\n');
-          const report = `## Visual Identity 03 — real-browser QA\n\nCandidate: \`${process.env.GITHUB_SHA || 'local'}\`\n\n| Result | Check | Detail |\n| --- | --- | --- |\n${rows}\n\nScreenshots captured: **${screenshots.length}** viewport PNGs (1440 / 820 / 390 across canonical and evidence-heavy surfaces).\n\n${failed.length ? `**Browser gate: FAIL — ${failed.length} check(s) require correction.**` : '**Browser gate: PASS.**'}\n`;
+          const report = `## Visual Identity 04 — real-browser QA\n\nCandidate: \`${process.env.GITHUB_SHA || 'local'}\`\n\n| Result | Check | Detail |\n| --- | --- | --- |\n${rows}\n\nScreenshots captured: **${screenshots.length}** viewport PNGs (1440 / 820 / 390 across canonical and evidence-heavy surfaces).\n\n${failed.length ? `**Browser gate: FAIL — ${failed.length} check(s) require correction.**` : '**Browser gate: PASS.**'}\n`;
           await writeFile('browser-qa/report.md', report);
           await writeFile('browser-qa/report.json', JSON.stringify({ results, screenshots, failed: failed.length }, null, 2));
           console.log(report);
