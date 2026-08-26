@@ -65,7 +65,7 @@ export default function ConnectedServiceArtefact() {
                 to={connectedServiceRecord.path}
                 state={internalEntry && returnFocusId ? { restoreFocusId: returnFocusId } : undefined}
               >
-                {internalEntry ? 'Return to Record' : 'View Record'}
+                {internalEntry ? 'Return to Record' : 'Read the analysis'}
               </Link>
             </div>
           </div>
