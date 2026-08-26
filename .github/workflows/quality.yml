@@ -27,5 +27,8 @@ jobs:
           node-version: 24
           cache: npm
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build and qualify production output
         run: PUBLISH=1 npm run check
