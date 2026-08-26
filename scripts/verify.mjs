@@ -72,7 +72,7 @@ const PLACEHOLDER = [
   /\bTBD\b/,
   /\bXXX\b/,
   /coming soon/i,
-  /placeholder text/i,
+  />\s*placeholder text\s*</i,
 ];
 
 for (const [file, source] of Object.entries(html)) {
