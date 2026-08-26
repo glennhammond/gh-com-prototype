@@ -164,7 +164,7 @@ export default function EnquiryForm() {
       />
 
       <fieldset className="enquiry__layers">
-        <legend>Where does the problem seem to sit?</legend>
+        <legend>What does the problem seem closest to?</legend>
         <p className="enquiry__hint" id="layers-hint">
           Optional. Choose more than one if it crosses boundaries; guessing is fine.
         </p>
