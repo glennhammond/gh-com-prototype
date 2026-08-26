@@ -70,6 +70,14 @@ jobs:
           const surfaces = [
             ['home', '/'],
             ['work', '/work'],
+            ['practice', '/practice'],
+            ['about', '/about'],
+            ['contact', '/contact'],
+            ['service-rise', '/services/rise-design-systems'],
+            ['service-storyline', '/services/storyline-development'],
+            ['knowledge-assessment', '/principles-of-assessment-and-rules-of-evidence'],
+            ['knowledge-storyline-master', '/blog/master-slides-in-storyline'],
+            ['knowledge-moodle-login', '/blog/how-to-set-moodles-login-page-as-the-sites-landing-page'],
             ['project-ws', '/work/wellbeing-studio'],
             ['record-ws', '/work/wellbeing-studio/contextual-entry'],
             ['artefact-ws', '/work/wellbeing-studio/contextual-entry/daily-wellbeing-journey'],
@@ -110,14 +118,44 @@ jobs:
               ['professional evidence system', /professional evidence system/i],
               ['one evidence grammar', /one evidence grammar/i],
             ];
-            const paths = ['/', '/work', '/practice', '/work/wellbeing-studio', '/work/wellbeing-studio/contextual-entry'];
-            for (const path of paths) {
+            for (const [, path] of surfaces) {
               await page.goto(base + path, { waitUntil: 'networkidle' });
               const text = await page.locator('body').innerText();
               for (const [label, pattern] of forbidden) {
                 assert(!pattern.test(text), `${path} exposes public identity phrase: ${label}`);
               }
             }
+            await context.close();
+          });
+
+          await check('Retained routes keep Glenn name-only and natural enquiry language', async () => {
+            const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+            const page = await context.newPage();
+
+            await page.goto(base + '/about', { waitUntil: 'networkidle' });
+            assert(await page.locator('.site-header__brand').isVisible(), 'Retained header brand is not visible');
+            assert(await page.locator('.site-header__descriptor').count() === 0, 'Retained header still carries a permanent descriptor beside Glenn Hammond');
+
+            await page.goto(base + '/contact', { waitUntil: 'networkidle' });
+            const legend = (await page.locator('.enquiry__layers legend').textContent())?.trim();
+            assert(legend === 'What does the problem seem closest to?', `Unexpected enquiry framing: ${legend}`);
+            assert(await page.locator('.enquiry__swatch').count() === 0, 'Legacy colour-coded enquiry framework is still rendered');
+            assert(await page.locator('.enquiry__layer-number').count() === 0, 'Legacy numbered enquiry framework is still rendered');
+            const areas = await page.locator('.enquiry__layer-name').allTextContents();
+            assert(JSON.stringify(areas.map((v) => v.trim())) === JSON.stringify([
+              'Product / experience',
+              'Learning / content',
+              'Platform / technology',
+              'Production / operations',
+            ]), `Unexpected enquiry areas: ${areas.join(' | ')}`);
+
+            for (const path of ['/services/rise-design-systems', '/services/storyline-development']) {
+              await page.goto(base + path, { waitUntil: 'networkidle' });
+              const text = await page.locator('body').innerText();
+              assert(/Specialist depth/i.test(text), `${path} no longer presents itself as specialist Practice depth`);
+              assert(!/Return to the Practice evidence interpretation/i.test(text), `${path} retains obsolete framework language`);
+            }
+
             await context.close();
           });
 
@@ -252,7 +290,7 @@ jobs:
           await browser.close();
           const failed = results.filter((r) => r.status === 'FAIL');
           const rows = results.map((r) => `| ${r.status} | ${r.name} | ${r.detail.replaceAll('|', '\\|')} |`).join('\n');
-          const report = `## Visual Identity 04 — real-browser QA\n\nCandidate: \`${process.env.GITHUB_SHA || 'local'}\`\n\n| Result | Check | Detail |\n| --- | --- | --- |\n${rows}\n\nScreenshots captured: **${screenshots.length}** viewport PNGs (1440 / 820 / 390 across canonical and evidence-heavy surfaces).\n\n${failed.length ? `**Browser gate: FAIL — ${failed.length} check(s) require correction.**` : '**Browser gate: PASS.**'}\n`;
+          const report = `## Visual Identity 04 — real-browser QA\n\nCandidate: \`${process.env.GITHUB_SHA || 'local'}\`\n\n| Result | Check | Detail |\n| --- | --- | --- |\n${rows}\n\nScreenshots captured: **${screenshots.length}** viewport PNGs (1440 / 820 / 390 across canonical, retained, specialist and evidence-heavy surfaces).\n\n${failed.length ? `**Browser gate: FAIL — ${failed.length} check(s) require correction.**` : '**Browser gate: PASS.**'}\n`;
           await writeFile('browser-qa/report.md', report);
           await writeFile('browser-qa/report.json', JSON.stringify({ results, screenshots, failed: failed.length }, null, 2));
           console.log(report);
