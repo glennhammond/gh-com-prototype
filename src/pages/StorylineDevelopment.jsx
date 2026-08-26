@@ -15,11 +15,11 @@ import {
 import "./ServicePage.css";
 
 /**
- * Advanced Storyline development.
+ * Specialist Articulate Storyline depth.
  *
- * The legacy /services URL remains addressable for specialist direct entry and
- * SEO migration continuity. Practice Architecture v1 no longer presents Rise
- * and Storyline as parallel pillars; this route is subordinate technical depth.
+ * The legacy /services URL remains addressable for direct entry and search
+ * migration continuity. It is technical/practice depth, not a parallel pillar
+ * in the public identity.
  */
 export default function StorylineDevelopment() {
   const evidenceProjects = copy.evidence.slugs
@@ -43,14 +43,11 @@ export default function StorylineDevelopment() {
         )}
       />
 
-      {/* --- Hero ------------------------------------------------------- */}
       <header className="svc-hero on-ink">
         <div className="container">
           <nav aria-label="Breadcrumb" className="svc-hero__crumbs">
             <ol>
-              <li>
-                <a href="/practice">Practice</a>
-              </li>
+              <li><a href="/practice">Practice</a></li>
               <li aria-current="page">Storyline development</li>
             </ol>
           </nav>
@@ -60,7 +57,6 @@ export default function StorylineDevelopment() {
         </div>
       </header>
 
-      {/* --- When it fits ------------------------------------------------ */}
       <Section>
         <SectionHead
           eyebrow={copy.whenItFits.eyebrow}
@@ -69,7 +65,6 @@ export default function StorylineDevelopment() {
         />
       </Section>
 
-      {/* --- Capability groups --------------------------------------------- */}
       <Section className="svc-system" aria-labelledby="svc-groups-title">
         <SectionHead
           id="svc-groups-title"
@@ -81,16 +76,13 @@ export default function StorylineDevelopment() {
             <article key={group.title} className="svc-group">
               <h3 className="svc-group__title">{group.title}</h3>
               <ul className="svc-group__list">
-                {group.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
+                {group.items.map((item) => <li key={item}>{item}</li>)}
               </ul>
             </article>
           ))}
         </div>
       </Section>
 
-      {/* --- Technical depth ------------------------------------------------ */}
       <Section band tight aria-labelledby="svc-technical-title">
         <SectionHead
           id="svc-technical-title"
@@ -100,7 +92,6 @@ export default function StorylineDevelopment() {
         <p className="svc-prose svc-prose--ink">{copy.technical.body}</p>
       </Section>
 
-      {/* --- Ecosystem experience -------------------------------------------- */}
       <Section aria-labelledby="svc-experience-title">
         <SectionHead
           id="svc-experience-title"
@@ -108,13 +99,10 @@ export default function StorylineDevelopment() {
           headline="Experience that predates the brief"
         />
         <div className="svc-prose">
-          {copy.experience.body.map((p) => (
-            <p key={p.slice(0, 24)}>{marked(p)}</p>
-          ))}
+          {copy.experience.body.map((p) => <p key={p.slice(0, 24)}>{marked(p)}</p>)}
         </div>
       </Section>
 
-      {/* --- Modernisation --------------------------------------------------- */}
       <Section className="svc-modernisation" aria-labelledby="svc-modernisation-title">
         <SectionHead
           id="svc-modernisation-title"
@@ -123,45 +111,35 @@ export default function StorylineDevelopment() {
           standfirst={copy.modernisation.body}
         />
         <ul className="svc-outcomes">
-          {copy.modernisation.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
+          {copy.modernisation.items.map((item) => <li key={item}>{item}</li>)}
         </ul>
       </Section>
 
-      {/* --- Selected work ---------------------------------------------- */}
       {evidenceProjects.length > 0 && (
         <Section className="svc-evidence" aria-labelledby="svc-evidence-title">
           <SectionHead
             id="svc-evidence-title"
             eyebrow={copy.evidence.heading}
-            headline="Storyline work, across six years"
+            headline="Selected Storyline work"
           />
           <ul className="svc-evidence__grid">
             {evidenceProjects.map((project) => (
-              <li key={project.slug}>
-                <ProjectCard project={project} />
-              </li>
+              <li key={project.slug}><ProjectCard project={project} /></li>
             ))}
           </ul>
           <p className="svc-evidence__more">
             Two of these belong to the same six-year engagement.{" "}
-            <Link to="/work/casa">See the full CASA programme</Link>
+            <Link to="/work/casa">See the wider CASA work</Link>
           </p>
         </Section>
       )}
 
-      {/* --- Close / CTA -------------------------------------------------- */}
       <Section band tight className="svc-cta" aria-labelledby="svc-cta-title">
-        <h2 id="svc-cta-title" className="display-l">
-          {copy.cta.heading}
-        </h2>
+        <h2 id="svc-cta-title" className="display-l">{copy.cta.heading}</h2>
         <p className="svc-cta__body">{copy.cta.body}</p>
-        <Button to={copy.cta.href} variant="primary">
-          {copy.cta.label}
-        </Button>
+        <Button to={copy.cta.href} variant="primary">{copy.cta.label}</Button>
         <p className="svc-cta__more">
-          <Link to="/practice">Return to the Practice evidence interpretation</Link>
+          <Link to="/practice">Read how the practice works</Link>
         </p>
       </Section>
     </>
