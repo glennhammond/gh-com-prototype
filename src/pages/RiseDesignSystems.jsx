@@ -14,11 +14,11 @@ import {
 import "./ServicePage.css";
 
 /**
- * Rise design systems and premium development.
+ * Specialist Articulate Rise depth.
  *
- * The legacy /services URL remains addressable for specialist direct entry and
- * SEO migration continuity. Practice Architecture v1 does not promote Rise as
- * a core Practice claim until the canonical four-territory field supports it.
+ * The legacy /services URL remains addressable for direct entry and search
+ * migration continuity. It is subordinate to Practice rather than presented as
+ * a parallel service brand.
  */
 export default function RiseDesignSystems() {
   const evidenceProject = projectBySlug[copy.evidence.slug];
@@ -40,14 +40,11 @@ export default function RiseDesignSystems() {
         )}
       />
 
-      {/* --- Hero ------------------------------------------------------- */}
       <header className="svc-hero on-ink">
         <div className="container">
           <nav aria-label="Breadcrumb" className="svc-hero__crumbs">
             <ol>
-              <li>
-                <a href="/practice">Practice</a>
-              </li>
+              <li><a href="/practice">Practice</a></li>
               <li aria-current="page">Rise design systems</li>
             </ol>
           </nav>
@@ -57,20 +54,13 @@ export default function RiseDesignSystems() {
         </div>
       </header>
 
-      {/* --- The challenge ------------------------------------------------ */}
       <Section>
-        <SectionHead
-          eyebrow={copy.challenge.eyebrow}
-          headline={copy.challenge.headline}
-        />
+        <SectionHead eyebrow={copy.challenge.eyebrow} headline={copy.challenge.headline} />
         <div className="svc-prose">
-          {copy.challenge.body.map((p) => (
-            <p key={p.slice(0, 24)}>{p}</p>
-          ))}
+          {copy.challenge.body.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
         </div>
       </Section>
 
-      {/* --- The system ----------------------------------------------------- */}
       <Section className="svc-system" aria-labelledby="svc-system-title">
         <SectionHead
           id="svc-system-title"
@@ -84,9 +74,7 @@ export default function RiseDesignSystems() {
               <h3 className="svc-group__title">{group.title}</h3>
               <p className="svc-group__body">{group.body}</p>
               <ul className="svc-group__list">
-                {group.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
+                {group.items.map((item) => <li key={item}>{item}</li>)}
               </ul>
             </article>
           ))}
@@ -94,23 +82,18 @@ export default function RiseDesignSystems() {
         <p className="svc-close-line">{copy.system.close}</p>
       </Section>
 
-      {/* --- Principle ------------------------------------------------------ */}
       <Section band tight>
         <p className="svc-principle">{copy.principle}</p>
       </Section>
 
-      {/* --- Outcomes --------------------------------------------------- */}
       <Section aria-labelledby="svc-outcomes-title">
         <SectionHead id="svc-outcomes-title" eyebrow="Outcomes" headline="What this changes" />
         <ul className="svc-outcomes">
-          {copy.outcomes.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
+          {copy.outcomes.items.map((item) => <li key={item}>{item}</li>)}
         </ul>
         <p className="svc-note">{copy.outcomes.note}</p>
       </Section>
 
-      {/* --- Evidence --------------------------------------------------- */}
       {evidenceProject && (
         <Section className="svc-evidence" aria-labelledby="svc-evidence-title">
           <SectionHead
@@ -122,11 +105,7 @@ export default function RiseDesignSystems() {
             <ProjectCard project={evidenceProject} size="lead" />
             {evidenceProject.externalRef && (
               <p className="svc-evidence__external">
-                <a
-                  href={evidenceProject.externalRef.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={evidenceProject.externalRef.href} target="_blank" rel="noopener noreferrer">
                   {evidenceProject.externalRef.label}
                   <span className="visually-hidden">: opens in a new tab</span>
                 </a>
@@ -136,17 +115,12 @@ export default function RiseDesignSystems() {
         </Section>
       )}
 
-      {/* --- Close / CTA -------------------------------------------------- */}
       <Section band tight className="svc-cta" aria-labelledby="svc-cta-title">
-        <h2 id="svc-cta-title" className="display-l">
-          {copy.cta.heading}
-        </h2>
+        <h2 id="svc-cta-title" className="display-l">{copy.cta.heading}</h2>
         <p className="svc-cta__body">{copy.cta.body}</p>
-        <Button to={copy.cta.href} variant="primary">
-          {copy.cta.label}
-        </Button>
+        <Button to={copy.cta.href} variant="primary">{copy.cta.label}</Button>
         <p className="svc-cta__more">
-          <Link to="/practice">Return to the Practice evidence interpretation</Link>
+          <Link to="/practice">Read how the practice works</Link>
         </p>
       </Section>
     </>
