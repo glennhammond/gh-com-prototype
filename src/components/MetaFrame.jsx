@@ -31,7 +31,6 @@ export default function MetaFrame() {
       <div className="container meta-frame__resident">
         <Link className="meta-frame__identity" to="/" aria-label="Glenn Hammond, home">
           <Wordmark />
-          <span className="meta-frame__record">THE RECORD</span>
         </Link>
 
         <button
@@ -72,9 +71,7 @@ export default function MetaFrame() {
               <Link className="meta-frame__context" to={context.contextHref}>
                 {context.contextLabel}
               </Link>
-            ) : (
-              <span className="meta-frame__context">THE RECORD</span>
-            )}
+            ) : null}
             <span className="meta-frame__subject" aria-current="page">
               {context.subject}
             </span>
