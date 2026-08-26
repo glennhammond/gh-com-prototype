@@ -62,19 +62,19 @@ export default function Practice() {
 
       <header className="practice-head">
         <div className="container practice-head__inner">
-          <p className="eyebrow">THE RECORD · Practice</p>
+          <p className="eyebrow">Practice</p>
           <h1>The work changes. Certain decisions keep recurring.</h1>
           <p className="practice-head__lede">
-            Practice is the interpretation layer of THE RECORD. It does not list everything I can do or
-            impose a method on old projects. It names the ways of working that recur when the evidence is
-            read across projects.
+            This page draws recurring ways of working from the projects shown on this site. It does not list
+            everything I can do or impose a method on old work; it looks for patterns that can be supported
+            across different contexts.
           </p>
           <p className="practice-head__integrity">
-            <strong>Evidence boundary.</strong> The public Record is selective and currently reaches back to
-            2015. It should not be read as thirty years of canonical evidence.
+            <strong>Evidence boundary.</strong> The work shown here is selective and currently reaches back to
+            2015. It should not be read as a complete account of thirty years of practice.
           </p>
           <Link className="practice-text-link" to="/work">
-            Enter THE RECORD
+            View the work
           </Link>
         </div>
       </header>
@@ -85,8 +85,8 @@ export default function Practice() {
             <p className="eyebrow">Practice claims · 01</p>
             <h2 id="practice-recurring-title">What keeps recurring</h2>
             <p>
-              These are the strongest claims the current evidence field supports. Each is tested across all
-              four canonical Project territories before it earns the label proven recurring practice.
+              These are the strongest claims the work shown here supports. Each is tested across the four
+              project families before it is treated as a proven recurring part of the practice.
             </p>
           </div>
 
@@ -102,7 +102,7 @@ export default function Practice() {
                   <p className="practice-boundary">{claim.boundary}</p>
                 </div>
                 <div className="practice-claim__evidence">
-                  <p className="practice-evidence-label">Evidence across THE RECORD</p>
+                  <p className="practice-evidence-label">Evidence across the work</p>
                   <EvidenceList evidence={claim.evidence} />
                 </div>
               </article>
@@ -142,12 +142,12 @@ export default function Practice() {
       <section className="practice-section" aria-labelledby="practice-evolution-title">
         <div className="container practice-evolution-layout">
           <div className="practice-section__head">
-            <p className="eyebrow">Evolution · selective canonical field</p>
-            <h2 id="practice-evolution-title">The practice has widened in altitude</h2>
+            <p className="eyebrow">Evolution · selected work</p>
+            <h2 id="practice-evolution-title">The practice has widened in scope</h2>
             <p>
-              The public Record shows a widening unit of design since 2015: from interaction and facilitated
-              experience into regulated learning systems, platform and content architecture, then product and
-              connected-service work.
+              The work shown here suggests a widening unit of design since 2015: from interaction and
+              facilitated experience into regulated learning systems, platform and content architecture,
+              then product and connected-service work.
             </p>
             <p className="practice-boundary">
               This is not a ladder. Earlier forms do not disappear as the work widens; artefact-making remains
@@ -162,7 +162,7 @@ export default function Practice() {
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
                 <Link className="practice-text-link" to={item.record.path}>
-                  Read Record · {item.record.title}
+                  Read the analysis · {item.record.title}
                 </Link>
               </li>
             ))}
@@ -199,9 +199,9 @@ export default function Practice() {
         <div className="container practice-specialist-layout">
           <div className="practice-section__head">
             <p className="eyebrow">Specialist production depth</p>
-            <h2 id="practice-specialist-title">Tools are materials, not the Practice</h2>
+            <h2 id="practice-specialist-title">Tools are materials, not the practice</h2>
             <p>
-              Storyline recurs across the historical Record, but the evidence is useful because of what the
+              Storyline recurs across the historical work, but the evidence is useful because of what the
               tool enabled — not because software expertise should become the architecture of the practice.
             </p>
           </div>
@@ -232,16 +232,16 @@ export default function Practice() {
         <div className="container practice-contract__inner">
           <div className="practice-section__head">
             <p className="eyebrow">Evidence contract</p>
-            <h2 id="practice-contract-title">How to read a Practice claim</h2>
+            <h2 id="practice-contract-title">How to read a practice claim</h2>
             <p>
-              Practice can interpret THE RECORD. It cannot outrun it. Stronger language requires stronger
+              Practice can interpret the work. It cannot outrun it. Stronger language requires stronger
               recurrence and stronger evidence.
             </p>
           </div>
           <dl className="practice-contract__definitions">
             <div>
               <dt>{practiceClassifications['proven-recurring']}</dt>
-              <dd>Supported across multiple canonical Project territories.</dd>
+              <dd>Supported across multiple projects and contexts.</dd>
             </div>
             <div>
               <dt>{practiceClassifications['strong-emerging']}</dt>
@@ -249,11 +249,11 @@ export default function Practice() {
             </div>
             <div>
               <dt>{practiceClassifications['single-project']}</dt>
-              <dd>Useful evidence that remains bounded to one Project until recurrence appears.</dd>
+              <dd>Useful evidence that remains bounded to one project until recurrence appears.</dd>
             </div>
             <div>
               <dt>{practiceClassifications['aspirational-positioning']}</dt>
-              <dd>Direction or biography that may be useful, but is not presented as canonical proof.</dd>
+              <dd>Direction or biography that may be useful, but is not presented as proof.</dd>
             </div>
           </dl>
         </div>
@@ -265,7 +265,7 @@ export default function Practice() {
           <h2 id="practice-close-title">The interpretation is only useful if you can inspect the work.</h2>
           <div className="practice-close__actions">
             <Link className="practice-close__primary" to="/work">
-              Examine THE RECORD
+              View the work
             </Link>
             <Link className="practice-close__secondary" to="/contact">
               Contact Glenn
