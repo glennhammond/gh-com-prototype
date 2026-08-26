@@ -2,7 +2,8 @@
    Editorial Territory — semantic foundation
 
    Qualified through Brand Architecture 02.6 and Visual Identity 03.2–03.6.
-   Production-candidate dependency lock is machine-generated and CI-ready.
+   Production-candidate dependency lock and verifier gates are qualified;
+   ordinary Production Quality remains the merge-readiness authority.
 
    Migration rule: these roles are additive. They do not replace the legacy
    palette at :root. Canonical surfaces opt in explicitly so historical and
