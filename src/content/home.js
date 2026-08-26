@@ -8,7 +8,7 @@ export const home = {
     eyebrow: 'Digital products · experiences · learning · systems',
     headline: 'Thirty years of making digital things.',
     standfirst:
-      'Still learning how to make them better. This site brings together projects across digital products, experiences, learning and systems. Each project opens into decisions worth examining and work that can still be inspected.',
+      'Still learning how to make them better. I work across digital products, experiences, learning and systems, usually where the problem crosses more than one of those boundaries.',
     primaryCta: { href: '/work', label: 'View the work' },
     secondaryCta: { href: '/practice', label: 'Read the practice' },
   },
@@ -42,7 +42,7 @@ export const home = {
     headline: 'Frame. Shape. Make. Evidence.',
     body: [
       'Show the thinking. Show the making. Show the evidence. I work across product strategy, experience architecture, learning design, visual design, media, platforms and implementation; the useful boundary is the point where the problem is genuinely solved.',
-      'This site is part of that evidence. Its information architecture, editorial model, interaction, accessibility and technical implementation are designed to demonstrate the same practice the work describes.',
+      'I care about the point where a good idea has to survive contact with real users, real platforms and real production constraints. That is why the work here includes both the decisions and the things that were made.',
     ],
     cta: { href: '/practice', label: 'How the practice works' },
   },
