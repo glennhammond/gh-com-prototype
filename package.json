@@ -6,10 +6,11 @@
   "description": "THE RECORD production prototype for glennhammond.com: Project, Record and Artefact evidence architecture.",
   "scripts": {
     "dev": "vite",
-    "build": "vite-react-ssg build && node scripts/postbuild.mjs && node scripts/search-audit.mjs && node scripts/migration-audit.mjs && node scripts/verify.mjs",
+    "build": "vite-react-ssg build && node scripts/postbuild.mjs && node scripts/search-audit.mjs && node scripts/migration-audit.mjs && node scripts/verify.mjs && node scripts/release-audit.mjs",
     "preview": "vite preview --port 4173",
     "images": "node scripts/images.mjs",
     "verify": "node scripts/verify.mjs",
+    "release:audit": "node scripts/release-audit.mjs",
     "search:audit": "node scripts/search-audit.mjs",
     "migration:audit": "node scripts/migration-audit.mjs",
     "check": "npm run build && npm run audit",
