@@ -13,7 +13,8 @@ import { join } from 'node:path';
  *
  * sitemap.xml is the generated source of truth for indexable launch surfaces.
  * Privacy is also public at launch even though it is deliberately absent from
- * the sitemap, so it is qualified explicitly here.
+ * the sitemap and intentionally noindex, so it is qualified for placeholder
+ * cleanliness without being required to be indexable.
  */
 
 const DIST = 'dist';
@@ -35,6 +36,7 @@ const sitemapPaths = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => 
   return path === '' ? '/' : path;
 }).filter(Boolean);
 
+const indexablePaths = new Set(sitemapPaths);
 const releasePaths = [...new Set([...sitemapPaths, '/privacy'])];
 
 function routeToFile(path) {
@@ -63,13 +65,16 @@ for (const path of releasePaths) {
     failures.push(`${path}: ${total} visible editorial placeholder(s) remain (${inline} inline, ${image} image, ${gapPanel} gap panel)`);
   }
 
-  if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html)) {
-    failures.push(`${path}: launch surface renders a noindex meta tag`);
+  if (
+    indexablePaths.has(path) &&
+    /<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html)
+  ) {
+    failures.push(`${path}: indexable launch surface renders a noindex meta tag`);
   }
 }
 
 notes.push(`${sitemapPaths.length} intentionally indexable canonical surface(s) qualified from sitemap.xml`);
-notes.push('Privacy qualified as a public non-sitemap launch surface');
+notes.push('Privacy qualified for publication cleanliness while retaining its intentional noindex state');
 notes.push('Legacy noindex/review routes remain subject to the whole-estate editorial report in verify.mjs, but are not release blockers');
 
 console.log('\n----------------------------------------------------------------');
