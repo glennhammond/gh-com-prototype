@@ -4,7 +4,7 @@
 **Candidate branch:** `feat/visual-identity-03-production-candidate-01`  
 **Pull request:** #7 → `feat/record-production-integration-01`  
 **Qualified parent:** `0298065d29cf8da655967f53953e663c3092ecb8`  
-**Authoritative release SHA:** the head of the candidate branch containing this record and the dependency remediation below; record the immutable SHA and Vercel deployment ID in the launch log before promotion  
+**Authoritative release SHA:** `d123c29edb4c4584fd8f5a76f96e3d7e90e5860d`  
 **Merge status:** **NOT MERGED**  
 **Production status:** **NOT PROMOTED**  
 **Verdict:** **GO — ready for a controlled, explicitly authorised promotion sequence**
@@ -19,15 +19,18 @@ The qualified parent was reconstructed from GitHub and its 573 repository blobs 
 | --- | --- | --- |
 | Branch and PR | PR #7 is open and draft; head `feat/visual-identity-03-production-candidate-01`; base `feat/record-production-integration-01`; mergeable; not merged | PASS |
 | Qualified parent | `0298065d29cf8da655967f53953e663c3092ecb8` | PASS |
+| Authoritative release | `d123c29edb4c4584fd8f5a76f96e3d7e90e5860d`; dependency manifests and this readiness record only | PASS |
 | Base at review | `c1f0ada6db643ebccc58bf62f9545496b72a4f0d` | Recorded |
 | GitHub Production Quality | Run `33047278042` / run 179 succeeded at the qualified parent | PASS |
 | Browser release gate | Run `33047274490` / run 66 succeeded at the qualified parent across 1440, 820 and 390 px viewports | PASS |
 | Candidate Vercel preview | Deployment `dpl_4zpMSL1VjmmoBf6KxqnWkHdK9KHv` was READY at the qualified parent | PASS |
+| Authoritative Vercel preview | Deployment `dpl_4r1KeMZx8P8TzkAeLcLqr8bmBgKZ` is READY at the authoritative release SHA | PASS |
+| Authoritative Production Quality | Run `33103290075` / run 181 succeeded at the authoritative release SHA | PASS |
 | Release audit | 38 generated routes; canonical estate, placeholder quarantine and evidence checks passed | PASS |
 | Search audit | 24 indexable canonicals, one noindex supporting Artefact and 20 approved redirect rules | PASS |
 | Migration audit | 27/27 live-estate URLs, 28/28 inherited WordPress identities and 3/3 portfolio rules resolved | PASS |
 
-The dependency remediation in this record changes dependency manifests only. The resulting candidate-branch head becomes authoritative only after GitHub Production Quality, browser QA and a READY Vercel preview have all completed successfully against that exact SHA. No drift between that SHA and the promoted deployment is permitted.
+The dependency remediation in this record changes dependency manifests only; no application source, route, style, content, asset or configuration file changed from the browser-qualified parent. GitHub Production Quality and a READY Vercel preview both completed successfully against the authoritative SHA. The real-browser gate at its application-source-identical parent remains valid evidence for presentation, while public runtime navigation is explicitly rechecked during promotion. No drift between the authoritative SHA and the promoted deployment is permitted.
 
 ## 2. Dependency and security disposition
 
@@ -55,7 +58,7 @@ The release estate remains the Search Cutover-qualified estate:
 
 The placeholder-bearing review routes are not production-release blockers and were not expanded in this phase.
 
-The real-browser release gate at the qualified parent passed Home, Work, Practice, About, Contact, service pages, retained knowledge, Wellbeing Studio, ISQ, CASA and TAFE surfaces at desktop, tablet and mobile widths. It also passed typography roles, fonts, Record/Artefact navigation and focus, scroll restoration, mobile-menu focus/Escape behaviour, reduced-motion behaviour and no-JavaScript mobile behaviour. No material visual, hierarchy, imagery, terminology or mobile-readability defect was exposed. Dependency-only remediation does not alter presentation, but the gate must still rerun at the authoritative SHA.
+The real-browser release gate at the qualified parent passed Home, Work, Practice, About, Contact, service pages, retained knowledge, Wellbeing Studio, ISQ, CASA and TAFE surfaces at desktop, tablet and mobile widths. It also passed typography roles, fonts, Record/Artefact navigation and focus, scroll restoration, mobile-menu focus/Escape behaviour, reduced-motion behaviour and no-JavaScript mobile behaviour. No material visual, hierarchy, imagery, terminology or mobile-readability defect was exposed. The authoritative diff contains no application-source or visual change; public runtime navigation remains a launch-day check.
 
 Human experience disposition: **PASS. Preserve the established identity; no redesign is indicated.**
 
@@ -117,7 +120,7 @@ If the exact authoritative SHA does not receive green CI, browser QA and a READY
 - Record the exact candidate SHA and its READY Vercel deployment ID.
 - Confirm PR #7 is still draft/open and still targets `feat/record-production-integration-01`.
 - Confirm no unexpected commits have entered either branch.
-- Confirm all required GitHub checks and browser QA are green at that SHA.
+- Confirm required GitHub checks remain green at that SHA and the browser-qualified application source has not drifted.
 - Confirm the old production deployment and both domain assignments remain available for rollback.
 - Obtain explicit approval from Glenn before each merge/promotion step.
 
