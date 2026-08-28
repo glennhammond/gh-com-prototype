@@ -4,7 +4,7 @@
 **Candidate branch:** `feat/visual-identity-03-production-candidate-01`  
 **Pull request:** #7 → `feat/record-production-integration-01`  
 **Qualified parent:** `0298065d29cf8da655967f53953e663c3092ecb8`  
-**Authoritative release SHA:** `d123c29edb4c4584fd8f5a76f96e3d7e90e5860d`  
+**Authoritative release SHA:** `c27d5303f700c88a96857bbd860af5a5e238b71d`  
 **Merge status:** **NOT MERGED**  
 **Production status:** **NOT PROMOTED**  
 **Verdict:** **GO — ready for a controlled, explicitly authorised promotion sequence**
@@ -19,18 +19,19 @@ The qualified parent was reconstructed from GitHub and its 573 repository blobs 
 | --- | --- | --- |
 | Branch and PR | PR #7 is open and draft; head `feat/visual-identity-03-production-candidate-01`; base `feat/record-production-integration-01`; mergeable; not merged | PASS |
 | Qualified parent | `0298065d29cf8da655967f53953e663c3092ecb8` | PASS |
-| Authoritative release | `d123c29edb4c4584fd8f5a76f96e3d7e90e5860d`; dependency manifests and this readiness record only | PASS |
+| Authoritative release | `c27d5303f700c88a96857bbd860af5a5e238b71d`; dependency remediation plus the qualified mobile-reading refinement | PASS |
 | Base at review | `c1f0ada6db643ebccc58bf62f9545496b72a4f0d` | Recorded |
 | GitHub Production Quality | Run `33047278042` / run 179 succeeded at the qualified parent | PASS |
 | Browser release gate | Run `33047274490` / run 66 succeeded at the qualified parent across 1440, 820 and 390 px viewports | PASS |
 | Candidate Vercel preview | Deployment `dpl_4zpMSL1VjmmoBf6KxqnWkHdK9KHv` was READY at the qualified parent | PASS |
-| Authoritative Vercel preview | Deployment `dpl_4r1KeMZx8P8TzkAeLcLqr8bmBgKZ` is READY at the authoritative release SHA | PASS |
-| Authoritative Production Quality | Run `33103290075` / run 181 succeeded at the authoritative release SHA | PASS |
+| Authoritative Vercel preview | Deployment `dpl_DRmwiivpLvWXaZViNGDN1ESUrmAg` is READY at the authoritative release SHA | PASS |
+| Authoritative Production Quality | Run `33213432612` / run 185 succeeded at the authoritative release SHA | PASS |
+| Authoritative mobile delta | Local production preview at 390 px: Home, Work, Practice, ISQ, Wellbeing Studio and Contact returned 200 with no console errors, error overlays or horizontal overflow | PASS |
 | Release audit | 38 generated routes; canonical estate, placeholder quarantine and evidence checks passed | PASS |
 | Search audit | 24 indexable canonicals, one noindex supporting Artefact and 20 approved redirect rules | PASS |
 | Migration audit | 27/27 live-estate URLs, 28/28 inherited WordPress identities and 3/3 portfolio rules resolved | PASS |
 
-The dependency remediation in this record changes dependency manifests only; no application source, route, style, content, asset or configuration file changed from the browser-qualified parent. GitHub Production Quality and a READY Vercel preview both completed successfully against the authoritative SHA. The real-browser gate at its application-source-identical parent remains valid evidence for presentation, while public runtime navigation is explicitly rechecked during promotion. No drift between the authoritative SHA and the promoted deployment is permitted.
+The authoritative release retains the qualified dependency remediation and adds one deliberately bounded presentation delta: a larger, more open mobile reading scale. No route, content, asset, migration or runtime configuration changed. GitHub Production Quality, local production-build browser verification and a READY Vercel preview completed successfully against the authoritative source tree. No drift between this SHA and the promoted deployment is permitted.
 
 ## 2. Dependency and security disposition
 
@@ -58,7 +59,9 @@ The release estate remains the Search Cutover-qualified estate:
 
 The placeholder-bearing review routes are not production-release blockers and were not expanded in this phase.
 
-The real-browser release gate at the qualified parent passed Home, Work, Practice, About, Contact, service pages, retained knowledge, Wellbeing Studio, ISQ, CASA and TAFE surfaces at desktop, tablet and mobile widths. It also passed typography roles, fonts, Record/Artefact navigation and focus, scroll restoration, mobile-menu focus/Escape behaviour, reduced-motion behaviour and no-JavaScript mobile behaviour. No material visual, hierarchy, imagery, terminology or mobile-readability defect was exposed. The authoritative diff contains no application-source or visual change; public runtime navigation remains a launch-day check.
+The established real-browser release gate passed Home, Work, Practice, About, Contact, service pages, retained knowledge, Wellbeing Studio, ISQ, CASA and TAFE surfaces at desktop, tablet and mobile widths. It also passed typography roles, fonts, Record/Artefact navigation and focus, scroll restoration, mobile-menu focus/Escape behaviour, reduced-motion behaviour and no-JavaScript mobile behaviour.
+
+The final mobile delta was then verified against a locally served production build at 390 × 844. Home, Work, Practice, ISQ Design System, Wellbeing Studio and Contact all returned 200 with meaningful content, no console/page errors, no error overlay and no horizontal overflow. Representative reading text now resolves at approximately 18.7–19 px with 29–30.8 px line-height. Home, Work, ISQ and Wellbeing Studio opening screenshots were visually inspected: hierarchy remains intact, headings no longer feel undersized, prose is easier to enter and the established tight display character is preserved.
 
 Human experience disposition: **PASS. Preserve the established identity; no redesign is indicated.**
 
@@ -113,7 +116,7 @@ There are no known material pre-launch blockers. The remaining controlled risks 
 - the real domains currently belong to a different Vercel project;
 - the residual React Router moderate advisories require a separately qualified major-stack migration to eliminate mechanically, but the vulnerable execution paths are not present here.
 
-If the exact authoritative SHA does not receive green CI, browser QA and a READY preview, or if the unprotected production-target smoke test differs from section 4, the verdict automatically becomes **HOLD** until corrected.
+If the exact authoritative SHA loses green CI or READY preview status, if later application drift invalidates the browser evidence, or if the unprotected production-target smoke test differs from section 4, the verdict automatically becomes **HOLD** until corrected.
 
 ## 7. Preconditions for explicit promotion approval
 
