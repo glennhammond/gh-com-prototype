@@ -220,6 +220,23 @@
   --header-h: 60px;
 }
 
+/* Mobile reading contract: one deliberate step larger and more open. The
+   display character stays tight; prose should feel immediate, not inspected. */
+@media (max-width: 560px) {
+  :root {
+    --size-display-l: clamp(2rem, 9.5vw, 2.8rem);
+    --size-display-m: clamp(1.55rem, 7vw, 2rem);
+    --size-heading: clamp(1.2rem, 5vw, 1.4rem);
+    --size-lede: clamp(1.15rem, 4.8vw, 1.3rem);
+    --size-body: 1.125rem;
+    --size-small: 1rem;
+    --size-caption: 0.9375rem;
+    --leading-heading: 1.2;
+    --leading-body: 1.68;
+    --leading-caption: 1.62;
+  }
+}
+
 @media (min-width: 800px) {
   :root {
     --header-h: 76px;

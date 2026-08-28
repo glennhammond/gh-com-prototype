@@ -525,19 +525,40 @@
   }
 
   .record-opening .record-opening__title {
-    font-size: clamp(2.25rem, 11vw, 3rem);
-    line-height: 1.04;
+    font-size: clamp(2.5rem, 11.5vw, 3.2rem);
+    line-height: 1.08;
     letter-spacing: -0.02em;
   }
 
+  .record-opening .record-opening__lede {
+    font-size: 1.1875rem;
+    line-height: 1.62;
+  }
+
+  .record-band .record-band__split > p,
+  .record-band .record-band__copy > p:not(.eyebrow) {
+    font-size: 1.125rem;
+    line-height: 1.68;
+  }
+
   .record-exam-opening h1 {
-    font-size: clamp(2.1rem, 10vw, 2.85rem);
-    line-height: 1.05;
+    font-size: clamp(2.35rem, 10.5vw, 3.05rem);
+    line-height: 1.09;
+  }
+
+  .record-exam-opening .record-exam-opening__summary > p:first-child {
+    font-size: 1.1875rem;
+    line-height: 1.65;
   }
 
   .artefact-inspection h1 {
-    font-size: clamp(2rem, 9.5vw, 2.65rem);
-    line-height: 1.06;
+    font-size: clamp(2.25rem, 10vw, 2.85rem);
+    line-height: 1.1;
+  }
+
+  .artefact-inspection .artefact-inspection__summary {
+    font-size: 1.125rem;
+    line-height: 1.65;
   }
 
   .artefact-inspection .artefact-stage-list .is-current {
