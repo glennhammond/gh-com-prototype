@@ -1,8 +1,10 @@
 # THE RECORD — Go-Live Readiness 01
 
-**Date:** 24 August 2026  
-**Status:** Release candidate qualified; public cutover remains a separate gate  
-**Branch:** `release/record-go-live-readiness-01`  
+**Date:** 24 August 2026
+
+**Status:** Release candidate qualified; public cutover remains a separate gate
+
+**Branch:** `release/record-go-live-readiness-01`
 **Baseline integrated to main:** `11fe447c98650d60c1a82e9a995039ed5ddb0e64`
 
 ## 1. Decision

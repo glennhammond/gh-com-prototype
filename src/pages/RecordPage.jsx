@@ -19,7 +19,7 @@ export default function RecordPage() {
     <>
       <Seo
         title={`${record.title} — Wellbeing Studio 2027 | Glenn Hammond`}
-        description="A Wellbeing Studio Record examining why the Practice Library was reorganised around Before Work, During Work and After Work, with evidence available immediately."
+        description="An examination of why the Wellbeing Studio Practice Library was reorganised around Before Work, During Work and After Work, with supporting work available to inspect."
         path={record.path}
         jsonLd={graph(
           personSchema,
@@ -48,7 +48,7 @@ export default function RecordPage() {
 
           <div className="artefact-preview" aria-labelledby="artefact-preview-title">
             <div className="artefact-preview__stage">
-              <p className="artefact-kicker">Evidence · {dailyWellbeingArtefact.kind}</p>
+              <p className="artefact-kicker">Artefact · {dailyWellbeingArtefact.kind}</p>
               <h2 id="artefact-preview-title">{dailyWellbeingArtefact.title}</h2>
               <p>
                 Right now · During Work. Need a reset between meetings? The first
@@ -95,7 +95,7 @@ export default function RecordPage() {
         <div className="container record-band__split">
           <div className="record-band__copy">
             <p className="eyebrow">Evidence boundary</p>
-            <h2 id="evidence-title">What this Record can support</h2>
+            <h2 id="evidence-title">What the evidence can support</h2>
             <p>{record.evidenceBoundary}</p>
           </div>
 

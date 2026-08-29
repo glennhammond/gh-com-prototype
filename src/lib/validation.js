@@ -10,7 +10,7 @@ export const FIELDS = {
   name: { label: "Your name", required: true },
   organisation: { label: "Organisation", required: true },
   email: { label: "Email", required: true },
-  layers: { label: "Which layers are you stuck at?", required: false },
+  layers: { label: "Where the problem seems to sit", required: false },
   message: { label: "What is happening?", required: true },
   timeframe: { label: "Rough timeframe", required: false },
 };

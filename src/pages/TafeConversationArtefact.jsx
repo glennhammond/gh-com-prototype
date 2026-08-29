@@ -159,7 +159,7 @@ export default function TafeConversationArtefact() {
               <p className="artefact-inspection__summary">{tafeConversationArtefact.summary}</p>
               <Link className="artefact-back" to={tafeConversationRecord.path}
                 state={internalEntry && returnFocusId ? { restoreFocusId: returnFocusId } : undefined}>
-                {internalEntry ? 'Return to Record' : 'View Record'}
+                {internalEntry ? 'Return to Record' : 'Read the analysis'}
               </Link>
             </div>
           </div>
@@ -199,12 +199,12 @@ export default function TafeConversationArtefact() {
 
           <div className="artefact-notes">
             <div>
-              <h2>What changed in the record</h2>
+              <h2>What changed in the analysis</h2>
               <p>
                 An older portfolio description characterised Pathways as self-directed.
                 The later editorial inventory corrects that interpretation: it was
                 designed for facilitator-led Years 8–9 school sessions supporting a
-                careers adviser’s conversation. This Artefact follows that newer evidence.
+                careers adviser’s conversation. This artefact follows that newer evidence.
               </p>
             </div>
             <div>

@@ -4,24 +4,11 @@ import { casaSubprojects } from "../content/projects.js";
 import "./ProjectCard.css";
 
 /**
- * Portfolio card — V3.
+ * Retained project card.
  *
- * Four sizes, and the size is the hierarchy:
- *
- *   programme  full width, image beside a list of the five child projects.
- *              Used exactly once, for CASA.
- *   lead       the flagship case study, wider than its neighbours.
- *   default    a case study in the grid.
- *   small      a prototype. Visibly lighter than a client case study.
- *
- * A card's visual is one of three things and never a borrowed screen:
- *   an image · a designed evidence panel built from verified figures ·
- *   a labelled gap saying which image is missing.
- *
- * Plain-language area tags replace numbered layer marks, so a visitor does not
- * have to have learned the four-layer model to scan the portfolio. The whole
- * card is one link with the heading carrying the accessible name and the image
- * marked decorative, so a screen reader announces one target rather than four.
+ * Four sizes, with hierarchy carried through composition rather than a public
+ * framework. Plain-language area tags let visitors scan the work without
+ * learning an internal taxonomy first.
  */
 export default function ProjectCard({ project, size = "default", eager = false }) {
   const { card } = project;
@@ -85,7 +72,7 @@ export default function ProjectCard({ project, size = "default", eager = false }
           )}
 
           <span className="pcard__cta" aria-hidden="true">
-            {isProgramme ? "Explore the programme" : "View case study"}
+            {isProgramme ? "View programme" : "View project"}
           </span>
         </div>
       </Link>
@@ -100,11 +87,6 @@ const SIZES = {
   small: "(min-width: 1000px) 300px, (min-width: 640px) 40vw, 100vw",
 };
 
-/**
- * Used where no approved imagery exists but verified figures do. Says what is
- * true at a size that reads as deliberate, and never implies a screen that
- * cannot be shown.
- */
 function EvidencePanel({ panel }) {
   return (
     <div className="epanel">
@@ -124,31 +106,18 @@ function EvidencePanel({ panel }) {
   );
 }
 
-/**
- * Used where no approved imagery exists but the project's own structure is
- * itself legible evidence — a numbered map of how the thing holds together,
- * the same device the homepage's featured-system section uses in place of a
- * screenshot (v3.3). Reserved for records where that structure genuinely is
- * the argument; everything else still falls through to GapPanel.
- */
 function MapPanel({ items }) {
   if (!items?.length) return null;
   return (
     <div className="mpanel">
       <p className="mpanel__kicker">How it holds together</p>
       <ol className="mpanel__list">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
+        {items.map((item) => <li key={item}>{item}</li>)}
       </ol>
     </div>
   );
 }
 
-/**
- * Used where the correct image does not exist or cannot be attributed. States
- * the gap rather than filling it with something from another project.
- */
 function GapPanel({ placeholder }) {
   if (!placeholder) return null;
   return (

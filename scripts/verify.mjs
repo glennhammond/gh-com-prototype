@@ -1,20 +1,27 @@
 /**
- * Build verification — publishing and release guardrails.
+ * Build verification — Blueprint §17, §26, §27 + Search 02.
  *
- * The canonical THE RECORD product and the migration-only V3 estate coexist in
- * one repository for now. This verifier treats that distinction as executable
- * architecture: canonical/indexable pages must be publication-clean, while
- * migration-only pages may retain explicit evidence gaps only when Vercel is
- * configured to keep them out of search until their final disposition is set.
+ * Publishing guardrails are enforced in code rather than remembered. Route
+ * existence and search inclusion are intentionally separate: the search policy
+ * decides indexability, while this verifier retains publication, evidence,
+ * performance, metadata and no-JS safeguards across the whole rendered estate.
+ *
+ * Run with: npm run verify (or npm run check to build first)
  */
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, extname, relative, sep } from "node:path";
 import { gzipSync } from "node:zlib";
 import { clients } from "../src/content/clients.js";
 import { projects, withheldProjects } from "../src/content/projects.js";
-import { recordRoutePaths } from "../src/content/the-record.js";
+import { recordContent, recordRoutePaths } from "../src/content/the-record.js";
 import { testimonials } from "../src/content/testimonials.js";
 import { isPublishable } from "../src/content/status.js";
+import {
+  getIndexableEvidencePaths,
+  getIndexableKnowledgePaths,
+  shouldNoindexPath,
+  validateSearchPolicy,
+} from "../src/content/search-policy.js";
 
 const DIST = "dist";
 const failures = [];
@@ -25,7 +32,6 @@ const fail = (m) => failures.push(m);
 const warn = (m) => warnings.push(m);
 const note = (m) => notes.push(m);
 const toPosix = (p) => p.split(sep).join("/");
-const routeToHtml = (route) => route === "/" ? "index.html" : `${route.slice(1)}.html`;
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {
@@ -36,10 +42,19 @@ function walk(dir, out = []) {
   return out;
 }
 
+const fileToRoute = (file) => {
+  const normal = toPosix(file);
+  if (normal === "index.html") return "/";
+  if (!normal.endsWith(".html")) return null;
+  return `/${normal.slice(0, -5)}`;
+};
+
 if (!existsSync(DIST)) {
   console.error("dist/ not found — run `npm run build` first.");
   process.exit(1);
 }
+
+validateSearchPolicy(recordContent);
 
 const files = walk(DIST);
 const htmlFiles = files.filter((f) => extname(f) === ".html");
@@ -47,7 +62,7 @@ const html = Object.fromEntries(
   htmlFiles.map((f) => [toPosix(relative(DIST, f)), readFileSync(f, "utf8")])
 );
 
-/* --- 1. Generic placeholder scan ------------------------------------------ */
+/* --- 1. Placeholder scan --------------------------------------------------- */
 
 const PLACEHOLDER = [
   /\[to be written\]/i,
@@ -57,7 +72,7 @@ const PLACEHOLDER = [
   /\bTBD\b/,
   /\bXXX\b/,
   /coming soon/i,
-  /placeholder text/i,
+  />\s*placeholder text\s*</i,
 ];
 
 for (const [file, source] of Object.entries(html)) {
@@ -66,7 +81,7 @@ for (const [file, source] of Object.entries(html)) {
   }
 }
 
-/* --- 2. Publication permissions ------------------------------------------- */
+/* --- 2. Client-name and logo approvals ------------------------------------ */
 
 const unapprovedNames = clients.filter((c) => !c.nameApproved);
 for (const [file, source] of Object.entries(html)) {
@@ -99,7 +114,7 @@ for (const withheld of withheldProjects) {
   }
 }
 
-/* --- 4. Content status ----------------------------------------------------- */
+/* --- 4. Content status ------------------------------------------------------ */
 
 for (const project of projects) {
   if (!isPublishable(project.status)) {
@@ -112,37 +127,51 @@ for (const t of testimonials) {
   }
 }
 
-/* --- 5. Pre-rendered content / no-JS resilience --------------------------- */
+/* --- 5. Pre-rendered content / no-JS resilience ---------------------------- */
 
 const REQUIRED = {
-  "index.html": ["Thirty years of making digital things.", "THE RECORD", "Frame. Shape. Make. Evidence."],
-  "work.html": ["Work is where the practice is composed", "Wellbeing Studio 2027", "TAFE Queensland SkillsTech Pathways"],
+  "index.html": ["Thirty years of making digital things.", "Still learning how to make them better.", "Frame. Shape. Make. Evidence."],
+  "work.html": ["Projects across digital products, experiences, learning and systems.", "Wellbeing Studio 2027", "TAFE Queensland SkillsTech Pathways"],
   "work/wellbeing-studio.html": ["The shape of the work", "Designing entry around moments in the working day"],
   "work/wellbeing-studio/contextual-entry.html": ["Why examine this", "Inspect the artefact"],
-  "work/wellbeing-studio/contextual-entry/daily-wellbeing-journey.html": ["Need a reset between meetings?", "Arrival Reset Breath", "View Record"],
+  "work/wellbeing-studio/contextual-entry/daily-wellbeing-journey.html": ["Need a reset between meetings?", "Arrival Reset Breath", "Read the analysis"],
   "work/wellbeing-studio/connected-service.html": ["Useful Experience is the centre", "Inspect the relationship model", "the R U OK? Day production slice"],
-  "work/wellbeing-studio/connected-service/relationship-model.html": ["Action / Return / Explore", "Continue only when continuing is useful"],
+  "work/wellbeing-studio/connected-service/relationship-model.html": ["Action / Return / Explore", "Continue only when continuing is useful", "Read the analysis"],
   "work/wellbeing-studio/ruok-production-slice.html": ["Capability proved", "The team proved authentication", "Inspect the production map"],
-  "work/wellbeing-studio/ruok-production-slice/qualification-map.html": ["Production rule", "Product correction", "2c56d6b", "View Record"],
+  "work/wellbeing-studio/ruok-production-slice/qualification-map.html": ["Production rule", "Product correction", "2c56d6b", "Read the analysis"],
   "work/casa/flight-examiner-rating.html": ["Assessment inside a safety regulator", "Designing for examiner judgement rather than recall"],
   "work/casa/flight-examiner-rating/examiner-judgement.html": ["Accuracy without application becomes a document", "Inspect the evidence sequence"],
-  "work/casa/flight-examiner-rating/examiner-judgement/assessment-reasoning.html": ["Know which instrument governs", "Make the principles of sound assessment explicit", "Show what sits below the visible task", "View Record"],
+  "work/casa/flight-examiner-rating/examiner-judgement/assessment-reasoning.html": ["Know which instrument governs", "Make the principles of sound assessment explicit", "Show what sits below the visible task", "Read the analysis"],
   "work/connect-and-learn.html": ["The platform could not wait for the courses", "Designing the platform and course rebuild as one system"],
   "work/connect-and-learn/concurrent-migration.html": ["Sequential delivery would have made the wrong decisions look final", "Inspect the dependency map"],
-  "work/connect-and-learn/concurrent-migration/dependency-map.html": ["Shape the destination and the estate together", "What serial delivery would get wrong", "View Record"],
+  "work/connect-and-learn/concurrent-migration/dependency-map.html": ["Shape the destination and the estate together", "What serial delivery would get wrong", "Read the analysis"],
+  "work/isq-elearning-design-system.html": ["ISQ eLearning Design System", "least complex implementation"],
+  "work/casa.html": ["The five projects", "What the six years contained"],
+  "work/casa/class.html": ["CASA Learning Academy for Safe Skies", "not public-facing"],
+  "work/casa/aviationworx.html": ["Image to supply", "no image in the recovered archive"],
+  "work/casa/course-system.html": ["Template or prototype"],
   "work/tafe-pathways.html": ["A digital environment inside a human conversation", "Designing technology to support a conversation, not replace it"],
   "work/tafe-pathways/supporting-conversation.html": ["A careers tool can answer questions", "Inspect the exploration environment"],
-  "work/tafe-pathways/supporting-conversation/exploration-environment.html": ["A hub, not a funnel", "Comparable industry data", "Put careers into an environment", "View Record"],
+  "work/tafe-pathways/supporting-conversation/exploration-environment.html": ["A hub, not a funnel", "Comparable industry data", "Put careers into an environment", "Read the analysis"],
+  "work/sonic-healthplus.html": ["Sonic HealthPlus"],
+  "work/safetyhub-asbestos.html": ["Safetyhub"],
+  "work/isq-differentiated-learning.html": ["Years 7 to 10"],
+  "work/goodstart-myportal.html": ["640 centres"],
+  "work/interaction-prototypes.html": ["SCORM 2004"],
   "practice.html": [
     "The work changes. Certain decisions keep recurring.",
     "Start with the situation, not the inherited structure.",
     "Keep connected decisions connected.",
-    "Solve at the altitude the problem requires.",
+    "Solve at the scale the problem requires.",
     "Frame. Shape. Make. Evidence.",
-    "The public Record is selective",
+    "The work shown here is selective",
+    "The practice has widened in scope",
   ],
-  "services/rise-design-systems.html": ["Transforming Rise into a distinctive", "A system, not cosmetic customisation"],
-  "services/storyline-development.html": ["When the interaction carries the learning", "Recognised as an Articulate eLearning Hero"],
+  "principles-of-assessment-and-rules-of-evidence.html": [
+    "The four Principles of Assessment",
+    "The four Rules of Evidence",
+    "Why validity appears twice",
+  ],
   "about.html": ["Where I have done it"],
   "contact.html": ["Tell me what is happening", "Email is the simplest place to start"],
   "privacy.html": ["No enquiry submission on the site", "No analytics or advertising tracking"],
@@ -159,7 +188,23 @@ for (const [file, needles] of Object.entries(REQUIRED)) {
   }
 }
 
-/* Practice Architecture v1 regression gate. */
+// Visual Identity 04 public-language contract. The internal evidence model may
+// keep its canonical terms in source and governance, but these phrases must not
+// return as public branding, explanatory taxonomy or obsolete CTA language.
+const PUBLIC_IDENTITY_FORBIDDEN = [
+  [/\bTHE RECORD\b/, "THE RECORD"],
+  [/Evidence landscape/i, "Evidence landscape"],
+  [/professional evidence system/i, "professional evidence system"],
+  [/one evidence grammar/i, "one evidence grammar"],
+  [/<dt>Altitude<\/dt>/i, "Altitude metadata label"],
+  [/>\s*View Record\s*</i, "View Record CTA"],
+];
+for (const [file, source] of Object.entries(html)) {
+  for (const [pattern, label] of PUBLIC_IDENTITY_FORBIDDEN) {
+    if (pattern.test(source)) fail(`Public identity leak "${label}" found in ${file}`);
+  }
+}
+
 const PRACTICE_LEGACY_MARKERS = [
   "Four layers, one owner",
   "Four engagements",
@@ -172,7 +217,7 @@ for (const marker of PRACTICE_LEGACY_MARKERS) {
   }
 }
 
-/* --- 6. Metadata and semantic head contract ------------------------------- */
+/* --- 6. Head metadata ------------------------------------------------------- */
 
 for (const [file, source] of Object.entries(html)) {
   if (file === "404.html") continue;
@@ -186,44 +231,27 @@ for (const [file, source] of Object.entries(html)) {
   if (h1s.length !== 1) fail(`${file} has ${h1s.length} h1 elements, expected 1`);
 }
 
-/* /404 and /privacy are support surfaces and must not be indexed. */
-const NOINDEX_PAGES = new Set(["404.html", "privacy.html"]);
+/* --- 6b. noindex — Search 02 contract --------------------------------------
+   404/privacy are deliberately excluded. Canonical evidence and retained
+   knowledge follow explicit search policy. Still-rendered legacy Work/service
+   pages are addressable for migration/review but quarantined from indexation. */
+
 for (const [file, source] of Object.entries(html)) {
+  const route = fileToRoute(file);
   const hasNoindex = /name="robots"[^>]*content="[^"]*noindex/i.test(source);
-  if (NOINDEX_PAGES.has(file)) {
-    if (!hasNoindex) fail(`${file} should carry a noindex robots meta tag but does not`);
-  } else if (hasNoindex) {
+  const shouldNoindex =
+    file === "404.html" ||
+    file === "privacy.html" ||
+    (route ? shouldNoindexPath(route) : false);
+
+  if (shouldNoindex && !hasNoindex) {
+    fail(`${file} should carry a noindex robots meta tag but does not`);
+  } else if (!shouldNoindex && hasNoindex) {
     fail(`${file} unexpectedly carries a noindex robots meta tag`);
   }
 }
 
-/* --- 6c. Migration-only route quarantine ---------------------------------- */
-
-const MIGRATION_ONLY_ROUTES = [
-  "/work/casa",
-  "/work/casa/aviationworx",
-  "/work/casa/class",
-  "/work/casa/course-system",
-  "/work/casa/learning-catalogue",
-  "/work/isq-elearning-design-system",
-  "/work/isq-differentiated-learning",
-  "/work/goodstart-myportal",
-  "/work/sonic-healthplus",
-  "/work/safetyhub-asbestos",
-  "/work/interaction-prototypes",
-];
-
-const vercelConfig = JSON.parse(readFileSync("vercel.json", "utf8"));
-for (const route of MIGRATION_ONLY_ROUTES) {
-  const rule = (vercelConfig.headers ?? []).find((item) => item.source === route);
-  const robots = rule?.headers?.find((item) => item.key.toLowerCase() === "x-robots-tag")?.value ?? "";
-  if (!/\bnoindex\b/i.test(robots)) {
-    fail(`Migration-only route ${route} is not quarantined with X-Robots-Tag: noindex`);
-  }
-}
-note(`${MIGRATION_ONLY_ROUTES.length} migration-only routes are explicitly quarantined from indexing`);
-
-/* --- 7. Internal links ----------------------------------------------------- */
+/* --- 7. Internal links ------------------------------------------------------ */
 
 const routes = new Set([
   "/",
@@ -236,6 +264,7 @@ const routes = new Set([
   "/privacy",
   ...projects.map((p) => p.path),
   ...recordRoutePaths,
+  ...getIndexableKnowledgePaths(),
 ]);
 
 for (const [file, source] of Object.entries(html)) {
@@ -247,59 +276,38 @@ for (const [file, source] of Object.entries(html)) {
   }
 }
 
-/* --- 7b. Editorial evidence gaps ------------------------------------------ */
+/* --- 7b. Editorial placeholders -------------------------------------------
+   Review builds count/list known factual gaps. PUBLISH=1 turns every remaining
+   editorial placeholder into a release failure. */
 
 const PUBLISHING = process.env.PUBLISH === "1";
-const RELEASE_INDEXABLE_FILES = new Set([
-  "index.html",
-  "work.html",
-  "practice.html",
-  "about.html",
-  "contact.html",
-  "services/rise-design-systems.html",
-  "services/storyline-development.html",
-  ...recordRoutePaths.map(routeToHtml),
-]);
-
 let placeholderCount = 0;
-let releasePlaceholderCount = 0;
 const placeholderPages = [];
-const releasePlaceholderPages = [];
 
 for (const [file, source] of Object.entries(html)) {
   const marks = source.match(/class="ph-mark"/g) ?? [];
   const gapPlates = source.match(/class="phplate"|class="gpanel"/g) ?? [];
   const total = marks.length + gapPlates.length;
-  if (!total) continue;
-
-  placeholderCount += total;
-  placeholderPages.push(`${file}: ${marks.length} inline, ${gapPlates.length} image`);
-  if (RELEASE_INDEXABLE_FILES.has(file)) {
-    releasePlaceholderCount += total;
-    releasePlaceholderPages.push(`${file}: ${marks.length} inline, ${gapPlates.length} image`);
+  if (total) {
+    placeholderCount += total;
+    placeholderPages.push(`${file}: ${marks.length} inline, ${gapPlates.length} image`);
   }
 }
 
 const gapItems = projects.reduce((n, p) => n + (p.gaps?.length ?? 0), 0);
 
 if (placeholderCount) {
-  note(`${placeholderCount} editorial placeholders remain in the migration estate across ${placeholderPages.length} pages`);
-  note(`${gapItems} legacy facts remain listed as still to confirm`);
+  note(`${placeholderCount} editorial placeholders across ${placeholderPages.length} pages`);
+  note(`${gapItems} facts listed as still to confirm`);
   for (const line of placeholderPages) note(`   ${line}`);
-}
-
-if (releasePlaceholderCount) {
-  for (const line of releasePlaceholderPages) warn(`Indexable release placeholder — ${line}`);
   if (PUBLISHING) {
-    fail(`PUBLISH=1 but ${releasePlaceholderCount} placeholder(s) remain in indexable release pages`);
+    fail(`PUBLISH=1 but ${placeholderCount} editorial placeholders remain. Resolve them or remove the copy.`);
   } else {
-    warn(`${releasePlaceholderCount} placeholder(s) remain in indexable release pages`);
+    warn("Review build: editorial placeholders are rendered on purpose. Set PUBLISH=1 to fail on them.");
   }
-} else {
-  note("Canonical/indexable release surfaces contain zero editorial placeholders");
 }
 
-/* --- 8. Performance budget ------------------------------------------------ */
+/* --- 8. Performance budget -------------------------------------------------- */
 
 const gz = (f) => gzipSync(readFileSync(f)).length;
 const sum = (list) => list.reduce((n, f) => n + gz(f), 0);
@@ -347,26 +355,26 @@ if (largestChunkKb > BUDGET.chunk) fail(`JS chunk budget exceeded: ${largestChun
 if (cssKb > BUDGET.css) fail(`CSS budget exceeded: ${cssKb}KB > ${BUDGET.css}KB`);
 if (largestImageKb > BUDGET.image) fail(`Image budget exceeded: ${largestImageKb}KB > ${BUDGET.image}KB`);
 
-/* --- 9. Third-party automatic requests ------------------------------------ */
+/* --- 9. Third-party runtime requests ---------------------------------------
+   External evidence citations are ordinary links and are allowed. This gate
+   blocks load-time third-party dependencies only (scripts/images/media etc),
+   because those affect privacy, reliability and performance. */
 
-const ALLOWED_EXTERNAL_LINKS = ["isq-elearning-design-system.vercel.app"];
-const EVIDENCE_LINKS = ["https://isq-elearning-design-system.vercel.app"];
+const ALLOWED_EXTERNAL_RESOURCES = ["isq-elearning-design-system.vercel.app"];
 
 for (const [file, source] of Object.entries(html)) {
-  const srcs = [...source.matchAll(/\bsrc="(https?:\/\/[^"]+)"/g)].map((m) => m[1]);
-  const hrefs = [...source.matchAll(/\bhref="(https?:\/\/[^"]+)"/g)]
+  const externalSrcs = [...source.matchAll(/\bsrc="(https?:\/\/[^"]+)"/g)]
     .map((m) => m[1])
-    .filter((u) => !EVIDENCE_LINKS.some((allowed) => u.startsWith(allowed)));
-
-  const external = [...srcs, ...hrefs]
     .filter((u) => !u.startsWith("https://glennhammond.com"))
     .filter((u) => !u.includes("schema.org"))
-    .filter((u) => !u.includes("linkedin.com"))
-    .filter((u) => !ALLOWED_EXTERNAL_LINKS.some((allowed) => u.includes(allowed)));
-  if (external.length) fail(`Third-party resource referenced in ${file}: ${external.join(", ")}`);
+    .filter((u) => !ALLOWED_EXTERNAL_RESOURCES.some((allowed) => u.includes(allowed)));
+
+  if (externalSrcs.length) {
+    fail(`Third-party runtime resource referenced in ${file}: ${externalSrcs.join(", ")}`);
+  }
 }
 
-/* --- 10. Sitemap integrity ------------------------------------------------- */
+/* --- 10. Sitemap integrity — Search 02 ------------------------------------- */
 
 const sitemapPath = join(DIST, "sitemap.xml");
 if (!existsSync(sitemapPath)) {
@@ -374,19 +382,31 @@ if (!existsSync(sitemapPath)) {
 } else {
   const sitemap = readFileSync(sitemapPath, "utf8");
   if (/<loc>[^<]*\/privacy<\/loc>/.test(sitemap)) fail("Sitemap includes /privacy, which is noindex and must not be listed");
-  if (/<loc>[^<]*\/services<\/loc>/.test(sitemap)) fail("Sitemap includes /services, which is outside the canonical product sitemap");
-  if (/<lastmod>/.test(sitemap)) fail("Sitemap contains a fabricated <lastmod> value");
+  if (/<loc>[^<]*\/services<\/loc>/.test(sitemap)) fail("Sitemap includes /services, which redirects to /practice");
+  if (/<lastmod>/.test(sitemap)) fail("Sitemap contains a <lastmod> value without a trustworthy modification source");
   if (!/<loc>[^<]*\/practice<\/loc>/.test(sitemap)) fail("Sitemap is missing the canonical /practice URL");
-  for (const route of recordRoutePaths) {
-    if (!sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) fail(`Sitemap is missing THE RECORD route ${route}`);
+
+  const indexableEvidence = getIndexableEvidencePaths(recordContent);
+  const indexableKnowledge = getIndexableKnowledgePaths();
+  for (const route of indexableEvidence) {
+    if (!sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) {
+      fail(`Sitemap is missing indexable evidence route ${route}`);
+    }
   }
-  for (const route of MIGRATION_ONLY_ROUTES) {
-    if (sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) fail(`Sitemap includes migration-only route ${route}`);
+  for (const route of indexableKnowledge) {
+    if (!sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) {
+      fail(`Sitemap is missing retained knowledge route ${route}`);
+    }
   }
-  note("Sitemap contains the canonical THE RECORD product and excludes migration-only/support routes");
+  for (const route of recordRoutePaths.filter((route) => !indexableEvidence.includes(route))) {
+    if (sitemap.includes(`<loc>https://glennhammond.com${route}</loc>`)) {
+      fail(`Sitemap includes evidence route explicitly excluded by search policy: ${route}`);
+    }
+  }
+  note(`Sitemap: ${indexableEvidence.length} evidence routes + ${indexableKnowledge.length} retained knowledge route(s) follow the explicit indexability contract; /services and /privacy absent; no fabricated lastmod`);
 }
 
-/* --- Report --------------------------------------------------------------- */
+/* --- Report ----------------------------------------------------------------- */
 
 const line = "-".repeat(64);
 console.log(`\n${line}\nVERIFICATION — ${htmlFiles.length} pages\n${line}`);

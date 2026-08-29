@@ -34,7 +34,7 @@ export default function TafeRecordProject() {
           <dl className="record-facts">
             <div><dt>State</dt><dd>{project.state}</dd></div>
             <div><dt>Role</dt><dd>{project.role}</dd></div>
-            <div><dt>Altitude</dt><dd>{project.altitude}</dd></div>
+            <div><dt>Scope</dt><dd>{project.altitude}</dd></div>
           </dl>
         </div>
       </header>
@@ -42,7 +42,7 @@ export default function TafeRecordProject() {
       <section className="record-band record-band--raised" aria-labelledby="tafe-context-title">
         <div className="container record-band__split">
           <div className="record-band__copy">
-            <p className="eyebrow">Territory</p>
+            <p className="eyebrow">Context</p>
             <h2 id="tafe-context-title">A digital environment inside a human conversation</h2>
           </div>
           <div>
@@ -59,11 +59,10 @@ export default function TafeRecordProject() {
       <section className="record-band" aria-labelledby="tafe-record-map-title">
         <div className="container">
           <div className="record-band__copy">
-            <p className="eyebrow">Evidence landscape</p>
-            <h2 id="tafe-record-map-title">Records</h2>
+            <p className="eyebrow">Decision</p>
+            <h2 id="tafe-record-map-title">A decision worth examining</h2>
             <p>
-              The first Record examines the central experience decision: what the
-              technology should do when a human facilitator is already part of the service.
+              What should the technology do when a human facilitator is already part of the service?
             </p>
           </div>
 
@@ -74,7 +73,7 @@ export default function TafeRecordProject() {
                 <h3><Link to={record.path}>{record.title}</Link></h3>
                 <p>{record.worthExamining}</p>
                 <Link className="record-map__action" to={record.path}>
-                  Examine the Record
+                  Examine the decision
                 </Link>
               </li>
             ))}

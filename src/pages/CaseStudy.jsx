@@ -70,10 +70,13 @@ export default function CaseStudy() {
   if (!project) return <NotFound />;
 
   const isProgramme = project.format === "programme";
+  const isDesignSystem = project.slug === "isq-elearning-design-system";
   const testimonial = project.testimonialId
     ? testimonialById[project.testimonialId]
     : null;
-  const figures = project.figures ?? [];
+  const figures = (project.figures ?? []).filter(
+    (item) => !(isDesignSystem && item.placeholder)
+  );
 
   return (
     <article className="case">
@@ -148,7 +151,7 @@ export default function CaseStudy() {
       {/* --- Primary evidence ------------------------------------------------
           One per page, at 800px, on paper. It is the only figure permitted to
           break the reading column, and the break is what signals its rank. */}
-      {(project.hero.image || project.hero.placeholder) && (
+      {(project.hero.image || (project.hero.placeholder && !isDesignSystem)) && (
         <div className="case__lead">
           <div className="container">
             <Figure
@@ -176,6 +179,11 @@ export default function CaseStudy() {
       <div className="container case__body">
         {project.evidenceNote && (
           <EvidenceNote>{project.evidenceNote}</EvidenceNote>
+        )}
+        {isDesignSystem && (
+          <EvidenceNote>
+            The live reference site and source repository are the current operational evidence base. Screens from live courses are not published here without explicit clearance; this case study therefore relies on the documented architecture, component decisions, implementation rules and governance that can be stated directly.
+          </EvidenceNote>
         )}
 
         <Block title="The situation" paragraphs={project.situation} />

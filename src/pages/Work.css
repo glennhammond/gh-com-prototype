@@ -1,28 +1,41 @@
 .record-work-head {
-  padding-block: clamp(64px, 9vw, 136px) clamp(48px, 7vw, 96px);
+  padding-block: clamp(60px, 8vw, 118px) clamp(44px, 6vw, 78px);
+  background: var(--field);
   border-bottom: 1px solid var(--rule);
 }
 
-.record-work-head__inner { display: grid; gap: var(--space-4); }
+.record-work-head__inner {
+  display: grid;
+  gap: var(--space-4);
+}
 
+/* Work is an index surface, not a territory. Large, but deliberately utility. */
 .record-work-head h1 {
-  max-width: 17ch;
-  font-size: clamp(2.6rem, 7vw, 6.4rem);
-  line-height: 0.98;
+  max-width: 15ch;
+  font-family: var(--font-utility);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5.5vw, 4.9rem);
+  line-height: 1;
   letter-spacing: -0.04em;
 }
 
 .record-work-head p:last-child {
-  max-width: 48ch;
+  max-width: 46ch;
+  font-family: var(--font-reading);
   font-size: var(--size-lede);
+  line-height: 1.55;
+  letter-spacing: -0.008em;
   color: var(--text-secondary);
 }
 
-.record-field { padding-block: var(--section-y); }
+.record-field {
+  padding-block: var(--section-y);
+  background: var(--field);
+}
 
 .record-field__grid {
   display: grid;
-  row-gap: clamp(72px, 10vw, 150px);
+  row-gap: clamp(68px, 9vw, 132px);
   column-gap: clamp(12px, 2vw, 28px);
 }
 
@@ -39,23 +52,31 @@
 .record-anchor__role,
 .record-point__context,
 .record-point__action {
-  font-family: var(--font-mono);
+  font-family: var(--font-index);
   font-size: var(--size-meta);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
 }
 
 .record-anchor__index,
+.record-anchor__meta,
 .record-anchor__role,
-.record-point__context { color: var(--text-tertiary); }
+.record-point__context {
+  color: var(--text-tertiary);
+}
 
-.record-anchor__meta { color: var(--brass-ink); }
+/* Signal is earned by the current lead rather than repeated through the index. */
+.record-anchor--lead .record-anchor__meta {
+  color: var(--signal-text);
+}
 
 .record-anchor h2 {
   margin-top: var(--space-3);
-  max-width: 18ch;
-  font-size: clamp(2rem, 5vw, 4.7rem);
-  line-height: 1;
+  max-width: 20ch;
+  font-family: var(--font-utility);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 3.6rem);
+  line-height: 1.04;
   letter-spacing: -0.035em;
 }
 
@@ -69,7 +90,7 @@
 .record-point h3 a:hover,
 .record-anchor h2 a:focus-visible,
 .record-point h3 a:focus-visible {
-  text-decoration-color: var(--brass);
+  text-decoration-color: var(--signal);
 }
 
 .record-anchor__proposition {
@@ -79,21 +100,26 @@
   color: var(--text-secondary);
 }
 
-.record-anchor__role { margin-top: var(--space-4); }
+.record-anchor__role {
+  margin-top: var(--space-4);
+}
 
 .record-point {
-  margin-top: clamp(48px, 7vw, 92px);
+  margin-top: clamp(44px, 6vw, 82px);
   margin-left: clamp(0px, 7vw, 112px);
   max-width: 720px;
   padding: var(--space-4) 0 var(--space-4) var(--space-5);
-  border-left: 3px solid var(--brass);
+  border-left: 2px solid var(--rule-strong);
 }
 
 .record-point h3 {
   margin-top: var(--space-3);
   max-width: 24ch;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  line-height: 1.08;
+  font-family: var(--font-utility);
+  font-weight: 600;
+  font-size: clamp(1.45rem, 2.8vw, 2.35rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
 }
 
 .record-point > p:not(.record-point__context) {
@@ -109,7 +135,10 @@
 }
 
 @media (min-width: 840px) {
-  .record-field__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .record-field__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
   .record-anchor { grid-column: 2 / 12; }
   .record-anchor--lead { grid-column: 1 / 13; }
   .record-anchor--2 { grid-column: 3 / 12; }
@@ -117,14 +146,35 @@
   .record-anchor--4 { grid-column: 4 / 13; }
 
   .record-anchor--lead h2 {
-    font-size: clamp(3.2rem, 7vw, 6.7rem);
-    max-width: 14ch;
+    max-width: 16ch;
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
   }
 }
 
 @media (max-width: 520px) {
-  .record-anchor { grid-template-columns: 1fr; }
-  .record-anchor__index { margin-bottom: var(--space-2); }
+  .record-work-head {
+    padding-block: 52px 42px;
+  }
+
+  .record-work-head h1 {
+    font-size: clamp(2.55rem, 12.5vw, 3.45rem);
+    line-height: 1.07;
+  }
+
+  .record-anchor {
+    grid-template-columns: 1fr;
+  }
+
+  .record-anchor__index {
+    margin-bottom: var(--space-2);
+  }
+
+  .record-anchor h2,
+  .record-anchor--lead h2 {
+    font-size: clamp(2rem, 9.5vw, 2.7rem);
+    line-height: 1.1;
+  }
+
   .record-point {
     margin-left: 0;
     padding-left: var(--space-4);

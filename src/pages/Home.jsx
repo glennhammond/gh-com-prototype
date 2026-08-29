@@ -8,7 +8,6 @@ import { home } from "../content/home.js";
 import {
   casaProject,
   connectProject,
-  recordContent,
   tafeProject,
   wellbeingProject,
 } from "../content/the-record.js";
@@ -16,15 +15,13 @@ import { site } from "../content/site.js";
 import { graph, personSchema, practiceSchema } from "../lib/schema.js";
 import "./Home.css";
 
-const territories = [wellbeingProject, connectProject, casaProject, tafeProject];
+const projects = [wellbeingProject, connectProject, casaProject, tafeProject];
 
 /**
- * Homepage — THE RECORD canonical entry surface.
+ * Homepage canonical entry surface.
  *
- * Home establishes the proposition, demonstrates the span of the evidence
- * field, and creates two movements: inspect THE RECORD or interpret the
- * practice. It deliberately does not reproduce the Work index or the full
- * Practice architecture.
+ * Home establishes Glenn's proposition and the span of the work without
+ * requiring visitors to learn the evidence architecture that organises it.
  */
 export default function Home() {
   const portrait = {
@@ -61,16 +58,14 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="hero__record-field" aria-label="THE RECORD evidence field">
+          <aside className="hero__record-field" aria-label="Selected work">
             <div className="hero__record-field-head">
-              <p>THE RECORD · Evidence field</p>
-              <p>
-                {territories.length} Projects · {recordContent.records.length} Records · {recordContent.artefacts.length} Artefacts
-              </p>
+              <p>Selected work</p>
+              <p>{projects.length} projects · contemporary and historical</p>
             </div>
 
             <ol className="hero__territories">
-              {territories.map((project, index) => (
+              {projects.map((project, index) => (
                 <li key={project.id}>
                   <span className="hero__territory-index">{String(index + 1).padStart(2, "0")}</span>
                   <div>
@@ -82,7 +77,7 @@ export default function Home() {
             </ol>
 
             <p className="hero__record-depth">
-              <span>Project</span><i aria-hidden="true">→</i><span>Record</span><i aria-hidden="true">→</i><span>Artefact</span>
+              Each project opens into the decisions and work behind it.
             </p>
           </aside>
         </div>

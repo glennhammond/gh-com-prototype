@@ -1,0 +1,70 @@
+/* ==========================================================================
+   Editorial Territory — semantic foundation
+
+   Qualified through Brand Architecture 02.6 and Visual Identity 03.2–03.6.
+   Production-candidate dependency lock and verifier gates are qualified;
+   ordinary Production Quality remains the merge-readiness authority.
+
+   Migration rule: these roles are additive. They do not replace the legacy
+   palette at :root. Canonical surfaces opt in explicitly so historical and
+   legacy routes retain their existing visual contract until qualified.
+   ========================================================================== */
+
+:root {
+  /* Canonical colour roles. */
+  --field: #f1f3f4;
+  --field-raised: #fafbfb;
+  --evidence-field: #e3e8eb;
+  --structure: #102a43;
+  --structure-deep: #0d2638;
+  --text-primary: #171c20;
+  --text-secondary-et: #4c5963;
+  --signal: #d97706;
+  --signal-text: #984b00;
+  --signal-on-structure: #f1a33c;
+  --rule-neutral: #b5bfc7;
+  --rule-structural: #8d9aa4;
+  --rule-soft-et: #dce2e6;
+
+  /* Functional focus uses an accessible signal step, not graphic orange.
+     #D97706 on #F1F3F4 is ~2.86:1; #984B00 is ~5.65:1. */
+  --focus-field: var(--signal-text);
+  --focus-structure: var(--signal-on-structure);
+
+  /* Canonical type roles. */
+  --font-territory: "ITC Avant Garde Std", "Century Gothic", "Futura",
+    system-ui, sans-serif;
+  --font-reading: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-utility: "InterVariable", "Inter", ui-sans-serif, -apple-system,
+    "Segoe UI", Arial, sans-serif;
+  --font-index: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Motion contract. Static surfaces are qualified; route travel remains held
+     until browser interaction QA. */
+  --motion-travel: 480ms;
+}
+
+.type-territory {
+  font-family: var(--font-territory);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.type-reading {
+  font-family: var(--font-reading);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.type-utility-heading {
+  font-family: var(--font-utility);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.type-index {
+  font-family: var(--font-index);
+  font-weight: 400;
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+}

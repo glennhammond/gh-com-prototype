@@ -56,15 +56,163 @@
       "permanent": true
     },
     {
-      "source": "/services/xapi-analytics",
-      "destination": "/practice",
+      "source": "/portfolio",
+      "destination": "/work",
       "permanent": true
     },
     {
-      "source": "/design-system/:slug*",
-      "destination": "/practice",
+      "source": "/profile",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio/migration-to-moodle",
+      "destination": "/work/connect-and-learn/concurrent-migration",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio/elearning-design-system",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/casa-flight-examiner-rating",
+      "destination": "/work/casa/flight-examiner-rating",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/overview",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/atomic-design",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/asset-register",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/colours",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/core-more-bore",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/course-structure",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/images-icons",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/storyline",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/elearning-design-system/typography",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/master-slides-in-storyline",
+      "destination": "/blog/master-slides-in-storyline",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "p",
+          "value": "156463"
+        }
+      ],
+      "destination": "/blog/master-slides-in-storyline",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-set-moodles-user-login-page-as-the-sites-landing-page",
+      "destination": "/blog/how-to-set-moodles-login-page-as-the-sites-landing-page",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-set-moodles-user-login-page-as-the-sites-landing-page",
+      "destination": "/blog/how-to-set-moodles-login-page-as-the-sites-landing-page",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "p",
+          "value": "164"
+        }
+      ],
+      "destination": "/blog/how-to-set-moodles-login-page-as-the-sites-landing-page",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "p"
+        }
+      ],
+      "destination": "/api/wordpress-legacy"
+    },
+    { "source": "/blog", "destination": "/api/gone" },
+    { "source": "/blog/ai-patterns-elearning", "destination": "/api/gone" },
+    { "source": "/blog/clean-design-elearning", "destination": "/api/gone" },
+    { "source": "/blog/design-system", "destination": "/api/gone" },
+    { "source": "/blog/scenario-writing-that-feels-real", "destination": "/api/gone" },
+    { "source": "/blog/storyline-tips-that-actually-help", "destination": "/api/gone" },
+    { "source": "/blog/ux-for-learning", "destination": "/api/gone" },
+    { "source": "/blog/welcome", "destination": "/api/gone" },
+    { "source": "/blog/xapi-basics", "destination": "/api/gone" },
+    { "source": "/blog/xapi-isnt-scary", "destination": "/api/gone" },
+    { "source": "/work/corporate-yoga-australia-website", "destination": "/api/gone" },
+    { "source": "/hello-world", "destination": "/api/gone" },
+    { "source": "/gamification-in-storyline-leaderboards-badges-and-incentives", "destination": "/api/gone" },
+    { "source": "/new-quick-tips-layout-for-your-projects", "destination": "/api/gone" },
+    { "source": "/new-elegant-blog-post-layout-how-to-create-vertical-tabs-in-storyline", "destination": "/api/gone" },
+    { "source": "/another-nifty-layout-idea-for-storyline", "destination": "/api/gone" },
+    { "source": "/ai-in-instructional-design", "destination": "/api/gone" },
+    { "source": "/using-xapi-to-unlock-deeper-learning-analytics", "destination": "/api/gone" },
+    { "source": "/5-ways-ai-is-transforming-elearning-design", "destination": "/api/gone" },
+    { "source": "/what-is-xapi-and-why-is-it-important-in-elearning", "destination": "/api/gone" },
+    { "source": "/storyline-vs-rise-which-tool-should-you-use", "destination": "/api/gone" },
+    { "source": "/a-new-quick-and-easy-layout-idea-for-storyline", "destination": "/api/gone" },
+    { "source": "/how-to-create-and-use-a-lightbox-in-storyline", "destination": "/api/gone" },
+    { "source": "/storyline-menu-design-options", "destination": "/api/gone" },
+    { "source": "/storyline-360-triggers-and-variables", "destination": "/api/gone" },
+    { "source": "/how-to-create-a-custom-storyline-player-menu", "destination": "/api/gone" },
+    { "source": "/branding-your-storyline-course", "destination": "/api/gone" },
+    { "source": "/using-tabs-in-storyline-interaction-ideas", "destination": "/api/gone" },
+    { "source": "/storyline-ui-layout-for-tabs", "destination": "/api/gone" },
+    { "source": "/a-modern-storyline-layout-to-support-your-courses", "destination": "/api/gone" },
+    { "source": "/get-a-modern-storyline-player-fast", "destination": "/api/gone" },
+    { "source": "/why-storyline-slides-still-matter-in-2025", "destination": "/api/gone" },
+    { "source": "/need-help-with-a-storyline-project", "destination": "/api/gone" },
+    { "source": "/elearning-tools-i-use", "destination": "/api/gone" },
+    { "source": "/quick-tips-for-web-flow-designers", "destination": "/api/gone" },
+    { "source": "/best-labs-for-facebook-brand-pages", "destination": "/api/gone" },
+    { "source": "/storyline-with-scorm-xapi-the-best-of-both-worlds", "destination": "/api/gone" }
   ],
   "headers": [
     {
@@ -85,10 +233,6 @@
     },
     {
       "source": "/work/casa/learning-catalogue",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
-    },
-    {
-      "source": "/work/isq-elearning-design-system",
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     },
     {
