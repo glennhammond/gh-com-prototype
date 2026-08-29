@@ -1,5 +1,7 @@
 # Production Promotion Readiness 01
 
+> **Promotion outcome — 29 August 2026:** the authorised controlled promotion is complete. The final deployed source is `5b99570fa60606c6ad624bb861452f0b5c67bebc`, recorded on `main` by merge `7b92ff679619c7ef37e5fbbf50ae91a103dbc624` and running as Vercel production deployment `dpl_DhvTBgZbxktLbEGn1k2bxYAws2Xz`. See `docs/CONTROLLED-PRODUCTION-PROMOTION-03.md` for the launch and rollback record.
+
 **Project:** glennhammond.com / THE RECORD  
 **Candidate branch:** `feat/visual-identity-03-production-candidate-01`  
 **Pull request:** #7 → `feat/record-production-integration-01`  
