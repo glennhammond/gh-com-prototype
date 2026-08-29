@@ -1,5 +1,7 @@
 # Controlled Production Promotion 03
 
+> **Stabilisation outcome — 30 August 2026 AEST:** Phase 04 completed without a further executable change. The public release estate, visitor journeys, active-deployment logs and full repository qualification passed. See `docs/LAUNCH-VALIDATION-STABILISATION-04.md`.
+
 **Project:** glennhammond.com / THE RECORD  
 **Promotion date:** 29 August 2026 (UTC)  
 **Outcome:** **COMPLETE — production live and verified**  
