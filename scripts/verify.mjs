@@ -173,8 +173,8 @@ const REQUIRED = {
     "Why validity appears twice",
   ],
   "about.html": ["Where I have done it"],
-  "contact.html": ["Tell me what is happening", "What does the problem seem closest to"],
-  "privacy.html": ["must not go live"],
+  "contact.html": ["Tell me what is happening", "Email is the simplest place to start"],
+  "privacy.html": ["No enquiry submission on the site", "No analytics or advertising tracking"],
 };
 
 for (const [file, needles] of Object.entries(REQUIRED)) {

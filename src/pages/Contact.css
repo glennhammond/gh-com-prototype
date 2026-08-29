@@ -9,14 +9,55 @@
 
 @media (min-width: 900px) {
   .contact__grid {
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
+    align-items: start;
   }
 }
 
+.contact__direct-panel,
 .contact__aside {
   border-top: 2px solid var(--brass);
   padding-top: var(--space-4);
   align-self: start;
+}
+
+.contact__direct-title {
+  margin-top: var(--space-3);
+  max-width: 20ch;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.contact__direct-lede {
+  margin-top: var(--space-4);
+  max-width: 52ch;
+  font-size: var(--size-lede);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.contact__email {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  letter-spacing: -0.02em;
+  text-decoration-color: var(--brass);
+  text-underline-offset: 0.22em;
+}
+
+.contact__channel-note {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+  max-width: 56ch;
+  font-size: var(--size-small);
+  line-height: 1.55;
+  color: var(--text-secondary);
 }
 
 .contact__aside-heading {
@@ -41,10 +82,10 @@
 }
 
 .contact__where {
-  margin-top: var(--space-2);
+  margin-top: var(--space-3);
   font-size: var(--size-small);
   color: var(--text-secondary);
-  max-width: 28ch;
+  max-width: 34ch;
 }
 
 .contact__next {
@@ -77,12 +118,4 @@
 
 .contact__next li:last-child {
   border-bottom: 0;
-}
-
-.contact__privacy {
-  margin-top: var(--space-5);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--rule);
-  font-size: var(--size-small);
-  color: var(--text-secondary);
 }
