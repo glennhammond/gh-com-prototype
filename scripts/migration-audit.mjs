@@ -22,6 +22,7 @@ import {
   legacySitemapArticleSources,
   validateLegacySourceState,
 } from '../src/content/legacy-source-state.js';
+import wordpressLegacyMiddleware from '../middleware.js';
 
 const DIST = 'dist';
 const SITE = 'https://glennhammond.com';
@@ -92,6 +93,30 @@ if (!wordpressQueryRewrite) {
 }
 if (!existsSync('api/gone.js')) fail('api/gone.js is missing; explicit 410 retirements cannot be served');
 if (!existsSync('api/wordpress-legacy.js')) fail('api/wordpress-legacy.js is missing; WordPress query identities cannot be resolved safely');
+
+const retiredWordPressResponse = await wordpressLegacyMiddleware(
+  new Request('https://glennhammond.com/?p=156456'),
+);
+if (retiredWordPressResponse.status !== 410) {
+  fail(`Routing middleware returned ${retiredWordPressResponse.status} for retired /?p=156456, expected 410`);
+}
+
+const preservedWordPressResponse = await wordpressLegacyMiddleware(
+  new Request('https://glennhammond.com/?p=156463'),
+);
+if (
+  preservedWordPressResponse.status !== 308 ||
+  preservedWordPressResponse.headers.get('location') !== 'https://glennhammond.com/blog/master-slides-in-storyline'
+) {
+  fail('Routing middleware does not preserve /?p=156463 at the Master Slides canonical');
+}
+
+const unknownWordPressResponse = await wordpressLegacyMiddleware(
+  new Request('https://glennhammond.com/?p=999999'),
+);
+if (unknownWordPressResponse.status !== 404) {
+  fail(`Routing middleware returned ${unknownWordPressResponse.status} for unknown /?p=999999, expected 404`);
+}
 
 for (const entry of liveSitemapMigration) {
   if (!entry.launchReady) continue;
