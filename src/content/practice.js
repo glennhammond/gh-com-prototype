@@ -9,9 +9,10 @@ export const practiceClassifications = {
 };
 
 /**
- * Practice is an interpretation layer over THE RECORD.
- * Evidence references use canonical Record / Artefact ids and are resolved
- * below so a broken or manufactured relationship fails during the build.
+ * Practice interprets the canonical evidence architecture without exposing
+ * that architecture as a public-facing brand. Evidence references use internal
+ * Project / Record / Artefact ids and are resolved below so broken or
+ * manufactured relationships fail during the build.
  */
 export const practiceClaims = [
   {
@@ -20,7 +21,7 @@ export const practiceClaims = [
     publicGroup: 'core',
     title: 'Start with the situation, not the inherited structure.',
     summary:
-      'Across the current Record, a recurring first move is to question the structure that arrived with the brief. A content portal can become a service around working moments; a migration can become a coupled delivery system; regulation can become assessment reasoning; a self-service default can become a facilitated environment.',
+      'Across the work shown here, a recurring first move is to question the structure that arrived with the brief. A content portal can become a service around working moments; a migration can become a coupled delivery system; regulation can become assessment reasoning; a self-service default can become a facilitated environment.',
     boundary:
       'This is a contemporary interpretation of recurring decisions. It is not terminology claimed to have been used by the historical projects themselves.',
     evidence: [
@@ -33,6 +34,10 @@ export const practiceClaims = [
         recordId: 'isq-concurrent-migration',
         artefactId: 'isq-migration-dependency-map',
         note: 'A serial migration sequence was rejected because platform, course-estate and operational decisions needed to remain coupled.',
+      },
+      {
+        projectId: 'isq-elearning-design-system',
+        note: 'Recurring course-level decisions were reframed as an operational design-system problem spanning patterns, foundations, reusable components, accessibility and implementation governance.',
       },
       {
         recordId: 'casa-examiner-judgement',
@@ -67,6 +72,10 @@ export const practiceClaims = [
         note: 'Platform migration and more than sixty Storyline rebuilds had to teach each other inside one delivery system.',
       },
       {
+        projectId: 'isq-elearning-design-system',
+        note: 'Learning patterns, visual foundations, Rise implementation, accessibility and component governance were treated as connected parts of one operational system rather than isolated style decisions.',
+      },
+      {
         recordId: 'casa-examiner-judgement',
         artefactId: 'casa-assessment-reasoning-sequence',
         note: 'Regulatory hierarchy, assessment principles, competency reasoning and interaction design were treated as one learning problem.',
@@ -82,11 +91,11 @@ export const practiceClaims = [
     id: 'required-altitude',
     classification: 'proven-recurring',
     publicGroup: 'core',
-    title: 'Solve at the altitude the problem requires.',
+    title: 'Solve at the scale the problem requires.',
     summary:
-      'Sometimes the useful unit is an interaction. Sometimes it is an experience, a platform, a product or the relationships between them. The Record shows the unit of design widening and narrowing with the problem rather than treating one discipline or deliverable as the permanent centre.',
+      'Sometimes the useful unit is an interaction. Sometimes it is an experience, a platform, a product or the relationships between them. The work shows the unit of design widening and narrowing with the problem rather than treating one discipline or deliverable as the permanent centre.',
     boundary:
-      'Artefact, Experience and System describe useful altitudes, not a hierarchy of value and not a branded sequential method. Earlier forms of making remain first-class inside broader system work.',
+      'Artefact, experience and system describe useful scales, not a hierarchy of value and not a branded sequential method. Earlier forms of making remain first-class inside broader system work.',
     evidence: [
       {
         recordId: 'tafe-supported-conversation',
@@ -104,6 +113,10 @@ export const practiceClaims = [
         note: 'The unit of work widened from courses to learning architecture, platform migration and operational continuity.',
       },
       {
+        projectId: 'isq-elearning-design-system',
+        note: 'Repeated course-level production choices widened into a reusable organisational system spanning components, patterns, accessibility, templates and governance.',
+      },
+      {
         recordId: 'ws-connected-service',
         artefactId: 'ws-connected-service-map',
         note: 'The current work operates at product, experience and service-system scale while still resolving into concrete participant interactions.',
@@ -118,7 +131,7 @@ export const practiceClaims = [
     summary:
       'Four overlapping modes are useful for describing the current practice: understand the real situation, shape the architecture, make the thing, then qualify what the evidence lets us say.',
     boundary:
-      'Frame, Shape and Make are visible broadly across the Record. Evidence as an explicitly named discipline is strongest in current work, so the four-part set is not presented as a historical methodology.',
+      'Frame, Shape and Make are visible broadly across the work shown here. Evidence as an explicitly named discipline is strongest in current work, so the four-part set is not presented as a historical methodology.',
     evidence: [
       {
         recordId: 'ws-ruok-production-slice',
@@ -150,7 +163,7 @@ export const practiceClaims = [
     summary:
       'Complex systems often need to become easier to understand without becoming simpler than the truth allows. That tension is clearest in regulated learning and is becoming increasingly explicit in product and evidence architecture.',
     boundary:
-      'This pattern is strong but not yet promoted to proven recurring practice across the whole canonical field.',
+      'This pattern is strong, but the work shown here does not yet support promoting it to a proven recurring part of the practice.',
     evidence: [
       {
         recordId: 'casa-examiner-judgement',
@@ -172,7 +185,7 @@ export const practiceClaims = [
     summary:
       'When a useful human relationship already exists, the digital product should know whether its job is to support that relationship rather than automate it away.',
     boundary:
-      'This is strongly evidenced in two territories. It remains an emerging Practice claim rather than a universal statement about every project.',
+      'This is strongly evidenced in two project contexts. It remains an emerging practice claim rather than a universal statement about every project.',
     evidence: [
       {
         recordId: 'tafe-supported-conversation',
@@ -194,7 +207,7 @@ export const practiceClaims = [
     summary:
       'The R U OK? Day production slice shows implementation, qualification and later product correction operating as one production discipline.',
     boundary:
-      'This is strong current evidence from one Project and is deliberately not promoted as recurring Practice yet.',
+      'This is strong current evidence from one project and is deliberately not promoted as recurring practice yet.',
     evidence: [
       {
         recordId: 'ws-ruok-production-slice',
@@ -211,7 +224,7 @@ export const practiceClaims = [
     summary:
       'A broader biographical positioning line about career continuity, retained elsewhere in the site.',
     boundary:
-      'The current public canonical THE RECORD field is selective and begins in 2015. It must not be used to imply thirty years of canonical evidence.',
+      'The selected public work currently reaches back to 2015. It must not be used to imply thirty years of documented project evidence.',
     evidence: [],
   },
 ];
@@ -230,7 +243,7 @@ export const practiceModes = [
   {
     id: 'make',
     title: 'Make',
-    body: 'Prototype, design, build and produce at the altitude the problem requires — from interaction to system.',
+    body: 'Prototype, design, build and produce at the scale the problem requires — from interaction to system.',
   },
   {
     id: 'evidence',
@@ -275,23 +288,29 @@ export const practiceEvolution = [
 ];
 
 function resolveEvidence(entry) {
-  const record = recordIndex.recordById[entry.recordId];
-  if (!record) {
+  const record = entry.recordId ? recordIndex.recordById[entry.recordId] : null;
+  if (entry.recordId && !record) {
     throw new Error(`Practice evidence references missing Record "${entry.recordId}"`);
   }
 
-  const project = recordIndex.projectById[record.projectId];
+  const projectId = entry.projectId ?? record?.projectId;
+  const project = projectId ? recordIndex.projectById[projectId] : null;
   if (!project) {
-    throw new Error(`Practice evidence Record "${record.id}" has no canonical Project`);
+    throw new Error(`Practice evidence has no canonical Project`);
+  }
+  if (record && record.projectId !== project.id) {
+    throw new Error(
+      `Practice evidence Record "${record.id}" does not belong to Project "${project.id}"`,
+    );
   }
 
   const artefact = entry.artefactId ? recordIndex.artefactById[entry.artefactId] : null;
   if (entry.artefactId && !artefact) {
     throw new Error(`Practice evidence references missing Artefact "${entry.artefactId}"`);
   }
-  if (artefact && artefact.recordId !== record.id) {
+  if (artefact && (!record || artefact.recordId !== record.id)) {
     throw new Error(
-      `Practice evidence Artefact "${artefact.id}" does not belong to Record "${record.id}"`,
+      `Practice evidence Artefact "${artefact.id}" does not belong to the referenced Record`,
     );
   }
 
@@ -319,10 +338,13 @@ function validatePracticeClaims() {
       );
     }
 
-    if (claim.publicGroup === 'core' && projects.size !== canonicalProjectIds.size) {
-      throw new Error(
-        `Core Practice claim "${claim.id}" must currently be tested against all canonical Projects`,
-      );
+    if (claim.publicGroup === 'core') {
+      const missingProjects = [...canonicalProjectIds].filter((id) => !projects.has(id));
+      if (missingProjects.length) {
+        throw new Error(
+          `Core Practice claim "${claim.id}" must currently be tested against all canonical Projects; missing ${missingProjects.join(', ')}`,
+        );
+      }
     }
   }
 }

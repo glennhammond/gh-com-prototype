@@ -33,7 +33,7 @@ export default function RecordProject() {
           <dl className="record-facts">
             <div><dt>State</dt><dd>{project.state}</dd></div>
             <div><dt>Role</dt><dd>{project.role}</dd></div>
-            <div><dt>Altitude</dt><dd>{project.altitude}</dd></div>
+            <div><dt>Scope</dt><dd>{project.altitude}</dd></div>
           </dl>
         </div>
       </header>
@@ -41,7 +41,7 @@ export default function RecordProject() {
       <section className="record-band record-band--raised" aria-labelledby="project-context-title">
         <div className="container record-band__split">
           <div className="record-band__copy">
-            <p className="eyebrow">Territory</p>
+            <p className="eyebrow">Context</p>
             <h2 id="project-context-title">The shape of the work</h2>
           </div>
           <p>{project.context}</p>
@@ -72,12 +72,8 @@ export default function RecordProject() {
       <section className="record-band record-band--raised" aria-labelledby="record-map-title">
         <div className="container">
           <div className="record-band__copy">
-            <p className="eyebrow">Evidence landscape</p>
-            <h2 id="record-map-title">Records</h2>
-            <p>
-              Records narrow the Project to consequential decisions. Depth is added
-              when the evidence can support it, not to make the territory look full.
-            </p>
+            <p className="eyebrow">Decisions</p>
+            <h2 id="record-map-title">Decisions worth examining</h2>
           </div>
 
           <ol className="record-map">
@@ -87,7 +83,7 @@ export default function RecordProject() {
                 <h3><Link to={record.path}>{record.title}</Link></h3>
                 <p>{record.worthExamining}</p>
                 <Link className="record-map__action" to={record.path}>
-                  Examine the Record
+                  Examine the decision
                 </Link>
               </li>
             ))}

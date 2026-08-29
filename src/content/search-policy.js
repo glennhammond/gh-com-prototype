@@ -41,6 +41,13 @@ export const searchPolicy = {
       directEntry: 'project',
       reason: 'Distinct platform-and-content migration body of work with independently useful professional context.',
     },
+    'isq-elearning-design-system': {
+      index: true,
+      sitemap: true,
+      canonical: '/work/isq-elearning-design-system',
+      directEntry: 'project',
+      reason: 'Substantial first-hand operational design-system evidence with current search signal and a strong semantic role as the canonical successor to the fragmented legacy Design System estate.',
+    },
     'casa-ferc': {
       index: true,
       sitemap: true,

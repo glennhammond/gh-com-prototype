@@ -2,12 +2,13 @@
 
 /**
  * Public-estate migration contract captured from the current gh-com-react
- * production deployment on 24 August 2026.
+ * production deployment on 24 August 2026 and reconciled for Minimum Amazing
+ * search cutover on 26 August 2026.
  *
  * This is deliberately separate from THE RECORD search policy. The search
  * policy governs what the new product wants indexed; this contract governs
  * what the existing public domain is already responsible for preserving,
- * redirecting, rebuilding, consolidating or intentionally retiring.
+ * redirecting or intentionally retiring.
  */
 
 /**
@@ -17,6 +18,7 @@
  * @property {MigrationAction} action
  * @property {boolean} launchReady
  * @property {string=} destination
+ * @property {404|410=} status
  * @property {string} reason
  */
 
@@ -38,27 +40,31 @@ export const liveSitemapMigration = [
   },
   {
     path: '/blog',
-    action: 'review',
-    launchReady: false,
-    reason: 'No conventional blog is required by the new architecture; the index cannot disappear until retained knowledge URLs are resolved.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'The new product deliberately has no conventional blog index. The three retained knowledge resources remain available at their qualified canonical URLs without preserving a generic blog programme.',
   },
   {
     path: '/blog/ai-patterns-elearning',
-    action: 'review',
-    launchReady: false,
-    reason: 'The old source is explicitly draft and AI guidance ages quickly. Do not turn sitemap presence into a publication claim; retain only if current usefulness and first-party search evidence justify a new resource.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'The surviving source is explicitly draft, the material is generic and time-sensitive, and Search Intelligence found no authority reason to preserve it for launch.',
   },
   {
     path: '/blog/clean-design-elearning',
-    action: 'review',
-    launchReady: false,
-    reason: 'The old source is explicitly draft and generic. The underlying UX topic may support a stronger first-hand resource, but sitemap presence alone is not sufficient reason to rebuild the URL.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'The surviving source is explicitly draft and generic. The wider UX topic is represented more credibly through first-hand Project and Practice evidence.',
   },
   {
     path: '/blog/design-system',
-    action: 'consolidate',
-    launchReady: false,
-    reason: 'The old source is explicitly draft and asserts integrations/outcomes too broadly. Its useful ideas belong with first-hand ISQ/CASA production-system evidence, not as a parallel generic authority claim.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'The generic draft article is not a proven semantic equivalent of the ISQ eLearning Design System Project and contains authority claims that should not be inherited through a redirect.',
   },
   {
     path: '/blog/master-slides-in-storyline',
@@ -69,42 +75,45 @@ export const liveSitemapMigration = [
   },
   {
     path: '/blog/scenario-writing-that-feels-real',
-    action: 'review',
-    launchReady: false,
-    reason: 'The current old-site source repository contains no matching article. Treat this as a sitemap discovery/investigation URL, not an automatic rebuild commitment, until first-party search or backlink evidence establishes independent value.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'No matching source survives and Search Intelligence found no independent authority requirement that justifies recreating the sitemap-only URL.',
   },
   {
     path: '/blog/storyline-tips-that-actually-help',
-    action: 'review',
-    launchReady: false,
-    reason: 'A matching markdown source survives, but it is explicitly status: draft. Its useful first-hand techniques may feed a stronger Storyline production resource; the sitemap entry does not itself justify restoring a separate page.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'The surviving source is explicitly draft and belongs to the generic Storyline-tip estate that Search Intelligence qualified for retirement rather than one-for-one recreation.',
   },
   {
     path: '/blog/ux-for-learning',
-    action: 'rebuild',
-    launchReady: false,
-    destination: '/blog/ux-for-learning',
-    reason: 'This is one of the few current-sitemap article URLs with surviving non-draft source. The topic aligns strategically with the practice, but the existing article is generic and should survive only if rebuilt around first-hand evidence and first-party search value.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'Although a non-draft source survives, it is generic and has no launch-scale authority evidence sufficient to justify rebuilding it beside stronger first-hand Practice and Project material.',
   },
   {
     path: '/blog/welcome',
     action: 'retire',
-    launchReady: false,
-    reason: 'The old source is explicitly draft, generic introductory copy and duplicated internally. It remains a retirement candidate, with final 404/410 treatment deferred until first-party search/link evidence is available.',
+    launchReady: true,
+    status: 410,
+    reason: 'The source is explicitly draft, generic introductory copy and has no independent authority value.',
   },
   {
     path: '/blog/xapi-basics',
-    action: 'rebuild',
-    launchReady: false,
-    destination: '/blog/xapi-basics',
-    reason: 'This is one of the few current-sitemap article URLs with surviving non-draft source. xAPI is an emerging authority territory, but the current article is too simplified for the evidence/governance standard now used in the practice; rebuild only when current first-hand implementation evidence can support it.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'Generic xAPI explanation is intentionally retired. Future xAPI authority should come from current first-hand implementation evidence rather than preserving simplified legacy copy.',
   },
   {
     path: '/blog/xapi-isnt-scary',
-    action: 'consolidate',
-    launchReady: false,
-    destination: '/blog/xapi-basics',
-    reason: 'The old source is explicitly draft, substantially overlaps xAPI basics and makes broader learning-outcome claims than the evidence supports. Consolidate only after the surviving xAPI surface is rebuilt and external-link evidence is checked.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'The source is explicitly draft, overlaps the retired generic xAPI explainer and is not a distinct authority asset.',
   },
   {
     path: '/contact',
@@ -136,87 +145,92 @@ export const liveSitemapMigration = [
   },
   {
     path: '/work/corporate-yoga-australia-website',
-    action: 'review',
-    launchReady: false,
-    destination: '/work/wellbeing-studio',
-    reason: 'Wellbeing Studio is a plausible successor only if it genuinely encompasses the historical website-project intent.',
+    action: 'retire',
+    launchReady: true,
+    status: 410,
+    reason: 'The historical website project is not semantically equivalent to Wellbeing Studio. Retiring it is safer than transferring unrelated authority into a different product body of work.',
   },
 
-  // Current eLearning Design System child URLs. Source recovery shows these are
-  // one coherent system rather than nine independent authority pages. They are
-  // therefore consolidation candidates into a future evidenced ISQ Design
-  // System Project → Record → Artefact cluster. Exact destinations stay open
-  // until that cluster is canonical and the first-party search data is known.
+  // The nine current Design System child URLs represent one coherent system.
+  // The evidence-rich /work/isq-elearning-design-system Project is now the
+  // canonical entry, so each historical child transfers directly to it rather
+  // than surviving as a thin parallel search page.
   {
     path: '/work/elearning-design-system/overview',
-    action: 'consolidate',
-    launchReady: false,
+    action: 'redirect',
+    launchReady: true,
     destination: '/work/isq-elearning-design-system',
-    reason: 'The overview is project-level material and should become the entry surface for the evidenced ISQ Design System rather than survive as a parallel mini-site overview.',
+    reason: 'Project-level overview material is consolidated into the canonical evidenced ISQ eLearning Design System Project.',
   },
   {
     path: '/work/elearning-design-system/atomic-design',
-    action: 'consolidate',
-    launchReady: false,
-    reason: 'Useful system-architecture explanation, but better represented inside the canonical design-system architecture/evidence surface than as a separate indexed page.',
+    action: 'redirect',
+    launchReady: true,
+    destination: '/work/isq-elearning-design-system',
+    reason: 'System-architecture evidence is preserved inside the stronger canonical Project rather than maintained as a thin child result.',
   },
   {
     path: '/work/elearning-design-system/asset-register',
-    action: 'consolidate',
-    launchReady: false,
-    reason: 'Asset governance is meaningful evidence but belongs inside the design-system governance/implementation story rather than as an independent search landing page.',
+    action: 'redirect',
+    launchReady: true,
+    destination: '/work/isq-elearning-design-system',
+    reason: 'Asset-governance evidence belongs to the canonical Project and does not warrant an independent search surface.',
   },
   {
     path: '/work/elearning-design-system/colours',
-    action: 'consolidate',
-    launchReady: false,
-    reason: 'Visual-foundation material is too narrow to justify an independent indexed result; preserve its evidence inside a system-foundations artefact.',
+    action: 'redirect',
+    launchReady: true,
+    destination: '/work/isq-elearning-design-system',
+    reason: 'Visual-foundation evidence is retained within the canonical Project rather than as an independent indexed child page.',
   },
   {
     path: '/work/elearning-design-system/core-more-bore',
-    action: 'rebuild',
-    launchReady: false,
-    reason: 'This is a distinct learning-design pattern rather than merely a visual-system child. Reassess as clearly attributed Glenn/ISQ practice language or a pattern-level Record before deciding its final URL; do not present it as a recognised external framework without provenance.',
+    action: 'redirect',
+    launchReady: true,
+    destination: '/work/isq-elearning-design-system',
+    reason: 'The learning-pattern evidence remains attributable within the canonical Project; no synthetic Record is created solely to preserve the old URL.',
   },
   {
     path: '/work/elearning-design-system/course-structure',
-    action: 'consolidate',
-    launchReady: false,
-    reason: 'Reusable course-flow guidance belongs with documented learning patterns inside the canonical design-system evidence rather than as a standalone project child.',
+    action: 'redirect',
+    launchReady: true,
+    destination: '/work/isq-elearning-design-system',
+    reason: 'Reusable course-flow evidence is consolidated into the canonical Project rather than perpetuating a thin child page.',
   },
   {
     path: '/work/elearning-design-system/images-icons',
-    action: 'consolidate',
-    launchReady: false,
-    reason: 'Imagery/icon guidance is a system foundation and should be retained as evidence within the canonical design-system cluster, not as an independent search result.',
+    action: 'redirect',
+    launchReady: true,
+    destination: '/work/isq-elearning-design-system',
+    reason: 'Imagery and icon guidance is a system foundation represented inside the canonical Project.',
   },
   {
     path: '/work/elearning-design-system/storyline',
-    action: 'consolidate',
-    launchReady: false,
-    reason: 'The current page mixes useful template evidence with unverified xAPI claims. Preserve the verified Storyline implementation evidence inside the canonical system/production architecture.',
+    action: 'redirect',
+    launchReady: true,
+    destination: '/work/isq-elearning-design-system',
+    reason: 'Verified Storyline/template implementation evidence is preserved inside the canonical Design System Project without inheriting unqualified claims from the old child URL.',
   },
   {
     path: '/work/elearning-design-system/typography',
-    action: 'consolidate',
-    launchReady: false,
-    reason: 'Currently indexed historical foundation material; retain its evidence and authority but consolidate into a stronger foundations artefact rather than perpetuating thin child pages.',
+    action: 'redirect',
+    launchReady: true,
+    destination: '/work/isq-elearning-design-system',
+    reason: 'Typography foundation evidence is consolidated into the stronger canonical Design System Project.',
   },
 ];
 
 /**
- * The current production repo also contains a substantial redirect graph from
- * WordPress permalinks/query IDs into newer React blog/work routes. Those
- * source URLs can carry external link equity even when they are absent from the
- * sitemap. Cutover is therefore blocked until the graph is flattened into the
- * new migration ledger or intentionally retired source-by-source.
+ * Search-cutover dependencies after Search Intelligence 01–05 reconciliation.
+ * A true value means the dependency has a launch-scale disposition, not that
+ * every imaginable historical data source is available.
  */
 export const migrationDependencies = {
-  inheritedRedirectGraphReconciled: false,
-  searchConsoleBaselineCaptured: false,
-  bingBaselineCaptured: false,
-  analyticsBaselineCaptured: false,
-  historicalCitationRecoveryComplete: false,
+  inheritedRedirectGraphReconciled: true,
+  searchConsoleBaselineCaptured: true,
+  bingBaselineClassifiedNonBlocking: true,
+  analyticsBaselineCaptured: true,
+  historicalCitationRecoverySufficientForLaunch: true,
 };
 
 export const liveSitemapCapture = {
@@ -241,8 +255,11 @@ export function validateMigrationPolicy() {
     if (entry.action === 'redirect' && !entry.destination) {
       throw new Error(`Migration policy: redirect ${entry.path} needs a destination`);
     }
-    if (entry.launchReady && ['review', 'rebuild', 'consolidate', 'retire'].includes(entry.action)) {
+    if (entry.launchReady && ['review', 'rebuild', 'consolidate'].includes(entry.action)) {
       throw new Error(`Migration policy: ${entry.path} cannot be launchReady while action ${entry.action} is unresolved`);
+    }
+    if (entry.action === 'retire' && entry.launchReady && ![404, 410].includes(entry.status)) {
+      throw new Error(`Migration policy: retired ${entry.path} needs an explicit 404 or 410 launch status`);
     }
   }
 

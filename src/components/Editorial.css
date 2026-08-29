@@ -12,13 +12,10 @@
   font-size: 0.82em;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  white-space: nowrap;
-}
-
-@media (max-width: 560px) {
-  .ph-mark {
-    white-space: normal;
-  }
+  /* Review notes can be much longer than ordinary inline copy. They must wrap
+     wherever the reading measure requires rather than widening the viewport. */
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 /* --- Evidence note -------------------------------------------------------- */

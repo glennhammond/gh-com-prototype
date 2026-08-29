@@ -8,24 +8,24 @@ export default function Work() {
   return (
     <>
       <Seo
-        title="Work — THE RECORD | Glenn Hammond"
-        description="A curated field of projects and professional evidence across digital learning, product design, platforms, interaction and production systems."
+        title="Work | Glenn Hammond"
+        description="Projects across digital products, experiences, learning and systems, opening into the decisions that shaped them and the work that can support those decisions."
         path="/work"
         jsonLd={graph(personSchema, breadcrumbSchema([{ name: 'Work', href: '/work' }]))}
       />
 
       <header className="record-work-head">
         <div className="container record-work-head__inner">
-          <p className="eyebrow">THE RECORD · Work</p>
-          <h1>Work is where the practice is composed, not catalogued.</h1>
+          <p className="eyebrow">Work</p>
+          <h1>Work</h1>
           <p>
-            Projects establish territory. Records narrow attention to the decisions,
-            making and evidence worth examining inside it.
+            Projects across digital products, experiences, learning and systems. Each opens into
+            the decisions that shaped it and the work that can support those decisions.
           </p>
         </div>
       </header>
 
-      <section className="record-field" aria-label="Selected project territories">
+      <section className="record-field" aria-label="Selected projects">
         <div className="container record-field__grid">
           {workProjects.map((project, index) => {
             const records = project.recordIds.map((id) => recordIndex.recordById[id]);

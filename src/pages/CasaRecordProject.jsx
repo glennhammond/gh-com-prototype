@@ -34,7 +34,7 @@ export default function CasaRecordProject() {
           <dl className="record-facts">
             <div><dt>State</dt><dd>{project.state}</dd></div>
             <div><dt>Role</dt><dd>{project.role}</dd></div>
-            <div><dt>Altitude</dt><dd>{project.altitude}</dd></div>
+            <div><dt>Scope</dt><dd>{project.altitude}</dd></div>
           </dl>
         </div>
       </header>
@@ -42,7 +42,7 @@ export default function CasaRecordProject() {
       <section className="record-band record-band--raised" aria-labelledby="casa-context-title">
         <div className="container record-band__split">
           <div className="record-band__copy">
-            <p className="eyebrow">Territory</p>
+            <p className="eyebrow">Context</p>
             <h2 id="casa-context-title">Assessment inside a safety regulator</h2>
           </div>
           <div>
@@ -59,11 +59,10 @@ export default function CasaRecordProject() {
       <section className="record-band" aria-labelledby="casa-record-map-title">
         <div className="container">
           <div className="record-band__copy">
-            <p className="eyebrow">Evidence landscape</p>
-            <h2 id="casa-record-map-title">Records</h2>
+            <p className="eyebrow">Decision</p>
+            <h2 id="casa-record-map-title">A decision worth examining</h2>
             <p>
-              This territory opens one design question in full: how regulated
-              professional learning can support judgement without reducing it to recall.
+              How could regulated professional learning support judgement without reducing it to recall?
             </p>
           </div>
 
@@ -74,7 +73,7 @@ export default function CasaRecordProject() {
                 <h3><Link to={record.path}>{record.title}</Link></h3>
                 <p>{record.worthExamining}</p>
                 <Link className="record-map__action" to={record.path}>
-                  Examine the Record
+                  Examine the decision
                 </Link>
               </li>
             ))}

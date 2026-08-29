@@ -1,24 +1,10 @@
 import { STATUS, SOURCE } from "./status.js";
 
 /**
- * Rise and Storyline — specialist practices within the practice.
- *
- * Neither of these is a parallel service line to the four layers in
- * `layers.js` or the four engagements in `engagements.js`. Both sit mostly
- * inside Content and Operations: Rise and Storyline are how the work gets
- * built, not a different kind of work. This file exists because that
- * positioning needs its own copy — a value proposition, a "when to use this"
- * judgement and a capability breakdown — that does not fit the layer or
- * engagement shape.
- *
- * Evidence is asymmetric and the copy says so rather than smoothing it over.
- * Storyline has six years of dated, attributable work (CASA's reusable
- * production system, the Flight Examiner Rating programme, sixty-plus ISQ
- * courses redeveloped). Rise has one system: the ISQ eLearning Design
- * System. Both pages point at real, verifiable evidence and nothing else —
- * see `content/projects.js` for the underlying project records and
- * `DECISIONS.md` #7 and #11 for why some of that evidence is still a
- * labelled placeholder rather than a screenshot.
+ * Specialist Articulate depth retained for direct entry and search continuity.
+ * These pages describe tools and production capability where that specificity
+ * is useful; they are not parallel brands or the organising structure of the
+ * public practice.
  */
 
 export const riseDesignSystems = {
@@ -26,36 +12,36 @@ export const riseDesignSystems = {
   source: SOURCE.BLUEPRINT,
 
   seo: {
-    title: "Rise Design Systems and Development | Glenn Hammond",
+    title: "Articulate Rise Design Systems | Glenn Hammond",
     description:
-      "Premium Articulate Rise development: reusable component libraries, custom HTML and CSS enhancement, and design systems built from real production work at Independent Schools Queensland.",
+      "Articulate Rise design systems, reusable components, custom HTML/CSS enhancement and production governance, grounded in real work at Independent Schools Queensland.",
   },
 
   hero: {
-    eyebrow: "Practice · Rise design systems",
-    headline: "Transforming Rise into a distinctive, scalable digital learning system.",
+    eyebrow: "Specialist depth · Articulate Rise",
+    headline: "Making Rise more distinctive, reusable and governed.",
     standfirst:
-      "Rise is one of the fastest authoring tools available, but out of the box it produces generic-looking courses with limited flexibility. I develop design systems, reusable components and custom HTML/CSS enhancements that transform Rise into a premium learning platform while retaining all of its speed and maintainability.",
+      "Rise is fast because it is deliberately constrained. That is useful until an organisation needs a recognisable visual language, repeatable interaction patterns, accessible components and standards that survive beyond one course. I design the system around the tool so teams can keep its speed without accepting every default.",
   },
 
   challenge: {
-    eyebrow: "The challenge with standard Rise",
+    eyebrow: "The constraint",
     headline: "Fast to build. Easy to make interchangeable.",
     body: [
-      "Rise's speed comes from a fixed set of blocks and a shared visual language, and for a single course that trade is a good one. The constraint shows up once an organisation is producing more than one: courses become visually interchangeable, brand expression is limited to a theme colour, the same handful of interactions get reused because they are the ones on offer, and authoring standards drift between projects because there is nowhere for a standard to live.",
-      "None of that is a flaw in Rise. It is what happens when a tool built for speed is used without a system built for scale — and it is exactly the gap specialist system design closes.",
+      "Rise's speed comes from a fixed set of blocks and a shared visual language. For a single course that trade can be entirely reasonable. The constraint becomes more visible across a programme or organisation: courses start to look interchangeable, interaction choices narrow to what is immediately available, and authoring standards can drift because there is nowhere for a shared production rule to live.",
+      "The useful response is not to fight Rise. It is to decide which constraints are helpful, then build a reusable layer of design, interaction and production governance around the places where the defaults are not enough.",
     ],
   },
 
   system: {
-    eyebrow: "A system, not cosmetic customisation",
-    headline: "Not just colours and fonts.",
+    eyebrow: "Beyond theme customisation",
+    headline: "Build the reusable rules around the tool.",
     intro:
-      "The work goes well beyond changing a theme. Two things get built, and they compound: a design system that governs how a course looks, reads and behaves, and technical enhancement that extends what Rise can actually do without leaving Rise.",
+      "The work combines a design system that governs how learning looks, reads and behaves with technical enhancement that extends what Rise can do while keeping the authoring model maintainable.",
     groups: [
       {
         title: "Design systems",
-        body: "Reusable component libraries, branded interaction patterns, consistent typography, spacing systems, accessible colour systems, reusable layouts, image standards and content patterns — the same structure the ISQ eLearning Design System documents as foundations, learning patterns and governed components.",
+        body: "Reusable component libraries, interaction patterns, typography, spacing, accessible colour, layouts, image standards and content patterns create a shared production language rather than a collection of one-off courses.",
         items: [
           "Reusable component libraries",
           "Branded interaction patterns",
@@ -69,7 +55,7 @@ export const riseDesignSystems = {
       },
       {
         title: "Technical enhancement",
-        body: "Custom HTML blocks, an external CSS architecture and a reusable interaction library that stay inside Rise's authoring model rather than fighting it — assigned the least complex implementation tier that fully supports the learning purpose, the same native-first rule the ISQ system documents and audits itself against.",
+        body: "Custom HTML blocks, external CSS and reusable interaction patterns can extend Rise without making every course a bespoke software project. The guiding rule is to use the least complex implementation that fully supports the learning purpose.",
         items: [
           "Custom HTML blocks",
           "External CSS architecture",
@@ -82,32 +68,32 @@ export const riseDesignSystems = {
       },
     ],
     close:
-      "Rather than producing one-off courses, I create scalable systems that enable teams to develop consistent, high-quality learning experiences for years to come.",
+      "The useful deliverable is not only the course in front of you. It is a system the next course can inherit.",
   },
 
   principle:
-    "A strong Rise engagement should leave the organisation with more than a finished course. It should create a reusable system that improves every course produced afterwards.",
+    "A strong Rise engagement should leave the organisation with more than a finished course. It should leave reusable decisions that improve the work that follows.",
 
   outcomes: {
-    note: "Adoption and delivery-efficiency figures belong to the underlying project record, not to marketing copy for this page — see the ISQ eLearning Design System case study for what is and is not yet claimed.",
+    note: "Any adoption or delivery-efficiency claim belongs with the ISQ project evidence where its basis and limitations can be inspected; this page does not manufacture a marketing number.",
     items: [
       "Stronger visual and interaction consistency across a course suite",
-      "Distinctive, on-brand learning rather than a generic Rise theme",
-      "Faster production once the component library and templates exist",
-      "Easier maintenance, because a fix or a rebrand happens once in the system rather than once per course",
-      "Accessible patterns built into components rather than audited after the fact",
-      "Clearer governance, so quality stops depending on who happens to build the next course",
+      "A more recognisable experience than the default Rise theme alone can provide",
+      "Faster production once reusable components and templates exist",
+      "Easier maintenance because shared rules can be updated centrally",
+      "Accessible patterns designed into components rather than added after production",
+      "Clearer governance so quality depends less on who builds the next course",
     ],
   },
 
   evidence: {
-    heading: "Featured system",
+    heading: "Work to inspect",
     slug: "isq-elearning-design-system",
   },
 
   cta: {
     heading: "Need Rise to do more?",
-    body: "Whether the requirement is a single flagship course or a reusable organisation-wide system, I can help establish the structure, components and standards needed to produce better learning at scale.",
+    body: "If the requirement is a flagship course, a reusable component system or a wider production standard, I can help work out what should stay native to Rise and what genuinely needs extending.",
     label: "Discuss a Rise project",
     href: "/contact",
   },
@@ -118,22 +104,22 @@ export const storylineDevelopment = {
   source: SOURCE.BLUEPRINT,
 
   seo: {
-    title: "Advanced Storyline Development | Glenn Hammond",
+    title: "Advanced Articulate Storyline Development | Glenn Hammond",
     description:
-      "Advanced Articulate Storyline development for branching scenarios, simulations, assessments and reusable production systems, built on six years of regulated aviation and education learning.",
+      "Advanced Articulate Storyline development for branching scenarios, simulations, assessment, interaction and reusable production systems across aviation and education learning.",
   },
 
   hero: {
-    eyebrow: "Practice · Storyline development",
-    headline: "Sophisticated interactive learning built on deep Articulate expertise.",
+    eyebrow: "Specialist depth · Articulate Storyline",
+    headline: "Complex interaction when the interaction carries the learning.",
     standfirst:
-      "I have developed with Articulate Storyline across regulated aviation and education learning for more than a decade, including six years inside Australia's aviation safety regulator. That depth is what makes it possible to design and build complex interactions, simulations and scenario-based learning that stay intuitive, maintainable and aligned with the learning objective.",
+      "I have used Articulate Storyline across regulated aviation and education learning for more than a decade, including six years inside Australia's aviation safety regulator. That depth is useful when the learning depends on decisions, consequence, practice, simulation or state — and when the result still needs to be maintainable after the interesting interaction has been built.",
   },
 
   whenItFits: {
-    eyebrow: "When Storyline is the right choice",
+    eyebrow: "When Storyline earns its complexity",
     headline: "When the interaction carries the learning.",
-    body: "Storyline earns its cost when a learner needs to make a decision, practise a process, explore a consequence, work through a branching scenario or receive feedback tailored to what they actually did — not just what they clicked. Rise is content-led; Storyline is interaction-led, and the two are chosen for different reasons rather than ranked against each other (see “The right tool for the learning problem” on the Practice overview).",
+    body: "Storyline is useful when a learner needs to make a decision, practise a process, explore a consequence, work through a branching scenario or receive feedback that depends on what they did. The tool is not the starting point; the required behaviour is. If a simpler implementation can carry the learning, it should.",
   },
 
   groups: [
@@ -185,21 +171,21 @@ export const storylineDevelopment = {
 
   technical: {
     eyebrow: "Technical depth",
-    body: "Variables and conditional logic, triggers, states and layers, SCORM and xAPI packaging, and LMS deployment are the means to a reliable experience, not the pitch. The interaction and learning-data prototypes on this site were built to test exactly this: SCORM learner-data capture and variable-driven navigation, outside a client brief, because the only way to trust a pattern under pressure is to have built it before you need it.",
+    body: "Variables and conditional logic, triggers, states and layers, SCORM and xAPI packaging, and LMS deployment are means to a reliable experience, not the proposition. The interaction and learning-data prototypes on this site test that technical depth outside a client brief so a pattern can be understood before it is needed under delivery pressure.",
   },
 
   experience: {
     eyebrow: "Experience across the Articulate ecosystem",
     body: [
-      "Six years inside the Civil Aviation Safety Authority (2015–2021) built and maintained a reusable Storyline production system for the regulator's design team — a style manual, authoring templates, specified components with documented states, and an icon and step-marker library used across the Flight Examiner Rating programme and the wider CASA learning catalogue.",
-      "That production-system discipline carried forward: more than sixty Storyline courses were redeveloped to a single architecture at Independent Schools Queensland, run alongside a platform migration inside a single term. Recognised as an Articulate eLearning Hero. [Confirm earliest Articulate tools used and approximate dates, for a fuller account of the ecosystem history.]",
+      "Six years inside the Civil Aviation Safety Authority (2015–2021) included building and maintaining a reusable Storyline production system for the regulator's design team — a style manual, authoring templates, specified components with documented states, and an icon and step-marker library used across the Flight Examiner Rating programme and wider CASA learning work.",
+      "That production-system discipline carried forward: more than sixty Storyline courses were redeveloped to a shared architecture at Independent Schools Queensland while a platform migration was happening in the same engagement. Recognised as an Articulate eLearning Hero. [Confirm earliest Articulate tools used and approximate dates, for a fuller account of the ecosystem history.]",
     ],
   },
 
   modernisation: {
     eyebrow: "Storyline modernisation",
     headline: "Modernising existing Storyline content.",
-    body: "Six years working inside one organisation's course library, and the production system built to govern it, is also what a modernisation engagement draws on: diagnosing what an older project was actually built to do, updating accessibility and publishing settings, consolidating inconsistent templates, and republishing to a current LMS without starting the course over.",
+    body: "Long-lived course libraries accumulate assumptions. Modernisation starts by working out what an older project was built to do, then updating only what needs to change: accessibility, publishing, templates, interaction patterns or LMS compatibility rather than reflexively rebuilding the whole course.",
     items: [
       "Legacy course audit",
       "Visual and interaction redesign",
@@ -212,13 +198,13 @@ export const storylineDevelopment = {
   },
 
   evidence: {
-    heading: "Selected work",
+    heading: "Work to inspect",
     slugs: ["flight-examiner-rating", "course-system", "connect-and-learn", "interaction-prototypes"],
   },
 
   cta: {
     heading: "Planning a complex Storyline project?",
-    body: "I can help shape the learning approach, prototype the interaction and develop a robust experience that is engaging, maintainable and ready for deployment.",
+    body: "I can help determine whether Storyline is warranted, shape the learning approach, prototype the interaction and build a maintainable implementation ready for deployment.",
     label: "Discuss a Storyline project",
     href: "/contact",
   },

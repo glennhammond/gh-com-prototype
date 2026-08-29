@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { recordIndex } from '../content/the-record.js';
+import { getImage } from '../lib/media.js';
 import './SelectedWork.css';
 
 function EvidenceIndex({ project }) {
   const records = project.recordIds.map((id) => recordIndex.recordById[id]);
-  const artefactCount = records.reduce((total, record) => total + record.artefactIds.length, 0);
+  const evidenceViewCount = records.reduce((total, record) => total + record.artefactIds.length, 0);
 
   return (
-    <div className="selwork__index" aria-label={`${project.title} evidence currently open`}>
+    <div className="selwork__index" aria-label={`${project.title} decisions and evidence currently open`}>
       <div className="selwork__index-head">
-        <span>{records.length} {records.length === 1 ? 'Record' : 'Records'}</span>
-        <span>{artefactCount} {artefactCount === 1 ? 'Artefact' : 'Artefacts'}</span>
+        <span>{records.length} {records.length === 1 ? 'Decision' : 'Decisions'}</span>
+        <span>{evidenceViewCount} {evidenceViewCount === 1 ? 'Evidence view' : 'Evidence views'}</span>
       </div>
       <ol>
         {records.map((record, index) => (
@@ -24,13 +25,40 @@ function EvidenceIndex({ project }) {
   );
 }
 
+function EvidenceView({ imageName, label, caption, alt, sizes = '(min-width: 860px) 48vw, 92vw' }) {
+  const image = getImage(imageName);
+  if (!image) return null;
+
+  return (
+    <figure className="selwork__evidence-view">
+      <div className="selwork__evidence-frame">
+        <picture>
+          <source type="image/avif" srcSet={image.avif} sizes={sizes} />
+          <source type="image/webp" srcSet={image.webp} sizes={sizes} />
+          <img
+            src={image.src}
+            alt={alt}
+            width={image.width}
+            height={image.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </div>
+      <figcaption>
+        <span className="selwork__evidence-label">{label}</span>
+        <span>{caption}</span>
+      </figcaption>
+    </figure>
+  );
+}
+
 /**
- * Home evidence sequence sourced from THE RECORD.
+ * Home evidence sequence sourced from the canonical internal evidence model.
  *
- * Home previews territory and evidence density. Work remains the full composed
- * field. The territories are deliberately unequal: Wellbeing is the active
- * reference, ISQ carries systems evidence, CASA demonstrates regulated-practice
- * depth, and TAFE is explicitly historical.
+ * Home previews the work without requiring visitors to learn that model. Real
+ * attributable evidence leads where it clarifies a project; structural evidence
+ * remains first-class where no truthful project-specific image exists.
  */
 export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
   return (
@@ -44,7 +72,15 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
 
         <div className="selwork__list">
           <article className="selwork__item selwork__item--lead" aria-labelledby="selwork-wellbeing-title">
-            <EvidenceIndex project={wellbeing} />
+            <div className="selwork__evidence-column">
+              <EvidenceView
+                imageName="ws-landing"
+                label="Source state · live Studio"
+                caption="The member experience already in use before the 2027 product reframe. Shown as the starting condition, not as the future-state design."
+                alt="Wellbeing Studio member home page showing a seasonal program hero and a monthly focus article card."
+              />
+              <EvidenceIndex project={wellbeing} />
+            </div>
             <div className="selwork__copy">
               <p className="selwork__kicker">{wellbeing.organisation} · {wellbeing.period}</p>
               <h3 id="selwork-wellbeing-title" className="selwork__title">
@@ -81,7 +117,16 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
           </article>
 
           <article className="selwork__item selwork__item--contained" aria-labelledby="selwork-casa-title">
-            <EvidenceIndex project={casa} />
+            <div className="selwork__evidence-column">
+              <EvidenceView
+                imageName="casa-regulation"
+                label="Recovered course screen · CASA"
+                caption="The regulatory hierarchy used inside the Flight Examiner Rating course to make governing instruments visible as a connected structure."
+                alt="A Flight Examiner Rating course diagram mapping the Civil Aviation Act through regulations, orders, Part 61 licensing, the Manual of Standards and the Flight Examiner Handbook."
+                sizes="(min-width: 760px) 40vw, 92vw"
+              />
+              <EvidenceIndex project={casa} />
+            </div>
             <div className="selwork__copy">
               <p className="selwork__kicker">{casa.organisation} · {casa.period}</p>
               <p className="selwork__tag">Flight Examiner Rating</p>
@@ -98,7 +143,16 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
           </article>
 
           <article className="selwork__item selwork__item--archive" aria-labelledby="selwork-tafe-title">
-            <div className="selwork__archive-index" aria-hidden="true">2015</div>
+            <div className="selwork__evidence-column">
+              <div className="selwork__archive-index" aria-hidden="true">2015</div>
+              <EvidenceView
+                imageName="tafe-wireframe"
+                label="Historical artefact · 2015"
+                caption="The original non-linear hub structure for facilitator-led Pathways sessions. It is preserved as historical evidence rather than redrawn as a contemporary interface."
+                alt="A wireframe flow diagram of the Pathways tool showing an entry screen, a central hub and grouped screen clusters connected around several exploration modes."
+                sizes="(min-width: 760px) 36vw, 92vw"
+              />
+            </div>
             <div className="selwork__copy">
               <p className="selwork__kicker">{tafe.organisation} · {tafe.period}</p>
               <p className="selwork__tag">Historical evidence</p>
@@ -108,7 +162,7 @@ export default function SelectedWork({ intro, wellbeing, isq, casa, tafe }) {
               <p className="selwork__body">
                 Pathways used Storyline as a non-linear shared exploration environment
                 for Years 8–9 school sessions. Its original interface remains historical
-                evidence while the contemporary Record corrects the earlier portfolio interpretation.
+                evidence while the contemporary analysis corrects the earlier portfolio interpretation.
               </p>
               <EvidenceIndex project={tafe} />
               <Link className="selwork__link" to={tafe.path}>Enter the SkillsTech Pathways Project</Link>
