@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigationType } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import MetaFrame from './MetaFrame.jsx';
 import Footer from './Footer.jsx';
 import '../styles/global.css';
@@ -85,6 +87,8 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
