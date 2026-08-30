@@ -174,7 +174,12 @@ const REQUIRED = {
   ],
   "about.html": ["Where I have done it"],
   "contact.html": ["Tell me what is happening", "Email is the simplest place to start"],
-  "privacy.html": ["No enquiry submission on the site", "No analytics or advertising tracking"],
+  "privacy.html": [
+    "No enquiry submission on the site",
+    "Privacy-respecting site measurement",
+    "Vercel Web Analytics and Speed Insights",
+    "not used here for advertising, cross-site tracking",
+  ],
 };
 
 for (const [file, needles] of Object.entries(REQUIRED)) {
@@ -202,6 +207,22 @@ const PUBLIC_IDENTITY_FORBIDDEN = [
 for (const [file, source] of Object.entries(html)) {
   for (const [pattern, label] of PUBLIC_IDENTITY_FORBIDDEN) {
     if (pattern.test(source)) fail(`Public identity leak "${label}" found in ${file}`);
+  }
+}
+
+// The production measurement contract is deliberately limited to Vercel's
+// first-party Web Analytics and Speed Insights. Advertising, cross-site and
+// session-replay trackers require a separate privacy decision and release.
+const FORBIDDEN_TRACKERS = [
+  [/googletagmanager\.com/i, "Google Tag Manager"],
+  [/google-analytics\.com/i, "Google Analytics"],
+  [/connect\.facebook\.net/i, "Meta Pixel"],
+  [/clarity\.ms\/tag/i, "Microsoft Clarity"],
+  [/hotjar\.com/i, "Hotjar"],
+];
+for (const [file, source] of Object.entries(html)) {
+  for (const [pattern, label] of FORBIDDEN_TRACKERS) {
+    if (pattern.test(source)) fail(`Unapproved tracker "${label}" found in ${file}`);
   }
 }
 

@@ -7,10 +7,8 @@ import "./Privacy.css";
 /**
  * Privacy — current website behaviour only.
  *
- * The Minimum Amazing release deliberately does not enable the prototype
- * enquiry submission seam or analytics. This page therefore states only what
- * the current website does, rather than inventing policy language for planned
- * integrations that are not running.
+ * This page describes the current production behaviour, including the
+ * privacy-respecting Vercel measurement used after the Pro upgrade.
  */
 export default function Privacy() {
   return (
@@ -34,7 +32,7 @@ export default function Privacy() {
           level={1}
           eyebrow="Privacy"
           headline="What this website does with information."
-          standfirst="The current release is deliberately simple: it publishes professional work and provides links for direct contact."
+          standfirst="This website publishes professional work, provides direct contact links and uses limited, privacy-respecting measurement to understand its performance."
         />
 
         <div className="privacy__body">
@@ -48,10 +46,13 @@ export default function Privacy() {
           </section>
 
           <section className="privacy__section">
-            <h2 className="privacy__heading">No analytics or advertising tracking</h2>
+            <h2 className="privacy__heading">Privacy-respecting site measurement</h2>
             <p>
-              This release does not include Google Analytics, advertising pixels,
-              personalisation, account tracking or marketing cookies.
+              This website uses Vercel Web Analytics and Speed Insights to understand
+              aggregate page use and real-world website performance. Vercel describes
+              these services as collecting anonymised usage and performance data without
+              using cookies. They are not used here for advertising, cross-site tracking,
+              personalisation or individual visitor profiles.
             </p>
           </section>
 
@@ -67,9 +68,9 @@ export default function Privacy() {
           <section className="privacy__section">
             <h2 className="privacy__heading">If the site changes</h2>
             <p>
-              If a working enquiry form, analytics or another feature that changes
-              how the website handles information is introduced, this page will be
-              updated before that feature is enabled.
+              If a working enquiry form or another feature changes how the website
+              handles information, this page will be updated before that feature is
+              enabled.
             </p>
           </section>
         </div>
