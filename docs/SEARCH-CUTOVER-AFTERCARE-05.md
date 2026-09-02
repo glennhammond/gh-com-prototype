@@ -12,6 +12,14 @@ The production search contract is healthy. The first post-launch public discover
 
 No search-driven production change is justified at this stage. The correct action is to preserve the qualified canonical, sitemap, redirect, 410 and 404 contract while Google recrawls and consolidates the estate.
 
+### Post-launch corrective action — 3 September 2026
+
+Public discovery checks exposed one uncaptured source family: nine historical `/design-system/*` paths corresponding directly to the existing nine-to-one ISQ eLearning Design System consolidation. Exact permanent redirects were added for all nine paths to `/work/isq-elearning-design-system`; no wildcard redirect was introduced.
+
+The search-visible `/blog/Moving-from-Wordpress-to-React` interim article was also made an explicit `410 Gone` retirement, including its lowercase path variant. This follows the launch ledger's existing judgement that the AI-assisted interim article is not a preservation requirement and has no qualified current equivalent.
+
+The migration audit now treats all eleven rules as release-blocking requirements so the gap cannot recur silently.
+
 ## 2. Production and Vercel identity
 
 | Purpose | Verified URL or identity |
