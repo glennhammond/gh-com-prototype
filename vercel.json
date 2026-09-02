@@ -126,6 +126,51 @@
       "permanent": true
     },
     {
+      "source": "/design-system/overview",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/atomic-design",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/asset-register",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/colours",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/core-more-bore",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/course-structure",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/images-icons",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/storyline",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/typography",
+      "destination": "/work/isq-elearning-design-system",
+      "permanent": true
+    },
+    {
       "source": "/master-slides-in-storyline",
       "destination": "/blog/master-slides-in-storyline",
       "permanent": true
@@ -186,6 +231,8 @@
     { "source": "/blog/welcome", "destination": "/api/gone" },
     { "source": "/blog/xapi-basics", "destination": "/api/gone" },
     { "source": "/blog/xapi-isnt-scary", "destination": "/api/gone" },
+    { "source": "/blog/Moving-from-Wordpress-to-React", "destination": "/api/gone" },
+    { "source": "/blog/moving-from-wordpress-to-react", "destination": "/api/gone" },
     { "source": "/work/corporate-yoga-australia-website", "destination": "/api/gone" },
     { "source": "/hello-world", "destination": "/api/gone" },
     { "source": "/gamification-in-storyline-leaderboards-badges-and-incentives", "destination": "/api/gone" },
