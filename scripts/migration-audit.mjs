@@ -83,6 +83,34 @@ const assertGone = (source, label = source) => {
   }
 };
 
+// Public post-launch discovery exposed a second historical path family for
+// the same nine Design System pages. Keep these source-specific so the audit
+// continues to prohibit broad redirects that could hide semantic debt.
+const observedDesignSystemSlugs = [
+  'overview',
+  'atomic-design',
+  'asset-register',
+  'colours',
+  'core-more-bore',
+  'course-structure',
+  'images-icons',
+  'storyline',
+  'typography',
+];
+
+for (const slug of observedDesignSystemSlugs) {
+  assertRedirect(
+    `/design-system/${slug}`,
+    '/work/isq-elearning-design-system',
+    `observed Design System legacy route /design-system/${slug}`,
+  );
+}
+
+// This interim AI-assisted article has no qualified current equivalent. Both
+// the search-visible casing and a defensive lowercase form retire explicitly.
+assertGone('/blog/Moving-from-Wordpress-to-React');
+assertGone('/blog/moving-from-wordpress-to-react');
+
 const wordpressQueryRewrite = rewrites.find((rewrite) =>
   rewrite.source === '/' &&
   rewrite.destination === '/api/wordpress-legacy' &&
