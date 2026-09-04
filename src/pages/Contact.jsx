@@ -1,5 +1,4 @@
 import Seo from "../components/Seo.jsx";
-import { SectionHead } from "../components/Section.jsx";
 import EnquiryForm from "../components/EnquiryForm.jsx";
 import { site } from "../content/site.js";
 import { graph, personSchema, breadcrumbSchema } from "../lib/schema.js";
@@ -28,25 +27,12 @@ export default function Contact() {
       />
 
       <div className="section container contact">
-        <div className="contact__intro">
-          <SectionHead
-            level={1}
-            eyebrow="Start a conversation"
-            headline="Tell me what is happening."
-            standfirst="A few sentences about the situation, the people involved and what needs to change is enough to begin. You do not need to diagnose the solution first."
-          />
-        </div>
-
         <div className="contact__grid">
           <section className="contact__direct-panel" aria-labelledby="contact-enquiry">
-            <p className="eyebrow">Direct enquiry</p>
-            <h2 id="contact-enquiry" className="contact__direct-title">
-              A few sentences are enough to begin.
-            </h2>
-            <p className="contact__direct-lede">
-              A rough brief, a problem that is still difficult to name, or a link
-              to something already underway are all useful starting points.
-            </p>
+            <p className="eyebrow">Start a conversation</p>
+            <h1 id="contact-enquiry" className="contact__direct-title">
+              Tell me what is happening.
+            </h1>
 
             <div className="contact__form">
               <EnquiryForm />
@@ -54,8 +40,7 @@ export default function Contact() {
 
             <p className="contact__channel-note">
               Prefer to write directly?{" "}
-              <a href={`mailto:${site.email}`}>{site.email}</a>. Email is the
-              simplest place to start if you would rather use your own mail application.
+              <a href={`mailto:${site.email}`}>{site.email}</a>.
             </p>
           </section>
 
@@ -67,16 +52,6 @@ export default function Contact() {
               <li>What is happening now, and what feels wrong or limited about it.</li>
               <li>Who the experience, product or learning is for.</li>
               <li>Any real deadline, constraint or existing system that matters.</li>
-            </ol>
-
-            <h2 className="eyebrow contact__aside-heading">What happens next</h2>
-            <ol className="contact__next">
-              <li>I read the message myself.</li>
-              <li>{site.responsePromise.text}</li>
-              <li>
-                If a conversation would be useful, we can arrange a short call
-                and work out what deserves attention first.
-              </li>
             </ol>
 
             <h2 className="eyebrow contact__aside-heading">Elsewhere</h2>
