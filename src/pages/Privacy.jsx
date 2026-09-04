@@ -7,10 +7,9 @@ import "./Privacy.css";
 /**
  * Privacy — current website behaviour only.
  *
- * The Minimum Amazing release deliberately does not enable the prototype
- * enquiry submission seam or analytics. This page therefore states only what
- * the current website does, rather than inventing policy language for planned
- * integrations that are not running.
+ * The contact form now uses Formspree for enquiry delivery. This page describes
+ * that live behaviour alongside the site's continuing absence of analytics,
+ * advertising tracking and marketing cookies.
  */
 export default function Privacy() {
   return (
@@ -34,16 +33,24 @@ export default function Privacy() {
           level={1}
           eyebrow="Privacy"
           headline="What this website does with information."
-          standfirst="The current release is deliberately simple: it publishes professional work and provides links for direct contact."
+          standfirst="This site publishes professional work and provides a contact form for direct enquiries. The notes below describe what is collected and why."
         />
 
         <div className="privacy__body">
           <section className="privacy__section">
-            <h2 className="privacy__heading">No enquiry submission on the site</h2>
+            <h2 className="privacy__heading">Contact enquiries and Formspree</h2>
             <p>
-              This release does not send or store a web enquiry. The contact page
-              provides an email link and a LinkedIn link instead. If you email me,
-              the message is handled through email rather than stored by this website.
+              If you use the contact form, the information you enter is sent to
+              Formspree so it can deliver the enquiry to me. This can include your
+              name, organisation, email address, message, selected problem area and
+              rough timeframe.
+            </p>
+            <p>
+              I use those details to read and respond to your enquiry. Formspree is
+              a third-party form delivery service and may process or retain a
+              submission as part of providing that service under its own information
+              practices. Please do not use the form to send sensitive or confidential
+              information.
             </p>
           </section>
 
@@ -56,20 +63,20 @@ export default function Privacy() {
           </section>
 
           <section className="privacy__section">
-            <h2 className="privacy__heading">External links</h2>
+            <h2 className="privacy__heading">External services and links</h2>
             <p>
-              Some links open external services such as LinkedIn or email. Once you
-              choose to follow an external link, that service operates under its own
-              terms and information practices.
+              The contact form uses Formspree for delivery, and some links open
+              external services such as LinkedIn or email. Those services operate
+              under their own terms and information practices.
             </p>
           </section>
 
           <section className="privacy__section">
             <h2 className="privacy__heading">If the site changes</h2>
             <p>
-              If a working enquiry form, analytics or another feature that changes
-              how the website handles information is introduced, this page will be
-              updated before that feature is enabled.
+              If analytics, accounts, marketing technology or another feature that
+              changes how the website handles information is introduced, this page
+              will be updated to describe that behaviour.
             </p>
           </section>
         </div>
