@@ -100,11 +100,7 @@ export default function EnquiryForm() {
         tabIndex={-1}
         role="status"
       >
-        <h2 className="display-m">Thank you — that has been received.</h2>
-        <p>
-          {site.responsePromise.text} If it is urgent,{" "}
-          <a href={`mailto:${site.email}`}>{site.email}</a> reaches me directly.
-        </p>
+        <h2 className="display-m">Thanks — your message has been sent.</h2>
       </div>
     );
   }
@@ -235,7 +231,6 @@ export default function EnquiryForm() {
         <button className="btn btn--primary" type="submit" disabled={state === "sending"}>
           <span>{state === "sending" ? "Sending…" : "Send this"}</span>
         </button>
-        <p className="enquiry__promise">{site.responsePromise.text}</p>
       </div>
 
       <p className="small">
