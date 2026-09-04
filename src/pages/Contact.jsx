@@ -29,7 +29,7 @@ export default function Contact() {
       <div className="section container contact">
         <div className="contact__grid">
           <section className="contact__direct-panel" aria-labelledby="contact-enquiry">
-            <p className="eyebrow">Start a conversation</p>
+            <p className="eyebrow">Direct enquiry</p>
             <h1 id="contact-enquiry" className="contact__direct-title">
               Tell me what is happening.
             </h1>
