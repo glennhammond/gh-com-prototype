@@ -3,6 +3,8 @@ import { site } from "../content/site.js";
 import { validateForm, validateField, hasErrors, errorSummary } from "../lib/validation.js";
 import "./EnquiryForm.css";
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xbdnpnrp";
+
 const EMPTY = {
   name: "",
   organisation: "",
@@ -30,13 +32,10 @@ const TIMEFRAMES = [
 /**
  * Enquiry form — six fields, four required.
  *
- * No phone field and no budget dropdown. The optional area question is there
- * only to provide useful context before a reply; it is deliberately ordinary
- * language rather than a public-facing framework the visitor has to learn.
- *
- * PROTOTYPE BEHAVIOUR — submission is mocked. `submitEnquiry` below is the
- * single seam a production endpoint plugs into; nothing else changes. See
- * INTEGRATIONS.md. No secret, key or endpoint is present in this bundle.
+ * Submission is delivered through Formspree. The endpoint is intentionally
+ * public client configuration; no secret or API key is shipped in the bundle.
+ * Existing validation, error-summary, focus-management and honeypot behaviour
+ * remain in place around the production delivery seam.
  */
 export default function EnquiryForm() {
   const [values, setValues] = useState(EMPTY);
@@ -80,9 +79,11 @@ export default function EnquiryForm() {
       return;
     }
 
+    const formData = new FormData(event.currentTarget);
     setState("sending");
+
     try {
-      await submitEnquiry(values);
+      await submitEnquiry(formData);
       setState("sent");
       requestAnimationFrame(() => statusRef.current?.focus());
     } catch {
@@ -104,16 +105,18 @@ export default function EnquiryForm() {
           {site.responsePromise.text} If it is urgent,{" "}
           <a href={`mailto:${site.email}`}>{site.email}</a> reaches me directly.
         </p>
-        <p className="enquiry__prototype-note">
-          Prototype note: this confirmation is simulated. No message was sent
-          and nothing was stored.
-        </p>
       </div>
     );
   }
 
   return (
-    <form className="enquiry" onSubmit={onSubmit} noValidate>
+    <form
+      className="enquiry"
+      action={FORMSPREE_ENDPOINT}
+      method="POST"
+      onSubmit={onSubmit}
+      noValidate
+    >
       {submitted && hasErrors(errors) && (
         <div
           className="enquiry__summary"
@@ -218,8 +221,14 @@ export default function EnquiryForm() {
       </div>
 
       <div className="enquiry__trap" aria-hidden="true">
-        <label htmlFor="company-url">Do not fill this in</label>
-        <input id="company-url" name="company-url" type="text" tabIndex={-1} autoComplete="off" />
+        <label htmlFor="formspree-gotcha">Do not fill this in</label>
+        <input
+          id="formspree-gotcha"
+          name="_gotcha"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
       <div className="enquiry__actions">
@@ -228,6 +237,11 @@ export default function EnquiryForm() {
         </button>
         <p className="enquiry__promise">{site.responsePromise.text}</p>
       </div>
+
+      <p className="small">
+        Formspree handles delivery of this enquiry. See the{" "}
+        <a href="/privacy">privacy page</a> for how submitted information is handled.
+      </p>
 
       {state === "error" && (
         <p className="enquiry__error-global" role="alert" ref={statusRef} tabIndex={-1}>
@@ -285,10 +299,26 @@ function Field({
   );
 }
 
-async function submitEnquiry(values) {
-  if (import.meta.env.DEV) {
-    console.info("[enquiry] mocked submission", values);
+async function submitEnquiry(formData) {
+  formData.set("_subject", "New enquiry from glennhammond.com");
+  formData.set("source", "glennhammond.com/contact");
+
+  const response = await fetch(FORMSPREE_ENDPOINT, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  const payload = await response.json().catch(() => null);
+  if (!response.ok) {
+    const reason = payload?.errors
+      ?.map((error) => error?.message)
+      .filter(Boolean)
+      .join(" ");
+    throw new Error(reason || "The enquiry could not be delivered.");
   }
-  await new Promise((resolve) => setTimeout(resolve, 450));
-  return { ok: true };
+
+  return payload ?? { ok: true };
 }

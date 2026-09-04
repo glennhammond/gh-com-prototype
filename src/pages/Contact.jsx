@@ -1,17 +1,15 @@
 import Seo from "../components/Seo.jsx";
 import { SectionHead } from "../components/Section.jsx";
+import EnquiryForm from "../components/EnquiryForm.jsx";
 import { site } from "../content/site.js";
 import { graph, personSchema, breadcrumbSchema } from "../lib/schema.js";
 import "./Contact.css";
 
 /**
- * Contact — release-ready direct contact.
+ * Contact — production enquiry form with a direct email fallback.
  *
- * The prototype enquiry form deliberately remains out of the Minimum Amazing
- * release until a real delivery endpoint and the associated privacy contract
- * have been implemented and qualified. Email and LinkedIn are genuine working
- * channels now, so the public page should use them rather than simulate a
- * submission that never leaves the browser.
+ * Form delivery is handled by Formspree through the existing accessible
+ * EnquiryForm component. Email and LinkedIn remain available as direct channels.
  */
 export default function Contact() {
   return (
@@ -40,23 +38,24 @@ export default function Contact() {
         </div>
 
         <div className="contact__grid">
-          <section className="contact__direct-panel" aria-labelledby="contact-email">
-            <p className="eyebrow">Direct contact</p>
-            <h2 id="contact-email" className="contact__direct-title">
-              Email is the simplest place to start.
+          <section className="contact__direct-panel" aria-labelledby="contact-enquiry">
+            <p className="eyebrow">Direct enquiry</p>
+            <h2 id="contact-enquiry" className="contact__direct-title">
+              A few sentences are enough to begin.
             </h2>
             <p className="contact__direct-lede">
-              Write in your own words. A rough brief, a problem that is still
-              difficult to name, or a link to something already underway are
-              all useful starting points.
+              A rough brief, a problem that is still difficult to name, or a link
+              to something already underway are all useful starting points.
             </p>
-            <a className="contact__email" href={`mailto:${site.email}`}>
-              {site.email}
-            </a>
+
+            <div className="contact__form">
+              <EnquiryForm />
+            </div>
+
             <p className="contact__channel-note">
-              This website does not submit or store an enquiry. The email link
-              opens your own mail application and the conversation continues
-              there.
+              Prefer to write directly?{" "}
+              <a href={`mailto:${site.email}`}>{site.email}</a>. Email is the
+              simplest place to start if you would rather use your own mail application.
             </p>
           </section>
 

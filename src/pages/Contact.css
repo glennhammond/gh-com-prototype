@@ -37,6 +37,10 @@
   color: var(--text-secondary);
 }
 
+.contact__form {
+  margin-top: var(--space-6);
+}
+
 .contact__email {
   display: inline-flex;
   align-items: center;
@@ -51,7 +55,7 @@
 }
 
 .contact__channel-note {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
   padding-top: var(--space-4);
   border-top: 1px solid var(--rule);
   max-width: 56ch;
