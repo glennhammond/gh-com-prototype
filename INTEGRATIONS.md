@@ -1,59 +1,55 @@
-# Production integrations still required
+# Production integrations
 
-What is mocked, what is missing, and what has to be true before this goes live.
-No secret, key, endpoint or account identifier is present anywhere in this
-repository.
+What is live, what is deliberately absent, and what still has to be true before
+new integrations are enabled.
 
----
-
-## 1. Enquiry form — MOCKED
-
-**Now** — `submitEnquiry()` at the bottom of
-`src/components/EnquiryForm.jsx` waits 450ms and resolves. Nothing is sent,
-nothing is stored. The success screen says so explicitly, so a reviewer cannot
-mistake it for a working form.
-
-**Everything else is real**: validation, error summary, focus management, ARIA
-wiring, the honeypot, the layer qualification, and the disabled sending state.
-
-**To make it live**, replace that one function. Nothing else changes.
-
-Recommended shape, per blueprint §24:
-
-```
-POST /api/enquiry   →  Vercel serverless function
-                    →  Resend (or Formspark / Postmark)
-                    →  glenn@glennhammond.com
-```
-
-Requirements:
-
-- **No submission store.** Confirmed decision in the Master Copy: deliver by
-  email, retain nothing.
-- **No CAPTCHA.** WCAG 2.2 SC 3.3.8. The honeypot field
-  (`company-url`) plus server-side IP rate limiting is the intended defence.
-  Reject any submission where the honeypot is non-empty.
-- Validate again on the server using `src/lib/validation.js` — it is pure and
-  has no DOM or React dependency for exactly this reason.
-- Set a sensible max body size and a per-IP limit.
-- API key in a Vercel environment variable. Never in the client bundle.
+No secret or API key is present in this repository. The Formspree form endpoint
+is public client configuration by design.
 
 ---
 
-## 2. Privacy policy — BLOCKER
+## 1. Enquiry form — LIVE VIA FORMSPREE
 
-`/privacy` ships the correct structure and factual scope with every operative
-clause left explicitly blank, and a visible notice saying it must not go live as
-it stands.
+`src/components/EnquiryForm.jsx` now submits contact enquiries to the Formspree
+form `xbdnpnrp`.
 
-Required before the form or analytics are switched on:
+The existing production form behaviour remains intact:
 
-- Approved wording for each of the five sections
-- Retention period for enquiry emails
-- Access, correction and complaints pathway, referencing the OAIC
-- Confirmation of whether a cookie notice is needed for the final GA4 config
+- four required fields with client-side validation;
+- accessible field errors and error summary;
+- focus management after validation, success and delivery failure;
+- disabled sending state;
+- optional problem-area and timeframe context;
+- Formspree `_gotcha` honeypot;
+- a direct email fallback;
+- an in-page success state rather than a simulated confirmation.
 
-This is not a design task. It will be forgotten unless it is scheduled.
+The browser sends the form directly to Formspree using `fetch()` and requests a
+JSON response. No Formspree React dependency is required because this project
+already owns the form state, validation and accessibility behaviour.
+
+The endpoint is intentionally visible in the client bundle. It is not a secret
+credential and must not be treated as one.
+
+**Production qualification still required after deployment:** submit one real
+test enquiry from `https://glennhammond.com/contact` and confirm that it arrives
+at the intended Formspree recipient with the expected sender details and fields.
+
+---
+
+## 2. Privacy policy — UPDATED FOR FORMSPREE
+
+`/privacy` now describes the live enquiry behaviour before the form is promoted
+to production. It states that contact details and message content are sent to
+Formspree for delivery and that Formspree may process or retain submissions as
+part of providing its service.
+
+The page continues to state that this release does not include Google Analytics,
+advertising pixels, personalisation, account tracking or marketing cookies.
+
+Do not reintroduce a zero-retention claim for enquiry submissions unless the
+actual Formspree account configuration and service behaviour have been verified
+to support it.
 
 ---
 
@@ -74,8 +70,9 @@ Confirmed configuration for production:
 | Ad personalisation | off |
 | Retention | 14 months |
 
-Install only after `/privacy` is live. Relax the third-party check in
-`scripts/verify.mjs` to allowlist `googletagmanager.com` at that point.
+Install only after `/privacy` is updated for the final analytics behaviour.
+Relax the third-party check in `scripts/verify.mjs` to allowlist the required
+Google runtime resources at that point.
 
 ---
 
@@ -110,8 +107,8 @@ collection per content type.
 ## 6. Open Graph image
 
 `public/og.png` is inherited from the previous build and reflects the old
-positioning. It should be redesigned for *The course is the easy part* before
-launch — it is the first thing anyone sees when Glenn shares a link.
+positioning. It should be redesigned for the current positioning before a later
+brand-polish release.
 
 ---
 
@@ -120,9 +117,9 @@ launch — it is the first thing anyone sees when Glenn shares a link.
 `npm run check` is the gate. Wire it into GitHub Actions on pull requests, and
 add:
 
-- `axe-core` accessibility scan against the built pages
-- Lighthouse CI against the budgets already in `verify.mjs`
-- a link checker across `dist/`
+- `axe-core` accessibility scan against the built pages;
+- Lighthouse CI against the budgets already in `verify.mjs`;
+- a link checker across `dist/`.
 
 The budgets and the content guardrails are already codified; only the runner is
 missing.
