@@ -2,36 +2,19 @@ import { Link } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
 import {
   corePracticeClaims,
-  currentPracticeLens,
-  emergingPracticeClaims,
-  practiceClassifications,
   practiceModes,
   resolvedPracticeEvolution,
 } from '../content/practice.js';
-import { recordIndex } from '../content/the-record.js';
+import { elearningDesignSystemProject, recordIndex } from '../content/public-record.js';
 import { breadcrumbSchema, graph, personSchema, practiceSchema } from '../lib/schema.js';
 import './Practice.css';
 
-function EvidenceList({ evidence, compact = false }) {
+function EvidenceLinks({ evidence }) {
   return (
-    <ul className={`practice-evidence${compact ? ' practice-evidence--compact' : ''}`}>
-      {evidence.map(({ project, record, artefact, note }) => (
-        <li
-          key={`${project.id}-${record?.id ?? 'project'}-${artefact?.id ?? 'evidence'}`}
-          className="practice-evidence__item"
-        >
-          <p className="practice-evidence__meta">
-            {project.title} · {project.period}
-          </p>
-          <p className="practice-evidence__record">
-            <Link to={record?.path ?? project.path}>{record?.title ?? project.title}</Link>
-          </p>
-          <p className="practice-evidence__note">{note}</p>
-          {artefact && (
-            <Link className="practice-evidence__inspect" to={artefact.path}>
-              Inspect artefact · {artefact.title}
-            </Link>
-          )}
+    <ul className="practice-specialist__records">
+      {evidence.slice(0, 3).map(({ project, record }) => (
+        <li key={`${project.id}-${record?.id ?? 'project'}`}>
+          <Link to={record?.path ?? project.path}>{record?.title ?? project.title}</Link>
         </li>
       ))}
     </ul>
@@ -51,7 +34,7 @@ export default function Practice() {
     <>
       <Seo
         title="Practice — How the work holds together | Glenn Hammond"
-        description="An evidence-backed interpretation of the recurring decisions across Glenn Hammond’s digital product, learning, interaction, platform and production work."
+        description="Recurring decisions across Glenn Hammond’s digital product, learning, interaction, platform and production work."
         path="/practice"
         jsonLd={graph(
           personSchema,
@@ -68,45 +51,31 @@ export default function Practice() {
           <p className="eyebrow">Practice</p>
           <h1>The work changes. Certain decisions keep recurring.</h1>
           <p className="practice-head__lede">
-            This page draws recurring ways of working from the projects shown on this site. It does not list
-            everything I can do or impose a method on old work; it looks for patterns that can be supported
-            across different contexts.
+            I do not use one fixed method for every project. These are the decisions that keep
+            proving useful across different kinds of work.
           </p>
-          <p className="practice-head__integrity">
-            <strong>Evidence boundary.</strong> The work shown here is selective and currently reaches back to
-            2015. It should not be read as a complete account of thirty years of practice.
-          </p>
-          <Link className="practice-text-link" to="/work">
-            View the work
-          </Link>
+          <Link className="practice-text-link" to="/work">View the work</Link>
         </div>
       </header>
 
       <section className="practice-section" aria-labelledby="practice-recurring-title">
         <div className="container">
           <div className="practice-section__head">
-            <p className="eyebrow">Practice claims · 01</p>
-            <h2 id="practice-recurring-title">What keeps recurring</h2>
-            <p>
-              These are the strongest claims the work shown here supports. Each is tested across the five
-              canonical project families before it is treated as a proven recurring part of the practice.
-            </p>
+            <p className="eyebrow">Recurring decisions</p>
+            <h2 id="practice-recurring-title">Three things I keep coming back to</h2>
           </div>
 
           <div className="practice-claims">
             {corePracticeClaims.map((claim, index) => (
               <article key={claim.id} className="practice-claim" aria-labelledby={`practice-${claim.id}`}>
                 <div className="practice-claim__interpretation">
-                  <p className="practice-classification">
-                    {String(index + 1).padStart(2, '0')} · {claim.label}
-                  </p>
+                  <p className="practice-classification">{String(index + 1).padStart(2, '0')}</p>
                   <h3 id={`practice-${claim.id}`}>{claim.title}</h3>
                   <p className="practice-claim__summary">{claim.summary}</p>
-                  <p className="practice-boundary">{claim.boundary}</p>
                 </div>
                 <div className="practice-claim__evidence">
-                  <p className="practice-evidence-label">Evidence across the work</p>
-                  <EvidenceList evidence={claim.evidence} />
+                  <p className="practice-evidence-label">Examples in the work</p>
+                  <EvidenceLinks evidence={claim.evidence} />
                 </div>
               </article>
             ))}
@@ -118,16 +87,10 @@ export default function Practice() {
         <div className="container">
           <div className="practice-section__head practice-section__head--wide">
             <p className="eyebrow">Current operating description</p>
-            <h2 id="practice-movement-title">A current way of describing the movement</h2>
-            <p className="practice-modes__phrase">Frame. Shape. Make. Evidence.</p>
+            <h2 id="practice-movement-title">Frame. Shape. Make. Evidence.</h2>
             <p>
-              These are overlapping modes, not four steps. The language describes the practice now; it is
-              not presented as terminology used by the historical projects.
+              These are overlapping modes rather than four steps. A project can move between them repeatedly as new information appears.
             </p>
-            <div className="practice-lens-boundary">
-              <p className="practice-classification">{currentPracticeLens?.label}</p>
-              <p className="practice-boundary">{currentPracticeLens?.boundary}</p>
-            </div>
           </div>
 
           <div className="practice-modes">
@@ -145,16 +108,10 @@ export default function Practice() {
       <section className="practice-section" aria-labelledby="practice-evolution-title">
         <div className="container practice-evolution-layout">
           <div className="practice-section__head">
-            <p className="eyebrow">Evolution · selected work</p>
-            <h2 id="practice-evolution-title">The practice has widened in scope</h2>
+            <p className="eyebrow">Selected evolution</p>
+            <h2 id="practice-evolution-title">The unit of design has widened</h2>
             <p>
-              The work shown here suggests a widening unit of design since 2015: from interaction and
-              facilitated experience into regulated learning systems, platform and content architecture,
-              then product and connected-service work.
-            </p>
-            <p className="practice-boundary">
-              This is not a ladder. Earlier forms do not disappear as the work widens; artefact-making remains
-              first-class inside experience and system work.
+              Interaction and course production are still part of the work. What changed is how often the problem now requires product, platform and system decisions around them.
             </p>
           </div>
 
@@ -164,115 +121,57 @@ export default function Practice() {
                 <p className="practice-evolution__period">{item.period} · {item.altitude}</p>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
-                <Link className="practice-text-link" to={item.record.path}>
-                  Read the analysis · {item.record.title}
-                </Link>
+                <Link className="practice-text-link" to={item.record.path}>Read the analysis</Link>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="practice-section practice-section--raised" aria-labelledby="practice-emerging-title">
-        <div className="container">
-          <div className="practice-section__head">
-            <p className="eyebrow">Practice claims · 02</p>
-            <h2 id="practice-emerging-title">What is still emerging</h2>
-            <p>
-              Some patterns are strong enough to notice but not strong enough to promote. Keeping that
-              distinction visible matters more than making the Practice page look complete.
-            </p>
-          </div>
-
-          <div className="practice-emerging">
-            {emergingPracticeClaims.map((claim) => (
-              <article key={claim.id} className="practice-emerging__claim">
-                <p className="practice-classification">{claim.label}</p>
-                <h3>{claim.title}</h3>
-                <p className="practice-claim__summary">{claim.summary}</p>
-                <p className="practice-boundary">{claim.boundary}</p>
-                <EvidenceList evidence={claim.evidence} compact />
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="practice-section" aria-labelledby="practice-specialist-title">
+      <section className="practice-section practice-section--raised" aria-labelledby="practice-depth-title">
         <div className="container practice-specialist-layout">
           <div className="practice-section__head">
-            <p className="eyebrow">Specialist production depth</p>
-            <h2 id="practice-specialist-title">Tools are materials, not the practice</h2>
+            <p className="eyebrow">Specialist depth</p>
+            <h2 id="practice-depth-title">Tools and systems are materials, not the pitch</h2>
             <p>
-              Storyline recurs across the historical work, but the evidence is useful because of what the
-              tool enabled — not because software expertise should become the architecture of the practice.
+              Technical depth matters when it lets the learning or product behave in a way a simpler implementation cannot.
             </p>
           </div>
 
-          <article className="practice-specialist" aria-labelledby="practice-storyline-title">
-            <p className="practice-classification">Evidenced specialist depth</p>
-            <h3 id="practice-storyline-title">Storyline, when the interaction carries the learning</h3>
-            <p>
-              TAFE used it for a non-linear, stateful careers environment. CASA used it to make assessment
-              reasoning visible inside regulated professional learning. ISQ rebuilt more than sixty Storyline
-              courses while the destination platform was still being shaped.
-            </p>
-            <ul className="practice-specialist__records">
-              {storylineRecords.map((record) => (
-                <li key={record.id}>
-                  <Link to={record.path}>{record.title}</Link>
-                </li>
-              ))}
-            </ul>
-            <Link className="practice-text-link" to="/services/storyline-development">
-              Specialist Storyline detail
-            </Link>
-          </article>
-        </div>
-      </section>
+          <div>
+            <article className="practice-specialist" aria-labelledby="practice-system-title">
+              <h3 id="practice-system-title">eLearning Design System</h3>
+              <p>
+                Begun in 2024: reusable learning patterns, components, branded implementation layers,
+                accessibility, governance and xAPI conventions treated as one operational system.
+              </p>
+              <Link className="practice-text-link" to={elearningDesignSystemProject.path}>View the eLearning Design System</Link>
+            </article>
 
-      <section className="practice-section practice-contract" aria-labelledby="practice-contract-title">
-        <div className="container practice-contract__inner">
-          <div className="practice-section__head">
-            <p className="eyebrow">Evidence contract</p>
-            <h2 id="practice-contract-title">How to read a practice claim</h2>
-            <p>
-              Practice can interpret the work. It cannot outrun it. Stronger language requires stronger
-              recurrence and stronger evidence.
-            </p>
+            <article className="practice-specialist" aria-labelledby="practice-storyline-title">
+              <h3 id="practice-storyline-title">Storyline, when the interaction carries the learning</h3>
+              <p>
+                TAFE used it for a non-linear careers environment. CASA used it to make assessment reasoning visible.
+                ISQ rebuilt more than sixty courses while the destination platform was still being shaped.
+              </p>
+              <ul className="practice-specialist__records">
+                {storylineRecords.map((record) => (
+                  <li key={record.id}><Link to={record.path}>{record.title}</Link></li>
+                ))}
+              </ul>
+              <Link className="practice-text-link" to="/services/storyline-development">Specialist Storyline detail</Link>
+            </article>
           </div>
-          <dl className="practice-contract__definitions">
-            <div>
-              <dt>{practiceClassifications['proven-recurring']}</dt>
-              <dd>Supported across multiple projects and contexts.</dd>
-            </div>
-            <div>
-              <dt>{practiceClassifications['strong-emerging']}</dt>
-              <dd>Repeated and credible, but narrower or too contemporary to impose retrospectively.</dd>
-            </div>
-            <div>
-              <dt>{practiceClassifications['single-project']}</dt>
-              <dd>Useful evidence that remains bounded to one project until recurrence appears.</dd>
-            </div>
-            <div>
-              <dt>{practiceClassifications['aspirational-positioning']}</dt>
-              <dd>Direction or biography that may be useful, but is not presented as proof.</dd>
-            </div>
-          </dl>
         </div>
       </section>
 
       <section className="practice-close" aria-labelledby="practice-close-title">
         <div className="container practice-close__inner">
-          <p className="eyebrow">Follow the evidence</p>
-          <h2 id="practice-close-title">The interpretation is only useful if you can inspect the work.</h2>
+          <p className="eyebrow">Follow the work</p>
+          <h2 id="practice-close-title">The useful question is what the situation needs next.</h2>
           <div className="practice-close__actions">
-            <Link className="practice-close__primary" to="/work">
-              View the work
-            </Link>
-            <Link className="practice-close__secondary" to="/contact">
-              Contact Glenn
-            </Link>
+            <Link className="practice-close__primary" to="/work">View the work</Link>
+            <Link className="practice-close__secondary" to="/contact">Contact Glenn</Link>
           </div>
         </div>
       </section>
