@@ -13,7 +13,7 @@ import {
 } from 'node:fs';
 import { extname, join, relative, sep } from 'node:path';
 import { knowledgeResources } from '../src/content/knowledge.js';
-import { recordContent } from '../src/content/the-record.js';
+import { recordContent } from '../src/content/public-record.js';
 import {
   evidenceSearchForPath,
   getIndexableEvidencePaths,
@@ -94,9 +94,6 @@ if (!existsSync(DIST)) {
 
 validateSearchPolicy(recordContent);
 
-// The client-safe search policy contains only metadata. Here, on the build
-// side, prove that retained knowledge body content and policy still cover one
-// another exactly so neither can drift silently.
 const knowledgeIds = new Set(knowledgeResources.map((resource) => resource.id));
 const knowledgePolicyIds = new Set(Object.keys(knowledgeSearchPolicy));
 if (knowledgeIds.size !== knowledgePolicyIds.size) {
@@ -151,9 +148,6 @@ for (const redirect of redirects) {
     fail(`redirect ${redirect.source} is a wildcard/pattern; migration redirects must be ledger-specific`);
   }
 
-  // Conditional WordPress query redirects use source '/'. They do not replace
-  // the homepage and therefore must not be treated as a canonical-source
-  // collision or as part of the unconditional redirect-chain graph.
   if (redirect.has?.length) {
     for (const condition of redirect.has) {
       if (condition.type !== 'query' || !condition.key || !condition.value) {
@@ -229,9 +223,6 @@ for (const route of expectedPaths) {
   }
 }
 
-// Every explicitly noindexed evidence route must stay live, self-canonical and
-// absent from the sitemap. This makes indexability an editorial policy rather
-// than a route-deletion side effect.
 for (const [id, policy] of Object.entries(searchPolicy.artefacts)) {
   if (policy.index) continue;
   const file = routeToFile(policy.canonical);
@@ -249,7 +240,6 @@ for (const [id, policy] of Object.entries(searchPolicy.artefacts)) {
   }
 }
 
-// Quarantine still-rendered migration-only Work and specialist-service routes.
 for (const [file, html] of htmlPages) {
   const route = fileToRoute(file);
   if (!route || route === '/404') continue;
