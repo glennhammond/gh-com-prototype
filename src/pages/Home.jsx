@@ -8,21 +8,20 @@ import { home } from "../content/home.js";
 import {
   casaProject,
   connectProject,
-  tafeProject,
   wellbeingProject,
 } from "../content/the-record.js";
+import { elearningDesignSystemProject } from "../content/public-record.js";
 import { site } from "../content/site.js";
 import { graph, personSchema, practiceSchema } from "../lib/schema.js";
 import "./Home.css";
 
-const projects = [wellbeingProject, connectProject, casaProject, tafeProject];
+const projects = [
+  wellbeingProject,
+  elearningDesignSystemProject,
+  connectProject,
+  casaProject,
+];
 
-/**
- * Homepage canonical entry surface.
- *
- * Home establishes Glenn's proposition and the span of the work without
- * requiring visitors to learn the evidence architecture that organises it.
- */
 export default function Home() {
   const portrait = {
     avif: portraitAvif,
@@ -61,7 +60,7 @@ export default function Home() {
           <aside className="hero__record-field" aria-label="Selected work">
             <div className="hero__record-field-head">
               <p>Selected work</p>
-              <p>{projects.length} projects · contemporary and historical</p>
+              <p>{projects.length} projects · current and historical</p>
             </div>
 
             <ol className="hero__territories">
@@ -76,9 +75,7 @@ export default function Home() {
               ))}
             </ol>
 
-            <p className="hero__record-depth">
-              Each project opens into the decisions and work behind it.
-            </p>
+            <p className="hero__record-depth">Each project opens into the decisions and work behind it.</p>
           </aside>
         </div>
       </section>
@@ -100,9 +97,9 @@ export default function Home() {
       <SelectedWork
         intro={home.work}
         wellbeing={wellbeingProject}
-        isq={connectProject}
+        designSystem={elearningDesignSystemProject}
+        connect={connectProject}
         casa={casaProject}
-        tafe={tafeProject}
       />
 
       <section className="section buy" aria-labelledby="buy-title">
@@ -114,9 +111,7 @@ export default function Home() {
           </div>
           <div className="buy__aside">
             <p>{home.buy.body}</p>
-            <Button to={home.buy.cta.href} variant="outline">
-              {home.buy.cta.label}
-            </Button>
+            <Button to={home.buy.cta.href} variant="outline">{home.buy.cta.label}</Button>
           </div>
         </div>
       </section>
@@ -144,9 +139,8 @@ export default function Home() {
             {home.person.body.map((paragraph) => (
               <p key={paragraph.slice(0, 24)} className="person__para">{paragraph}</p>
             ))}
-            <Link className="person__link" to={home.person.cta.href}>
-              {home.person.cta.label}
-            </Link>
+            <Link className="person__link" to={home.person.cta.href}>{home.person.cta.label}</Link>
+            <Link className="person__link" to="/about">About Glenn</Link>
           </div>
         </div>
       </section>
@@ -158,10 +152,7 @@ export default function Home() {
             <p className="close__body">{home.close.body}</p>
           </div>
           <div className="close__action">
-            <Button to={home.close.cta.href} variant="primary">
-              {home.close.cta.label}
-            </Button>
-            <p className="close__promise">{site.responsePromise.text}</p>
+            <Button to={home.close.cta.href} variant="primary">{home.close.cta.label}</Button>
             <p className="close__alt">
               Or write directly: <a href={`mailto:${site.email}`}>{site.email}</a>
             </p>

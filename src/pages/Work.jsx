@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
-import { recordIndex, workProjects } from '../content/the-record.js';
+import { recordIndex, workProjects } from '../content/public-record.js';
 import { breadcrumbSchema, graph, personSchema } from '../lib/schema.js';
 import './Work.css';
 
@@ -28,7 +28,7 @@ export default function Work() {
       <section className="record-field" aria-label="Selected projects">
         <div className="container record-field__grid">
           {workProjects.map((project, index) => {
-            const records = project.recordIds.map((id) => recordIndex.recordById[id]);
+            const records = project.recordIds.map((id) => recordIndex.recordById[id]).filter(Boolean);
             const placement = project.placements.find((item) => item.surface === 'work');
             const featured = Boolean(placement?.featured);
 

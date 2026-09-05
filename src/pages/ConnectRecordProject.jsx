@@ -35,6 +35,16 @@ export default function ConnectRecordProject() {
         </div>
       </header>
 
+      <section className="connect-proof" aria-label="Project scale and recognition">
+        <div className="container">
+          <dl className="connect-proof__grid">
+            <div><dt>3 <span>months</span></dt><dd>Platform migration and course-estate rebuild</dd></div>
+            <div><dt>60+ <span>courses</span></dt><dd>Storyline courses rebuilt in parallel</dd></div>
+            <div><dt>2×</dt><dd>Diamond Awards, Best eLearning Project, LearnX 2024</dd></div>
+          </dl>
+        </div>
+      </section>
+
       <section className="record-band record-band--raised" aria-labelledby="connect-context-title">
         <div className="container record-band__split">
           <div className="record-band__copy">

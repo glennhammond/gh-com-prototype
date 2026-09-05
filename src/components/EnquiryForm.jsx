@@ -30,12 +30,12 @@ const TIMEFRAMES = [
 ];
 
 /**
- * Enquiry form — six fields, four required.
+ * Production enquiry form.
  *
- * Submission is delivered through Formspree. The endpoint is intentionally
- * public client configuration; no secret or API key is shipped in the bundle.
- * Existing validation, error-summary, focus-management and honeypot behaviour
- * remain in place around the production delivery seam.
+ * Name, email and message are the only required information. Organisation,
+ * problem area and timeframe can add useful context but should never block a
+ * conversation. Formspree handles delivery; validation and focus management
+ * remain local so errors are clear and accessible.
  */
 export default function EnquiryForm() {
   const [values, setValues] = useState(EMPTY);
@@ -94,12 +94,7 @@ export default function EnquiryForm() {
 
   if (state === "sent") {
     return (
-      <div
-        className="enquiry__done"
-        ref={statusRef}
-        tabIndex={-1}
-        role="status"
-      >
+      <div className="enquiry__done" ref={statusRef} tabIndex={-1} role="status">
         <h2 className="display-m">Thanks — your message has been sent.</h2>
       </div>
     );
@@ -114,12 +109,7 @@ export default function EnquiryForm() {
       noValidate
     >
       {submitted && hasErrors(errors) && (
-        <div
-          className="enquiry__summary"
-          ref={summaryRef}
-          tabIndex={-1}
-          role="alert"
-        >
+        <div className="enquiry__summary" ref={summaryRef} tabIndex={-1} role="alert">
           <h2 className="enquiry__summary-title">{errorSummary(errors)}</h2>
           <ul>
             {Object.entries(errors).map(([field, message]) => (
@@ -143,12 +133,10 @@ export default function EnquiryForm() {
       <Field
         id="organisation"
         label="Organisation"
-        hint="Put “independent” if that fits better."
         value={values.organisation}
         error={errors.organisation}
         onChange={setField}
         autoComplete="organization"
-        required
       />
       <Field
         id="email"
@@ -209,9 +197,7 @@ export default function EnquiryForm() {
         >
           <option value="">Select if it helps</option>
           {TIMEFRAMES.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
+            <option key={t} value={t}>{t}</option>
           ))}
         </select>
       </div>
@@ -256,7 +242,7 @@ function Field({
   value,
   onChange,
   as = "input",
-  required,
+  required = false,
   ...rest
 }) {
   const Control = as;
@@ -271,24 +257,22 @@ function Field({
         {!required && <span className="enquiry__optional">Optional</span>}
       </label>
       {hint && (
-        <p className="enquiry__hint" id={hintId}>
-          {hint}
-        </p>
+        <p className="enquiry__hint" id={hintId}>{hint}</p>
       )}
       <Control
         id={id}
         name={id}
         className="enquiry__control"
         value={value}
+        required={required}
+        aria-required={required ? "true" : undefined}
         onChange={(e) => onChange(id, e.target.value)}
         aria-invalid={error ? "true" : undefined}
         aria-describedby={describedBy}
         {...rest}
       />
       {error && (
-        <p className="enquiry__error" id={errorId}>
-          {error}
-        </p>
+        <p className="enquiry__error" id={errorId}>{error}</p>
       )}
     </div>
   );
@@ -301,9 +285,7 @@ async function submitEnquiry(formData) {
   const response = await fetch(FORMSPREE_ENDPOINT, {
     method: "POST",
     body: formData,
-    headers: {
-      Accept: "application/json",
-    },
+    headers: { Accept: "application/json" },
   });
 
   const payload = await response.json().catch(() => null);

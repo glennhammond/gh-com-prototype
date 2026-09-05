@@ -24,9 +24,9 @@ export const home = {
   },
   work: {
     eyebrow: 'Selected work',
-    headline: 'Different periods. Different disciplines. Work that can still be examined.',
+    headline: 'Current systems, product work and evidence from earlier practice.',
     standfirst:
-      'Wellbeing Studio shows contemporary product and service work. ISQ shows platform and production systems. CASA shows regulated professional learning. TAFE Pathways preserves historical interaction work without pretending old work is new work.',
+      'Wellbeing Studio shows contemporary product and service work. The eLearning Design System shows reusable learning patterns, components, governance and learning-data design. Connect & Learn shows platform and content migration at scale. CASA shows regulated professional learning.',
   },
   buy: {
     eyebrow: 'Practice',
@@ -34,22 +34,22 @@ export const home = {
     standfirst:
       'Across these projects the work moves between product strategy, experience architecture, learning design, interaction, platforms, production and implementation.',
     body:
-      'Practice is where the recurring patterns are interpreted: how problems are framed, decisions are made, systems are shaped and the work is carried through to something usable.',
+      'Certain decisions keep recurring: frame the real situation, keep connected decisions connected, and solve at the scale the problem requires.',
     cta: { href: '/practice', label: 'Read the practice' },
   },
   person: {
     eyebrow: 'The practice',
     headline: 'Frame. Shape. Make. Evidence.',
     body: [
-      'Show the thinking. Show the making. Show the evidence. I work across product strategy, experience architecture, learning design, visual design, media, platforms and implementation; the useful boundary is the point where the problem is genuinely solved.',
-      'I care about the point where a good idea has to survive contact with real users, real platforms and real production constraints. That is why the work here includes both the decisions and the things that were made.',
+      'I work across product strategy, experience architecture, learning design, visual design, media, platforms and implementation; the useful boundary is the point where the problem is genuinely solved.',
+      'The work here includes both the decisions and the things that were made, because good ideas still have to survive contact with real users, real platforms and real production constraints.',
     ],
     cta: { href: '/practice', label: 'How the practice works' },
   },
   close: {
     headline: 'Start with the problem, not the service label.',
     body:
-      'If you recognise something in the work, describe what is happening. A few sentences is enough to start a useful conversation.',
+      'If you recognise something in the work, describe what is happening. A few sentences is enough to start.',
     cta: { href: '/contact', label: 'Contact Glenn' },
   },
   seo: {

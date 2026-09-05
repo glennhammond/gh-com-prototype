@@ -1,12 +1,6 @@
-/**
- * Post-build sitemap + robots.
- *
- * The route table still renders parts of the legacy estate during migration,
- * but the sitemap expresses only intentionally indexable canonical surfaces.
- * Route existence is not search inclusion.
- */
+/** Post-build sitemap + robots for intentionally indexable canonical surfaces. */
 import { writeFileSync } from 'node:fs';
-import { recordContent } from '../src/content/the-record.js';
+import { recordContent } from '../src/content/public-record.js';
 import {
   getIndexableEvidencePaths,
   getIndexableKnowledgePaths,

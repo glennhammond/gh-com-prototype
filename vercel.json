@@ -42,7 +42,7 @@
     },
     {
       "source": "/elearning-design-system",
-      "destination": "/practice",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
@@ -72,7 +72,12 @@
     },
     {
       "source": "/portfolio/elearning-design-system",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
+      "permanent": true
+    },
+    {
+      "source": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
@@ -82,92 +87,92 @@
     },
     {
       "source": "/work/elearning-design-system/overview",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/work/elearning-design-system/atomic-design",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/work/elearning-design-system/asset-register",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/work/elearning-design-system/colours",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/work/elearning-design-system/core-more-bore",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/work/elearning-design-system/course-structure",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/work/elearning-design-system/images-icons",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/work/elearning-design-system/storyline",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/work/elearning-design-system/typography",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/overview",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/atomic-design",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/asset-register",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/colours",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/core-more-bore",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/course-structure",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/images-icons",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/storyline",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {
       "source": "/design-system/typography",
-      "destination": "/work/isq-elearning-design-system",
+      "destination": "/work/elearning-design-system",
       "permanent": true
     },
     {

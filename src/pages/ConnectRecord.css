@@ -1,5 +1,44 @@
 .connect-record-eyebrow { margin-top: var(--space-5); }
 
+.connect-proof {
+  padding-block: var(--space-5);
+  background: var(--paper-raised);
+  border-block: 1px solid var(--rule);
+}
+
+.connect-proof__grid {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.connect-proof__grid > div {
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--brass);
+}
+
+.connect-proof__grid dt {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.connect-proof__grid dt span {
+  margin-left: .2em;
+  font-family: var(--font-mono);
+  font-size: var(--size-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+}
+
+.connect-proof__grid dd {
+  margin-top: var(--space-2);
+  max-width: 28ch;
+  color: var(--text-secondary);
+  font-size: var(--size-small);
+}
+
 .connect-stream-preview {
   margin-top: var(--space-7);
   padding: clamp(24px, 4vw, 52px);
@@ -185,6 +224,12 @@
 }
 
 .connect-evidence-conclusion .artefact-kicker { color: var(--brass-light); }
+
+@media (min-width: 720px) {
+  .connect-proof__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 
 @media (min-width: 840px) {
   .connect-dependency-map__streams > li {
