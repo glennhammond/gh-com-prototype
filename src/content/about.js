@@ -1,60 +1,53 @@
 import { STATUS, SOURCE } from "./status.js";
 
-/**
- * About — Blueprint §15.
- *
- * Two registers on one page: a short summary for scanning, then a complete
- * dated history for the recruiter and the person doing diligence. First person
- * throughout; third person is the tell of a one-person business pretending to
- * be an agency.
- *
- * NOTE — deliberately absent: the personal dimension (why Glenn moved into
- * digital learning, what he thinks organisations get wrong, one detail from
- * outside work). The blueprint calls this the highest value-per-word writing
- * task on the project. It cannot be invented, so the section is omitted rather
- * than shipped empty. See CONTENT-REGISTER.md.
- */
-
+/** Public biography: broad practice first, then the dated digital-learning history. */
 export const about = {
   eyebrow: "About",
-  headline: "I have spent fifteen years on the parts of digital learning nobody puts in the brief.",
+  headline: "Thirty years making digital things. Fifteen-plus years focused on digital learning.",
 
   summary: [
-    "Six years inside the aviation regulator, building learning for examiners who assess other examiners. Three months moving a professional learning platform serving teachers, principals, board members and volunteers off a system they had outgrown. A year turning a workplace wellbeing business into a product that runs without its founder in the room.",
-    "The through-line is not the subject matter. It is that in each case the interesting problem was somewhere other than the course.",
+    "My practice started broader than eLearning: visual and digital design, web and media work, then increasingly complex learning products and platforms. The last fifteen-plus years have concentrated on digital learning, but the older disciplines never disappeared — they are why I am comfortable moving between interface, content, media, systems and implementation.",
+    "Six years inside the aviation regulator, a professional-learning platform migration and more than sixty course rebuilds at ISQ, and the current Wellbeing Studio product work all reinforced the same thing: the interesting problem is often somewhere other than the course.",
   ],
+
+  earlierPractice: {
+    heading: "Before digital learning became the centre",
+    paragraphs: [
+      "The thirty-year line on the homepage refers to the wider practice, not thirty years doing the same job. Earlier work was rooted in graphic and digital design, web production and media. Over time the work moved deeper into learning, interaction and platforms, while the visual and production disciplines stayed part of how I solve problems.",
+      "That history matters because current projects rarely stay inside one neat discipline. A learning problem may become an information-architecture problem; a platform problem may need interface design; a useful experience may need video, front-end code or a production system behind it.",
+    ],
+  },
 
   approach: {
     heading: "How I work",
     paragraphs: [
       "Most learning problems arrive described as content problems. A course is not landing, so the request is for a better course. Often the course is fine and the platform is making it unusable, or the content is fine and nobody has owned the workflow that keeps it current.",
-      "So I start with the whole system rather than the brief, and I stay with the connected decisions rather than handing the boundaries between disciplines to somebody else. That is not a claim to be better at every discipline than a specialist. It is a claim that the decisions between disciplines are often where the work is lost, and that somebody needs to own them.",
+      "So I start with the whole situation rather than the inherited brief, and I keep connected decisions connected long enough for them to improve each other. The useful boundary is the point where the problem is genuinely solved.",
     ],
-    status: STATUS.PROPOSED,
+    status: STATUS.APPROVED,
   },
 
-  /** Dated professional history — recruiters and diligence (BP §5, §15). */
   history: [
     {
       period: "2026 —",
       role: "Digital Learning & Platform Lead, Wellbeing Studio",
       org: "Corporate Yoga Australia",
       detail:
-        "Led Wellbeing Studio from concept to production: product strategy, learning experience, UX and interface design, platform architecture, Moodle, AWS, registration and cohort workflows, video delivery, and communications automation.",
+        "Led Wellbeing Studio from concept to production: product strategy, learning experience, UX and interface design, platform architecture, registration and cohort workflows, video delivery, campaign systems and production implementation.",
     },
     {
       period: "2021 —",
       role: "eLearning Specialist",
       org: "Independent Schools Queensland",
       detail:
-        "Professional learning for member schools, including the Connect & Learn platform migration and course redevelopment recognised with two LearnX 2024 Diamond Awards.",
+        "Professional learning for member schools, including the Connect & Learn platform migration and course redevelopment recognised with two LearnX 2024 Diamond Awards, plus current design-system, custom Rise and learning-data work.",
     },
     {
       period: "2015 – 2021",
       role: "eLearning Specialist",
       org: "Civil Aviation Safety Authority",
       detail:
-        "Regulated aviation learning including the Flight Examiner Rating programme, and a reusable learning-production system for the regulator: style manual, authoring templates, asset libraries and team processes.",
+        "Regulated aviation learning including the Flight Examiner Rating programme, internal learning platforms, media production and a reusable Storyline production system for the regulator's design team.",
     },
     {
       period: "2014 – 2015",
@@ -65,10 +58,10 @@ export const about = {
     },
     {
       period: "Earlier",
-      role: "Digital learning and design",
-      org: "Australian aviation industry",
+      role: "Digital and visual design",
+      org: "Freelance and industry work",
       detail:
-        "Designed and implemented Aviationworx for the Australian aviation industry.",
+        "Graphic design, web and digital production, media and early learning-platform work formed the broader practice that digital learning later grew from.",
     },
   ],
 
