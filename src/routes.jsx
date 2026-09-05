@@ -4,13 +4,7 @@ import Contact from './pages/Contact.jsx';
 import Privacy from './pages/Privacy.jsx';
 import NotFound from './pages/NotFound.jsx';
 
-/**
- * THE RECORD production integration.
- *
- * Home, canonical evidence and retained knowledge are statically rendered.
- * Legacy case-study records remain lazy migration routes so the old content
- * estate stays out of the route-independent client bootstrap.
- */
+/** Canonical public routes plus retained migration/knowledge surfaces. */
 export const routes = [
   {
     path: '/',
@@ -19,9 +13,6 @@ export const routes = [
       { index: true, lazy: () => import('./routes/HomeRoute.jsx') },
       { path: 'work', element: <Work /> },
 
-      // THE RECORD: canonical Project → Record → Artefact routes.
-      // Detail surfaces are lazy route modules so evidence-specific code stays
-      // out of the route-independent bootstrap while SSG still pre-renders them.
       { path: 'work/wellbeing-studio', lazy: () => import('./routes/WellbeingProjectRoute.jsx') },
       { path: 'work/wellbeing-studio/contextual-entry', lazy: () => import('./routes/ContextualEntryRecordRoute.jsx') },
       {
@@ -45,7 +36,11 @@ export const routes = [
         lazy: () => import('./routes/RuokQualificationArtefactRoute.jsx'),
       },
 
-      // CASA: first non-WS THE RECORD territory.
+      {
+        path: 'work/elearning-design-system',
+        lazy: () => import('./routes/ElearningDesignSystemRoute.jsx'),
+      },
+
       {
         path: 'work/casa/flight-examiner-rating',
         lazy: () => import('./routes/CasaRecordProjectRoute.jsx'),
@@ -59,7 +54,6 @@ export const routes = [
         lazy: () => import('./routes/CasaJudgementArtefactRoute.jsx'),
       },
 
-      // ISQ Connect & Learn: Project → Record → Artefact.
       {
         path: 'work/connect-and-learn',
         lazy: () => import('./routes/ConnectRecordProjectRoute.jsx'),
@@ -73,7 +67,6 @@ export const routes = [
         lazy: () => import('./routes/ConnectDependencyArtefactRoute.jsx'),
       },
 
-      // TAFE Queensland SkillsTech: historical Project → Record → Artefact.
       {
         path: 'work/tafe-pathways',
         lazy: () => import('./routes/TafeRecordProjectRoute.jsx'),
@@ -93,8 +86,6 @@ export const routes = [
 
       { path: 'practice', lazy: () => import('./routes/PracticeRoute.jsx') },
 
-      // Retained standalone knowledge. These are deliberately not a blog
-      // hierarchy; each URL must independently earn preservation/indexability.
       {
         path: 'principles-of-assessment-and-rules-of-evidence',
         lazy: () => import('./routes/AssessmentPrinciplesRoute.jsx'),
@@ -108,8 +99,7 @@ export const routes = [
         lazy: () => import('./routes/KnowledgeArticleRoute.jsx'),
       },
 
-      // Legacy service/about routes remain addressable pending Go-Live SEO
-      // qualification, but are no longer part of the public global IA.
+      // Specialist depth remains addressable but outside the primary IA.
       { path: 'services/rise-design-systems', lazy: () => import('./routes/RiseRoute.jsx') },
       { path: 'services/storyline-development', lazy: () => import('./routes/StorylineRoute.jsx') },
       { path: 'about', lazy: () => import('./routes/AboutRoute.jsx') },
