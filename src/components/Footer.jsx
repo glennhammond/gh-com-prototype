@@ -7,14 +7,9 @@ import "./Footer.css";
 /**
  * Site footer.
  *
- * Contact sits in the same position on every page — WCAG 2.2 SC 3.2.6
- * (Consistent Help). Email is shown as well as the form: a form-only practice
- * reads as gated, and referrals prefer email (Blueprint §15, §21).
- *
- * v3.1: the footer moves from an ink band to raised paper. A dark footer on
- * every page works against the 10% ink target, and on the homepage it put two
- * ink blocks in sequence directly beneath the close. The four-colour layer
- * spine now carries the terminal mark instead.
+ * Contact sits in the same position on every page and email remains available
+ * alongside the enquiry form. About is intentionally discoverable here while
+ * the primary navigation stays compact.
  */
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -69,9 +64,7 @@ export default function Footer() {
       </div>
 
       <div className="container site-footer__base">
-        <p className="site-footer__fine">
-          &copy; {year} Glenn Hammond. {site.responsePromise.short}.
-        </p>
+        <p className="site-footer__fine">&copy; {year} Glenn Hammond.</p>
       </div>
     </footer>
   );
