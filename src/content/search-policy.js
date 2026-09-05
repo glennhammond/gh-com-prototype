@@ -1,17 +1,8 @@
 // @ts-check
 
 /**
- * Search/indexability policy for THE RECORD and retained standalone knowledge.
- *
+ * Search/indexability policy for canonical evidence and retained knowledge.
  * Route existence and search inclusion are deliberately separate concerns.
- * Every canonical Project, Record and Artefact must be represented here.
- * Artefacts are opt-in: omission is a validation error, not an implicit index.
- * Retained knowledge is similarly explicit and remains outside a conventional
- * blog/content cadence.
- *
- * Important dependency boundary: this module is imported by Seo.jsx and is
- * therefore route-independent client code. It must contain policy metadata
- * only; retained knowledge body content remains in lazy route modules.
  */
 
 /** @typedef {'project'|'record'|'artefact'|'knowledge'|'supporting'} DirectEntryType */
@@ -44,9 +35,9 @@ export const searchPolicy = {
     'isq-elearning-design-system': {
       index: true,
       sitemap: true,
-      canonical: '/work/isq-elearning-design-system',
+      canonical: '/work/elearning-design-system',
       directEntry: 'project',
-      reason: 'Substantial first-hand operational design-system evidence with current search signal and a strong semantic role as the canonical successor to the fragmented legacy Design System estate.',
+      reason: 'Substantial first-hand operational eLearning Design System begun in 2024, with ISQ retained as an implementation context rather than misrepresented as owner of the core system.',
     },
     'casa-ferc': {
       index: true,
@@ -188,8 +179,6 @@ const assert = (condition, message) => {
 };
 
 /**
- * Validates the search policy against THE RECORD content without importing the
- * legacy content estate into client metadata code.
  * @param {{projects: Array<{id:string,path:string}>, records: Array<{id:string,path:string}>, artefacts: Array<{id:string,path:string}>}} content
  */
 export function validateSearchPolicy(content) {
@@ -220,11 +209,6 @@ export function validateSearchPolicy(content) {
   return searchPolicy;
 }
 
-/**
- * Policy-shape validation only. Exact coverage against retained knowledge body
- * content is performed by the server-side search audit, preserving the client
- * dependency boundary above.
- */
 export function validateKnowledgeSearchPolicy() {
   for (const [id, policy] of Object.entries(knowledgeSearchPolicy)) {
     assert(typeof policy.index === 'boolean', `knowledge ${id}.index must be boolean`);
@@ -234,7 +218,6 @@ export function validateKnowledgeSearchPolicy() {
     assert(policy.directEntry === 'knowledge', `knowledge ${id} must use directEntry=knowledge`);
     assert(typeof policy.reason === 'string' && policy.reason.trim().length > 20, `knowledge ${id} needs an editorial/search rationale`);
   }
-
   return knowledgeSearchPolicy;
 }
 
@@ -253,12 +236,7 @@ export function knowledgeSearchForPath(path) {
   return Object.values(knowledgeSearchPolicy).find((policy) => policy.canonical === path) ?? null;
 }
 
-/**
- * Evidence routes not explicitly approved by this policy are migration-only
- * and therefore noindex. Legacy specialist service routes are also quarantined
- * until their final ledger disposition is implemented.
- * @param {string} path
- */
+/** @param {string} path */
 export function shouldNoindexPath(path) {
   const evidencePolicy = evidenceSearchForPath(path);
   if (evidencePolicy) return !evidencePolicy.index;
