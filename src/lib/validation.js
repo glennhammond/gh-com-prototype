@@ -1,24 +1,19 @@
 /**
  * Enquiry form validation — pure functions, no DOM, no React.
- *
- * Kept separate so it can be unit tested and reused by a server handler when
- * the form is wired to a real endpoint. Messages are written to be actionable
- * (WCAG 2.2 SC 3.3.3): they say what to do, not that something is invalid.
+ * Messages are actionable: they say what to do rather than merely reporting
+ * that a value is invalid.
  */
 
 export const FIELDS = {
   name: { label: "Your name", required: true },
-  organisation: { label: "Organisation", required: true },
+  organisation: { label: "Organisation", required: false },
   email: { label: "Email", required: true },
   layers: { label: "Where the problem seems to sit", required: false },
   message: { label: "What is happening?", required: true },
   timeframe: { label: "Rough timeframe", required: false },
 };
 
-/**
- * Deliberately permissive. Over-strict email regexes reject valid addresses,
- * and the cost of a bounced reply is lower than the cost of a blocked enquiry.
- */
+/** Deliberately permissive: over-strict email regexes reject valid addresses. */
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export function validateField(name, value) {
@@ -27,9 +22,6 @@ export function validateField(name, value) {
   switch (name) {
     case "name":
       if (!trimmed) return "Add your name so I know who I am replying to.";
-      return null;
-    case "organisation":
-      if (!trimmed) return "Add your organisation. Put “independent” if that fits better.";
       return null;
     case "email":
       if (!trimmed) return "Add an email address so I can reply.";
