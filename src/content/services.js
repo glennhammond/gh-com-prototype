@@ -1,12 +1,6 @@
 import { STATUS, SOURCE } from "./status.js";
 
-/**
- * Specialist Articulate depth retained for direct entry and search continuity.
- * These pages describe tools and production capability where that specificity
- * is useful; they are not parallel brands or the organising structure of the
- * public practice.
- */
-
+/** Specialist Articulate depth retained outside the primary global IA. */
 export const riseDesignSystems = {
   status: STATUS.PROPOSED,
   source: SOURCE.BLUEPRINT,
@@ -14,21 +8,21 @@ export const riseDesignSystems = {
   seo: {
     title: "Articulate Rise Design Systems | Glenn Hammond",
     description:
-      "Articulate Rise design systems, reusable components, custom HTML/CSS enhancement and production governance, grounded in real work at Independent Schools Queensland.",
+      "Articulate Rise design systems, reusable components, custom HTML/CSS enhancement and production governance, grounded in the eLearning Design System and real ISQ implementation work.",
   },
 
   hero: {
     eyebrow: "Specialist depth · Articulate Rise",
     headline: "Making Rise more distinctive, reusable and governed.",
     standfirst:
-      "Rise is fast because it is deliberately constrained. That is useful until an organisation needs a recognisable visual language, repeatable interaction patterns, accessible components and standards that survive beyond one course. I design the system around the tool so teams can keep its speed without accepting every default.",
+      "Rise is fast because it is deliberately constrained. That is useful until an organisation needs a recognisable visual language, repeatable interaction patterns, accessible components and standards that survive beyond one course. I design the reusable system around the tool so teams can keep its speed without accepting every default.",
   },
 
   challenge: {
     eyebrow: "The constraint",
     headline: "Fast to build. Easy to make interchangeable.",
     body: [
-      "Rise's speed comes from a fixed set of blocks and a shared visual language. For a single course that trade can be entirely reasonable. The constraint becomes more visible across a programme or organisation: courses start to look interchangeable, interaction choices narrow to what is immediately available, and authoring standards can drift because there is nowhere for a shared production rule to live.",
+      "Rise's speed comes from a fixed set of blocks and a shared visual language. Across a programme or organisation, courses can start to look interchangeable and production standards can drift because recurring decisions have nowhere shared to live.",
       "The useful response is not to fight Rise. It is to decide which constraints are helpful, then build a reusable layer of design, interaction and production governance around the places where the defaults are not enough.",
     ],
   },
@@ -37,20 +31,19 @@ export const riseDesignSystems = {
     eyebrow: "Beyond theme customisation",
     headline: "Build the reusable rules around the tool.",
     intro:
-      "The work combines a design system that governs how learning looks, reads and behaves with technical enhancement that extends what Rise can do while keeping the authoring model maintainable.",
+      "The work connects the neutral eLearning Design System to branded production implementations. ISQ is one important implementation context: its brand and course requirements consume the core patterns and components without defining the core system itself.",
     groups: [
       {
         title: "Design systems",
         body: "Reusable component libraries, interaction patterns, typography, spacing, accessible colour, layouts, image standards and content patterns create a shared production language rather than a collection of one-off courses.",
         items: [
           "Reusable component libraries",
-          "Branded interaction patterns",
-          "Consistent typography",
-          "Spacing systems",
+          "Branded implementation layers",
+          "Consistent typography and spacing",
           "Accessible colour systems",
           "Reusable layouts",
           "Image standards",
-          "Content patterns",
+          "Content and interaction patterns",
         ],
       },
       {
@@ -62,8 +55,8 @@ export const riseDesignSystems = {
           "Reusable interaction library",
           "Accessible components",
           "Responsive layouts",
-          "Advanced styling — accordions, tabs, flip cards, timelines, process diagrams",
           "Reusable templates",
+          "xAPI statement integration where default telemetry is not meaningful enough",
         ],
       },
     ],
@@ -75,11 +68,11 @@ export const riseDesignSystems = {
     "A strong Rise engagement should leave the organisation with more than a finished course. It should leave reusable decisions that improve the work that follows.",
 
   outcomes: {
-    note: "Any adoption or delivery-efficiency claim belongs with the ISQ project evidence where its basis and limitations can be inspected; this page does not manufacture a marketing number.",
+    note: "Adoption and efficiency claims need evidence; this page describes the production intent rather than inventing marketing numbers.",
     items: [
       "Stronger visual and interaction consistency across a course suite",
       "A more recognisable experience than the default Rise theme alone can provide",
-      "Faster production once reusable components and templates exist",
+      "Reusable decisions that reduce repeated course-level design work",
       "Easier maintenance because shared rules can be updated centrally",
       "Accessible patterns designed into components rather than added after production",
       "Clearer governance so quality depends less on who builds the next course",
@@ -125,47 +118,19 @@ export const storylineDevelopment = {
   groups: [
     {
       title: "Scenario-based learning",
-      items: [
-        "Branching decisions",
-        "Realistic consequences",
-        "Role-based perspectives",
-        "Workplace situations",
-        "Adaptive feedback",
-        "Non-linear pathways",
-      ],
+      items: ["Branching decisions", "Realistic consequences", "Role-based perspectives", "Workplace situations", "Adaptive feedback", "Non-linear pathways"],
     },
     {
       title: "Simulations and practice",
-      items: [
-        "Software simulations",
-        "Procedural practice",
-        "Guided demonstrations",
-        "Systems training",
-        "Equipment or interface interactions",
-        "Safe practice environments",
-      ],
+      items: ["Software simulations", "Procedural practice", "Guided demonstrations", "Systems training", "Equipment or interface interactions", "Safe practice environments"],
     },
     {
       title: "Advanced assessments",
-      items: [
-        "Variable-driven assessment",
-        "Complex scoring",
-        "Question banks",
-        "Confidence measures",
-        "Remediation pathways",
-        "Performance-based feedback",
-      ],
+      items: ["Variable-driven assessment", "Complex scoring", "Question banks", "Confidence measures", "Remediation pathways", "Performance-based feedback"],
     },
     {
       title: "Custom interactive experiences",
-      items: [
-        "Bespoke interfaces",
-        "Animated processes",
-        "Interactive diagrams",
-        "Exploratory experiences",
-        "Dashboards and menus",
-        "Non-linear content structures",
-      ],
+      items: ["Bespoke interfaces", "Animated processes", "Interactive diagrams", "Exploratory experiences", "Dashboards and menus", "Non-linear content structures"],
     },
   ],
 
@@ -178,7 +143,7 @@ export const storylineDevelopment = {
     eyebrow: "Experience across the Articulate ecosystem",
     body: [
       "Six years inside the Civil Aviation Safety Authority (2015–2021) included building and maintaining a reusable Storyline production system for the regulator's design team — a style manual, authoring templates, specified components with documented states, and an icon and step-marker library used across the Flight Examiner Rating programme and wider CASA learning work.",
-      "That production-system discipline carried forward: more than sixty Storyline courses were redeveloped to a shared architecture at Independent Schools Queensland while a platform migration was happening in the same engagement. Recognised as an Articulate eLearning Hero. [Confirm earliest Articulate tools used and approximate dates, for a fuller account of the ecosystem history.]",
+      "That production-system discipline carried forward: more than sixty Storyline courses were redeveloped to a shared architecture at Independent Schools Queensland while a platform migration was happening in the same engagement. I was also recognised as an Articulate eLearning Hero.",
     ],
   },
 
@@ -186,15 +151,7 @@ export const storylineDevelopment = {
     eyebrow: "Storyline modernisation",
     headline: "Modernising existing Storyline content.",
     body: "Long-lived course libraries accumulate assumptions. Modernisation starts by working out what an older project was built to do, then updating only what needs to change: accessibility, publishing, templates, interaction patterns or LMS compatibility rather than reflexively rebuilding the whole course.",
-    items: [
-      "Legacy course audit",
-      "Visual and interaction redesign",
-      "Accessibility remediation",
-      "Player and publishing updates",
-      "Template consolidation",
-      "SCORM or xAPI review",
-      "LMS compatibility testing",
-    ],
+    items: ["Legacy course audit", "Visual and interaction redesign", "Accessibility remediation", "Player and publishing updates", "Template consolidation", "SCORM or xAPI review", "LMS compatibility testing"],
   },
 
   evidence: {
