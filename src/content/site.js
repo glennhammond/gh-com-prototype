@@ -17,17 +17,12 @@ export const site = {
   },
   email: 'glenn@glennhammond.com',
   linkedin: 'https://linkedin.com/in/glennhammond/',
-  responsePromise: {
-    text: 'I read every enquiry myself and reply within 24 hours.',
-    short: 'Replies within 24 hours',
-    status: STATUS.APPROVED,
-    source: SOURCE.MASTER_COPY,
-  },
   showAvailability: false,
   offerCvDownload: false,
 };
 
-// Locked public IA. Home is available through the identity/wordmark.
+// Home is available through the identity/wordmark. Keep the primary navigation
+// deliberately small; About is discoverable in the footer and from Home.
 export const nav = [
   { href: '/work', label: 'Work' },
   { href: '/practice', label: 'Practice' },
@@ -35,6 +30,7 @@ export const nav = [
 export const navCta = { href: '/contact', label: 'Contact' };
 export const footerLinks = [
   ...nav,
+  { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
   { href: '/privacy', label: 'Privacy' },
 ];
